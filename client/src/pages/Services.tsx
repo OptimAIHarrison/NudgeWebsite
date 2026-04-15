@@ -175,13 +175,16 @@ export default function Services() {
       {/* Pillars Tabs */}
       <section className="py-12 md:py-16 bg-background border-b border-border sticky top-24 z-40">
         <div className="container">
-          <div className="flex flex-wrap gap-3 justify-center">
+              <div className="flex flex-wrap gap-3 justify-center">
             {PILLARS.map((pillar) => {
               const Icon = pillar.icon;
               return (
                 <button
                   key={pillar.id}
-                  onClick={() => setActivePillar(pillar.id)}
+                  onClick={() => {
+                    setActivePillar(pillar.id);
+                    setExpandedService(null);
+                  }}
                   className={`flex items-center gap-2 px-8 py-4 rounded-lg font-semibold transition-all text-base md:text-lg ${
                     activePillar === pillar.id
                       ? 'bg-accent text-white shadow-lg'
