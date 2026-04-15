@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import SearchModal from '@/components/SearchModal';
+
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 
@@ -13,7 +13,7 @@ interface FAQItem {
 }
 
 export default function FAQ() {
-  const [searchOpen, setSearchOpen] = useState(false);
+
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const faqs: FAQItem[] = [
@@ -91,8 +91,7 @@ export default function FAQ() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onSearchOpen={() => setSearchOpen(true)} />
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <Header />
 
       {/* Hero */}
       <section className="py-16 md:py-24 bg-gradient-mesh relative overflow-hidden">
@@ -112,7 +111,7 @@ export default function FAQ() {
         <div className="container max-w-3xl mx-auto">
           <div className="space-y-4">
             {faqs.map((faq) => (
-              <div key={faq.id} className="glass-panel overflow-hidden">
+              <div key={faq.id} className="glass-card overflow-hidden">
                 <button
                   onClick={() => setExpandedId(expandedId === faq.id ? null : faq.id)}
                   className="w-full p-6 flex items-start justify-between hover:bg-accent/5 transition-colors text-left"

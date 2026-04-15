@@ -1,157 +1,201 @@
 import { useState } from 'react';
-import { Star, TrendingUp } from 'lucide-react';
+import { ChevronLeft, ChevronRight, TrendingUp } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import SearchModal from '@/components/SearchModal';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 
-interface CaseStudy {
-  id: string;
-  company: string;
-  contact: string;
-  role: string;
-  challenge: string;
-  solution: string;
-  result: string;
-  metric: string;
-  quote: string;
-  rating: number;
-}
-
-const caseStudies: CaseStudy[] = [
-  {
-    id: '1',
-    company: 'TechStart Co',
-    contact: 'Sarah Chen',
-    role: 'Marketing Director',
-    challenge: 'Broken tracking setup leading to inaccurate ROI reporting on paid campaigns.',
-    solution: 'Implemented GA4 with Server-Side Tagging and fixed all tracking issues.',
-    result: 'Accurate attribution and 45% improvement in lead quality within 3 months.',
-    metric: '45% improvement in lead quality',
-    quote: 'Nudge Digital transformed our marketing operations. We saw a 45% improvement in lead quality within 3 months.',
-    rating: 5,
-  },
-  {
-    id: '2',
-    company: 'Growth Ventures',
-    contact: 'Michael Roberts',
-    role: 'CEO',
-    challenge: 'CRM system was underutilized and not integrated with marketing automation.',
-    solution: 'Full CRM implementation with custom workflows and marketing automation integration.',
-    result: 'Sales team productivity increased by 60%, better lead nurturing.',
-    metric: '60% increase in sales productivity',
-    quote: 'Their technical expertise solved tracking issues that were costing us thousands monthly. Highly recommended.',
-    rating: 5,
-  },
-  {
-    id: '3',
-    company: 'Digital Agency Pro',
-    contact: 'Emma Wilson',
-    role: 'Agency Director',
-    challenge: 'Needed specialized technical support for complex client implementations.',
-    solution: 'Became their trusted technical partner for CRM, tracking, and optimization.',
-    result: 'Delivered 8 successful client projects with 100% client satisfaction.',
-    metric: '8 successful projects, 100% satisfaction',
-    quote: 'As an agency, we rely on Nudge for specialized technical implementation. They deliver every time.',
-    rating: 5,
-  },
-  {
-    id: '4',
-    company: 'E-Commerce Plus',
-    contact: 'David Lee',
-    role: 'Head of Marketing',
-    challenge: 'Website conversion rate was 1.2%, losing significant revenue.',
-    solution: 'Comprehensive CRO audit, A/B testing program, and funnel optimization.',
-    result: 'Conversion rate increased to 2.8%, generating an extra $500k annually.',
-    metric: '$500k additional annual revenue',
-    quote: 'The CRO work paid for itself within the first month. Exceptional results.',
-    rating: 5,
-  },
-  {
-    id: '5',
-    company: 'SaaS Innovators',
-    contact: 'Lisa Zhang',
-    role: 'VP of Growth',
-    challenge: 'Multiple marketing tools not communicating, data silos everywhere.',
-    solution: 'MarTech stack audit, tool consolidation, and API integrations.',
-    result: 'Unified data platform, 35% reduction in marketing tech costs.',
-    metric: '35% reduction in tech costs',
-    quote: 'They simplified our entire tech stack and saved us thousands. Best decision we made.',
-    rating: 5,
-  },
-  {
-    id: '6',
-    company: 'B2B Services Ltd',
-    contact: 'James Murphy',
-    role: 'Marketing Manager',
-    challenge: 'SEO strategy was non-existent, losing organic traffic to competitors.',
-    solution: 'Technical SEO audit, site optimization, and content strategy.',
-    result: 'Organic traffic increased by 120%, top 3 rankings for 15 keywords.',
-    metric: '120% increase in organic traffic',
-    quote: 'Their technical SEO expertise is unmatched. We are now dominating search.',
-    rating: 5,
-  },
-];
-
 export default function Testimonials() {
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
+
+  const testimonials = [
+    {
+      id: 1,
+      company: 'TechStart Co',
+      quote: 'Harrison fixed our tracking issues and we saw a 45% improvement in lead quality within 3 months.',
+      author: 'Sarah Chen',
+      role: 'Marketing Director',
+    },
+    {
+      id: 2,
+      company: 'Growth Ventures',
+      quote: 'His technical expertise solved problems that were costing us thousands monthly.',
+      author: 'Michael Roberts',
+      role: 'CEO',
+    },
+    {
+      id: 3,
+      company: 'Digital Agency Pro',
+      quote: 'As an agency, we rely on Harrison for specialized technical implementation. He delivers every time.',
+      author: 'Emma Wilson',
+      role: 'Agency Director',
+    },
+    {
+      id: 4,
+      company: 'E-commerce Collective',
+      quote: 'The ROI improvement was immediate. Best investment we made in our marketing stack.',
+      author: 'James Liu',
+      role: 'Founder',
+    },
+  ];
+
+  const caseStudies = [
+    {
+      id: 1,
+      company: 'E-commerce Brand',
+      industry: 'Retail',
+      challenge: 'Broken tracking and low conversion rates. They were losing visibility into customer journeys.',
+      solution: 'Implemented GA4, fixed funnel issues, optimized checkout flow, and set up proper attribution.',
+      result: '+67% Conversions',
+      metric: '$500K+ Additional Revenue',
+      timeline: '4 months',
+    },
+    {
+      id: 2,
+      company: 'SaaS Company',
+      industry: 'Software',
+      challenge: 'Manual workflows wasting 40 hours/week. No automation, no CRM integration.',
+      solution: 'Built CRM automation, email sequences, and integrated marketing operations.',
+      result: '40 Hours/Week Saved',
+      metric: '$120K Annual Savings',
+      timeline: '2 months',
+    },
+    {
+      id: 3,
+      company: 'Marketing Agency',
+      industry: 'Agency',
+      challenge: 'Clients needed technical SEO expertise that they couldn\'t deliver in-house.',
+      solution: 'Provided fractional technical SEO services and implementation support.',
+      result: '+3 New Revenue Streams',
+      metric: '$50K+ Monthly Revenue',
+      timeline: 'Ongoing',
+    },
+    {
+      id: 4,
+      company: 'B2B SaaS Platform',
+      industry: 'Technology',
+      challenge: 'Complex tracking setup with multiple data sources causing reporting inconsistencies.',
+      solution: 'Unified data infrastructure, implemented proper tracking, built custom dashboards.',
+      result: '+34% Data Accuracy',
+      metric: 'Better Decision Making',
+      timeline: '6 weeks',
+    },
+  ];
+
+  const nextTestimonial = () => {
+    setTestimonialIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onSearchOpen={() => setSearchOpen(true)} />
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <Header />
 
-      <section className="py-16 md:py-24 bg-card border-b border-border">
-        <div className="container">
+      {/* Header */}
+      <section className="py-16 md:py-24 bg-secondary/30 border-b border-border">
+        <div className="container text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Client Success Stories
+            Client Success & Testimonials
           </h1>
-          <p className="text-xl text-foreground/60 max-w-3xl">
-            Real results from real clients. See how we have helped businesses transform their digital marketing.
+          <p className="text-xl text-foreground/60 max-w-3xl mx-auto">
+            Real results from real clients. See how I've helped businesses solve their toughest digital marketing challenges.
           </p>
         </div>
       </section>
 
-      <section className="py-16 md:py-24">
+      {/* Testimonials Carousel */}
+      <section className="py-20 md:py-32 bg-background">
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">What Clients Say</h2>
+            <p className="text-xl text-foreground/60 max-w-2xl mx-auto">
+              Direct feedback from people I've worked with.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            <div className="glass-card p-12">
+              <div className="mb-8">
+                <p className="text-2xl text-foreground italic mb-6">"{testimonials[testimonialIndex].quote}"</p>
+                <div>
+                  <p className="font-semibold text-foreground text-lg">{testimonials[testimonialIndex].author}</p>
+                  <p className="text-foreground/60">{testimonials[testimonialIndex].role} at {testimonials[testimonialIndex].company}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <button
+                  onClick={prevTestimonial}
+                  className="p-3 hover:bg-accent/10 rounded-lg transition-colors"
+                >
+                  <ChevronLeft className="w-6 h-6 text-accent" />
+                </button>
+
+                <div className="flex gap-2">
+                  {testimonials.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setTestimonialIndex(idx)}
+                      className={`transition-all ${
+                        idx === testimonialIndex ? 'bg-accent w-8 h-2 rounded-full' : 'bg-accent/30 w-2 h-2 rounded-full'
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                <button
+                  onClick={nextTestimonial}
+                  className="p-3 hover:bg-accent/10 rounded-lg transition-colors"
+                >
+                  <ChevronRight className="w-6 h-6 text-accent" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Case Studies */}
+      <section className="py-20 md:py-32 bg-secondary/30">
+        <div className="container">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Case Studies</h2>
+            <p className="text-xl text-foreground/60 max-w-2xl mx-auto">
+              Detailed breakdowns of projects and the measurable impact.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {caseStudies.map((study) => (
-              <div key={study.id} className="glass-card flex flex-col">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground">{study.company}</h3>
-                    <p className="text-sm text-foreground/60">{study.contact}, {study.role}</p>
-                  </div>
-                  <div className="flex gap-1">
-                    {[...Array(study.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-accent text-accent" />
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mb-6 p-4 bg-accent/5 rounded-lg border border-accent/20">
-                  <p className="text-sm text-foreground/70 italic">"{study.quote}"</p>
-                </div>
-
-                <div className="space-y-4 flex-1">
-                  <div>
-                    <p className="text-xs font-semibold text-accent uppercase mb-1">Challenge</p>
-                    <p className="text-sm text-foreground/70">{study.challenge}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-accent uppercase mb-1">Our Solution</p>
-                    <p className="text-sm text-foreground/70">{study.solution}</p>
-                  </div>
-                  <div className="pt-4 border-t border-border">
-                    <div className="flex items-start gap-3">
-                      <TrendingUp className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-xs font-semibold text-accent uppercase">Result</p>
-                        <p className="text-sm font-semibold text-foreground">{study.metric}</p>
-                      </div>
+              <div key={study.id} className="glass-card p-8 hover:scale-105 transition-transform">
+                <div className="mb-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 className="text-2xl font-bold text-foreground">{study.company}</h3>
+                      <p className="text-sm text-accent font-semibold mt-1">{study.industry}</p>
                     </div>
                   </div>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-sm text-foreground/60 font-semibold mb-2">Challenge</p>
+                      <p className="text-foreground/80">{study.challenge}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-foreground/60 font-semibold mb-2">Solution</p>
+                      <p className="text-foreground/80">{study.solution}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-t border-border pt-6">
+                  <p className="text-sm text-foreground/60 font-semibold mb-2">Result</p>
+                  <p className="text-3xl font-bold text-accent mb-2">{study.result}</p>
+                  <p className="text-foreground/70 mb-4">{study.metric}</p>
+                  <p className="text-sm text-foreground/60">Timeline: {study.timeline}</p>
                 </div>
               </div>
             ))}
@@ -159,16 +203,17 @@ export default function Testimonials() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-card">
+      {/* CTA Section */}
+      <section className="py-20 md:py-32 bg-gradient-to-r from-accent/10 to-accent/5">
         <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-            Ready to Be Our Next Success Story?
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            Ready to Achieve Similar Results?
           </h2>
-          <p className="text-lg text-foreground/60 mb-8 max-w-2xl mx-auto">
-            Let us help you achieve measurable results and transform your digital marketing.
+          <p className="text-xl text-foreground/60 mb-8 max-w-2xl mx-auto">
+            Let's discuss your challenges and create a custom solution.
           </p>
           <Link href="/contact">
-            <Button className="btn-nudge-primary">
+            <Button className="btn-nudge-primary text-lg px-8 py-4">
               Send a Nudge
             </Button>
           </Link>

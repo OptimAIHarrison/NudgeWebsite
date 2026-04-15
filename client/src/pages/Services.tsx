@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown, Zap, TrendingUp, Code, Palette, BarChart3, Lock, Mail, Settings, Layers } from 'lucide-react';
+import { ChevronDown, Zap, TrendingUp, Code, BarChart3, Palette, Lightbulb, Rocket, Target, Database, Settings, Gauge, CheckCircle, Layers } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'wouter';
@@ -14,21 +14,21 @@ const PILLARS = [
     services: [
       {
         title: 'Comprehensive Digital Marketing Audit',
-        description: 'Full analysis of your current strategy, tools, and performance',
-        details: 'Website audit, competitor analysis, MarTech stack review, performance benchmarking',
-        martech: 'Google Analytics, SEMrush, Hotjar',
+        bullets: ['Full-spectrum analysis', 'Competitive benchmarking', 'Gap identification'],
+        details: 'Website audit, competitor analysis, MarTech stack review, performance benchmarking, detailed recommendations',
+        martech: ['Google Analytics', 'SEMrush', 'Hotjar'],
       },
       {
-        title: 'Growth Strategy & Roadmap Development',
-        description: 'Custom 12-month strategy tailored to your business',
-        details: 'Market research, opportunity identification, prioritization, implementation timeline',
-        martech: 'Miro, Notion, Looker Studio',
+        title: 'Growth Strategy & Roadmap',
+        bullets: ['Strategic planning', 'Opportunity identification', 'Implementation timeline'],
+        details: 'Market research, opportunity identification, prioritization, 12-month implementation roadmap',
+        martech: ['Miro', 'Notion', 'Looker Studio'],
       },
       {
-        title: 'Marketing Technology (MarTech) Stack Consulting',
-        description: 'Optimize your tools and integrations',
-        details: 'Stack audit, tool recommendations, integration planning, cost optimization',
-        martech: 'Zapier, Make, Segment',
+        title: 'MarTech Stack Consulting',
+        bullets: ['Tool evaluation', 'Integration planning', 'Cost optimization'],
+        details: 'Stack audit, tool recommendations, integration planning, cost optimization, vendor selection',
+        martech: ['Zapier', 'Make', 'Segment'],
       },
     ],
   },
@@ -40,21 +40,21 @@ const PILLARS = [
     services: [
       {
         title: 'CRM Implementation & Optimization',
-        description: 'Get your CRM working for you, not against you',
-        details: 'Setup, data migration, workflow automation, team training',
-        martech: 'HubSpot, Salesforce, Pipedrive',
+        bullets: ['Setup & configuration', 'Workflow automation', 'Data integration'],
+        details: 'CRM setup, data migration, workflow automation, team training, ongoing optimization',
+        martech: ['HubSpot', 'Salesforce', 'Pipedrive'],
       },
       {
-        title: 'Email Marketing (EDM) & Lifecycle Automation',
-        description: 'Automated nurture sequences that convert',
-        details: 'Segmentation strategy, email sequences, lifecycle campaigns, A/B testing',
-        martech: 'Klaviyo, ConvertKit, ActiveCampaign',
+        title: 'Email Marketing & Lifecycle Automation',
+        bullets: ['Automation sequences', 'Lifecycle campaigns', 'Segmentation'],
+        details: 'Segmentation strategy, email sequences, lifecycle campaigns, A/B testing, performance optimization',
+        martech: ['Klaviyo', 'ConvertKit', 'ActiveCampaign'],
       },
       {
         title: 'AI & Workflow Automation',
-        description: 'Eliminate manual tasks with intelligent automation',
-        details: 'Workflow design, tool integration, AI implementation, process optimization',
-        martech: 'Zapier, Make, n8n',
+        bullets: ['Process automation', 'AI integration', 'Efficiency gains'],
+        details: 'Workflow design, tool integration, AI implementation, process optimization, ROI tracking',
+        martech: ['Zapier', 'Make', 'n8n'],
       },
     ],
   },
@@ -66,33 +66,33 @@ const PILLARS = [
     services: [
       {
         title: 'Advanced Tracking & Attribution',
-        description: 'Know exactly where your conversions come from',
-        details: 'GA4 setup, event tracking, cross-domain tracking, attribution modeling',
-        martech: 'Google Analytics 4, Mixpanel, Amplitude',
+        bullets: ['GA4 implementation', 'Event tracking', 'Attribution modeling'],
+        details: 'GA4 setup, event tracking, cross-domain tracking, attribution modeling, data validation',
+        martech: ['Google Analytics 4', 'Mixpanel', 'Amplitude'],
       },
       {
         title: 'Paid Media Strategy & Management',
-        description: 'Maximize ROI on every ad dollar spent',
-        details: 'Campaign strategy, audience targeting, bid optimization, reporting',
-        martech: 'Google Ads, Meta Ads, LinkedIn Ads',
+        bullets: ['Campaign strategy', 'Bid optimization', 'Performance reporting'],
+        details: 'Campaign strategy, audience targeting, bid optimization, A/B testing, monthly reporting',
+        martech: ['Google Ads', 'Meta Ads', 'LinkedIn Ads'],
       },
       {
         title: 'Technical SEO & Search Authority',
-        description: 'Dominate search results with technical excellence',
-        details: 'Site structure optimization, schema markup, crawlability fixes, Core Web Vitals',
-        martech: 'Screaming Frog, Ahrefs, Google Search Console',
+        bullets: ['Site optimization', 'Technical fixes', 'Authority building'],
+        details: 'Site structure optimization, schema markup, crawlability fixes, Core Web Vitals, link building',
+        martech: ['Screaming Frog', 'Ahrefs', 'Google Search Console'],
       },
       {
-        title: 'Conversion Rate Optimization (CRO)',
-        description: 'Get more from your existing traffic',
-        details: 'Heatmap analysis, user testing, A/B testing, funnel optimization',
-        martech: 'Hotjar, Unbounce, Optimizely',
+        title: 'Conversion Rate Optimization',
+        bullets: ['A/B testing', 'Funnel analysis', 'UX optimization'],
+        details: 'Heatmap analysis, user testing, A/B testing, funnel optimization, friction point removal',
+        martech: ['Hotjar', 'Unbounce', 'Optimizely'],
       },
       {
         title: 'Analytics & Reporting',
-        description: 'Dashboards that tell the real story',
-        details: 'Custom dashboards, automated reporting, insights & recommendations',
-        martech: 'Looker Studio, Tableau, Data Studio',
+        bullets: ['Custom dashboards', 'Automated reporting', 'Data visualization'],
+        details: 'Custom dashboards, automated reporting, insights & recommendations, data storytelling',
+        martech: ['Looker Studio', 'Tableau', 'Data Studio'],
       },
     ],
   },
@@ -103,22 +103,22 @@ const PILLARS = [
     description: 'I help you tell your story and build authority.',
     services: [
       {
-        title: 'Messaging Hierarchy & Core Narrative Development',
-        description: 'Crystal clear messaging that resonates',
-        details: 'Brand positioning, value proposition, messaging framework, content pillars',
-        martech: 'Notion, Figma, Brand.ai',
+        title: 'Messaging & Core Narrative',
+        bullets: ['Brand positioning', 'Value proposition', 'Messaging framework'],
+        details: 'Brand positioning, value proposition development, messaging framework, content pillars',
+        martech: ['Notion', 'Figma', 'Brand.ai'],
       },
       {
-        title: 'Social Media Strategy & Creative Direction',
-        description: 'Social presence that drives real engagement',
-        details: 'Platform strategy, content calendar, creative guidelines, community management',
-        martech: 'Buffer, Later, Sprout Social',
+        title: 'Social Media Strategy & Direction',
+        bullets: ['Platform strategy', 'Content calendar', 'Community management'],
+        details: 'Platform strategy, content calendar, creative guidelines, community management, engagement tracking',
+        martech: ['Buffer', 'Later', 'Sprout Social'],
       },
       {
-        title: 'Brand & Creative Assets Development',
-        description: 'Professional assets that elevate your brand',
-        details: 'Logo design, brand guidelines, templates, asset library',
-        martech: 'Figma, Canva, Adobe Creative Suite',
+        title: 'Brand & Creative Assets',
+        bullets: ['Asset creation', 'Brand guidelines', 'Creative direction'],
+        details: 'Logo design, brand guidelines, templates, asset library, creative direction',
+        martech: ['Figma', 'Canva', 'Adobe Creative Suite'],
       },
     ],
   },
@@ -129,22 +129,22 @@ const PILLARS = [
     description: 'I solve the technical problems that agencies overlook.',
     services: [
       {
-        title: 'Website Performance & Speed Optimization',
-        description: 'Lightning-fast sites that convert better',
-        details: 'Core Web Vitals optimization, image optimization, caching, CDN setup',
-        martech: 'PageSpeed Insights, GTmetrix, Cloudflare',
+        title: 'Website Performance & Speed',
+        bullets: ['Speed optimization', 'Core Web Vitals', 'Technical fixes'],
+        details: 'Core Web Vitals optimization, image optimization, caching, CDN setup, performance monitoring',
+        martech: ['PageSpeed Insights', 'GTmetrix', 'Cloudflare'],
       },
       {
-        title: 'Tracking & Data Integrity Cleanups',
-        description: 'Fix your broken data and tracking',
-        details: 'Tag audit, data validation, duplicate removal, data quality assurance',
-        martech: 'Google Tag Manager, Segment, Tealium',
+        title: 'Tracking & Data Integrity',
+        bullets: ['Tracking audit', 'Data validation', 'Implementation fixes'],
+        details: 'Tag audit, data validation, duplicate removal, data quality assurance, ongoing monitoring',
+        martech: ['Google Tag Manager', 'Segment', 'Tealium'],
       },
       {
-        title: 'Broken Funnel & Conversion Path Diagnostics',
-        description: 'Find and fix where you\'re losing customers',
-        details: 'Funnel analysis, drop-off identification, friction point removal, optimization',
-        martech: 'Hotjar, FullStory, Contentsquare',
+        title: 'Broken Funnel & Conversion Diagnostics',
+        bullets: ['Funnel analysis', 'Issue identification', 'Optimization'],
+        details: 'Funnel analysis, drop-off identification, friction point removal, conversion optimization',
+        martech: ['Hotjar', 'FullStory', 'Contentsquare'],
       },
     ],
   },
@@ -160,102 +160,130 @@ export default function Services() {
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Hero */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-accent/5 to-background">
-        <div className="container">
-          <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-4">
-              What I Offer
-            </h1>
-            <p className="text-xl text-foreground/60 max-w-3xl mx-auto">
-              I handle everything from SEO and email marketing to CRM setup, automation, and complete digital strategy. Full-stack digital marketing expertise.
-            </p>
-          </div>
+      {/* Header */}
+      <section className="py-16 md:py-24 bg-secondary/30 border-b border-border">
+        <div className="container text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            Services
+          </h1>
+          <p className="text-xl text-foreground/60 max-w-3xl mx-auto">
+            I handle everything from SEO and email marketing to CRM setup, automation, and complete digital strategy. Full-stack digital marketing expertise.
+          </p>
         </div>
       </section>
 
       {/* Pillars Tabs */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-12 md:py-16 bg-background border-b border-border sticky top-24 z-40">
         <div className="container">
-          {/* Tab Navigation */}
-          <div className="flex flex-col md:flex-row gap-4 mb-12 overflow-x-auto pb-4">
+          <div className="flex flex-wrap gap-3 justify-center">
             {PILLARS.map((pillar) => {
               const Icon = pillar.icon;
               return (
                 <button
                   key={pillar.id}
                   onClick={() => setActivePillar(pillar.id)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all whitespace-nowrap ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
                     activePillar === pillar.id
                       ? 'bg-accent text-white shadow-lg'
-                      : 'bg-card text-foreground hover:bg-card/80'
+                      : 'bg-secondary text-foreground hover:bg-secondary/80'
                   }`}
                 >
                   <Icon className="w-5 h-5" />
-                  <span className="hidden sm:inline">{pillar.name}</span>
-                  <span className="sm:hidden text-sm">{pillar.name.split('&')[0]}</span>
+                  <span className="hidden sm:inline text-sm">{pillar.name}</span>
+                  <span className="sm:hidden text-xs">{pillar.name.split(' ')[0]}</span>
                 </button>
               );
             })}
           </div>
+        </div>
+      </section>
 
-          {/* Pillar Content */}
+      {/* Services Grid */}
+      <section className="py-20 md:py-32">
+        <div className="container">
           {currentPillar && (
-            <div className="max-w-4xl mx-auto">
-              <div className="mb-12">
-                <h2 className="text-4xl font-bold text-foreground mb-4">{currentPillar.name}</h2>
-                <p className="text-xl text-foreground/60">{currentPillar.description}</p>
+            <>
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">{currentPillar.name}</h2>
+                <p className="text-lg text-foreground/60">{currentPillar.description}</p>
               </div>
 
-              {/* Services */}
-              <div className="space-y-4">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                 {currentPillar.services.map((service, idx) => (
-                  <div key={idx} className="glass-card">
+                  <div key={idx} className="glass-card overflow-hidden flex flex-col">
                     <button
                       onClick={() =>
                         setExpandedService(
                           expandedService === `${activePillar}-${idx}` ? null : `${activePillar}-${idx}`
                         )
                       }
-                      className="w-full text-left flex items-start justify-between gap-4 p-6"
+                      className="w-full text-left p-6 hover:bg-accent/5 transition-colors flex-1 flex flex-col"
                     >
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-foreground mb-1">{service.title}</h3>
-                        <p className="text-foreground/60">{service.description}</p>
+                      <div className="flex items-start justify-between gap-4 mb-3">
+                        <h3 className="text-lg font-bold text-foreground flex-1">{service.title}</h3>
+                        <ChevronDown
+                          className={`w-5 h-5 text-accent flex-shrink-0 transition-transform ${
+                            expandedService === `${activePillar}-${idx}` ? 'rotate-180' : ''
+                          }`}
+                        />
                       </div>
-                      <ChevronDown
-                        className={`w-5 h-5 text-accent flex-shrink-0 transition-transform ${
-                          expandedService === `${activePillar}-${idx}` ? 'rotate-180' : ''
-                        }`}
-                      />
+
+                      <ul className="space-y-2">
+                        {service.bullets.map((bullet, i) => (
+                          <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                            <span className="text-accent font-bold mt-0.5">•</span>
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </button>
 
                     {expandedService === `${activePillar}-${idx}` && (
-                      <div className="border-t border-border px-6 py-6 space-y-4 bg-card/50">
+                      <div className="border-t border-border p-6 bg-accent/5 space-y-4 animate-slide-in-down">
                         <div>
                           <h4 className="font-semibold text-foreground mb-2">What's Included</h4>
-                          <p className="text-foreground/70">{service.details}</p>
+                          <p className="text-foreground/70 text-sm">{service.details}</p>
                         </div>
+
                         <div>
-                          <h4 className="font-semibold text-foreground mb-2">Tools & Platforms</h4>
-                          <p className="text-foreground/70">{service.martech}</p>
+                          <h4 className="font-semibold text-foreground mb-3">MarTech Stack</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {service.martech.map((tool, i) => (
+                              <span
+                                key={i}
+                                className="px-3 py-1 bg-accent/10 text-accent text-xs font-semibold rounded-full"
+                              >
+                                {tool}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="pt-4 border-t border-border">
+                          <Link href="/contact">
+                            <Button className="btn-nudge-primary w-full">
+                              Get Started
+                            </Button>
+                          </Link>
                         </div>
                       </div>
                     )}
                   </div>
                 ))}
               </div>
-            </div>
+            </>
           )}
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-accent/10 to-accent/5">
+      {/* CTA */}
+      <section className="py-20 md:py-32 bg-gradient-to-r from-accent/10 to-accent/5">
         <div className="container text-center">
-          <h2 className="text-4xl font-bold text-foreground mb-4">Ready to Get Started?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            Need Something Custom?
+          </h2>
           <p className="text-xl text-foreground/60 mb-8 max-w-2xl mx-auto">
-            Let's discuss your challenges and find the right solution for your business.
+            Not sure which service is right for you? Let's discuss your specific needs.
           </p>
           <Link href="/contact">
             <Button className="btn-nudge-primary text-lg px-8 py-4">

@@ -1,191 +1,195 @@
-import { Check } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronDown, Check } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import SearchModal from '@/components/SearchModal';
-import { useState } from 'react';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 
-interface PricingPackage {
-  name: string;
-  description: string;
-  priceFrom: number;
-  priceTo: number;
-  frequency: string;
-  features: string[];
-  highlighted?: boolean;
-}
-
-const packages: PricingPackage[] = [
-  {
-    name: 'Diagnostic Audit & Growth Blueprint',
-    description: 'A 30-day deep dive into your data, tech stack, and funnel.',
-    priceFrom: 3500,
-    priceTo: 7500,
-    frequency: 'One-time',
-    features: [
-      'Full-spectrum digital presence analysis',
-      'Performance benchmarking against competitors',
-      'Identification of critical gaps and opportunities',
-      'Executive summary and detailed audit report',
-      'Actionable recommendations for growth',
-      'Clear roadmap you can implement yourself',
-    ],
-  },
-  {
-    name: 'Strategic Implementer Retainer',
-    description: 'Ongoing strategic leadership and hands-on implementation.',
-    priceFrom: 4000,
-    priceTo: 10000,
-    frequency: 'Monthly',
-    features: [
-      'Weekly strategic check-ins',
-      'Hands-on technical implementation',
-      'Managing critical marketing operations',
-      'Growth initiatives and optimization',
-      'Monthly performance reporting',
-      'Proactive optimization and recommendations',
-      'Senior-level expertise without full-time overhead',
-    ],
-    highlighted: true,
-  },
-  {
-    name: 'Technical Sprint & Project Execution',
-    description: 'Specific high-impact, one-off projects for critical challenges.',
-    priceFrom: 5000,
-    priceTo: 20000,
-    frequency: 'Project-based',
-    features: [
-      'CRM migrations and implementations',
-      'GA4 and GTM Server-Side setup',
-      'Complete website and SEO rebuilds',
-      'Rapid expert resolution of technical problems',
-      'Immediate impact and long-term stability',
-      'Specialist intervention for complex challenges',
-      'Deliverables and documentation included',
-    ],
-  },
-];
-
 export default function Pricing() {
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [expandedCategory, setExpandedCategory] = useState(0);
+  const [selectedService, setSelectedService] = useState(null);
+
+  const pricingCategories = [
+    {
+      id: 0,
+      title: 'One-Off Fixes',
+      description: 'Quick technical fixes and optimizations',
+      pricing: 'Hourly',
+      rate: '$150-250/hour',
+      examples: [
+        'Fix broken tracking or pixels',
+        'Audit and optimize GA4 setup',
+        'Technical SEO quick fixes',
+        'Email template debugging',
+        'CRM workflow troubleshooting',
+      ],
+      details: 'Perfect for specific technical problems that need immediate attention.',
+    },
+    {
+      id: 1,
+      title: 'Project-Based',
+      description: 'Defined scope with fixed pricing',
+      pricing: 'Custom',
+      rate: '$5,000-$20,000+',
+      examples: [
+        'Complete CRM implementation',
+        'Website technical audit & fixes',
+        'Marketing automation setup',
+        'Data infrastructure rebuild',
+        'Analytics implementation',
+      ],
+      details: 'Best for well-defined projects with clear deliverables and timelines.',
+    },
+    {
+      id: 2,
+      title: 'Strategy Services',
+      description: 'Strategic advisory and planning',
+      pricing: 'Custom',
+      rate: '$3,500-$7,500',
+      examples: [
+        'Digital marketing audit',
+        'Growth strategy development',
+        'MarTech stack consulting',
+        'Competitive analysis',
+        'Roadmap creation',
+      ],
+      details: 'Get expert strategic guidance to plan your digital marketing direction.',
+    },
+    {
+      id: 3,
+      title: 'Implementation Retainer',
+      description: 'Ongoing strategic leadership and execution',
+      pricing: 'Monthly',
+      rate: '$4,000-$10,000+/month',
+      examples: [
+        'Weekly strategic check-ins',
+        'Hands-on technical implementation',
+        'Marketing operations management',
+        'Growth initiatives & optimization',
+        'Monthly performance reporting',
+      ],
+      details: 'Senior-level expertise without the overhead of a full-time hire.',
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onSearchOpen={() => setSearchOpen(true)} />
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <Header />
 
-      <section className="py-16 md:py-24 bg-card border-b border-border">
-        <div className="container">
+      {/* Header */}
+      <section className="py-16 md:py-24 bg-secondary/30 border-b border-border">
+        <div className="container text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Indicative Pricing
           </h1>
-          <p className="text-xl text-foreground/60 max-w-3xl">
-            Value-based pricing reflecting expertise and impact. All prices in AUD.
+          <p className="text-xl text-foreground/60 max-w-3xl mx-auto">
+            Value-based pricing reflecting expertise and impact. All prices in AUD. Custom solutions available.
           </p>
         </div>
       </section>
 
-      <section className="py-16 md:py-24">
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {packages.map((pkg, idx) => (
-              <div
-                key={idx}
-                className={`glass-card p-8 flex flex-col ${
-                  pkg.highlighted ? 'ring-2 ring-accent md:scale-105' : ''
-                }`}
-              >
-                {pkg.highlighted && (
-                  <div className="mb-4 inline-block">
-                    <span className="px-3 py-1 bg-accent/20 text-accent text-xs font-semibold rounded-full">
-                      MOST POPULAR
-                    </span>
+      {/* Pricing Categories */}
+      <section className="py-20 md:py-32">
+        <div className="container max-w-4xl">
+          <div className="space-y-4">
+            {pricingCategories.map((category, idx) => (
+              <div key={category.id} className="glass-card overflow-hidden">
+                <button
+                  onClick={() => setExpandedCategory(expandedCategory === idx ? -1 : idx)}
+                  className="w-full p-8 flex items-center justify-between hover:bg-accent/5 transition-colors"
+                >
+                  <div className="text-left">
+                    <h3 className="text-2xl font-bold text-foreground mb-1">{category.title}</h3>
+                    <p className="text-foreground/60">{category.description}</p>
+                  </div>
+                  <div className="text-right flex-shrink-0">
+                    <p className="text-sm text-accent font-semibold mb-1">{category.pricing}</p>
+                    <p className="text-2xl font-bold text-foreground">{category.rate}</p>
+                    <ChevronDown
+                      className={`w-6 h-6 text-accent mt-2 transition-transform ${
+                        expandedCategory === idx ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
+                </button>
+
+                {expandedCategory === idx && (
+                  <div className="border-t border-border p-8 bg-accent/5 animate-slide-in-down">
+                    <p className="text-foreground/70 mb-6">{category.details}</p>
+
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-4">Typical Services:</h4>
+                      <ul className="space-y-3">
+                        {category.examples.map((example, i) => (
+                          <li key={i} className="flex items-start gap-3">
+                            <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                            <span className="text-foreground/80">{example}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="mt-8 pt-8 border-t border-border">
+                      <Link href="/contact">
+                        <Button className="btn-nudge-primary text-lg px-8 py-4">
+                          Get a Custom Quote
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 )}
-
-                <h3 className="text-2xl font-bold text-foreground mb-2">
-                  {pkg.name}
-                </h3>
-                <p className="text-foreground/60 text-sm mb-6">
-                  {pkg.description}
-                </p>
-
-                <div className="mb-8">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold text-foreground">
-                      ${pkg.priceFrom.toLocaleString()}
-                    </span>
-                    <span className="text-foreground/60">–</span>
-                    <span className="text-4xl font-bold text-foreground">
-                      ${pkg.priceTo.toLocaleString()}
-                    </span>
-                  </div>
-                  <p className="text-foreground/60 text-sm mt-2">{pkg.frequency}</p>
-                </div>
-
-                <Link href="/contact">
-                  <Button
-                    className={`w-full mb-8 ${
-                      pkg.highlighted ? 'btn-nudge-primary' : 'btn-nudge-secondary'
-                    }`}
-                  >
-                    Send a Nudge
-                  </Button>
-                </Link>
-
-                <div className="space-y-4 flex-1">
-                  {pkg.features.map((feature, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                      <span className="text-foreground/80 text-sm">{feature}</span>
-                    </div>
-                  ))}
-                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-card">
+      {/* FAQ */}
+      <section className="py-20 md:py-32 bg-secondary/30">
         <div className="container max-w-3xl">
-          <h2 className="text-3xl font-bold text-foreground mb-8">FAQ</h2>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Pricing FAQ</h2>
+          </div>
+
           <div className="space-y-6">
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                Can you customize a package?
-              </h3>
+            <div className="glass-card p-8">
+              <h3 className="text-lg font-semibold text-foreground mb-3">Can you customize a package?</h3>
               <p className="text-foreground/60">
-                Absolutely. These are indicative prices. We can tailor solutions based on your requirements.
+                Absolutely. These are indicative prices. I can tailor solutions based on your specific requirements, scope, and timeline.
               </p>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                What payment terms do you offer?
-              </h3>
+
+            <div className="glass-card p-8">
+              <h3 className="text-lg font-semibold text-foreground mb-3">What payment terms do you offer?</h3>
               <p className="text-foreground/60">
-                For projects, 50% upfront and 50% upon completion. For retainers, monthly in advance.
+                For projects: 50% upfront and 50% upon completion. For retainers: monthly in advance. Flexible terms available for longer commitments.
               </p>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                Do you offer discounts for longer commitments?
-              </h3>
+
+            <div className="glass-card p-8">
+              <h3 className="text-lg font-semibold text-foreground mb-3">Do you offer discounts for longer commitments?</h3>
               <p className="text-foreground/60">
-                Yes. Longer retainer commitments can include pricing adjustments.
+                Yes. Longer retainer commitments (6+ months) can include pricing adjustments and priority support.
+              </p>
+            </div>
+
+            <div className="glass-card p-8">
+              <h3 className="text-lg font-semibold text-foreground mb-3">How do I know which option is right for me?</h3>
+              <p className="text-foreground/60">
+                That's what the initial consultation is for. Send me a nudge with your situation, and I'll recommend the best approach for your needs.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-gradient-to-r from-accent/20 to-accent/10">
+      {/* CTA Section */}
+      <section className="py-20 md:py-32 bg-gradient-to-r from-accent/10 to-accent/5">
         <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             Let's Discuss Your Growth Strategy
           </h2>
-          <p className="text-lg text-foreground/70 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-foreground/60 mb-8 max-w-2xl mx-auto">
             Every business is unique. Let me understand your challenges and create a custom solution.
           </p>
           <Link href="/contact">
