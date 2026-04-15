@@ -1,9 +1,31 @@
-import { useState } from 'react';
-import { BookOpen, TrendingUp, Code } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { BookOpen, TrendingUp, Code, Download } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SearchModal from '@/components/SearchModal';
 import { Link } from 'wouter';
+
+interface Article {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  tags: string[];
+  seoTitle: string;
+  seoDescription: string;
+  seoKeywords: string;
+  featuredImage?: string;
+  pdf?: {
+    url: string;
+    requiresForm: boolean;
+  };
+  embedLinks: string[];
+  embedVideos: string[];
+  status: 'draft' | 'published' | 'scheduled';
+  publishedAt?: string;
+  createdAt: string;
+}
 
 interface Resource {
   id: string;
@@ -14,7 +36,7 @@ interface Resource {
   url: string;
 }
 
-const resources: Resource[] = [
+const defaultResources: Resource[] = [
   {
     id: '1',
     title: 'The Complete GA4 Setup Guide',
@@ -68,16 +90,48 @@ const resources: Resource[] = [
 export default function Resources() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [showPdfForm, setShowPdfForm] = useState<string | null>(null);
+  const [formData, setFormData] = useState({ name: '', email: '', company: '', phone: '' });
+
+  useEffect(() => {
+    // Load published articles from localStorage
+    const saved = localStorage.getItem('articles');
+    if (saved) {
+      const all = JSON.parse(saved);
+      const published = all.filter((a: Article) => a.status === 'published');
+      setArticles(published);
+    }
+  }, []);
 
   const categories = [
+    { value: 'all', label: 'All Resources' },
     { value: 'guide', label: 'Guides' },
     { value: 'case-study', label: 'Case Studies' },
     { value: 'technical', label: 'Technical' },
   ];
 
-  const filteredResources = selectedCategory
-    ? resources.filter((r) => r.category === selectedCategory)
-    : resources;
+  const filteredResources = selectedCategory && selectedCategory !== 'all'
+    ? defaultResources.filter((r) => r.category === selectedCategory)
+    : defaultResources;
+
+  const handlePdfDownload = (articleId: string, pdfUrl: string) => {
+    const article = articles.find(a => a.id === articleId);
+    if (article?.pdf?.requiresForm) {
+      setShowPdfForm(articleId);
+    } else {
+      window.open(pdfUrl, '_blank');
+    }
+  };
+
+  const handleFormSubmit = (e: React.FormEvent, pdfUrl: string) => {
+    e.preventDefault();
+    // Here you could send the form data to your backend
+    console.log('Form submitted:', formData);
+    window.open(pdfUrl, '_blank');
+    setShowPdfForm(null);
+    setFormData({ name: '', email: '', company: '', phone: '' });
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -97,27 +151,17 @@ export default function Resources() {
 
       <section className="py-16 md:py-24">
         <div className="container">
+          {/* Category Filters */}
           <div className="mb-12">
-            <h2 className="text-2xl font-bold text-foreground mb-6">Filter by Category</h2>
-            <div className="flex flex-wrap gap-3">
-              <button
-                onClick={() => setSelectedCategory(null)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  selectedCategory === null
-                    ? 'bg-accent text-accent-foreground'
-                    : 'glass-panel text-foreground hover:border-accent/50'
-                }`}
-              >
-                All Resources
-              </button>
+            <div className="flex flex-wrap gap-3 justify-center">
               {categories.map((cat) => (
                 <button
                   key={cat.value}
-                  onClick={() => setSelectedCategory(cat.value)}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                    selectedCategory === cat.value
-                      ? 'bg-accent text-accent-foreground'
-                      : 'glass-panel text-foreground hover:border-accent/50'
+                  onClick={() => setSelectedCategory(cat.value === 'all' ? null : cat.value)}
+                  className={`px-6 py-2 rounded-full font-semibold transition-all ${
+                    (cat.value === 'all' && !selectedCategory) || selectedCategory === cat.value
+                      ? 'bg-accent text-white shadow-lg'
+                      : 'bg-secondary text-foreground hover:bg-secondary/80'
                   }`}
                 >
                   {cat.label}
@@ -126,46 +170,131 @@ export default function Resources() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Resources Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {filteredResources.map((resource) => (
-              <Link key={resource.id} href={resource.url}>
-                <a className="glass-card group cursor-pointer">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="p-3 bg-accent/10 rounded-lg text-accent group-hover:bg-accent/20 transition-colors">
-                      {resource.icon}
-                    </div>
-                    <span className="text-xs font-semibold text-accent uppercase mt-1">
-                      {resource.category.replace('-', ' ')}
-                    </span>
+              <div key={resource.id} className="glass-card p-6 hover:shadow-lg transition-all">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center text-accent">
+                    {resource.icon}
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-accent transition-colors">
-                    {resource.title}
-                  </h3>
-                  <p className="text-sm text-foreground/60">
-                    {resource.description}
-                  </p>
-                </a>
-              </Link>
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2">{resource.title}</h3>
+                <p className="text-foreground/60 text-sm mb-4">{resource.description}</p>
+                <Link href={resource.url}>
+                  <a className="text-accent hover:text-accent/80 font-semibold text-sm">
+                    Read More →
+                  </a>
+                </Link>
+              </div>
             ))}
           </div>
+
+          {/* Published Articles Section */}
+          {articles.length > 0 && (
+            <div className="mt-20 pt-20 border-t border-border">
+              <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Latest Articles</h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {articles.map((article) => (
+                  <div key={article.id} className="glass-card overflow-hidden hover:shadow-lg transition-all">
+                    <div className="p-6">
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {article.tags.slice(0, 2).map((tag) => (
+                          <span key={tag} className="text-xs bg-accent/20 text-accent px-2 py-1 rounded">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <h3 className="text-lg font-bold text-foreground mb-2">{article.title}</h3>
+                      <p className="text-foreground/60 text-sm mb-4 line-clamp-2">{article.excerpt}</p>
+                      
+                      <div className="flex items-center justify-between">
+                        <Link href={`/article/${article.slug}`}>
+                          <a className="text-accent hover:text-accent/80 font-semibold text-sm">
+                            Read Article →
+                          </a>
+                        </Link>
+                        {article.pdf && (
+                          <button
+                            onClick={() => handlePdfDownload(article.id, article.pdf!.url)}
+                            className="p-2 hover:bg-secondary rounded-lg transition-colors text-foreground/60 hover:text-foreground"
+                          >
+                            <Download className="w-4 h-4" />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-card">
-        <div className="container text-center">
-          <h2 className="text-3xl font-bold text-foreground mb-6">
-            Need Custom Training or Consulting?
-          </h2>
-          <p className="text-lg text-foreground/60 mb-8 max-w-2xl mx-auto">
-            We offer custom workshops and training sessions for your team.
-          </p>
-          <Link href="/contact">
-            <button className="btn-nudge-primary">
-              Send a Nudge
-            </button>
-          </Link>
+      {/* PDF Download Form Modal */}
+      {showPdfForm && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="glass-card p-8 max-w-md w-full">
+            <h3 className="text-2xl font-bold text-foreground mb-4">Download PDF</h3>
+            <p className="text-foreground/60 mb-6">Please provide your details to download this resource.</p>
+            
+            <form onSubmit={(e) => {
+              const article = articles.find(a => a.id === showPdfForm);
+              if (article?.pdf) {
+                handleFormSubmit(e, article.pdf.url);
+              }
+            }} className="space-y-4">
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                required
+                className="w-full px-4 py-2 bg-secondary/50 border border-border rounded-lg text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                required
+                className="w-full px-4 py-2 bg-secondary/50 border border-border rounded-lg text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
+              />
+              <input
+                type="text"
+                placeholder="Company"
+                value={formData.company}
+                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                className="w-full px-4 py-2 bg-secondary/50 border border-border rounded-lg text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
+              />
+              <input
+                type="tel"
+                placeholder="Phone"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                className="w-full px-4 py-2 bg-secondary/50 border border-border rounded-lg text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
+              />
+              
+              <div className="flex gap-3 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowPdfForm(null)}
+                  className="flex-1 px-4 py-2 bg-secondary text-foreground rounded-lg hover:bg-secondary/80 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors font-semibold"
+                >
+                  Download
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </section>
+      )}
 
       <Footer />
     </div>

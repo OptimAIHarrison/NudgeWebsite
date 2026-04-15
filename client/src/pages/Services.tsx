@@ -182,7 +182,7 @@ export default function Services() {
                 <button
                   key={pillar.id}
                   onClick={() => setActivePillar(pillar.id)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all ${
+                  className={`flex items-center gap-2 px-8 py-4 rounded-lg font-semibold transition-all text-base md:text-lg ${
                     activePillar === pillar.id
                       ? 'bg-accent text-white shadow-lg'
                       : 'bg-secondary text-foreground hover:bg-secondary/80'
@@ -208,7 +208,7 @@ export default function Services() {
                 <p className="text-lg text-foreground/60">{currentPillar.description}</p>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+              <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
                 {currentPillar.services.map((service, idx) => (
                   <div key={idx} className="glass-card overflow-hidden flex flex-col">
                     <button

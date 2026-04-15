@@ -16,6 +16,9 @@ import Resources from "./pages/Resources";
 import Testimonials from "./pages/Testimonials";
 import Calculator from "./pages/Calculator";
 import FAQ from "./pages/FAQ";
+import Login from "./pages/Login";
+import Admin from "./pages/Admin";
+import ArticleEditor from "./pages/ArticleEditor";
 
 function Router() {
   const [location] = useLocation();
@@ -36,6 +39,9 @@ function Router() {
       <Route path={"/testimonials"} component={Testimonials} />
       <Route path={"/calculator"} component={Calculator} />
       <Route path={"/faq"} component={FAQ} />
+      <Route path={"/login"} component={Login} />
+      <Route path={"/admin"} component={Admin} />
+      <Route path={"/admin/editor"} component={ArticleEditor} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
