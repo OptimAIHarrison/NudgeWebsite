@@ -93,8 +93,8 @@ export default function Pricing() {
 
       {/* Pricing Categories */}
       <section className="py-20 md:py-32">
-        <div className="container max-w-4xl">
-          <div className="space-y-4">
+        <div className="container">
+          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
             {pricingCategories.map((category, idx) => (
               <div key={category.id} className="glass-card overflow-hidden">
                 <button
@@ -133,9 +133,9 @@ export default function Pricing() {
                     </div>
 
                     <div className="mt-8 pt-8 border-t border-border">
-                      <Link href="/contact">
-                        <Button className="btn-nudge-primary text-lg px-8 py-4">
-                          Get a Custom Quote
+                      <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
+                        <Button className="btn-nudge-primary text-lg px-8 py-6 w-full">
+                          Send a Nudge
                         </Button>
                       </Link>
                     </div>
@@ -195,8 +195,8 @@ export default function Pricing() {
           <p className="text-xl text-foreground/60 mb-8 max-w-2xl mx-auto">
             Every business is unique. Let me understand your challenges and create a custom solution.
           </p>
-          <Link href="/contact">
-            <Button className="btn-nudge-primary text-lg px-8 py-4">
+          <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
+            <Button className="btn-nudge-primary text-lg px-8 py-6">
               Send a Nudge
             </Button>
           </Link>

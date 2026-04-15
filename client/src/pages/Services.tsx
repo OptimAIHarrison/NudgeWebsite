@@ -260,9 +260,9 @@ export default function Services() {
                         </div>
 
                         <div className="pt-4 border-t border-border">
-                          <Link href="/contact">
-                            <Button className="btn-nudge-primary w-full">
-                              Get Started
+                          <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
+                            <Button className="btn-nudge-primary w-full text-lg px-8 py-6">
+                              Send a Nudge
                             </Button>
                           </Link>
                         </div>
@@ -285,8 +285,8 @@ export default function Services() {
           <p className="text-xl text-foreground/60 mb-8 max-w-2xl mx-auto">
             Not sure which service is right for you? Let's discuss your specific needs.
           </p>
-          <Link href="/contact">
-            <Button className="btn-nudge-primary text-lg px-8 py-4">
+          <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
+            <Button className="btn-nudge-primary text-lg px-8 py-6">
               Send a Nudge
             </Button>
           </Link>

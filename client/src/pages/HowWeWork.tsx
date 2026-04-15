@@ -167,8 +167,8 @@ export default function HowWeWork() {
           <p className="text-lg text-foreground/70 mb-8 max-w-2xl mx-auto">
             Let's discuss your challenges and find the right solution.
           </p>
-          <Link href="/contact">
-            <Button className="btn-nudge-primary text-lg px-8 py-4">
+          <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
+            <Button className="btn-nudge-primary text-lg px-8 py-6">
               Send a Nudge
             </Button>
           </Link>
