@@ -6,6 +6,8 @@ import SearchModal from '@/components/SearchModal';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 
+const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663532599876/9u4P3ot5rXMeEQxrn76eMy/nudgewebsite_0d4b2e8a.png';
+
 export default function Home() {
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -80,9 +82,7 @@ export default function Home() {
           <div className="text-center space-y-8 animate-fade-in">
             {/* Logo */}
             <div className="flex justify-center mb-6">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-2xl">N</span>
-              </div>
+              <img src={LOGO_URL} alt="Nudge Digital" className="h-24 w-auto" />
             </div>
 
             {/* Headline */}
