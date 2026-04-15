@@ -14,6 +14,7 @@ import About from "./pages/About";
 import Resources from "./pages/Resources";
 import Testimonials from "./pages/Testimonials";
 import Calculator from "./pages/Calculator";
+import FAQ from "./pages/FAQ";
 
 function Router() {
   return (
@@ -27,6 +28,7 @@ function Router() {
       <Route path={"/resources"} component={Resources} />
       <Route path={"/testimonials"} component={Testimonials} />
       <Route path={"/calculator"} component={Calculator} />
+      <Route path={"/faq"} component={FAQ} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

@@ -1,44 +1,63 @@
 import { useState } from 'react';
-import { Link } from 'wouter';
-import { ArrowRight, Star } from 'lucide-react';
+import { ArrowRight, Zap, TrendingUp, Code, Palette, BarChart3, CheckCircle } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SearchModal from '@/components/SearchModal';
+import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 
 export default function Home() {
   const [searchOpen, setSearchOpen] = useState(false);
 
-  const testimonials = [
+  const services = [
     {
       id: 1,
-      name: 'Sarah Chen',
-      company: 'TechStart Co',
-      quote: 'Nudge Digital transformed our marketing operations. We saw a 45% improvement in lead quality within 3 months.',
-      rating: 5,
+      title: 'Strategic Advisory',
+      description: 'I help you map out your digital strategy and identify the biggest opportunities.',
+      icon: <TrendingUp className="w-6 h-6" />,
     },
     {
       id: 2,
-      name: 'Michael Roberts',
-      company: 'Growth Ventures',
-      quote: 'Their technical expertise solved tracking issues that were costing us thousands monthly. Highly recommended.',
-      rating: 5,
+      title: 'Marketing Operations',
+      description: 'I fix your broken CRM, automate your workflows, and get your data flowing.',
+      icon: <Zap className="w-6 h-6" />,
     },
     {
       id: 3,
-      name: 'Emma Wilson',
-      company: 'Digital Agency Pro',
-      quote: 'As an agency, we rely on Nudge for specialized technical implementation. They deliver every time.',
-      rating: 5,
+      title: 'Performance Marketing',
+      description: 'I optimize your tracking, improve your conversions, and maximize your ROI.',
+      icon: <BarChart3 className="w-6 h-6" />,
+    },
+    {
+      id: 4,
+      title: 'Technical Implementation',
+      description: 'I handle the hard technical stuff that most agencies overlook.',
+      icon: <Code className="w-6 h-6" />,
     },
   ];
 
-  const services = [
-    { title: 'Strategic Advisory', description: 'Data-backed roadmaps for growth' },
-    { title: 'Marketing Operations', description: 'Automated, scalable systems' },
-    { title: 'Performance Marketing', description: 'Measurable ROI and attribution' },
-    { title: 'Brand & Content', description: 'Compelling narratives and assets' },
-    { title: 'Technical Fixes', description: 'Rapid problem resolution' },
+  const testimonials = [
+    {
+      id: 1,
+      company: 'TechStart Co',
+      quote: 'Harrison fixed our tracking issues and we saw a 45% improvement in lead quality within 3 months.',
+      author: 'Sarah Chen',
+      role: 'Marketing Director',
+    },
+    {
+      id: 2,
+      company: 'Growth Ventures',
+      quote: 'His technical expertise solved problems that were costing us thousands monthly.',
+      author: 'Michael Roberts',
+      role: 'CEO',
+    },
+    {
+      id: 3,
+      company: 'Digital Agency Pro',
+      quote: 'As an agency, we rely on Harrison for specialized technical implementation. He delivers every time.',
+      author: 'Emma Wilson',
+      role: 'Agency Director',
+    },
   ];
 
   return (
@@ -47,173 +66,139 @@ export default function Home() {
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0">
-        {/* Animated Background */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-          <div className="absolute inset-0 gradient-mesh" />
-        </div>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background gradient */}
+        <div className="absolute inset-0 gradient-hero opacity-60"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background"></div>
 
-        <div className="container max-w-5xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Left Content */}
-            <div className="space-y-6 animate-slide-in-up">
-              <div className="space-y-4">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                  Your Digital Marketing <span className="text-gradient">Strategist & Implementer</span>
-                </h1>
-                <p className="text-lg md:text-xl text-foreground/70">
-                  We architect, implement, and optimize high-performance digital ecosystems that drive predictable, measurable growth.
-                </p>
-              </div>
+        {/* Animated background elements */}
+        <div className="absolute top-20 right-10 w-72 h-72 bg-accent/20 rounded-full blur-3xl opacity-30 animate-float"></div>
+        <div className="absolute bottom-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
 
-              {/* Search Bar */}
-              <div className="glass-panel p-2 flex items-center gap-2 max-w-md">
-                <input
-                  type="text"
-                  placeholder="What do you need help with?"
-                  onClick={() => setSearchOpen(true)}
-                  className="flex-1 bg-transparent text-foreground placeholder-foreground/50 outline-none px-4 py-2"
-                  readOnly
-                />
-                <button
-                  onClick={() => setSearchOpen(true)}
-                  className="p-2 hover:bg-accent/10 rounded-lg transition-colors"
-                >
-                  <ArrowRight className="w-5 h-5 text-accent" />
-                </button>
-              </div>
-
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link href="/contact">
-                  <Button className="btn-nudge-primary w-full sm:w-auto">
-                    Send Us a Nudge
-                  </Button>
-                </Link>
-                <Link href="/services">
-                  <Button className="btn-nudge-secondary w-full sm:w-auto">
-                    Explore Services
-                  </Button>
-                </Link>
-              </div>
-
-              {/* Trust Indicators */}
-              <div className="flex flex-wrap gap-6 pt-4 text-sm text-foreground/60">
-                <div>
-                  <p className="font-semibold text-foreground">50+</p>
-                  <p>Successful Projects</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-foreground">15+</p>
-                  <p>Years Combined Experience</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-foreground">3</p>
-                  <p>Pricing Models</p>
-                </div>
+        {/* Content */}
+        <div className="container relative z-10 max-w-4xl mx-auto px-4">
+          <div className="text-center space-y-8 animate-fade-in">
+            {/* Logo */}
+            <div className="flex justify-center mb-6">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-2xl">N</span>
               </div>
             </div>
 
-            {/* Right Visual */}
-            <div className="hidden lg:flex items-center justify-center">
-              <div className="relative w-full max-w-sm">
-                {/* Glass Panels */}
-                <div className="glass-panel p-8 space-y-4 animate-slide-in-down">
-                  <div className="h-32 bg-gradient-to-br from-accent/20 to-purple-400/20 rounded-lg" />
-                  <div className="h-4 bg-accent/10 rounded w-3/4" />
-                  <div className="h-4 bg-accent/10 rounded w-1/2" />
+            {/* Headline */}
+            <div className="space-y-4">
+              <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight">
+                Your Digital Marketing
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/70">
+                  Strategist & Implementer
+                </span>
+              </h1>
+              <p className="text-xl md:text-2xl text-foreground/70 max-w-2xl mx-auto leading-relaxed">
+                I solve the technical problems that agencies overlook. Strategy, implementation, and results—all from one person you can trust.
+              </p>
+            </div>
+
+            {/* Search Bar */}
+            <div className="max-w-2xl mx-auto">
+              <button
+                onClick={() => setSearchOpen(true)}
+                className="w-full glass-panel px-6 py-4 text-left text-foreground/60 hover:text-foreground transition-colors group"
+              >
+                <div className="flex items-center justify-between">
+                  <span>What do you need help with?</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
-                <div className="glass-panel p-8 absolute -bottom-8 -right-8 w-64 space-y-4 animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
-                  <div className="h-24 bg-gradient-to-br from-purple-400/20 to-accent/20 rounded-lg" />
-                  <div className="h-4 bg-accent/10 rounded w-2/3" />
-                </div>
-              </div>
+              </button>
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <Link href="/contact">
+                <Button className="btn-nudge-primary text-lg px-8 py-4">
+                  Send Us a Nudge
+                </Button>
+              </Link>
+              <Link href="/services">
+                <Button className="btn-nudge-secondary text-lg px-8 py-4">
+                  Explore Services
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Overview */}
-      <section className="py-16 md:py-24 bg-card">
+      {/* What I Do Best */}
+      <section className="py-20 md:py-32 bg-secondary/30">
         <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Five Pillars of Excellence
-            </h2>
-            <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
-              Comprehensive solutions across every aspect of digital marketing
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">What I Do Best</h2>
+            <p className="text-xl text-foreground/60 max-w-2xl mx-auto">
+              I specialize in the technical challenges that most agencies can't solve. Here's where I add the most value.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-            {services.map((service, idx) => (
-              <Link key={idx} href="/services">
-                <a className="glass-card group cursor-pointer">
-                  <h3 className="font-semibold text-foreground group-hover:text-accent transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm text-foreground/60 mt-2">
-                    {service.description}
-                  </p>
-                </a>
-              </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {services.map((service) => (
+              <div key={service.id} className="glass-panel p-8 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-accent/15 rounded-lg text-accent flex-shrink-0">
+                    {service.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-foreground mb-2">{service.title}</h3>
+                    <p className="text-foreground/70">{service.description}</p>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-16 md:py-24">
+      {/* Client Success */}
+      <section className="py-20 md:py-32">
         <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Trusted by Industry Leaders
-            </h2>
-            <p className="text-lg text-foreground/60">
-              See what our clients say about working with us
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Real Results</h2>
+            <p className="text-xl text-foreground/60 max-w-2xl mx-auto">
+              Here's what my clients have achieved after working together.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="glass-card">
+              <div key={testimonial.id} className="glass-panel p-8">
                 <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-accent text-lg">★</span>
                   ))}
                 </div>
-                <p className="text-foreground/80 mb-4 italic">"{testimonial.quote}"</p>
-                <div>
-                  <p className="font-semibold text-foreground">{testimonial.name}</p>
-                  <p className="text-sm text-foreground/60">{testimonial.company}</p>
+                <p className="text-foreground/80 mb-6 italic">"{testimonial.quote}"</p>
+                <div className="border-t border-border pt-4">
+                  <p className="font-semibold text-foreground">{testimonial.author}</p>
+                  <p className="text-sm text-foreground/60">{testimonial.role} at {testimonial.company}</p>
                 </div>
               </div>
             ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link href="/testimonials">
-              <Button className="btn-nudge-outline">
-                View All Success Stories
-              </Button>
-            </Link>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-primary">
-        <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to Transform Your Digital Marketing?
+      <section className="py-20 md:py-32 bg-gradient-mesh relative overflow-hidden">
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
+        </div>
+        <div className="container relative z-10 text-center max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            Ready to Start Your Nudge?
           </h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Let's discuss how we can architect your growth strategy and implement the systems that drive results.
+          <p className="text-xl text-foreground/70 mb-8">
+            Tell me what you need help with. I will respond with a clear plan and pricing within 24 hours.
           </p>
           <Link href="/contact">
-            <Button className="bg-white text-accent hover:bg-white/90 px-8 py-3 rounded-lg font-semibold">
+            <Button className="btn-nudge-primary text-lg px-8 py-4">
               Send Us a Nudge
             </Button>
           </Link>

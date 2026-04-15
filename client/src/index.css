@@ -44,39 +44,39 @@
 }
 
 :root {
-  --primary: oklch(0.623 0.214 259.815);
-  --primary-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.623 0.214 259.815);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --chart-1: oklch(0.623 0.214 259.815);
-  --chart-2: oklch(0.700 0.200 260);
-  --chart-3: oklch(0.550 0.220 260);
-  --chart-4: oklch(0.480 0.210 260);
-  --chart-5: oklch(0.420 0.200 260);
+  --primary: oklch(0.55 0.25 270);
+  --primary-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.55 0.25 270);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --chart-1: oklch(0.55 0.25 270);
+  --chart-2: oklch(0.60 0.24 270);
+  --chart-3: oklch(0.50 0.26 270);
+  --chart-4: oklch(0.45 0.25 270);
+  --chart-5: oklch(0.40 0.24 270);
   --radius: 0.75rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
-  --card: oklch(0.98 0.002 286);
-  --card-foreground: oklch(0.235 0.015 65);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.95 0.005 286);
-  --secondary-foreground: oklch(0.3 0.015 65);
-  --muted: oklch(0.92 0.004 286);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.623 0.214 259.815);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: oklch(0.98 0.001 0);
+  --foreground: oklch(0.15 0.01 0);
+  --card: oklch(0.96 0.002 0);
+  --card-foreground: oklch(0.15 0.01 0);
+  --popover: oklch(0.98 0.001 0);
+  --popover-foreground: oklch(0.15 0.01 0);
+  --secondary: oklch(0.92 0.003 0);
+  --secondary-foreground: oklch(0.25 0.01 0);
+  --muted: oklch(0.88 0.002 0);
+  --muted-foreground: oklch(0.50 0.01 0);
+  --accent: oklch(0.55 0.25 270);
+  --accent-foreground: oklch(0.98 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.623 0.214 259.815);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
+  --border: oklch(0.90 0.002 0);
+  --input: oklch(0.90 0.002 0);
+  --ring: oklch(0.55 0.25 270);
+  --sidebar: oklch(0.98 0.001 0);
+  --sidebar-foreground: oklch(0.15 0.01 0);
+  --sidebar-accent: oklch(0.55 0.25 270);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.90 0.002 0);
+  --sidebar-ring: oklch(0.55 0.25 270);
 }
 
 .dark {
@@ -170,16 +170,17 @@
   .glass-panel {
     position: relative;
     overflow: hidden;
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.3);
   }
 
   .dark .glass-panel {
-    background: rgba(30, 41, 59, 0.7);
-    border: 1px solid rgba(139, 92, 246, 0.2);
+    background: rgba(20, 20, 30, 0.8);
+    border: 1.5px solid rgba(168, 85, 247, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(168, 85, 247, 0.1);
   }
 
   .glass-card {
@@ -216,33 +217,66 @@
 
   /* Gradient Backgrounds */
   .gradient-primary {
-    background: linear-gradient(135deg, oklch(0.623 0.214 259.815) 0%, oklch(0.700 0.200 260) 100%);
+    background: linear-gradient(135deg, oklch(0.55 0.25 270) 0%, oklch(0.40 0.24 270) 100%);
   }
 
   .gradient-accent {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(167, 139, 250, 0.1) 100%);
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(139, 92, 246, 0.08) 100%);
   }
 
   .gradient-mesh {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(167, 139, 250, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(168, 85, 247, 0.2) 50%, rgba(0, 0, 0, 0.2) 100%);
+  }
+
+  .gradient-hero {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
   }
 
   /* Buttons */
   .btn-nudge {
-    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 300ms;
   }
 
   .btn-nudge-primary {
-    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent bg-accent text-accent-foreground hover:shadow-lg hover:scale-105 active:scale-95;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 300ms;
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-nudge-primary:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+  }
+
+  .btn-nudge-primary:active {
+    transform: scale(0.95);
   }
 
   .btn-nudge-secondary {
-    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent text-foreground hover:bg-accent/10 border-2 border-accent/30;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 300ms;
+    color: var(--foreground);
+    border: 2px solid rgba(139, 92, 246, 0.3);
     position: relative;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(10px);
-    border: 2px solid rgba(139, 92, 246, 0.3);
+    cursor: pointer;
+  }
+
+  .btn-nudge-secondary:hover {
+    background: rgba(255, 255, 255, 0.85);
   }
 
   .dark .btn-nudge-secondary {
@@ -250,8 +284,23 @@
     border: 2px solid rgba(139, 92, 246, 0.3);
   }
 
+  .dark .btn-nudge-secondary:hover {
+    background: rgba(30, 41, 59, 0.85);
+  }
+
   .btn-nudge-outline {
-    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent border-2 border-accent text-accent hover:bg-accent/10;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 300ms;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .btn-nudge-outline:hover {
+    background: rgba(168, 85, 247, 0.1);
   }
 
   /* Text Utilities */
