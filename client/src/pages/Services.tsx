@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearch } from 'wouter';
 import { ChevronDown, Zap, TrendingUp, Code, BarChart3, Palette, Lightbulb, Rocket, Target, Database, Settings, Gauge, CheckCircle, Layers } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -151,8 +152,24 @@ const PILLARS = [
 ];
 
 export default function Services() {
+  const search = useSearch();
   const [activePillar, setActivePillar] = useState('strategic');
   const [expandedService, setExpandedService] = useState<string | null>(null);
+
+  // Handle URL parameters to open specific service
+  useEffect(() => {
+    const params = new URLSearchParams(search);
+    const pillarParam = params.get('pillar');
+    const serviceParam = params.get('service');
+
+    if (pillarParam) {
+      setActivePillar(pillarParam);
+    }
+
+    if (serviceParam) {
+      setExpandedService(serviceParam);
+    }
+  }, [search]);
 
   const currentPillar = PILLARS.find((p) => p.id === activePillar);
 
@@ -212,12 +229,14 @@ export default function Services() {
               </div>
 
               <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
-                {currentPillar.services.map((service, idx) => (
+                {currentPillar.services.map((service, idx) => {
+                  const serviceId = `${activePillar}-${idx}`;
+                  return (
                   <div key={idx} className="glass-card overflow-hidden flex flex-col">
                     <button
                       onClick={() =>
                         setExpandedService(
-                          expandedService === `${activePillar}-${idx}` ? null : `${activePillar}-${idx}`
+                          expandedService === serviceId ? null : serviceId
                         )
                       }
                       className="w-full text-left p-6 hover:bg-accent/5 transition-colors flex-1 flex flex-col"
@@ -226,7 +245,7 @@ export default function Services() {
                         <h3 className="text-lg font-bold text-foreground flex-1">{service.title}</h3>
                         <ChevronDown
                           className={`w-5 h-5 text-accent flex-shrink-0 transition-transform ${
-                            expandedService === `${activePillar}-${idx}` ? 'rotate-180' : ''
+                            expandedService === serviceId ? 'rotate-180' : ''
                           }`}
                         />
                       </div>
@@ -241,7 +260,7 @@ export default function Services() {
                       </ul>
                     </button>
 
-                    {expandedService === `${activePillar}-${idx}` && (
+                    {expandedService === serviceId && (
                       <div className="border-t border-border p-6 bg-accent/5 space-y-4 animate-slide-in-down">
                         <div>
                           <h4 className="font-semibold text-foreground mb-2">What's Included</h4>
@@ -272,7 +291,8 @@ export default function Services() {
                       </div>
                     )}
                   </div>
-                ))}
+                );
+                })}
               </div>
             </>
           )}

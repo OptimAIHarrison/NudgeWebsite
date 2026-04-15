@@ -16,23 +16,23 @@ interface SearchModalProps {
 }
 
 const SERVICES_DATA = [
-  { title: 'Comprehensive Digital Marketing Audit', pillar: 'Strategic Advisory & Audits', keywords: ['audit', 'analysis', 'review', 'assessment'] },
-  { title: 'Growth Strategy & Roadmap Development', pillar: 'Strategic Advisory & Audits', keywords: ['strategy', 'roadmap', 'planning', 'growth'] },
-  { title: 'Marketing Technology (MarTech) Stack Consulting', pillar: 'Strategic Advisory & Audits', keywords: ['martech', 'tools', 'stack', 'technology'] },
-  { title: 'CRM Implementation & Optimization', pillar: 'Marketing Operations & Automation', keywords: ['crm', 'hubspot', 'salesforce', 'implementation'] },
-  { title: 'Email Marketing (EDM) & Lifecycle Automation', pillar: 'Marketing Operations & Automation', keywords: ['email', 'automation', 'edm', 'lifecycle', 'newsletter'] },
-  { title: 'AI & Workflow Automation', pillar: 'Marketing Operations & Automation', keywords: ['automation', 'ai', 'workflow', 'zapier', 'integration'] },
-  { title: 'Advanced Tracking & Attribution', pillar: 'Performance Marketing & Analytics', keywords: ['tracking', 'analytics', 'attribution', 'ga4', 'data'] },
-  { title: 'Paid Media Strategy & Management', pillar: 'Performance Marketing & Analytics', keywords: ['paid', 'ads', 'google ads', 'facebook', 'ppc', 'advertising'] },
-  { title: 'Technical SEO & Search Authority', pillar: 'Performance Marketing & Analytics', keywords: ['seo', 'search', 'ranking', 'organic', 'technical'] },
-  { title: 'Conversion Rate Optimization (CRO)', pillar: 'Performance Marketing & Analytics', keywords: ['conversion', 'cro', 'optimization', 'testing', 'ab test'] },
-  { title: 'Analytics & Reporting', pillar: 'Performance Marketing & Analytics', keywords: ['analytics', 'reporting', 'dashboard', 'insights', 'metrics'] },
-  { title: 'Messaging Hierarchy & Core Narrative Development', pillar: 'Brand & Content Enablement', keywords: ['messaging', 'brand', 'narrative', 'positioning', 'content'] },
-  { title: 'Social Media Strategy & Creative Direction', pillar: 'Brand & Content Enablement', keywords: ['social', 'media', 'instagram', 'linkedin', 'twitter', 'content'] },
-  { title: 'Brand & Creative Assets Development', pillar: 'Brand & Content Enablement', keywords: ['brand', 'creative', 'design', 'assets', 'logo'] },
-  { title: 'Website Performance & Speed Optimization', pillar: 'Technical Fixes & Optimization', keywords: ['performance', 'speed', 'optimization', 'website', 'core web vitals'] },
-  { title: 'Tracking & Data Integrity Cleanups', pillar: 'Technical Fixes & Optimization', keywords: ['tracking', 'data', 'cleanup', 'integrity', 'tag manager'] },
-  { title: 'Broken Funnel & Conversion Path Diagnostics', pillar: 'Technical Fixes & Optimization', keywords: ['funnel', 'conversion', 'diagnostic', 'path', 'issue'] },
+  { id: 'strategic-0', title: 'Comprehensive Digital Marketing Audit', pillar: 'strategic', pillarName: 'Strategic Advisory & Audits', keywords: ['audit', 'analysis', 'review', 'assessment'] },
+  { id: 'strategic-1', title: 'Growth Strategy & Roadmap Development', pillar: 'strategic', pillarName: 'Strategic Advisory & Audits', keywords: ['strategy', 'roadmap', 'planning', 'growth'] },
+  { id: 'strategic-2', title: 'Marketing Technology (MarTech) Stack Consulting', pillar: 'strategic', pillarName: 'Strategic Advisory & Audits', keywords: ['martech', 'tools', 'stack', 'technology'] },
+  { id: 'operations-0', title: 'CRM Implementation & Optimization', pillar: 'operations', pillarName: 'Marketing Operations & Automation', keywords: ['crm', 'hubspot', 'salesforce', 'implementation'] },
+  { id: 'operations-1', title: 'Email Marketing (EDM) & Lifecycle Automation', pillar: 'operations', pillarName: 'Marketing Operations & Automation', keywords: ['email', 'automation', 'edm', 'lifecycle', 'newsletter'] },
+  { id: 'operations-2', title: 'AI & Workflow Automation', pillar: 'operations', pillarName: 'Marketing Operations & Automation', keywords: ['automation', 'ai', 'workflow', 'zapier', 'integration'] },
+  { id: 'performance-0', title: 'Advanced Tracking & Attribution', pillar: 'performance', pillarName: 'Performance Marketing & Analytics', keywords: ['tracking', 'analytics', 'attribution', 'ga4', 'data'] },
+  { id: 'performance-1', title: 'Paid Media Strategy & Management', pillar: 'performance', pillarName: 'Performance Marketing & Analytics', keywords: ['paid', 'ads', 'google ads', 'facebook', 'ppc', 'advertising'] },
+  { id: 'performance-2', title: 'Technical SEO & Search Authority', pillar: 'performance', pillarName: 'Performance Marketing & Analytics', keywords: ['seo', 'search', 'ranking', 'organic', 'technical'] },
+  { id: 'performance-3', title: 'Conversion Rate Optimization (CRO)', pillar: 'performance', pillarName: 'Performance Marketing & Analytics', keywords: ['conversion', 'cro', 'optimization', 'testing', 'ab test'] },
+  { id: 'performance-4', title: 'Analytics & Reporting', pillar: 'performance', pillarName: 'Performance Marketing & Analytics', keywords: ['analytics', 'reporting', 'dashboard', 'insights', 'metrics'] },
+  { id: 'brand-0', title: 'Messaging Hierarchy & Core Narrative Development', pillar: 'brand', pillarName: 'Brand & Content Enablement', keywords: ['messaging', 'brand', 'narrative', 'positioning', 'content'] },
+  { id: 'brand-1', title: 'Social Media Strategy & Creative Direction', pillar: 'brand', pillarName: 'Brand & Content Enablement', keywords: ['social', 'media', 'instagram', 'linkedin', 'twitter', 'content'] },
+  { id: 'brand-2', title: 'Brand & Creative Assets Development', pillar: 'brand', pillarName: 'Brand & Content Enablement', keywords: ['brand', 'creative', 'design', 'assets', 'logo'] },
+  { id: 'technical-0', title: 'Website Performance & Speed Optimization', pillar: 'technical', pillarName: 'Technical Fixes & Optimization', keywords: ['performance', 'speed', 'optimization', 'website', 'core web vitals'] },
+  { id: 'technical-1', title: 'Tracking & Data Integrity Cleanups', pillar: 'technical', pillarName: 'Technical Fixes & Optimization', keywords: ['tracking', 'data', 'cleanup', 'integrity', 'tag manager'] },
+  { id: 'technical-2', title: 'Broken Funnel & Conversion Path Diagnostics', pillar: 'technical', pillarName: 'Technical Fixes & Optimization', keywords: ['funnel', 'conversion', 'diagnostic', 'path', 'issue'] },
 ];
 
 export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
@@ -55,16 +55,16 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       const searchResults: SearchResult[] = SERVICES_DATA
         .filter((service) => {
           const titleMatch = service.title.toLowerCase().includes(lowerQuery);
-          const pillarMatch = service.pillar.toLowerCase().includes(lowerQuery);
+          const pillarMatch = service.pillarName.toLowerCase().includes(lowerQuery);
           const keywordMatch = service.keywords.some(k => k.includes(lowerQuery));
           return titleMatch || pillarMatch || keywordMatch;
         })
-        .map((service, idx) => ({
-          id: `${idx}`,
+        .map((service) => ({
+          id: service.id,
           title: service.title,
-          description: service.pillar,
+          description: service.pillarName,
           pillar: service.pillar,
-          url: '/services',
+          url: `/services?pillar=${service.pillar}&service=${service.id}`,
         }));
 
       setResults(searchResults);
@@ -127,7 +127,10 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             ) : results.length > 0 ? (
               <div className="divide-y divide-border/30">
                 {results.map((result) => (
-                  <Link key={result.id} href={result.url} onClick={onClose}>
+                  <Link key={result.id} href={result.url} onClick={() => {
+                    onClose();
+                    window.scrollTo(0, 0);
+                  }}>
                     <a className="block p-4 md:p-6 hover:bg-accent/5 transition-colors">
                       <h3 className="font-semibold text-foreground mb-1">{result.title}</h3>
                       <p className="text-sm text-accent">{result.description}</p>
