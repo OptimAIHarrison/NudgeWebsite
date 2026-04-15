@@ -220,6 +220,6 @@
 - [x] Pricing: Minimum hourly rate $75
 - [x] Center headings on How We Work, Resources, About, Contact pages
 - [x] Larger "Send a Nudge" buttons (increased top/bottom padding)
-- [ ] Larger service pillar buttons (increased vertical size)
+- [x] Larger service pillar buttons (increased vertical size)
 - [x] Down arrows on How We Work dropdown panels
 - [x] Scroll to top on page navigation

@@ -182,7 +182,7 @@ export default function Services() {
                 <button
                   key={pillar.id}
                   onClick={() => setActivePillar(pillar.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all ${
                     activePillar === pillar.id
                       ? 'bg-accent text-white shadow-lg'
                       : 'bg-secondary text-foreground hover:bg-secondary/80'

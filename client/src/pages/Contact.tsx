@@ -42,11 +42,11 @@ export default function Contact() {
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
       <section className="py-16 md:py-24 bg-card border-b border-border">
-        <div className="container">
+        <div className="container text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Send a Nudge
           </h1>
-          <p className="text-xl text-foreground/60 max-w-3xl">
+          <p className="text-xl text-foreground/60 max-w-3xl mx-auto">
             Tell us about your digital marketing challenges. We will respond with a clear plan and pricing.
           </p>
         </div>
