@@ -20,6 +20,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
     { label: 'Pricing', href: '/pricing' },
     { label: 'Resources', href: '/resources' },
     { label: 'About', href: '/about' },
+    { label: 'Calculator', href: '/calculator' },
   ];
 
   return (
@@ -44,12 +45,18 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
         {/* Search and CTA */}
         <div className="flex items-center gap-2 md:gap-4">
           <button
-            onClick={onSearchOpen}
+            onClick={() => onSearchOpen?.()}
             className="p-2 hover:bg-accent/10 rounded-lg transition-colors"
             aria-label="Search"
           >
             <Search className="w-5 h-5 text-foreground/70" />
           </button>
+
+          <Link href="/calculator" className="hidden sm:inline-flex">
+            <Button variant="outline" className="text-sm">
+              Calculator
+            </Button>
+          </Link>
 
           <Link href="/contact">
             <Button className="btn-nudge-primary hidden sm:inline-flex">

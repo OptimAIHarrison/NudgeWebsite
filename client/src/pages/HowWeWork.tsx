@@ -64,7 +64,7 @@ export default function HowWeWork() {
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             How I Work
           </h1>
-          <p className="text-xl text-foreground/60 max-w-3xl">
+          <p className="text-xl text-foreground/60 max-w-3xl mx-auto">
             A simple, transparent process designed to get you results fast.
           </p>
         </div>
