@@ -208,7 +208,7 @@ export default function Services() {
                 <p className="text-lg text-foreground/60">{currentPillar.description}</p>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
                 {currentPillar.services.map((service, idx) => (
                   <div key={idx} className="glass-card overflow-hidden flex flex-col">
                     <button

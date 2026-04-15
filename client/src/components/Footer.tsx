@@ -71,7 +71,7 @@ export default function Footer() {
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href}>
+                    <Link href={link.href} onClick={() => window.scrollTo(0, 0)}>
                       <a className="text-sm text-foreground/60 hover:text-accent transition-colors">
                         {link.label}
                       </a>

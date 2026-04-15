@@ -154,9 +154,9 @@ export default function Home() {
                   </Button>
                 </Link>
                 <Link href="/services" className="flex-1" onClick={() => window.scrollTo(0, 0)}>
-                  <button className="w-full px-8 py-6 text-lg font-semibold text-accent border-2 border-accent rounded-lg hover:bg-accent/10 transition-colors">
+                  <Button className="w-full px-8 py-6 text-lg font-semibold text-accent border-2 border-accent rounded-lg hover:bg-accent/10 transition-colors bg-transparent">
                     Explore Services
-                  </button>
+                  </Button>
                 </Link>
               </div>
             </div>
