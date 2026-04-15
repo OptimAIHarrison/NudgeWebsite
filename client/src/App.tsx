@@ -4,6 +4,7 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import ChatBot from "./components/ChatBot";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Pricing from "./pages/Pricing";
@@ -47,6 +48,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
+          <ChatBot />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

@@ -168,7 +168,9 @@
 
   /* Liquid Glass Effects */
   .glass-panel {
-    @apply relative overflow-hidden rounded-2xl;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.5);
@@ -181,11 +183,35 @@
   }
 
   .glass-card {
-    @apply glass-panel p-6 transition-all duration-300 hover:shadow-lg hover:border-accent/50;
+    @apply p-6 transition-all duration-300 hover:shadow-lg hover:border-accent/50;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .dark .glass-card {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(139, 92, 246, 0.2);
   }
 
   .glass-input {
-    @apply glass-panel px-4 py-3 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent;
+    @apply px-4 py-3 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .dark .glass-input {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(139, 92, 246, 0.2);
   }
 
   /* Gradient Backgrounds */
@@ -207,15 +233,25 @@
   }
 
   .btn-nudge-primary {
-    @apply btn-nudge bg-accent text-accent-foreground hover:shadow-lg hover:scale-105 active:scale-95;
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent bg-accent text-accent-foreground hover:shadow-lg hover:scale-105 active:scale-95;
   }
 
   .btn-nudge-secondary {
-    @apply btn-nudge glass-panel text-foreground hover:bg-accent/10 border-2 border-accent/30;
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent text-foreground hover:bg-accent/10 border-2 border-accent/30;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+  }
+
+  .dark .btn-nudge-secondary {
+    background: rgba(30, 41, 59, 0.7);
+    border: 2px solid rgba(139, 92, 246, 0.3);
   }
 
   .btn-nudge-outline {
-    @apply btn-nudge border-2 border-accent text-accent hover:bg-accent/10;
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent border-2 border-accent text-accent hover:bg-accent/10;
   }
 
   /* Text Utilities */

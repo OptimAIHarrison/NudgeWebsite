@@ -127,15 +127,15 @@
 - [x] Trust indicators
 
 ### AI Chatbot
-- [ ] Liquid glass UI design for chatbot
-- [ ] Chatbot widget on all pages
-- [ ] LLM backend integration
-- [ ] Service recommendation logic
-- [ ] Pricing tier guidance
-- [ ] Conversion prompts ("Send Us a Nudge")
-- [ ] Message history and context
-- [ ] Mobile-friendly chat interface
-- [ ] Smooth animations and transitions
+- [x] Liquid glass UI design for chatbot
+- [x] Chatbot widget on all pages
+- [ ] LLM backend integration (uses mock responses)
+- [x] Service recommendation logic
+- [x] Pricing tier guidance
+- [x] Conversion prompts ("Send Us a Nudge")
+- [x] Message history and context
+- [x] Mobile-friendly chat interface
+- [x] Smooth animations and transitions
 
 ## Technical Implementation
 
