@@ -1,14 +1,11 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import SearchModal from '@/components/SearchModal';
 import { useState } from 'react';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, Zap, Target, Lightbulb } from 'lucide-react';
 
 export default function About() {
-  const [searchOpen, setSearchOpen] = useState(false);
-
   const expertise = [
     {
       icon: <Zap className="w-6 h-6" />,
@@ -48,8 +45,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onSearchOpen={() => setSearchOpen(true)} />
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <Header />
 
       {/* Hero */}
       <section className="py-16 md:py-24 bg-gradient-mesh relative overflow-hidden">
@@ -67,7 +63,7 @@ export default function About() {
       {/* Story */}
       <section className="py-20 md:py-32">
         <div className="container max-w-3xl mx-auto">
-          <div className="glass-panel p-8 md:p-12 space-y-6">
+          <div className="glass-card p-8 md:p-12 space-y-6">
             <div>
               <h2 className="text-3xl font-bold text-foreground mb-4">My Story</h2>
               <p className="text-lg text-foreground/70 leading-relaxed">
@@ -108,7 +104,7 @@ export default function About() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {expertise.map((item, idx) => (
-              <div key={idx} className="glass-panel p-8">
+              <div key={idx} className="glass-card p-8">
                 <div className="p-4 bg-accent/15 rounded-lg text-accent w-fit mb-4">
                   {item.icon}
                 </div>
@@ -132,7 +128,7 @@ export default function About() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {values.map((value, idx) => (
-              <div key={idx} className="glass-panel p-8">
+              <div key={idx} className="glass-card p-8">
                 <div className="flex items-start gap-3 mb-3">
                   <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
                   <h3 className="text-xl font-semibold text-foreground">{value.title}</h3>
