@@ -136,7 +136,7 @@ export default function Home() {
             </div>
 
             {/* Liquid Glass Container */}
-            <div className="glass-panel p-8 md:p-10 max-w-3xl mx-auto space-y-6 mt-8">
+            <div className="max-w-3xl mx-auto mt-8 p-8 md:p-10 space-y-6 rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl hover:shadow-accent/20 transition-shadow">
               <button
                 onClick={() => setSearchOpen(true)}
                 className="w-full px-6 py-4 text-left text-foreground/60 hover:text-foreground transition-colors group bg-white/50 rounded-lg border border-white/30 hover:bg-white/70"
@@ -148,14 +148,16 @@ export default function Home() {
               </button>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/contact" className="flex-1">
-                  <Button className="btn-nudge-primary text-lg px-8 py-4 w-full">
+                <Link href="/contact" className="flex-1" onClick={() => window.scrollTo(0, 0)}>
+                  <Button className="btn-nudge-primary text-lg px-8 py-6 w-full">
                     Send a Nudge
                   </Button>
                 </Link>
-                <button className="flex-1 px-8 py-4 text-lg font-semibold text-accent border-2 border-accent rounded-lg hover:bg-accent/10 transition-colors">
-                  <Link href="/services">Explore Services</Link>
-                </button>
+                <Link href="/services" className="flex-1" onClick={() => window.scrollTo(0, 0)}>
+                  <button className="w-full px-8 py-6 text-lg font-semibold text-accent border-2 border-accent rounded-lg hover:bg-accent/10 transition-colors">
+                    Explore Services
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

@@ -209,3 +209,17 @@
 - [ ] Troubleshooting guide
 - [ ] Component library documentation
 - [ ] API documentation for custom procedures
+
+
+## Final Refinements
+
+- [x] Same-size buttons in search container
+- [x] Liquid glass search container with transparency and outside shadow
+- [x] "What I Do Best" (6 items) on About page
+- [x] Pricing: Add EDM, database, SEO to project-based
+- [x] Pricing: Minimum hourly rate $75
+- [x] Center headings on How We Work, Resources, About, Contact pages
+- [x] Larger "Send a Nudge" buttons (increased top/bottom padding)
+- [ ] Larger service pillar buttons (increased vertical size)
+- [x] Down arrows on How We Work dropdown panels
+- [x] Scroll to top on page navigation

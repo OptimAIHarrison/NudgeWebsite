@@ -15,7 +15,7 @@ export default function Pricing() {
       title: 'One-Off Fixes',
       description: 'Quick technical fixes and optimizations',
       pricing: 'Hourly',
-      rate: '$150-250/hour',
+      rate: '$75-250/hour',
       examples: [
         'Fix broken tracking or pixels',
         'Audit and optimize GA4 setup',
@@ -35,6 +35,9 @@ export default function Pricing() {
         'Complete CRM implementation',
         'Website technical audit & fixes',
         'Marketing automation setup',
+        'Email Marketing (EDM) automation setup',
+        'Database optimization & integration',
+        'Technical SEO implementation',
         'Data infrastructure rebuild',
         'Analytics implementation',
       ],

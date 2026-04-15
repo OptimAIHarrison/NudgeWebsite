@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, MessageSquare, Lightbulb, Zap } from 'lucide-react';
+import { Search, MessageSquare, Lightbulb, Zap, ChevronDown } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'wouter';
@@ -60,7 +60,7 @@ export default function HowWeWork() {
       <Header />
 
       <section className="py-16 md:py-24 bg-gradient-to-b from-accent/10 to-background border-b border-border">
-        <div className="container">
+        <div className="container text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             How I Work
           </h1>
@@ -102,6 +102,7 @@ export default function HowWeWork() {
                             {step.description}
                           </p>
                         </div>
+                        <ChevronDown className={`w-5 h-5 text-accent flex-shrink-0 transition-transform ${expandedStep === step.number ? 'rotate-180' : ''}`} />
                       </div>
                     </div>
                   </button>
