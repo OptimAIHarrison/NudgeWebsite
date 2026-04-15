@@ -24,10 +24,10 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
-      <div className="container flex items-center justify-between h-16 md:h-20">
+      <div className="container flex items-center justify-between h-20 md:h-24">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 flex-shrink-0 hover:opacity-80 transition-opacity">
-          <img src={LOGO_URL} alt="Nudge Digital" className="h-12 w-auto" />
+          <img src={LOGO_URL} alt="Nudge Digital" className="h-14 md:h-16 w-auto" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -53,7 +53,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
 
           <Link href="/contact">
             <Button className="btn-nudge-primary hidden sm:inline-flex">
-              Send Us a Nudge
+              Send a Nudge
             </Button>
           </Link>
 
@@ -88,7 +88,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
             ))}
             <Link href="/contact">
               <Button className="btn-nudge-primary w-full mt-4">
-                Send Us a Nudge
+                Send a Nudge
               </Button>
             </Link>
           </nav>

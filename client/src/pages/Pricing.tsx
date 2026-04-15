@@ -130,7 +130,7 @@ export default function Pricing() {
                       pkg.highlighted ? 'btn-nudge-primary' : 'btn-nudge-secondary'
                     }`}
                   >
-                    Send Us a Nudge
+                    Send a Nudge
                   </Button>
                 </Link>
 
@@ -180,17 +180,17 @@ export default function Pricing() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-gradient-primary">
+      <section className="py-16 md:py-24 bg-gradient-to-r from-accent/20 to-accent/10">
         <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
             Let's Discuss Your Growth Strategy
           </h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Every business is unique. Let us understand your challenges and create a custom solution.
+          <p className="text-lg text-foreground/70 mb-8 max-w-2xl mx-auto">
+            Every business is unique. Let me understand your challenges and create a custom solution.
           </p>
           <Link href="/contact">
-            <Button className="bg-white text-accent hover:bg-white/90 px-8 py-3 rounded-lg font-semibold">
-              Send Us a Nudge
+            <Button className="btn-nudge-primary text-lg px-8 py-4">
+              Send a Nudge
             </Button>
           </Link>
         </div>

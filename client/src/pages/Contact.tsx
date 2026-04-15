@@ -44,7 +44,7 @@ export default function Contact() {
       <section className="py-16 md:py-24 bg-card border-b border-border">
         <div className="container">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Send Us a Nudge
+            Send a Nudge
           </h1>
           <p className="text-xl text-foreground/60 max-w-3xl">
             Tell us about your digital marketing challenges. We will respond with a clear plan and pricing.
@@ -179,7 +179,7 @@ export default function Contact() {
                 </div>
 
                 <Button type="submit" className="btn-nudge-primary w-full">
-                  Send Us a Nudge
+                  Send a Nudge
                 </Button>
               </form>
             </div>

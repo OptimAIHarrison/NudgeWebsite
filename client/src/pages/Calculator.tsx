@@ -2,12 +2,10 @@ import { useState } from 'react';
 import { TrendingUp } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import SearchModal from '@/components/SearchModal';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 
 export default function Calculator() {
-  const [searchOpen, setSearchOpen] = useState(false);
   const [hoursPerWeek, setHoursPerWeek] = useState(20);
   const [monthlyAgencyCost, setMonthlyAgencyCost] = useState(5000);
 
@@ -20,8 +18,7 @@ export default function Calculator() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onSearchOpen={() => setSearchOpen(true)} />
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <Header />
 
       <section className="py-16 md:py-24 bg-card border-b border-border">
         <div className="container">
@@ -217,7 +214,7 @@ export default function Calculator() {
           </p>
           <Link href="/contact">
             <Button className="bg-white text-accent hover:bg-white/90 px-8 py-3 rounded-lg font-semibold">
-              Send Us a Nudge
+              Send a Nudge
             </Button>
           </Link>
         </div>

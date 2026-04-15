@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Search, MessageSquare, Lightbulb, Zap } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import SearchModal from '@/components/SearchModal';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 
@@ -20,8 +19,8 @@ const steps = [
   },
   {
     number: 2,
-    title: 'Send Us a Brief Nudge',
-    description: 'No service is too large or too small. Tell us what is stuck, what you need, or what you want done.',
+    title: 'Send a Brief Nudge',
+    description: 'No service is too large or too small. Tell me what is stuck, what you need, or what you want done.',
     icon: MessageSquare,
     details: [
       'Quick, simple contact form',
@@ -31,8 +30,8 @@ const steps = [
   },
   {
     number: 3,
-    title: 'We Research & Reverse Brief',
-    description: 'We check the details, dig in, and send back a clear plan, pricing, and timeframes.',
+    title: 'I Research & Reverse Brief',
+    description: 'I check the details, dig in, and send back a clear plan, pricing, and timeframes.',
     icon: Lightbulb,
     details: [
       'We understand your business',
@@ -42,8 +41,8 @@ const steps = [
   },
   {
     number: 4,
-    title: 'We Get to Work',
-    description: 'You sign off, and we get to the doing. Fast, focused, and without the fluff.',
+    title: 'I Get to Work',
+    description: 'You sign off, and I get to the doing. Fast, focused, and without the fluff.',
     icon: Zap,
     details: [
       'Rapid execution',
@@ -54,18 +53,16 @@ const steps = [
 ];
 
 export default function HowWeWork() {
-  const [searchOpen, setSearchOpen] = useState(false);
   const [expandedStep, setExpandedStep] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onSearchOpen={() => setSearchOpen(true)} />
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <Header />
 
-      <section className="py-16 md:py-24 bg-card border-b border-border">
+      <section className="py-16 md:py-24 bg-gradient-to-b from-accent/10 to-background border-b border-border">
         <div className="container">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            How We Work
+            How I Work
           </h1>
           <p className="text-xl text-foreground/60 max-w-3xl">
             A simple, transparent process designed to get you results fast.
@@ -161,17 +158,17 @@ export default function HowWeWork() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-gradient-primary">
+      <section className="py-16 md:py-24 bg-gradient-to-r from-accent/20 to-accent/10">
         <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to Start Your Nudge?
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+            Ready to Get Started?
           </h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Tell us what you need help with. We will respond with a clear plan and pricing within 24 hours.
+          <p className="text-lg text-foreground/70 mb-8 max-w-2xl mx-auto">
+            Let's discuss your challenges and find the right solution.
           </p>
           <Link href="/contact">
-            <Button className="bg-white text-accent hover:bg-white/90 px-8 py-3 rounded-lg font-semibold">
-              Send Us a Nudge
+            <Button className="btn-nudge-primary text-lg px-8 py-4">
+              Send a Nudge
             </Button>
           </Link>
         </div>

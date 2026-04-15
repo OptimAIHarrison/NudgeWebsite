@@ -183,7 +183,7 @@ async function generateChatResponse(userMessage: string, previousMessages: Messa
   }
 
   if (lowerMessage.includes('contact') || lowerMessage.includes('nudge')) {
-    return 'You can send us a nudge by filling out our contact form on the Send Us a Nudge page. We typically respond within 24 hours to discuss your specific needs and create a custom proposal.';
+    return 'You can send us a nudge by filling out our contact form on the Send a Nudge page. We typically respond within 24 hours to discuss your specific needs and create a custom proposal.';
   }
 
   if (lowerMessage.includes('how') || lowerMessage.includes('process') || lowerMessage.includes('work')) {

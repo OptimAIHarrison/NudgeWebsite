@@ -147,7 +147,7 @@ export default function FAQ() {
           </p>
           <Link href="/contact">
             <Button className="btn-nudge-primary text-lg px-8 py-4">
-              Send Us a Nudge
+              Send a Nudge
             </Button>
           </Link>
         </div>

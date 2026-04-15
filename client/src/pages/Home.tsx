@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Zap, TrendingUp, Code, Palette, BarChart3, CheckCircle } from 'lucide-react';
+import { ArrowRight, Zap, TrendingUp, Code, BarChart3, CheckCircle, Sparkles } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SearchModal from '@/components/SearchModal';
@@ -45,6 +45,7 @@ export default function Home() {
       quote: 'Harrison fixed our tracking issues and we saw a 45% improvement in lead quality within 3 months.',
       author: 'Sarah Chen',
       role: 'Marketing Director',
+      metric: '+45% Lead Quality',
     },
     {
       id: 2,
@@ -52,6 +53,7 @@ export default function Home() {
       quote: 'His technical expertise solved problems that were costing us thousands monthly.',
       author: 'Michael Roberts',
       role: 'CEO',
+      metric: '$50K+ Monthly Savings',
     },
     {
       id: 3,
@@ -59,6 +61,7 @@ export default function Home() {
       quote: 'As an agency, we rely on Harrison for specialized technical implementation. He delivers every time.',
       author: 'Emma Wilson',
       role: 'Agency Director',
+      metric: '100% On-Time Delivery',
     },
   ];
 
@@ -78,10 +81,10 @@ export default function Home() {
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
 
         {/* Content */}
-        <div className="container relative z-10 max-w-4xl mx-auto px-4">
-          <div className="text-center space-y-8 animate-fade-in">
+        <div className="container relative z-10 max-w-5xl mx-auto px-4">
+          <div className="text-center space-y-6 animate-fade-in">
             {/* Logo */}
-            <div className="flex justify-center mb-6">
+            <div className="flex justify-center mb-4">
               <img src={LOGO_URL} alt="Nudge Digital" className="h-24 w-auto" />
             </div>
 
@@ -98,31 +101,30 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Search Bar */}
-            <div className="max-w-2xl mx-auto">
+            {/* Liquid Glass Container for Search & CTAs */}
+            <div className="glass-panel p-8 md:p-10 max-w-2xl mx-auto space-y-6 mt-8">
+              {/* Search Bar */}
               <button
                 onClick={() => setSearchOpen(true)}
-                className="w-full glass-panel px-6 py-4 text-left text-foreground/60 hover:text-foreground transition-colors group"
+                className="w-full px-6 py-4 text-left text-foreground/60 hover:text-foreground transition-colors group bg-white/50 rounded-lg border border-white/30 hover:bg-white/70"
               >
                 <div className="flex items-center justify-between">
                   <span>What do you need help with?</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </button>
-            </div>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Link href="/contact">
-                <Button className="btn-nudge-primary text-lg px-8 py-4">
-                  Send Us a Nudge
-                </Button>
-              </Link>
-              <Link href="/services">
-                <Button className="btn-nudge-secondary text-lg px-8 py-4">
-                  Explore Services
-                </Button>
-              </Link>
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/contact" className="flex-1">
+                  <Button className="btn-nudge-primary text-lg px-8 py-4 w-full">
+                    Send a Nudge
+                  </Button>
+                </Link>
+                <button className="flex-1 px-8 py-4 text-lg font-semibold text-accent border-2 border-accent rounded-lg hover:bg-accent/10 transition-colors">
+                  <Link href="/services">Explore Services</Link>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -134,20 +136,20 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">What I Do Best</h2>
             <p className="text-xl text-foreground/60 max-w-2xl mx-auto">
-              I specialize in the technical challenges that most agencies can't solve. Here's where I add the most value.
+              I handle everything from SEO and email marketing to CRM setup, automation, and complete digital strategy. Full-stack digital marketing expertise.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {services.map((service) => (
-              <div key={service.id} className="glass-panel p-8 hover:shadow-lg transition-all duration-300">
+              <div key={service.id} className="glass-card group hover:scale-105 transition-transform">
                 <div className="flex items-start gap-4">
-                  <div className="p-3 bg-accent/15 rounded-lg text-accent flex-shrink-0">
+                  <div className="p-3 rounded-lg bg-accent/10 text-accent group-hover:bg-accent/20 transition-colors">
                     {service.icon}
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-foreground mb-2">{service.title}</h3>
-                    <p className="text-foreground/70">{service.description}</p>
+                  <div className="text-left">
+                    <h3 className="text-lg font-semibold text-foreground mb-2">{service.title}</h3>
+                    <p className="text-foreground/60">{service.description}</p>
                   </div>
                 </div>
               </div>
@@ -156,52 +158,83 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Client Success */}
-      <section className="py-20 md:py-32">
+      {/* Client Success / Testimonials */}
+      <section className="py-20 md:py-32 bg-background">
         <div className="container">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Real Results</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Client Success Stories</h2>
             <p className="text-xl text-foreground/60 max-w-2xl mx-auto">
-              Here's what my clients have achieved after working together.
+              Real results from real clients. See how I've helped businesses solve their toughest digital marketing challenges.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="glass-panel p-8">
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-accent text-lg">★</span>
-                  ))}
+              <div key={testimonial.id} className="glass-card">
+                <div className="mb-4">
+                  <div className="text-3xl font-bold text-accent mb-2">{testimonial.metric}</div>
+                  <p className="text-sm text-foreground/60">{testimonial.company}</p>
                 </div>
                 <p className="text-foreground/80 mb-6 italic">"{testimonial.quote}"</p>
                 <div className="border-t border-border pt-4">
                   <p className="font-semibold text-foreground">{testimonial.author}</p>
-                  <p className="text-sm text-foreground/60">{testimonial.role} at {testimonial.company}</p>
+                  <p className="text-sm text-foreground/60">{testimonial.role}</p>
                 </div>
               </div>
             ))}
           </div>
+
+          <div className="text-center mt-12">
+            <Link href="/testimonials">
+              <Button className="btn-nudge-primary text-lg px-8 py-4">
+                View All Success Stories
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 md:py-32 bg-gradient-mesh relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
-        </div>
-        <div className="container relative z-10 text-center max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Ready to Start Your Nudge?
-          </h2>
-          <p className="text-xl text-foreground/70 mb-8">
-            Tell me what you need help with. I will respond with a clear plan and pricing within 24 hours.
-          </p>
-          <Link href="/contact">
-            <Button className="btn-nudge-primary text-lg px-8 py-4">
-              Send Us a Nudge
-            </Button>
-          </Link>
+      {/* Why Work With Nudge */}
+      <section className="py-20 md:py-32 bg-gradient-to-r from-accent/5 to-accent/10">
+        <div className="container">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Why Work With Nudge</h2>
+            <p className="text-xl text-foreground/60 max-w-2xl mx-auto">
+              I'm not an agency. I'm a fractional strategist who gets results.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/20 flex items-center justify-center">
+                <Sparkles className="w-8 h-8 text-accent" />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">Technical Expertise</h3>
+              <p className="text-foreground/60">I solve the technical problems that agencies overlook or charge premium rates for.</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/20 flex items-center justify-center">
+                <CheckCircle className="w-8 h-8 text-accent" />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">Full-Stack Solution</h3>
+              <p className="text-foreground/60">From strategy to implementation, I handle everything you need for digital success.</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/20 flex items-center justify-center">
+                <TrendingUp className="w-8 h-8 text-accent" />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">Proven Results</h3>
+              <p className="text-foreground/60">Real improvements in lead quality, conversions, and ROI for every client.</p>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <Link href="/testimonials">
+              <Button className="btn-nudge-primary text-lg px-8 py-4">
+                Explore Client Success
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 

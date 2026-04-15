@@ -1,6 +1,8 @@
 import { Link } from 'wouter';
 import { Linkedin, Twitter, Facebook, Mail, Phone } from 'lucide-react';
 
+const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663532599876/9u4P3ot5rXMeEQxrn76eMy/nudgewebsite_0d4b2e8a.png';
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -37,11 +39,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand Section */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent to-purple-400 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">N</span>
-              </div>
-              <span className="font-bold text-foreground">Nudge Digital</span>
+            <div className="mb-4">
+              <img src={LOGO_URL} alt="Nudge Digital" className="h-8 w-auto" />
             </div>
             <p className="text-sm text-foreground/60 mb-4">
               Your Digital Marketing Strategist & Implementer
@@ -115,7 +114,7 @@ export default function Footer() {
           </p>
           <Link href="/contact">
             <a className="text-sm font-medium text-accent hover:text-accent/80 transition-colors">
-              Send Us a Nudge
+              Send a Nudge
             </a>
           </Link>
         </div>

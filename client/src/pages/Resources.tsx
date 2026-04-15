@@ -161,7 +161,7 @@ export default function Resources() {
           </p>
           <Link href="/contact">
             <button className="btn-nudge-primary">
-              Send Us a Nudge
+              Send a Nudge
             </button>
           </Link>
         </div>
