@@ -1,225 +1,248 @@
 import { useState } from 'react';
-import { TrendingUp } from 'lucide-react';
+import { Check, TrendingUp } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import SearchModal from '@/components/SearchModal';
-import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
+import { Link } from 'wouter';
 
 export default function Calculator() {
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [hoursPerWeek, setHoursPerWeek] = useState(20);
-  const [monthlyAgencyCost, setMonthlyAgencyCost] = useState(5000);
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
 
-  const annualFullTimeCost = hoursPerWeek * 52 * 85; // $85/hour average
-  const annualAgencyCost = monthlyAgencyCost * 12;
-  const nudgeRetainerCost = 8000 * 12; // $8000/month average
+  const services = [
+    {
+      id: 'hourly',
+      name: 'Hourly Fixes & Quick Work',
+      nudgeRate: 150,
+      ftEmployeeCost: 85,
+      agencyCost: 250,
+      description: 'Technical fixes, audits, quick optimizations'
+    },
+    {
+      id: 'project',
+      name: 'Project-Based Work',
+      nudgeRate: 12500,
+      ftEmployeeCost: 18000,
+      agencyCost: 35000,
+      description: 'CRM setup, website audits, automation implementation'
+    },
+    {
+      id: 'strategy',
+      name: 'Strategy Services',
+      nudgeRate: 5500,
+      ftEmployeeCost: 8000,
+      agencyCost: 15000,
+      description: 'Digital marketing audit, growth strategy, roadmap'
+    },
+    {
+      id: 'retainer',
+      name: 'Monthly Retainer',
+      nudgeRate: 7000,
+      ftEmployeeCost: 12000,
+      agencyCost: 25000,
+      description: 'Ongoing strategic leadership and implementation'
+    }
+  ];
 
-  const annualSavingsVsFullTime = annualFullTimeCost - nudgeRetainerCost;
-  const annualSavingsVsAgency = annualAgencyCost - nudgeRetainerCost;
+  const toggleService = (serviceId: string) => {
+    setSelectedServices(prev =>
+      prev.includes(serviceId)
+        ? prev.filter(id => id !== serviceId)
+        : [...prev, serviceId]
+    );
+  };
+
+  const calculateSavings = () => {
+    let nudgeTotal = 0;
+    let ftEmployeeTotal = 0;
+    let agencyTotal = 0;
+
+    selectedServices.forEach(serviceId => {
+      const service = services.find(s => s.id === serviceId);
+      if (service) {
+        nudgeTotal += service.nudgeRate;
+        ftEmployeeTotal += service.ftEmployeeCost;
+        agencyTotal += service.agencyCost;
+      }
+    });
+
+    return {
+      nudgeTotal,
+      ftEmployeeTotal,
+      agencyTotal,
+      savingsVsFT: ftEmployeeTotal - nudgeTotal,
+      savingsVsAgency: agencyTotal - nudgeTotal
+    };
+  };
+
+  const savings = calculateSavings();
+  const hasSelected = selectedServices.length > 0;
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onSearchOpen={() => setSearchOpen(true)} />
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <Header />
 
-      <section className="py-16 md:py-24 bg-card border-b border-border">
-        <div className="container">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Time & Cost Savings Calculator
-          </h1>
-          <p className="text-xl text-foreground/60 max-w-3xl">
-            See how much time and money you can save by working with Nudge Digital instead of hiring full-time or using traditional agencies.
-          </p>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24">
-        <div className="container max-w-4xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Sliders */}
-            <div className="space-y-8">
-              <div className="glass-panel p-8">
-                <h3 className="text-2xl font-bold text-foreground mb-8">Adjust Your Scenario</h3>
-
-                <div className="space-y-8">
-                  {/* Full-Time Employee Slider */}
-                  <div>
-                    <label className="block text-sm font-semibold text-foreground mb-4">
-                      Hours per week for full-time employee: <span className="text-accent">{hoursPerWeek}h</span>
-                    </label>
-                    <input
-                      type="range"
-                      min="5"
-                      max="40"
-                      value={hoursPerWeek}
-                      onChange={(e) => setHoursPerWeek(Number(e.target.value))}
-                      className="w-full h-2 bg-accent/20 rounded-lg appearance-none cursor-pointer"
-                    />
-                    <div className="flex justify-between text-xs text-foreground/60 mt-2">
-                      <span>5h</span>
-                      <span>40h</span>
-                    </div>
-                  </div>
-
-                  {/* Agency Cost Slider */}
-                  <div>
-                    <label className="block text-sm font-semibold text-foreground mb-4">
-                      Monthly agency cost: <span className="text-accent">${monthlyAgencyCost.toLocaleString()}</span>
-                    </label>
-                    <input
-                      type="range"
-                      min="2000"
-                      max="20000"
-                      step="500"
-                      value={monthlyAgencyCost}
-                      onChange={(e) => setMonthlyAgencyCost(Number(e.target.value))}
-                      className="w-full h-2 bg-accent/20 rounded-lg appearance-none cursor-pointer"
-                    />
-                    <div className="flex justify-between text-xs text-foreground/60 mt-2">
-                      <span>$2,000</span>
-                      <span>$20,000</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Results */}
-            <div className="space-y-6">
-              {/* Full-Time Comparison */}
-              <div className="glass-card">
-                <h4 className="text-lg font-bold text-foreground mb-4">vs. Full-Time Employee</h4>
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-sm text-foreground/60 mb-1">Annual Full-Time Cost</p>
-                    <p className="text-2xl font-bold text-foreground">
-                      ${annualFullTimeCost.toLocaleString()}
-                    </p>
-                  </div>
-                  <div className="border-t border-border pt-4">
-                    <p className="text-sm text-foreground/60 mb-1">Nudge Digital Annual Cost</p>
-                    <p className="text-2xl font-bold text-foreground">
-                      ${nudgeRetainerCost.toLocaleString()}
-                    </p>
-                  </div>
-                  <div className="bg-accent/10 border border-accent/20 rounded-lg p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <TrendingUp className="w-5 h-5 text-accent" />
-                      <p className="text-sm font-semibold text-accent">Annual Savings</p>
-                    </div>
-                    <p className="text-3xl font-bold text-accent">
-                      ${Math.max(0, annualSavingsVsFullTime).toLocaleString()}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Agency Comparison */}
-              <div className="glass-card">
-                <h4 className="text-lg font-bold text-foreground mb-4">vs. Traditional Agency</h4>
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-sm text-foreground/60 mb-1">Annual Agency Cost</p>
-                    <p className="text-2xl font-bold text-foreground">
-                      ${annualAgencyCost.toLocaleString()}
-                    </p>
-                  </div>
-                  <div className="border-t border-border pt-4">
-                    <p className="text-sm text-foreground/60 mb-1">Nudge Digital Annual Cost</p>
-                    <p className="text-2xl font-bold text-foreground">
-                      ${nudgeRetainerCost.toLocaleString()}
-                    </p>
-                  </div>
-                  <div className="bg-accent/10 border border-accent/20 rounded-lg p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <TrendingUp className="w-5 h-5 text-accent" />
-                      <p className="text-sm font-semibold text-accent">Annual Savings</p>
-                    </div>
-                    <p className="text-3xl font-bold text-accent">
-                      ${Math.max(0, annualSavingsVsAgency).toLocaleString()}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24 bg-card">
-        <div className="container max-w-3xl">
-          <h2 className="text-3xl font-bold text-foreground mb-8">Why Nudge Digital?</h2>
-          <div className="space-y-6">
-            <div className="flex gap-4">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-10 w-10 rounded-full bg-accent text-white font-bold">
-                  1
-                </div>
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground mb-1">Expert Execution</h3>
-                <p className="text-foreground/60">
-                  Senior-level expertise without the overhead of a full-time employee.
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-10 w-10 rounded-full bg-accent text-white font-bold">
-                  2
-                </div>
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground mb-1">Specialized Skills</h3>
-                <p className="text-foreground/60">
-                  Technical expertise that most agencies do not have.
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-10 w-10 rounded-full bg-accent text-white font-bold">
-                  3
-                </div>
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground mb-1">Fast Turnaround</h3>
-                <p className="text-foreground/60">
-                  Quick execution and rapid problem-solving without bureaucracy.
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-10 w-10 rounded-full bg-accent text-white font-bold">
-                  4
-                </div>
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground mb-1">Measurable Results</h3>
-                <p className="text-foreground/60">
-                  We focus on outcomes, not hours worked or tasks completed.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24 bg-gradient-primary">
+      {/* Header */}
+      <section className="py-16 md:py-24 bg-secondary/30 border-b border-border">
         <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to See Your Savings?
-          </h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Let us discuss your specific situation and create a custom proposal.
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            Calculate Your Savings
+          </h1>
+          <p className="text-xl text-foreground/60 max-w-3xl mx-auto">
+            See how much you'll save by working with me instead of hiring full-time or engaging an agency.
           </p>
-          <Link href="/contact">
-            <Button className="bg-white text-accent hover:bg-white/90 px-8 py-3 rounded-lg font-semibold">
-              Send a Nudge
-            </Button>
-          </Link>
+        </div>
+      </section>
+
+      {/* Calculator */}
+      <section className="py-20 md:py-32">
+        <div className="container max-w-6xl">
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {/* Services Selection */}
+            <div className="md:col-span-1">
+              <div className="glass-card p-8">
+                <h2 className="text-2xl font-bold text-foreground mb-6">Select Services</h2>
+                <div className="space-y-4">
+                  {services.map(service => (
+                    <button
+                      key={service.id}
+                      onClick={() => toggleService(service.id)}
+                      className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
+                        selectedServices.includes(service.id)
+                          ? 'border-accent bg-accent/10'
+                          : 'border-border bg-background hover:border-accent/50'
+                      }`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className={`w-5 h-5 rounded border-2 mt-0.5 flex items-center justify-center flex-shrink-0 ${
+                          selectedServices.includes(service.id)
+                            ? 'bg-accent border-accent'
+                            : 'border-border'
+                        }`}>
+                          {selectedServices.includes(service.id) && (
+                            <Check className="w-4 h-4 text-background" />
+                          )}
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-foreground">{service.name}</h3>
+                          <p className="text-sm text-foreground/60">{service.description}</p>
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Comparison Results */}
+            <div className="md:col-span-2">
+              {!hasSelected ? (
+                <div className="glass-card p-12 text-center">
+                  <TrendingUp className="w-16 h-16 text-accent/30 mx-auto mb-4" />
+                  <p className="text-lg text-foreground/60">
+                    Select services above to see your savings
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  {/* Cost Comparison */}
+                  <div className="glass-card p-8">
+                    <h3 className="text-xl font-bold text-foreground mb-6">Cost Comparison</h3>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between p-4 bg-accent/10 rounded-lg border border-accent/30">
+                        <div>
+                          <p className="text-sm text-foreground/60">Nudge Digital</p>
+                          <p className="text-2xl font-bold text-accent">${savings.nudgeTotal.toLocaleString()}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs text-accent font-semibold">BEST VALUE</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between p-4 bg-foreground/5 rounded-lg border border-border">
+                        <div>
+                          <p className="text-sm text-foreground/60">Full-Time Employee</p>
+                          <p className="text-2xl font-bold text-foreground">${savings.ftEmployeeTotal.toLocaleString()}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs text-foreground/60">+ Overhead</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between p-4 bg-foreground/5 rounded-lg border border-border">
+                        <div>
+                          <p className="text-sm text-foreground/60">Traditional Agency</p>
+                          <p className="text-2xl font-bold text-foreground">${savings.agencyTotal.toLocaleString()}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs text-foreground/60">+ Markup</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Savings Breakdown */}
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="glass-card p-8 border-2 border-accent/30">
+                      <h4 className="text-lg font-semibold text-foreground mb-2">vs Full-Time Employee</h4>
+                      <p className="text-4xl font-bold text-accent mb-2">
+                        ${savings.savingsVsFT.toLocaleString()}
+                      </p>
+                      <p className="text-sm text-foreground/60">
+                        Save {Math.round((savings.savingsVsFT / savings.ftEmployeeTotal) * 100)}% compared to hiring full-time
+                      </p>
+                    </div>
+
+                    <div className="glass-card p-8 border-2 border-accent/30">
+                      <h4 className="text-lg font-semibold text-foreground mb-2">vs Traditional Agency</h4>
+                      <p className="text-4xl font-bold text-accent mb-2">
+                        ${savings.savingsVsAgency.toLocaleString()}
+                      </p>
+                      <p className="text-sm text-foreground/60">
+                        Save {Math.round((savings.savingsVsAgency / savings.agencyTotal) * 100)}% compared to agencies
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Why Nudge Wins */}
+                  <div className="glass-card p-8 bg-accent/5 border border-accent/20">
+                    <h4 className="font-semibold text-foreground mb-4">Why Nudge Digital Wins</h4>
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                        <p className="text-foreground/80">No overhead costs or employee benefits</p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                        <p className="text-foreground/80">Direct access to expertise without agency markup</p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                        <p className="text-foreground/80">Flexible engagement - pay only for what you need</p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                        <p className="text-foreground/80">Senior-level strategy without junior team overhead</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* CTA */}
+          {hasSelected && (
+            <div className="text-center">
+              <p className="text-lg text-foreground/70 mb-6">
+                Ready to start saving? Let's discuss how I can help.
+              </p>
+              <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
+                <Button className="btn-nudge-primary text-lg px-8 py-6">
+                  Send a Nudge
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
       </section>
 
