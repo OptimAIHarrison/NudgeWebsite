@@ -94,7 +94,7 @@ export default function Pricing() {
       {/* Pricing Categories */}
       <section className="py-20 md:py-32">
         <div className="container">
-          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {pricingCategories.map((category, idx) => (
               <div key={category.id} className="glass-card overflow-hidden">
                 <button
