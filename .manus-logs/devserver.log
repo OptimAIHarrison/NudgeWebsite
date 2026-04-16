@@ -3336,3 +3336,235 @@
 [2026-04-16T21:25:57.999Z] [OAuth] Initialized with baseURL: https://api.manus.im
 [2026-04-16T21:25:58.303Z] Server running on http://localhost:3000/
 [2026-04-16T21:26:00.074Z] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[2026-04-16T21:29:01.075Z] 5:29:01 PM [vite] (client) hmr update /src/pages/Calculator.tsx, /src/index.css
+[2026-04-16T21:29:01.277Z] 5:29:01 PM [vite] Internal server error: /home/ubuntu/nudge_digital/client/src/pages/Calculator.tsx: Expected corresponding JSX closing tag for <main>. (376:8)
+[2026-04-16T21:29:01.277Z] 
+[2026-04-16T21:29:01.278Z] 374 |           </div>
+[2026-04-16T21:29:01.278Z] 375 |         </div>
+[2026-04-16T21:29:01.278Z] > 376 |         </div>
+[2026-04-16T21:29:01.279Z] |         ^
+[2026-04-16T21:29:01.279Z] 377 |       </main>
+[2026-04-16T21:29:01.279Z] 378 |
+[2026-04-16T21:29:01.280Z] 379 |       <Footer />
+[2026-04-16T21:29:01.280Z] Plugin: vite:react-babel
+[2026-04-16T21:29:01.280Z] File: /home/ubuntu/nudge_digital/client/src/pages/Calculator.tsx:376:8
+[2026-04-16T21:29:01.281Z] 374 |            </div>
+[2026-04-16T21:29:01.281Z] 375 |          </div>
+[2026-04-16T21:29:01.281Z] 376 |          </div>
+[2026-04-16T21:29:01.281Z] |          ^
+[2026-04-16T21:29:01.282Z] 377 |        </main>
+[2026-04-16T21:29:01.282Z] 378 |
+[2026-04-16T21:29:01.282Z] at toParseError (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parse-error.ts:95:45)
+[2026-04-16T21:29:01.283Z] at raise (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/tokenizer/index.ts:1503:19)
+[2026-04-16T21:29:01.283Z] at jsxParseElementAt (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/jsx/index.ts:527:18)
+[2026-04-16T21:29:01.283Z] at jsxParseElementAt (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+[2026-04-16T21:29:01.284Z] at jsxParseElement (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/jsx/index.ts:559:19)
+[2026-04-16T21:29:01.284Z] at parseExprAtom (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/jsx/index.ts:573:21)
+[2026-04-16T21:29:01.284Z] at parseExprSubscripts (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:734:23)
+[2026-04-16T21:29:01.285Z] at parseUpdate (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:713:21)
+[2026-04-16T21:29:01.285Z] at parseMaybeUnary (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:675:23)
+[2026-04-16T21:29:01.285Z] at parseMaybeUnary (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3855:20)
+[2026-04-16T21:29:01.286Z] at parseMaybeUnaryOrPrivate (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:409:14)
+[2026-04-16T21:29:01.286Z] at parseExprOps (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:421:23)
+[2026-04-16T21:29:01.286Z] at parseMaybeConditional (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:376:23)
+[2026-04-16T21:29:01.286Z] at parseMaybeAssign (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:301:21)
+[2026-04-16T21:29:01.287Z] at fn (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3708:23)
+[2026-04-16T21:29:01.287Z] at tryParse (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/util.ts:174:20)
+[2026-04-16T21:29:01.287Z] at parseMaybeAssign (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3707:20)
+[2026-04-16T21:29:01.288Z] at callback (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:257:12)
+[2026-04-16T21:29:01.288Z] at allowInAnd (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:3192:12)
+[2026-04-16T21:29:01.288Z] at parseMaybeAssignAllowIn (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:256:17)
+[2026-04-16T21:29:01.289Z] at parseMaybeAssignAllowInOrVoidPattern (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:3306:17)
+[2026-04-16T21:29:01.289Z] at parseParenAndDistinguishExpression (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:1813:16)
+[2026-04-16T21:29:01.289Z] at parseExprAtom (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:1162:21)
+[2026-04-16T21:29:01.290Z] at parseExprAtom (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+[2026-04-16T21:29:01.290Z] at parseExprSubscripts (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:734:23)
+[2026-04-16T21:29:01.291Z] at parseUpdate (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:713:21)
+[2026-04-16T21:29:01.291Z] at parseMaybeUnary (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:675:23)
+[2026-04-16T21:29:01.292Z] at parseMaybeUnary (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3855:20)
+[2026-04-16T21:29:01.292Z] at parseMaybeUnaryOrPrivate (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:409:14)
+[2026-04-16T21:29:01.293Z] at parseExprOps (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:421:23)
+[2026-04-16T21:29:01.293Z] at parseMaybeConditional (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:376:23)
+[2026-04-16T21:29:01.294Z] at parseMaybeAssign (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:301:21)
+[2026-04-16T21:29:01.294Z] at parseMaybeAssign (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3727:22)
+[2026-04-16T21:29:01.295Z] at parseExpressionBase (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:226:23)
+[2026-04-16T21:29:01.295Z] at callback (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:217:39)
+[2026-04-16T21:29:01.295Z] at allowInAnd (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:3187:16)
+[2026-04-16T21:29:01.296Z] at parseExpression (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:217:17)
+[2026-04-16T21:29:01.296Z] at parseReturnStatement (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1110:28)
+[2026-04-16T21:29:01.296Z] at parseStatementContent (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:538:21)
+[2026-04-16T21:29:01.297Z] at parseStatementContent (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3185:20)
+[2026-04-16T21:29:01.297Z] at parseStatementLike (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:477:17)
+[2026-04-16T21:29:01.297Z] at parseStatementListItem (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:426:17)
+[2026-04-16T21:29:01.298Z] at parseBlockOrModuleBlockBody (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1439:16)
+[2026-04-16T21:29:01.298Z] at parseBlockBody (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1412:10)
+[2026-04-16T21:29:01.298Z] at parseBlock (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1380:10)
+[2026-04-16T21:29:01.299Z] at parseFunctionBody (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:2616:24)
+[2026-04-16T21:29:01.299Z] at parseFunctionBodyAndFinish (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:2585:10)
+[2026-04-16T21:29:01.299Z] at parseFunctionBodyAndFinish (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:2646:20)
+[2026-04-16T21:29:01.300Z] at callback (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1690:12)
+[2026-04-16T21:29:01.300Z] at withSmartMixTopicForbiddingContext (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:3166:14)
+[2026-04-16T21:29:01.422Z] 5:29:01 PM [vite] (client) Pre-transform error: /home/ubuntu/nudge_digital/client/src/pages/Calculator.tsx: Expected corresponding JSX closing tag for <main>. (376:8)
+[2026-04-16T21:29:01.423Z] 
+[2026-04-16T21:29:01.423Z] 374 |           </div>
+[2026-04-16T21:29:01.423Z] 375 |         </div>
+[2026-04-16T21:29:01.424Z] > 376 |         </div>
+[2026-04-16T21:29:01.424Z] |         ^
+[2026-04-16T21:29:01.424Z] 377 |       </main>
+[2026-04-16T21:29:01.425Z] 378 |
+[2026-04-16T21:29:01.425Z] 379 |       <Footer />
+[2026-04-16T21:29:01.425Z] Plugin: vite:react-babel
+[2026-04-16T21:29:01.425Z] File: /home/ubuntu/nudge_digital/client/src/pages/Calculator.tsx:376:8
+[2026-04-16T21:29:01.426Z] 374 |            </div>
+[2026-04-16T21:29:01.426Z] 375 |          </div>
+[2026-04-16T21:29:01.426Z] 376 |          </div>
+[2026-04-16T21:29:01.427Z] |          ^
+[2026-04-16T21:29:01.427Z] 377 |        </main>
+[2026-04-16T21:29:01.427Z] 378 |
+[2026-04-16T21:29:07.821Z] 5:29:07 PM [vite] Internal server error: /home/ubuntu/nudge_digital/client/src/pages/Calculator.tsx: Expected corresponding JSX closing tag for <main>. (376:8)
+[2026-04-16T21:29:07.822Z] 
+[2026-04-16T21:29:07.822Z] 374 |           </div>
+[2026-04-16T21:29:07.823Z] 375 |         </div>
+[2026-04-16T21:29:07.823Z] > 376 |         </div>
+[2026-04-16T21:29:07.824Z] |         ^
+[2026-04-16T21:29:07.824Z] 377 |       </main>
+[2026-04-16T21:29:07.825Z] 378 |
+[2026-04-16T21:29:07.825Z] 379 |       <Footer />
+[2026-04-16T21:29:07.826Z] Plugin: vite:react-babel
+[2026-04-16T21:29:07.826Z] File: /home/ubuntu/nudge_digital/client/src/pages/Calculator.tsx:376:8
+[2026-04-16T21:29:07.827Z] 374 |            </div>
+[2026-04-16T21:29:07.828Z] 375 |          </div>
+[2026-04-16T21:29:07.828Z] 376 |          </div>
+[2026-04-16T21:29:07.828Z] |          ^
+[2026-04-16T21:29:07.829Z] 377 |        </main>
+[2026-04-16T21:29:07.830Z] 378 |
+[2026-04-16T21:29:07.830Z] at toParseError (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parse-error.ts:95:45)
+[2026-04-16T21:29:07.831Z] at raise (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/tokenizer/index.ts:1503:19)
+[2026-04-16T21:29:07.831Z] at jsxParseElementAt (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/jsx/index.ts:527:18)
+[2026-04-16T21:29:07.831Z] at jsxParseElementAt (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+[2026-04-16T21:29:07.832Z] at jsxParseElement (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/jsx/index.ts:559:19)
+[2026-04-16T21:29:07.832Z] at parseExprAtom (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/jsx/index.ts:573:21)
+[2026-04-16T21:29:07.832Z] at parseExprSubscripts (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:734:23)
+[2026-04-16T21:29:07.833Z] at parseUpdate (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:713:21)
+[2026-04-16T21:29:07.833Z] at parseMaybeUnary (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:675:23)
+[2026-04-16T21:29:07.834Z] at parseMaybeUnary (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3855:20)
+[2026-04-16T21:29:07.835Z] at parseMaybeUnaryOrPrivate (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:409:14)
+[2026-04-16T21:29:07.835Z] at parseExprOps (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:421:23)
+[2026-04-16T21:29:07.835Z] at parseMaybeConditional (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:376:23)
+[2026-04-16T21:29:07.836Z] at parseMaybeAssign (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:301:21)
+[2026-04-16T21:29:07.836Z] at fn (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3708:23)
+[2026-04-16T21:29:07.836Z] at tryParse (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/util.ts:174:20)
+[2026-04-16T21:29:07.837Z] at parseMaybeAssign (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3707:20)
+[2026-04-16T21:29:07.837Z] at callback (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:257:12)
+[2026-04-16T21:29:07.838Z] at allowInAnd (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:3192:12)
+[2026-04-16T21:29:07.838Z] at parseMaybeAssignAllowIn (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:256:17)
+[2026-04-16T21:29:07.838Z] at parseMaybeAssignAllowInOrVoidPattern (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:3306:17)
+[2026-04-16T21:29:07.839Z] at parseParenAndDistinguishExpression (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:1813:16)
+[2026-04-16T21:29:07.839Z] at parseExprAtom (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:1162:21)
+[2026-04-16T21:29:07.839Z] at parseExprAtom (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+[2026-04-16T21:29:07.839Z] at parseExprSubscripts (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:734:23)
+[2026-04-16T21:29:07.840Z] at parseUpdate (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:713:21)
+[2026-04-16T21:29:07.840Z] at parseMaybeUnary (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:675:23)
+[2026-04-16T21:29:07.840Z] at parseMaybeUnary (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3855:20)
+[2026-04-16T21:29:07.841Z] at parseMaybeUnaryOrPrivate (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:409:14)
+[2026-04-16T21:29:07.841Z] at parseExprOps (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:421:23)
+[2026-04-16T21:29:07.841Z] at parseMaybeConditional (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:376:23)
+[2026-04-16T21:29:07.842Z] at parseMaybeAssign (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:301:21)
+[2026-04-16T21:29:07.842Z] at parseMaybeAssign (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3727:22)
+[2026-04-16T21:29:07.842Z] at parseExpressionBase (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:226:23)
+[2026-04-16T21:29:07.843Z] at callback (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:217:39)
+[2026-04-16T21:29:07.843Z] at allowInAnd (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:3187:16)
+[2026-04-16T21:29:07.843Z] at parseExpression (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:217:17)
+[2026-04-16T21:29:07.844Z] at parseReturnStatement (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1110:28)
+[2026-04-16T21:29:07.844Z] at parseStatementContent (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:538:21)
+[2026-04-16T21:29:07.844Z] at parseStatementContent (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3185:20)
+[2026-04-16T21:29:07.844Z] at parseStatementLike (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:477:17)
+[2026-04-16T21:29:07.845Z] at parseStatementListItem (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:426:17)
+[2026-04-16T21:29:07.845Z] at parseBlockOrModuleBlockBody (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1439:16)
+[2026-04-16T21:29:07.845Z] at parseBlockBody (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1412:10)
+[2026-04-16T21:29:07.846Z] at parseBlock (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1380:10)
+[2026-04-16T21:29:07.846Z] at parseFunctionBody (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:2616:24)
+[2026-04-16T21:29:07.846Z] at parseFunctionBodyAndFinish (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:2585:10)
+[2026-04-16T21:29:07.847Z] at parseFunctionBodyAndFinish (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:2646:20)
+[2026-04-16T21:29:07.847Z] at callback (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1690:12)
+[2026-04-16T21:29:07.847Z] at withSmartMixTopicForbiddingContext (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:3166:14)
+[2026-04-16T21:29:11.507Z] 5:29:11 PM [vite] Internal server error: /home/ubuntu/nudge_digital/client/src/pages/Calculator.tsx: Expected corresponding JSX closing tag for <main>. (376:8)
+[2026-04-16T21:29:11.507Z] 
+[2026-04-16T21:29:11.508Z] 374 |           </div>
+[2026-04-16T21:29:11.508Z] 375 |         </div>
+[2026-04-16T21:29:11.508Z] > 376 |         </div>
+[2026-04-16T21:29:11.509Z] |         ^
+[2026-04-16T21:29:11.509Z] 377 |       </main>
+[2026-04-16T21:29:11.509Z] 378 |
+[2026-04-16T21:29:11.510Z] 379 |       <Footer />
+[2026-04-16T21:29:11.510Z] Plugin: vite:react-babel
+[2026-04-16T21:29:11.510Z] File: /home/ubuntu/nudge_digital/client/src/pages/Calculator.tsx:376:8
+[2026-04-16T21:29:11.511Z] 374 |            </div>
+[2026-04-16T21:29:11.511Z] 375 |          </div>
+[2026-04-16T21:29:11.511Z] 376 |          </div>
+[2026-04-16T21:29:11.512Z] |          ^
+[2026-04-16T21:29:11.512Z] 377 |        </main>
+[2026-04-16T21:29:11.512Z] 378 |
+[2026-04-16T21:29:11.513Z] at toParseError (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parse-error.ts:95:45)
+[2026-04-16T21:29:11.513Z] at raise (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/tokenizer/index.ts:1503:19)
+[2026-04-16T21:29:11.513Z] at jsxParseElementAt (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/jsx/index.ts:527:18)
+[2026-04-16T21:29:11.514Z] at jsxParseElementAt (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+[2026-04-16T21:29:11.514Z] at jsxParseElement (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/jsx/index.ts:559:19)
+[2026-04-16T21:29:11.514Z] at parseExprAtom (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/jsx/index.ts:573:21)
+[2026-04-16T21:29:11.515Z] at parseExprSubscripts (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:734:23)
+[2026-04-16T21:29:11.515Z] at parseUpdate (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:713:21)
+[2026-04-16T21:29:11.515Z] at parseMaybeUnary (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:675:23)
+[2026-04-16T21:29:11.515Z] at parseMaybeUnary (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3855:20)
+[2026-04-16T21:29:11.516Z] at parseMaybeUnaryOrPrivate (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:409:14)
+[2026-04-16T21:29:11.516Z] at parseExprOps (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:421:23)
+[2026-04-16T21:29:11.517Z] at parseMaybeConditional (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:376:23)
+[2026-04-16T21:29:11.517Z] at parseMaybeAssign (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:301:21)
+[2026-04-16T21:29:11.517Z] at fn (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3708:23)
+[2026-04-16T21:29:11.517Z] at tryParse (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/util.ts:174:20)
+[2026-04-16T21:29:11.518Z] at parseMaybeAssign (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3707:20)
+[2026-04-16T21:29:11.518Z] at callback (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:257:12)
+[2026-04-16T21:29:11.518Z] at allowInAnd (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:3192:12)
+[2026-04-16T21:29:11.519Z] at parseMaybeAssignAllowIn (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:256:17)
+[2026-04-16T21:29:11.519Z] at parseMaybeAssignAllowInOrVoidPattern (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:3306:17)
+[2026-04-16T21:29:11.519Z] at parseParenAndDistinguishExpression (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:1813:16)
+[2026-04-16T21:29:11.520Z] at parseExprAtom (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:1162:21)
+[2026-04-16T21:29:11.520Z] at parseExprAtom (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+[2026-04-16T21:29:11.520Z] at parseExprSubscripts (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:734:23)
+[2026-04-16T21:29:11.521Z] at parseUpdate (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:713:21)
+[2026-04-16T21:29:11.521Z] at parseMaybeUnary (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:675:23)
+[2026-04-16T21:29:11.521Z] at parseMaybeUnary (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3855:20)
+[2026-04-16T21:29:11.522Z] at parseMaybeUnaryOrPrivate (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:409:14)
+[2026-04-16T21:29:11.522Z] at parseExprOps (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:421:23)
+[2026-04-16T21:29:11.522Z] at parseMaybeConditional (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:376:23)
+[2026-04-16T21:29:11.523Z] at parseMaybeAssign (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:301:21)
+[2026-04-16T21:29:11.523Z] at parseMaybeAssign (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3727:22)
+[2026-04-16T21:29:11.523Z] at parseExpressionBase (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:226:23)
+[2026-04-16T21:29:11.524Z] at callback (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:217:39)
+[2026-04-16T21:29:11.524Z] at allowInAnd (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:3187:16)
+[2026-04-16T21:29:11.524Z] at parseExpression (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:217:17)
+[2026-04-16T21:29:11.525Z] at parseReturnStatement (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1110:28)
+[2026-04-16T21:29:11.525Z] at parseStatementContent (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:538:21)
+[2026-04-16T21:29:11.525Z] at parseStatementContent (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:3185:20)
+[2026-04-16T21:29:11.526Z] at parseStatementLike (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:477:17)
+[2026-04-16T21:29:11.526Z] at parseStatementListItem (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:426:17)
+[2026-04-16T21:29:11.526Z] at parseBlockOrModuleBlockBody (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1439:16)
+[2026-04-16T21:29:11.527Z] at parseBlockBody (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1412:10)
+[2026-04-16T21:29:11.527Z] at parseBlock (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1380:10)
+[2026-04-16T21:29:11.527Z] at parseFunctionBody (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:2616:24)
+[2026-04-16T21:29:11.528Z] at parseFunctionBodyAndFinish (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:2585:10)
+[2026-04-16T21:29:11.528Z] at parseFunctionBodyAndFinish (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/plugins/typescript/index.ts:2646:20)
+[2026-04-16T21:29:11.528Z] at callback (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/statement.ts:1690:12)
+[2026-04-16T21:29:11.529Z] at withSmartMixTopicForbiddingContext (/home/ubuntu/nudge_digital/node_modules/.pnpm/@babel+parser@7.28.4/node_modules/@babel/parser/src/parser/expression.ts:3166:14)
+[2026-04-16T21:29:20.737Z] 5:29:20 PM [vite] (client) hmr update /src/pages/Calculator.tsx, /src/index.css
+[2026-04-16T21:29:33.311Z] 5:29:33 PM [vite] (client) hmr update /src/pages/Calculator.tsx, /src/index.css
+[2026-04-16T21:29:39.464Z] Dev server process group stopped
+[2026-04-16T21:29:39.467Z] ELIFECYCLE  Command failed.
+[2026-04-16T21:29:39.520Z] Dev server exited with code -15
+[2026-04-16T21:29:42.503Z] Starting dev server with command: pnpm run dev
+[2026-04-16T21:29:43.348Z] 
+[2026-04-16T21:29:43.349Z] > nudge_digital@1.0.0 dev /home/ubuntu/nudge_digital
+[2026-04-16T21:29:43.350Z] > NODE_ENV=development tsx watch server/_core/index.ts
+[2026-04-16T21:29:43.350Z] 
+[2026-04-16T21:29:45.055Z] [OAuth] Initialized with baseURL: https://api.manus.im
+[2026-04-16T21:29:45.296Z] Server running on http://localhost:3000/
+[2026-04-16T21:29:56.590Z] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`

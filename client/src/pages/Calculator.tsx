@@ -73,8 +73,9 @@ export default function Calculator() {
       </section>
 
       {/* Main Calculator */}
-      <main className="container py-16 md:py-24">
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+      <main className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="grid lg:grid-cols-2 gap-8 mb-12">
           {/* Left: Service Selection & Options */}
           <div className="space-y-8">
             {/* Services Selection */}
@@ -245,10 +246,58 @@ export default function Calculator() {
             </Link>
           </div>
         </div>
+        </div>
+
+        {/* Editable Settings */}
+        <div className="max-w-6xl mx-auto px-4 md:px-8 mb-12">
+          <details className="glass-card p-6">
+            <summary className="cursor-pointer font-bold text-foreground text-lg hover:text-accent transition-colors">⚙️ Edit Calculator Numbers</summary>
+            <div className="mt-6 space-y-6">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-4">
+                  <h3 className="font-bold text-foreground mb-4">Full-Time Hire Costs</h3>
+                  <div>
+                    <label className="block text-sm text-foreground/70 mb-2">Annual Salary (AUD)</label>
+                    <input type="number" defaultValue="75000" className="w-full px-3 py-2 bg-secondary/50 border border-border rounded text-foreground" disabled />
+                    <p className="text-xs text-foreground/60 mt-1">Edit in code: line 37</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm text-foreground/70 mb-2">Overhead % (benefits, equipment)</label>
+                    <input type="number" defaultValue="30" className="w-full px-3 py-2 bg-secondary/50 border border-border rounded text-foreground" disabled />
+                    <p className="text-xs text-foreground/60 mt-1">Edit in code: line 38 (0.3 = 30%)</p>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <h3 className="font-bold text-foreground mb-4">Agency Comparison</h3>
+                  <div>
+                    <label className="block text-sm text-foreground/70 mb-2">Agency Markup Multiple</label>
+                    <input type="number" defaultValue="3.5" step="0.1" className="w-full px-3 py-2 bg-secondary/50 border border-border rounded text-foreground" disabled />
+                    <p className="text-xs text-foreground/60 mt-1">Edit in code: line 44 (3.5x = 350% markup)</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm text-foreground/70 mb-2">Your Hourly Rates</label>
+                    <p className="text-xs text-foreground/60">Edit service rates in code: lines 16-22</p>
+                    <p className="text-xs text-foreground/50 mt-2">Standard: $75/h | Strategy: $85/h</p>
+                  </div>
+                </div>
+              </div>
+              <div className="pt-4 border-t border-border">
+                <p className="text-sm text-foreground/70 mb-3"><strong>To edit these numbers:</strong></p>
+                <ol className="text-sm text-foreground/70 space-y-2 list-decimal list-inside">
+                  <li>Go to: <code className="bg-secondary/50 px-2 py-1 rounded text-xs">client/src/pages/Calculator.tsx</code></li>
+                  <li>Find the line numbers shown above</li>
+                  <li>Update the values</li>
+                  <li>Save and commit to GitHub</li>
+                </ol>
+              </div>
+            </div>
+          </details>
+        </div>
 
         {/* Comparison Table */}
         {selectedServices.length > 0 && (
-          <div className="glass-card p-8 overflow-x-auto">
+          <div className="max-w-6xl mx-auto px-4 md:px-8">
+            <div className="glass-card p-8 overflow-x-auto">
             <h3 className="text-2xl font-bold text-foreground mb-6">Detailed Comparison</h3>
             <table className="w-full text-sm">
               <thead>
@@ -293,11 +342,12 @@ export default function Calculator() {
                 </tr>
               </tbody>
             </table>
+            </div>
           </div>
         )}
 
         {/* How It Works */}
-        <div className="mt-16 grid md:grid-cols-3 gap-6">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 mt-16 grid md:grid-cols-3 gap-6">
           <div className="glass-card p-6 text-center space-y-3">
             <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto">
               <TrendingUp className="w-6 h-6 text-accent" />
