@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
-import { Save, ArrowLeft, X, Image, Youtube, Linkedin, Instagram, Music } from 'lucide-react';
+import { Save, ArrowLeft, X, Image, Youtube, Linkedin, Instagram, Music, Upload } from 'lucide-react';
+import RichTextEditor from '@/components/RichTextEditor';
 
 interface Article {
   id: string;
@@ -22,7 +23,7 @@ interface Article {
   embedVideos: string[];
   status: 'draft' | 'published' | 'scheduled';
   publishedAt?: string;
-  scheduledFor?: string; // ISO string in AEST
+  scheduledFor?: string;
   createdAt: string;
 }
 
@@ -57,6 +58,7 @@ export default function ArticleEditor() {
   const [mediaEmbed, setMediaEmbed] = useState<MediaEmbed | null>(null);
   const [scheduleDate, setScheduleDate] = useState('');
   const [scheduleTime, setScheduleTime] = useState('');
+  const [autoGenerateSEO, setAutoGenerateSEO] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem('adminToken');
@@ -67,13 +69,42 @@ export default function ArticleEditor() {
     }
   }, [setLocation]);
 
+  // Auto-generate SEO when title or content changes
+  useEffect(() => {
+    if (autoGenerateSEO && article.title) {
+      // Generate SEO title (max 60 chars)
+      let seoTitle = article.title;
+      if (seoTitle.length > 60) {
+        seoTitle = seoTitle.substring(0, 57) + '...';
+      }
+
+      // Generate SEO description from excerpt or content (max 160 chars)
+      let seoDescription = article.excerpt || article.content.replace(/<[^>]*>/g, '').substring(0, 160);
+      if (seoDescription.length > 160) {
+        seoDescription = seoDescription.substring(0, 157) + '...';
+      }
+
+      // Generate keywords from title
+      const keywords = article.title
+        .split(' ')
+        .filter(word => word.length > 3)
+        .slice(0, 5)
+        .join(', ');
+
+      setArticle(prev => ({
+        ...prev,
+        seoTitle,
+        seoDescription,
+        seoKeywords: keywords,
+      }));
+    }
+  }, [article.title, article.excerpt, autoGenerateSEO]);
+
   const handleSave = () => {
-    // If scheduled, convert date/time to ISO string
     let publishedAt = article.publishedAt;
     if (article.status === 'scheduled' && scheduleDate && scheduleTime) {
       const dateTimeStr = `${scheduleDate}T${scheduleTime}`;
       const localDate = new Date(dateTimeStr);
-      // Convert to AEST (UTC+10 or UTC+11 depending on DST)
       publishedAt = localDate.toISOString();
     }
 
@@ -133,6 +164,28 @@ export default function ArticleEditor() {
     }
   };
 
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>, type: 'image' | 'video' | 'pdf') => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const url = event.target?.result as string;
+        
+        if (type === 'image') {
+          setMediaEmbed({ type: 'image', url });
+        } else if (type === 'video') {
+          setMediaEmbed({ type: 'video', url });
+        } else if (type === 'pdf') {
+          setArticle(prev => ({
+            ...prev,
+            pdf: { url, requiresForm: false }
+          }));
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const insertMediaEmbed = () => {
     if (!mediaEmbed) return;
 
@@ -151,10 +204,10 @@ export default function ArticleEditor() {
         embedCode = `[TIKTOK: ${mediaEmbed.url}]`;
         break;
       case 'image':
-        embedCode = `[IMAGE: ${mediaEmbed.url}]`;
+        embedCode = `<img src="${mediaEmbed.url}" alt="Article image" style="max-width: 100%; height: auto; margin: 1rem 0;" />`;
         break;
       case 'video':
-        embedCode = `[VIDEO: ${mediaEmbed.url}]`;
+        embedCode = `<video src="${mediaEmbed.url}" controls style="max-width: 100%; height: auto; margin: 1rem 0;"></video>`;
         break;
     }
 
@@ -244,65 +297,11 @@ export default function ArticleEditor() {
 
               <div>
                 <label className="block text-sm font-semibold text-foreground mb-2">Content</label>
-                <textarea
+                <RichTextEditor
                   value={article.content}
-                  onChange={(e) => setArticle({ ...article, content: e.target.value })}
-                  placeholder="Write your article content here... Use [YOUTUBE: url], [LINKEDIN: url], [INSTAGRAM: url], [TIKTOK: url], [IMAGE: url], [VIDEO: url] to embed media"
-                  rows={10}
-                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-lg text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 font-mono text-sm"
+                  onChange={(value) => setArticle({ ...article, content: value })}
+                  placeholder="Write your article content here..."
                 />
-              </div>
-
-              {/* Media Embed Helper */}
-              <div className="bg-accent/10 border border-accent/30 rounded-lg p-4 space-y-3">
-                <h4 className="font-semibold text-foreground text-sm">Insert Media</h4>
-                <div className="grid grid-cols-2 gap-2">
-                  {[
-                    { type: 'youtube', label: 'YouTube', icon: Youtube },
-                    { type: 'linkedin', label: 'LinkedIn', icon: Linkedin },
-                    { type: 'instagram', label: 'Instagram', icon: Instagram },
-                    { type: 'tiktok', label: 'TikTok', icon: Music },
-                    { type: 'image', label: 'Image', icon: Image },
-                    { type: 'video', label: 'Video', icon: Youtube },
-                  ].map((media) => (
-                    <button
-                      key={media.type}
-                      onClick={() => setMediaEmbed({ type: media.type as any, url: '' })}
-                      className="flex items-center gap-2 px-3 py-2 bg-accent/20 hover:bg-accent/30 text-accent rounded text-sm font-medium transition-colors"
-                    >
-                      <media.icon className="w-4 h-4" />
-                      {media.label}
-                    </button>
-                  ))}
-                </div>
-
-                {mediaEmbed && (
-                  <div className="space-y-2 pt-3 border-t border-accent/20">
-                    <div className="flex items-center gap-2">
-                      {getMediaIcon(mediaEmbed.type)}
-                      <span className="text-sm font-medium text-foreground capitalize">{mediaEmbed.type}</span>
-                      <button
-                        onClick={() => setMediaEmbed(null)}
-                        className="ml-auto text-foreground/60 hover:text-foreground"
-                      >
-                        <X className="w-4 h-4" />
-                      </button>
-                    </div>
-                    <input
-                      type="url"
-                      value={mediaEmbed.url}
-                      onChange={(e) => setMediaEmbed({ ...mediaEmbed, url: e.target.value })}
-                      placeholder={`Enter ${mediaEmbed.type} URL...`}
-                      className="w-full px-3 py-2 bg-secondary/50 border border-border rounded text-sm text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
-                    />
-                    <Button
-                      onClick={insertMediaEmbed}
-                      className="w-full bg-accent hover:bg-accent/90 text-white text-sm py-2 rounded"
-                    >
-                      Insert into Content
-                    </Button>
-                  </div>
-                )}
               </div>
             </div>
 
@@ -444,7 +443,18 @@ export default function ArticleEditor() {
 
             {/* SEO */}
             <div className="glass-card p-6 space-y-4">
-              <h3 className="text-lg font-bold text-foreground">SEO</h3>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-foreground">SEO</h3>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={autoGenerateSEO}
+                    onChange={(e) => setAutoGenerateSEO(e.target.checked)}
+                    className="w-4 h-4 rounded"
+                  />
+                  <span className="text-xs text-foreground/60">Auto-generate</span>
+                </label>
+              </div>
               
               <div>
                 <label className="block text-sm font-semibold text-foreground mb-2">SEO Title</label>
@@ -484,7 +494,7 @@ export default function ArticleEditor() {
               </div>
             </div>
 
-            {/* PDF */}
+            {/* PDF Upload */}
             <div className="glass-card p-6 space-y-4">
               <h3 className="text-lg font-bold text-foreground">PDF Download</h3>
               <label className="flex items-center gap-2 cursor-pointer">
@@ -499,13 +509,28 @@ export default function ArticleEditor() {
               
               {article.pdf && (
                 <div className="space-y-3">
-                  <input
-                    type="url"
-                    value={article.pdf.url}
-                    onChange={(e) => setArticle({ ...article, pdf: { ...article.pdf!, url: e.target.value } })}
-                    placeholder="PDF URL"
-                    className="w-full px-4 py-2 bg-secondary/50 border border-border rounded-lg text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 text-sm"
-                  />
+                  {article.pdf.url ? (
+                    <div className="p-3 bg-secondary/30 rounded-lg flex items-center justify-between">
+                      <span className="text-sm text-accent truncate">PDF uploaded</span>
+                      <button
+                        onClick={() => setArticle({ ...article, pdf: { ...article.pdf!, url: '' } })}
+                        className="text-foreground/60 hover:text-foreground"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ) : (
+                    <label className="flex items-center gap-2 p-3 border-2 border-dashed border-accent/30 rounded-lg cursor-pointer hover:border-accent/50 transition-colors">
+                      <Upload className="w-4 h-4 text-accent" />
+                      <span className="text-sm text-foreground/60">Click to upload PDF</span>
+                      <input
+                        type="file"
+                        accept=".pdf"
+                        onChange={(e) => handleFileUpload(e, 'pdf')}
+                        className="hidden"
+                      />
+                    </label>
+                  )}
                   
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
