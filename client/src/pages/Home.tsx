@@ -188,6 +188,38 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Calculator CTA Section */}
+      <section className="py-20 md:py-32 bg-background">
+        <div className="container">
+          <div className="max-w-4xl mx-auto">
+            <div className="glass-card p-12 md:p-16 bg-gradient-to-br from-accent/10 to-accent/5 border-2 border-accent/30">
+              <div className="space-y-8">
+                <div className="space-y-4">
+                  <h2 className="text-4xl md:text-5xl font-bold text-foreground">
+                    You already know I have the expertise.
+                  </h2>
+                  <p className="text-xl text-foreground/70 leading-relaxed">
+                    You've seen how I work. You've reviewed the case studies and testimonials. Now let's talk numbers—see exactly how much you could save by working with me instead of hiring full-time or using an agency.
+                  </p>
+                </div>
+
+                <div className="pt-8 border-t border-accent/20">
+                  <Link href="/calculator" onClick={() => window.scrollTo(0, 0)}>
+                    <Button className="btn-nudge-primary text-lg px-8 py-6 inline-flex items-center gap-2">
+                      See Your Savings
+                      <ArrowRight className="w-5 h-5" />
+                    </Button>
+                  </Link>
+                  <p className="text-sm text-foreground/60 mt-4">
+                    Use our interactive calculator to compare costs and see your potential ROI.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Carousel */}
       <section className="py-20 md:py-32 bg-background">
         <div className="container">
