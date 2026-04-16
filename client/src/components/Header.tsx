@@ -19,8 +19,8 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
     { label: 'How We Work', href: '/how-we-work' },
     { label: 'Pricing', href: '/pricing' },
     { label: 'Resources', href: '/resources' },
+    { label: 'Customer Success', href: '/testimonials' },
     { label: 'About', href: '/about' },
-    { label: 'Calculator', href: '/calculator' },
   ];
 
   return (
@@ -54,7 +54,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
 
           <Link href="/calculator" className="hidden sm:inline-flex">
             <Button variant="outline" className="text-sm">
-              Calculator
+              Savings Calculator
             </Button>
           </Link>
 

@@ -294,52 +294,6 @@ export default function Calculator() {
           </div>
         </div>
 
-        {/* Editable Settings */}
-        <div className="max-w-6xl mx-auto px-4 md:px-8 mb-12">
-          <details className="glass-card p-6">
-            <summary className="cursor-pointer font-bold text-foreground text-lg hover:text-accent transition-colors">⚙️ Edit Calculator Numbers</summary>
-            <div className="mt-6 space-y-6">
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-4">
-                  <h3 className="font-bold text-foreground mb-4">Full-Time Hire Costs</h3>
-                  <div>
-                    <label className="block text-sm text-foreground/70 mb-2">Default Annual Salary (AUD)</label>
-                    <input type="number" defaultValue="75000" className="w-full px-3 py-2 bg-secondary/50 border border-border rounded text-foreground" disabled />
-                    <p className="text-xs text-foreground/60 mt-1">Edit in code: line 37</p>
-                  </div>
-                  <div>
-                    <label className="block text-sm text-foreground/70 mb-2">Overhead % (benefits, equipment)</label>
-                    <input type="number" defaultValue="30" className="w-full px-3 py-2 bg-secondary/50 border border-border rounded text-foreground" disabled />
-                    <p className="text-xs text-foreground/60 mt-1">Edit in code: line 38 (0.3 = 30%)</p>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <h3 className="font-bold text-foreground mb-4">Agency Comparison</h3>
-                  <div>
-                    <label className="block text-sm text-foreground/70 mb-2">Default Monthly Spend</label>
-                    <input type="number" defaultValue="10000" className="w-full px-3 py-2 bg-secondary/50 border border-border rounded text-foreground" disabled />
-                    <p className="text-xs text-foreground/60 mt-1">Edit in code: line 29</p>
-                  </div>
-                  <div>
-                    <label className="block text-sm text-foreground/70 mb-2">Your Hourly Rates</label>
-                    <p className="text-xs text-foreground/60">Edit service rates in code: lines 16-22</p>
-                    <p className="text-xs text-foreground/50 mt-2">Standard: $75/h | Strategy: $85/h</p>
-                  </div>
-                </div>
-              </div>
-              <div className="pt-4 border-t border-border">
-                <p className="text-sm text-foreground/70 mb-3"><strong>To edit these numbers:</strong></p>
-                <ol className="text-sm text-foreground/70 space-y-2 list-decimal list-inside">
-                  <li>Go to: <code className="bg-secondary/50 px-2 py-1 rounded text-xs">client/src/pages/Calculator.tsx</code></li>
-                  <li>Find the line numbers shown above</li>
-                  <li>Update the values</li>
-                  <li>Save and commit to GitHub</li>
-                </ol>
-              </div>
-            </div>
-          </details>
-        </div>
-
         {/* Comparison Table */}
         {selectedServices.length > 0 && (
           <div className="max-w-6xl mx-auto px-4 md:px-8">

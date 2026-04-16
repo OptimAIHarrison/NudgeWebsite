@@ -3580,3 +3580,6 @@
 [2026-04-16T21:33:29.798Z] 
 [2026-04-16T21:33:31.522Z] [OAuth] Initialized with baseURL: https://api.manus.im
 [2026-04-16T21:33:31.779Z] Server running on http://localhost:3000/
+[2026-04-16T21:33:42.585Z] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[2026-04-16T21:37:55.518Z] 5:37:55 PM [vite] (client) hmr update /src/pages/Calculator.tsx, /src/index.css
+[2026-04-16T21:38:12.228Z] 5:38:12 PM [vite] (client) hmr update /src/components/Header.tsx, /src/index.css
