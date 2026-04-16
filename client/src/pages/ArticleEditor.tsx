@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
-import { Save, ArrowLeft, Upload, X, Eye } from 'lucide-react';
+import { Save, ArrowLeft, X, Image, Youtube, Linkedin, Instagram, Music } from 'lucide-react';
 
 interface Article {
   id: string;
@@ -22,7 +22,14 @@ interface Article {
   embedVideos: string[];
   status: 'draft' | 'published' | 'scheduled';
   publishedAt?: string;
+  scheduledFor?: string; // ISO string in AEST
   createdAt: string;
+}
+
+interface MediaEmbed {
+  type: 'youtube' | 'linkedin' | 'instagram' | 'tiktok' | 'image' | 'video';
+  url: string;
+  id?: string;
 }
 
 export default function ArticleEditor() {
@@ -47,6 +54,9 @@ export default function ArticleEditor() {
   const [newLink, setNewLink] = useState('');
   const [newVideo, setNewVideo] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [mediaEmbed, setMediaEmbed] = useState<MediaEmbed | null>(null);
+  const [scheduleDate, setScheduleDate] = useState('');
+  const [scheduleTime, setScheduleTime] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('adminToken');
@@ -58,13 +68,28 @@ export default function ArticleEditor() {
   }, [setLocation]);
 
   const handleSave = () => {
+    // If scheduled, convert date/time to ISO string
+    let publishedAt = article.publishedAt;
+    if (article.status === 'scheduled' && scheduleDate && scheduleTime) {
+      const dateTimeStr = `${scheduleDate}T${scheduleTime}`;
+      const localDate = new Date(dateTimeStr);
+      // Convert to AEST (UTC+10 or UTC+11 depending on DST)
+      publishedAt = localDate.toISOString();
+    }
+
     const articles = JSON.parse(localStorage.getItem('articles') || '[]');
     const existing = articles.findIndex((a: Article) => a.id === article.id);
     
+    const articleToSave = {
+      ...article,
+      publishedAt,
+      scheduledFor: article.status === 'scheduled' ? publishedAt : undefined,
+    };
+
     if (existing >= 0) {
-      articles[existing] = article;
+      articles[existing] = articleToSave;
     } else {
-      articles.push(article);
+      articles.push(articleToSave);
     }
     
     localStorage.setItem('articles', JSON.stringify(articles));
@@ -105,6 +130,57 @@ export default function ArticleEditor() {
         embedVideos: [...article.embedVideos, newVideo],
       });
       setNewVideo('');
+    }
+  };
+
+  const insertMediaEmbed = () => {
+    if (!mediaEmbed) return;
+
+    let embedCode = '';
+    switch (mediaEmbed.type) {
+      case 'youtube':
+        embedCode = `[YOUTUBE: ${mediaEmbed.url}]`;
+        break;
+      case 'linkedin':
+        embedCode = `[LINKEDIN: ${mediaEmbed.url}]`;
+        break;
+      case 'instagram':
+        embedCode = `[INSTAGRAM: ${mediaEmbed.url}]`;
+        break;
+      case 'tiktok':
+        embedCode = `[TIKTOK: ${mediaEmbed.url}]`;
+        break;
+      case 'image':
+        embedCode = `[IMAGE: ${mediaEmbed.url}]`;
+        break;
+      case 'video':
+        embedCode = `[VIDEO: ${mediaEmbed.url}]`;
+        break;
+    }
+
+    setArticle({
+      ...article,
+      content: article.content + '\n\n' + embedCode,
+    });
+    setMediaEmbed(null);
+  };
+
+  const getMediaIcon = (type: string) => {
+    switch (type) {
+      case 'youtube':
+        return <Youtube className="w-4 h-4" />;
+      case 'linkedin':
+        return <Linkedin className="w-4 h-4" />;
+      case 'instagram':
+        return <Instagram className="w-4 h-4" />;
+      case 'tiktok':
+        return <Music className="w-4 h-4" />;
+      case 'image':
+        return <Image className="w-4 h-4" />;
+      case 'video':
+        return <Youtube className="w-4 h-4" />;
+      default:
+        return null;
     }
   };
 
@@ -171,10 +247,62 @@ export default function ArticleEditor() {
                 <textarea
                   value={article.content}
                   onChange={(e) => setArticle({ ...article, content: e.target.value })}
-                  placeholder="Write your article content here..."
+                  placeholder="Write your article content here... Use [YOUTUBE: url], [LINKEDIN: url], [INSTAGRAM: url], [TIKTOK: url], [IMAGE: url], [VIDEO: url] to embed media"
                   rows={10}
                   className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-lg text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 font-mono text-sm"
                 />
+              </div>
+
+              {/* Media Embed Helper */}
+              <div className="bg-accent/10 border border-accent/30 rounded-lg p-4 space-y-3">
+                <h4 className="font-semibold text-foreground text-sm">Insert Media</h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { type: 'youtube', label: 'YouTube', icon: Youtube },
+                    { type: 'linkedin', label: 'LinkedIn', icon: Linkedin },
+                    { type: 'instagram', label: 'Instagram', icon: Instagram },
+                    { type: 'tiktok', label: 'TikTok', icon: Music },
+                    { type: 'image', label: 'Image', icon: Image },
+                    { type: 'video', label: 'Video', icon: Youtube },
+                  ].map((media) => (
+                    <button
+                      key={media.type}
+                      onClick={() => setMediaEmbed({ type: media.type as any, url: '' })}
+                      className="flex items-center gap-2 px-3 py-2 bg-accent/20 hover:bg-accent/30 text-accent rounded text-sm font-medium transition-colors"
+                    >
+                      <media.icon className="w-4 h-4" />
+                      {media.label}
+                    </button>
+                  ))}
+                </div>
+
+                {mediaEmbed && (
+                  <div className="space-y-2 pt-3 border-t border-accent/20">
+                    <div className="flex items-center gap-2">
+                      {getMediaIcon(mediaEmbed.type)}
+                      <span className="text-sm font-medium text-foreground capitalize">{mediaEmbed.type}</span>
+                      <button
+                        onClick={() => setMediaEmbed(null)}
+                        className="ml-auto text-foreground/60 hover:text-foreground"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                    <input
+                      type="url"
+                      value={mediaEmbed.url}
+                      onChange={(e) => setMediaEmbed({ ...mediaEmbed, url: e.target.value })}
+                      placeholder={`Enter ${mediaEmbed.type} URL...`}
+                      className="w-full px-3 py-2 bg-secondary/50 border border-border rounded text-sm text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
+                    />
+                    <Button
+                      onClick={insertMediaEmbed}
+                      className="w-full bg-accent hover:bg-accent/90 text-white text-sm py-2 rounded"
+                    >
+                      Insert into Content
+                    </Button>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -208,7 +336,7 @@ export default function ArticleEditor() {
 
             {/* Embeds */}
             <div className="glass-card p-6 space-y-6">
-              <h3 className="text-lg font-bold text-foreground">Embeds</h3>
+              <h3 className="text-lg font-bold text-foreground">Additional Embeds</h3>
               
               {/* Links */}
               <div>
@@ -283,6 +411,36 @@ export default function ArticleEditor() {
                 <option value="scheduled">Scheduled</option>
               </select>
             </div>
+
+            {/* Schedule */}
+            {article.status === 'scheduled' && (
+              <div className="glass-card p-6 space-y-4">
+                <h3 className="text-lg font-bold text-foreground">Schedule (AEST)</h3>
+                <div>
+                  <label className="block text-sm font-semibold text-foreground mb-2">Date</label>
+                  <input
+                    type="date"
+                    value={scheduleDate}
+                    onChange={(e) => setScheduleDate(e.target.value)}
+                    className="w-full px-4 py-2 bg-secondary/50 border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-foreground mb-2">Time</label>
+                  <input
+                    type="time"
+                    value={scheduleTime}
+                    onChange={(e) => setScheduleTime(e.target.value)}
+                    className="w-full px-4 py-2 bg-secondary/50 border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50"
+                  />
+                </div>
+                {scheduleDate && scheduleTime && (
+                  <p className="text-xs text-foreground/60">
+                    Will publish: {new Date(`${scheduleDate}T${scheduleTime}`).toLocaleString('en-AU', { timeZone: 'Australia/Sydney' })} AEST
+                  </p>
+                )}
+              </div>
+            )}
 
             {/* SEO */}
             <div className="glass-card p-6 space-y-4">

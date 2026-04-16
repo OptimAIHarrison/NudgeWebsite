@@ -3310,3 +3310,13 @@
 [2026-04-15T22:11:57.055Z] 6:11:57 PM [vite] (client) hmr update /src/components/SearchModal.tsx, /src/index.css
 [2026-04-15T22:12:12.140Z] 6:12:12 PM [vite] (client) hmr update /src/pages/Services.tsx, /src/index.css
 [2026-04-15T22:12:24.795Z] 6:12:24 PM [vite] (client) hmr update /src/pages/Services.tsx, /src/index.css
+[2026-04-16T21:07:53.670Z] Dev server process group stopped
+[2026-04-16T21:07:56.709Z] Starting dev server with command: pnpm run dev
+[2026-04-16T21:07:58.173Z] 
+[2026-04-16T21:07:58.174Z] > nudge_digital@1.0.0 dev /home/ubuntu/nudge_digital
+[2026-04-16T21:07:58.174Z] > NODE_ENV=development tsx watch server/_core/index.ts
+[2026-04-16T21:07:58.174Z] 
+[2026-04-16T21:08:00.288Z] [OAuth] Initialized with baseURL: https://api.manus.im
+[2026-04-16T21:08:00.655Z] Server running on http://localhost:3000/
+[2026-04-16T21:08:01.596Z] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[2026-04-16T21:10:06.353Z] 5:10:06 PM [vite] (client) hmr update /src/pages/ArticleEditor.tsx, /src/index.css
