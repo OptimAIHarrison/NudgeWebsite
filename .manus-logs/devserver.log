@@ -3583,3 +3583,14 @@
 [2026-04-16T21:33:42.585Z] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
 [2026-04-16T21:37:55.518Z] 5:37:55 PM [vite] (client) hmr update /src/pages/Calculator.tsx, /src/index.css
 [2026-04-16T21:38:12.228Z] 5:38:12 PM [vite] (client) hmr update /src/components/Header.tsx, /src/index.css
+[2026-04-16T21:41:53.662Z] 5:41:53 PM [vite] (client) hmr update /src/components/RichTextEditor.tsx, /src/index.css
+[2026-04-16T21:42:06.235Z] Dev server process group stopped
+[2026-04-16T21:42:06.238Z] ELIFECYCLE  Command failed.
+[2026-04-16T21:42:06.275Z] Dev server exited with code -15
+[2026-04-16T21:42:09.274Z] Starting dev server with command: pnpm run dev
+[2026-04-16T21:42:10.086Z] 
+[2026-04-16T21:42:10.086Z] > nudge_digital@1.0.0 dev /home/ubuntu/nudge_digital
+[2026-04-16T21:42:10.087Z] > NODE_ENV=development tsx watch server/_core/index.ts
+[2026-04-16T21:42:10.087Z] 
+[2026-04-16T21:42:11.804Z] [OAuth] Initialized with baseURL: https://api.manus.im
+[2026-04-16T21:42:12.035Z] Server running on http://localhost:3000/
