@@ -101,31 +101,72 @@ export default function About() {
 
       {/* Story */}
       <section className="py-20 md:py-32">
-        <div className="container max-w-3xl mx-auto">
-          <div className="glass-card p-8 md:p-12 space-y-6">
-            <div>
-              <h2 className="text-3xl font-bold text-foreground mb-4">My Story</h2>
-              <p className="text-lg text-foreground/70 leading-relaxed">
-                I've spent the last decade working in digital marketing—from agency side to in-house roles. I've seen it all: broken tracking setups, CRMs that nobody uses, marketing operations that are a mess, and agencies that promise the world but deliver mediocrity.
+        <div className="container max-w-4xl mx-auto px-4">
+          <div className="space-y-8">
+            {/* Header */}
+            <div className="space-y-4">
+              <p className="text-sm font-semibold text-accent uppercase tracking-wide">About Me</p>
+              <h2 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
+                Marketer. Wanderer. Recovering corporate machine.
+              </h2>
+              <p className="text-lg text-foreground/60 font-medium">
+                Digital Marketing | Growth Strategy | Solo Operator
               </p>
             </div>
 
-            <div>
-              <p className="text-lg text-foreground/70 leading-relaxed">
-                That's when I realized something: most businesses don't need another full-time hire or another agency. They need someone who can come in, understand their specific challenges, and actually fix them. Someone who knows the technical side as well as the strategic side.
+            {/* First paragraph with quote box */}
+            <div className="space-y-6">
+              <div className="pl-6 border-l-4 border-accent/50 py-4">
+                <p className="text-lg text-foreground leading-relaxed">
+                  I started out in corporate UK — Database Executive, sharp suit, sharpening my elbows on the way up. By the time I was running the marketing department, I was way too young, way too caffeinated, and burning out before I even had the vocabulary for it.
+                </p>
+              </div>
+
+              <p className="text-lg text-foreground leading-relaxed">
+                So I did what any sensible person does. I packed a bag, grew my hair out, got a nose piercing, collected a few tattoos, and went to see the world. I climbed mountains, dove to the depths, ate everything I could get my hands on, and worked my way through more varieties of beer than I'd care to admit. All the while, I kept doing what I love — freelance and contract digital marketing for clients across the globe. I think I still have the anklet somewhere.
               </p>
             </div>
 
-            <div>
-              <p className="text-lg text-foreground/70 leading-relaxed">
-                So I decided to go fractional. Now I work with businesses that need senior-level digital marketing expertise without the overhead of a full-time employee or the frustration of a traditional agency.
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4 py-8">
+              <div className="bg-secondary/50 rounded-lg p-6 text-center">
+                <p className="text-3xl font-bold text-accent mb-2">10+</p>
+                <p className="text-sm text-foreground/70">years in digital marketing</p>
+              </div>
+              <div className="bg-secondary/50 rounded-lg p-6 text-center">
+                <p className="text-3xl font-bold text-accent mb-2">3</p>
+                <p className="text-sm text-foreground/70">continents worked across</p>
+              </div>
+              <div className="bg-secondary/50 rounded-lg p-6 text-center">
+                <p className="text-3xl font-bold text-accent mb-2">1</p>
+                <p className="text-sm text-foreground/70">suspiciously surviving anklet</p>
+              </div>
+            </div>
+
+            {/* Second section */}
+            <p className="text-lg text-foreground leading-relaxed">
+              Eventually, gravity (and a working visa) pulled me to Australia. I did my fruit picking, spent six months living in the desert — yes, really — and then got back to what I do best. I landed with a team that actually gave a damn about growth; not just the company's, but mine. We ran the marketing department together through some of the most chaotic, uncharted years in recent memory — COVID, market upheaval, the whole circus. We didn't just survive it. We built something.
+            </p>
+
+            {/* Highlighted quote */}
+            <div className="bg-secondary/30 border-l-4 border-accent rounded-lg p-8 my-8">
+              <p className="text-lg text-foreground leading-relaxed">
+                Now I've gone solo. No more org chart, no more committees. Just me, my craft, and the clients smart enough to see the value. You're not hiring an agency. You're getting a seasoned, tattooed, well-travelled marketing operator who has run departments, navigated crises, freelanced across time zones, and genuinely loves this stuff.
               </p>
             </div>
 
-            <div>
-              <p className="text-lg text-foreground/70 leading-relaxed">
-                I focus on the technical stuff that matters: fixing your tracking, optimizing your conversions, building your MarTech stack, and implementing strategies that actually work. I'm not here to make you feel good—I'm here to make your business better.
+            {/* Closing */}
+            <div className="space-y-6">
+              <p className="text-lg text-foreground leading-relaxed">
+                I know my stuff. I'm easy to work with. And I'll probably be the most interesting person in your Zoom call. You're welcome.
               </p>
+
+              <div className="pt-6 border-t border-border/50 space-y-3">
+                <p className="text-sm font-semibold text-foreground/60">— A thought —</p>
+                <p className="text-lg text-foreground leading-relaxed">
+                  Imagine if I posted this on LinkedIn.
+                </p>
+              </div>
             </div>
           </div>
         </div>
