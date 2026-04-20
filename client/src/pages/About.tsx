@@ -46,7 +46,7 @@ export default function About() {
     },
     {
       title: 'Results-Focused',
-      description: 'Everything I do is tied to measurable outcomes. If it doesn\'t move the needle, we don\'t do it.',
+      description: 'Everything I do is tied to measurable outcomes. If it doesn\'t move the needle, I don\'t do it.',
     },
     {
       title: 'Technical Excellence',
@@ -145,7 +145,7 @@ export default function About() {
 
             {/* Second section */}
             <p className="text-lg text-foreground leading-relaxed">
-              Eventually, gravity (and a working visa) pulled me to Australia. I did my fruit picking, spent six months living in the desert — yes, really — and then got back to what I do best. I landed with a team that actually gave a damn about growth; not just the company's, but mine. We ran the marketing department together through some of the most chaotic, uncharted years in recent memory — COVID, market upheaval, the whole circus. We didn't just survive it. We built something.
+              Eventually, gravity (and a working visa) pulled me to Australia. I did my fruit picking, spent six months living in the desert — yes, really — and then got back to what I do best. I landed with a team that actually gave a damn about growth; not just the company's, but mine. I ran the marketing department through some of the most chaotic, uncharted years in recent memory — COVID, market upheaval, the whole circus. I didn't just survive it. I built something.
             </p>
 
             {/* Highlighted quote */}
