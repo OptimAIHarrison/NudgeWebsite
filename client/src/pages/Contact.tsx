@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SearchModal from '@/components/SearchModal';
 import { Button } from '@/components/ui/button';
+import { trpc } from '@/lib/trpc';
 
 export default function Contact() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -24,11 +25,23 @@ export default function Contact() {
     'Not sure - let us recommend',
   ];
 
+  const contactMutation = trpc.contact.useMutation();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for sending us a nudge! We will get back to you shortly.');
-    setFormData({ name: '', email: '', company: '', service: '', message: '' });
+    contactMutation.mutate(formData, {
+      onSuccess: (result) => {
+        if (result.success) {
+          alert('Thank you for sending us a nudge! I will get back to you shortly.');
+          setFormData({ name: '', email: '', company: '', service: '', message: '' });
+        } else {
+          alert('Failed to send message. Please try again.');
+        }
+      },
+      onError: () => {
+        alert('Error sending message. Please try again.');
+      }
+    });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -178,8 +191,12 @@ export default function Contact() {
                   />
                 </div>
 
-                <Button type="submit" className="btn-nudge-primary w-full">
-                  Send a Nudge
+                <Button 
+                  type="submit" 
+                  className="btn-nudge-primary w-full"
+                  disabled={contactMutation.isPending}
+                >
+                  {contactMutation.isPending ? 'Sending...' : 'Send a Nudge'}
                 </Button>
               </form>
             </div>
