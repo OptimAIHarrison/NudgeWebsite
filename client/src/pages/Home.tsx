@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowRight, Zap, TrendingUp, Code, BarChart3, CheckCircle, Sparkles, ChevronLeft, ChevronRight, Lightbulb, Rocket, Target, Palette, Bell, Database, LineChart } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Lightbulb, Rocket, Target, Code, TrendingUp, CheckCircle, Bell, Database, LineChart, Zap, BarChart3 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SearchModal from '@/components/SearchModal';
@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 
 const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663532599876/9u4P3ot5rXMeEQxrn76eMy/nudgewebsite_0d4b2e8a.png';
 
-// Service-focused Notification Component with varied sizes
+// Service Notification Component
 function ServiceNotification({ 
   delay, 
   position, 
@@ -16,35 +16,32 @@ function ServiceNotification({
   size = 'md'
 }: { 
   delay: number; 
-  position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center-left' | 'center-right';
+  position: 'tl' | 'tr' | 'bl' | 'br' | 'cl' | 'cr';
   service: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md';
 }) {
   const positionClasses = {
-    'top-left': 'top-1/4 left-1/12 -translate-x-1/2 -translate-y-1/2 hidden lg:block',
-    'top-right': 'top-1/3 right-1/12 translate-x-1/2 -translate-y-1/2 hidden lg:block',
-    'bottom-left': 'top-2/3 left-1/12 -translate-x-1/2 -translate-y-1/2 hidden lg:block',
-    'bottom-right': 'top-3/4 right-1/12 translate-x-1/2 -translate-y-1/2 hidden lg:block',
-    'center-left': 'top-1/2 left-1/12 -translate-x-1/2 -translate-y-1/2 hidden lg:block',
-    'center-right': 'top-1/2 right-1/12 translate-x-1/2 -translate-y-1/2 hidden lg:block',
+    'tl': 'top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 hidden lg:block',
+    'tr': 'top-1/3 right-1/3 translate-x-1/2 -translate-y-1/2 hidden lg:block',
+    'bl': 'top-2/3 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden lg:block',
+    'br': 'top-3/4 right-1/4 translate-x-1/2 -translate-y-1/2 hidden lg:block',
+    'cl': 'top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden lg:block',
+    'cr': 'top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 hidden lg:block',
   };
 
   const sizeClasses = {
     'sm': 'max-w-xs p-3',
     'md': 'max-w-sm p-4',
-    'lg': 'max-w-md p-5',
   };
 
   const iconSize = {
     'sm': 'w-8 h-8',
     'md': 'w-10 h-10',
-    'lg': 'w-12 h-12',
   };
 
   const textSize = {
     'sm': 'text-xs',
     'md': 'text-sm',
-    'lg': 'text-base',
   };
 
   const services: Record<string, { icon: React.ReactNode; color: string }> = {
@@ -66,14 +63,14 @@ function ServiceNotification({
         animationDuration: '0.6s',
       }}
     >
-      <div className={`${sizeClasses[size]} rounded-xl backdrop-blur-sm bg-gradient-to-br ${serviceData.color} border border-white/5 shadow-sm hover:shadow-md transition-all duration-300 group hover:scale-105 animate-pulse-notification relative`}>
-        <div className="flex items-start gap-2">
+      <div className={`${sizeClasses[size]} rounded-lg backdrop-blur-sm bg-gradient-to-br ${serviceData.color} border border-white/5 shadow-sm hover:shadow-md transition-all duration-300 group hover:scale-105 flex items-start justify-between gap-2`}>
+        <div className="flex items-start gap-2 flex-1 min-w-0">
           <div className="flex-shrink-0 mt-0.5 text-accent/50 group-hover:text-accent/70 transition-colors">
             {serviceData.icon}
           </div>
           <div className="flex-1 min-w-0">
-            <p className={`font-semibold text-foreground/80 ${textSize[size]}`}>{service}</p>
-            <p className={`text-foreground/50 ${textSize[size]} leading-tight mt-0.5`}>
+            <p className={`font-semibold text-foreground/80 ${textSize[size]} truncate`}>{service}</p>
+            <p className={`text-foreground/50 ${textSize[size]} leading-tight mt-0.5 line-clamp-2`}>
               {service === 'SEO' && 'Technical optimization'}
               {service === 'Email' && 'Automation & sequences'}
               {service === 'CRM' && 'System setup & flows'}
@@ -82,10 +79,10 @@ function ServiceNotification({
               {service === 'Automation' && 'Workflow automation'}
             </p>
           </div>
-          <div className="absolute -top-2 -right-2 flex items-center gap-1">
-            <Bell className={`${iconSize[size]} text-accent/60 animate-pulse-notification`} />
-            <div className="w-2 h-2 rounded-full bg-accent animate-pulse-notification"></div>
-          </div>
+        </div>
+        <div className="flex-shrink-0 flex items-center gap-1">
+          <Bell className={`${iconSize[size]} text-accent/60`} style={{ animation: `pulse-notification 2s ease-in-out infinite ${delay * 0.3}s` }} />
+          <div className="rounded-full bg-accent" style={{ width: size === 'sm' ? '4px' : '6px', height: size === 'sm' ? '4px' : '6px', animation: `pulse-notification 2s ease-in-out infinite ${delay * 0.4}s` }}></div>
         </div>
       </div>
     </div>
@@ -98,25 +95,22 @@ export default function Home() {
   const [notifications, setNotifications] = useState<Array<{ 
     id: number; 
     delay: number; 
-    position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center-left' | 'center-right';
+    position: 'tl' | 'tr' | 'bl' | 'br' | 'cl' | 'cr';
     service: string;
-    size: 'sm' | 'md' | 'lg';
+    size: 'sm' | 'md';
   }>>([]);
 
   useEffect(() => {
-    // Generate varied service notifications
-    const positions: Array<'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center-left' | 'center-right'> = [
-      'top-left', 'top-right', 'bottom-left', 'bottom-right', 'center-left', 'center-right'
-    ];
+    const positions: Array<'tl' | 'tr' | 'bl' | 'br' | 'cl' | 'cr'> = ['tl', 'tr', 'bl', 'br', 'cl', 'cr'];
     const services = ['SEO', 'Email', 'CRM', 'Analytics', 'Strategy', 'Automation'];
-    const sizes: Array<'sm' | 'md' | 'lg'> = ['sm', 'md', 'lg'];
+    const sizes: Array<'sm' | 'md'> = ['md', 'sm', 'md', 'sm', 'md', 'sm'];
 
     const generatedNotifications = positions.map((position, idx) => ({
       id: idx,
-      delay: idx * 0.3,
+      delay: idx * 0.2,
       position,
       service: services[idx],
-      size: sizes[idx % 3],
+      size: sizes[idx],
     }));
     setNotifications(generatedNotifications);
   }, []);
@@ -218,7 +212,7 @@ export default function Home() {
       <Header onSearchOpen={() => setSearchOpen(true)} />
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
-      {/* Hero Section with Service Notifications */}
+      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 gradient-hero opacity-60"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background"></div>
@@ -227,7 +221,7 @@ export default function Home() {
         <div className="absolute top-20 right-10 w-72 h-72 bg-accent/20 rounded-full blur-3xl opacity-30 animate-float"></div>
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
 
-        {/* Service Notification Cards - Behind Text */}
+        {/* Service Notification Cards */}
         <div className="absolute inset-0 pointer-events-none">
           {notifications.map((notif) => (
             <ServiceNotification 
@@ -243,13 +237,9 @@ export default function Home() {
         <div className="container relative z-10 max-w-5xl mx-auto px-4">
           <div className="text-center space-y-6 animate-fade-in">
             {/* Animated Logo */}
-            <div className="flex justify-center mb-4 relative">
-              <div className="relative">
-                <img src={LOGO_URL} alt="Nudge Digital" className="h-24 w-auto animate-bounce" style={{ animationDuration: '3s' }} />
-              </div>
+            <div className="flex justify-center mb-4">
+              <img src={LOGO_URL} alt="Nudge Digital" className="h-24 w-auto animate-bounce" style={{ animationDuration: '3s' }} />
             </div>
-
-
 
             <div className="space-y-4">
               <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight">
@@ -263,7 +253,7 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Liquid Glass Container with Enhanced Design */}
+            {/* CTA Container */}
             <div className="max-w-3xl mx-auto mt-8 p-8 md:p-10 space-y-6 rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl hover:shadow-accent/20 transition-shadow">
               <button
                 onClick={() => setSearchOpen(true)}
@@ -316,7 +306,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Carousel */}
+      {/* Testimonials */}
       <section className="py-20 md:py-32 bg-background">
         <div className="container">
           <div className="text-center mb-16">
@@ -416,7 +406,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Work With Nudge */}
+      {/* Why Work With Me */}
       <section className="py-20 md:py-32 bg-gradient-to-r from-accent/5 to-accent/10">
         <div className="container">
           <div className="text-center mb-12">

@@ -3627,3 +3627,6 @@
 [2026-05-04T07:56:39.418Z] 3:56:39 AM [vite] (client) hmr update /src/pages/Calculator.tsx, /src/index.css
 [2026-05-04T07:56:39.421Z] 3:56:39 AM [vite] (client) hmr update /src/pages/Pricing.tsx, /src/index.css
 [2026-05-04T07:56:39.423Z] 3:56:39 AM [vite] (client) hmr update /src/pages/FAQ.tsx, /src/index.css
+[2026-05-04T08:03:07.937Z] 4:03:07 AM [vite] (client) hmr update /src/pages/Home.tsx, /src/index.css
+[2026-05-04T08:03:31.929Z] 4:03:31 AM [vite] (client) hmr update /src/pages/Pricing.tsx, /src/index.css
+[2026-05-04T08:03:36.359Z] 4:03:36 AM [vite] (client) hmr update /src/index.css

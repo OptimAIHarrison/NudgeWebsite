@@ -593,3 +593,7 @@
 [2026-05-04T07:55:13.647Z] {"timestamp":1777881311225,"level":"DEBUG","args":["[vite] connected."],"stack":null}
 [2026-05-04T07:55:54.363Z] {"timestamp":1777881352063,"level":"DEBUG","args":["[Manus] Debug collector initialized (no rrweb, UI events only)"],"stack":null}
 [2026-05-04T07:55:54.363Z] {"timestamp":1777881352407,"level":"DEBUG","args":["[vite] connected."],"stack":null}
+[2026-05-04T08:03:23.641Z] {"timestamp":1777881800735,"level":"DEBUG","args":["[Manus] Debug collector initialized (no rrweb, UI events only)"],"stack":null}
+[2026-05-04T08:03:23.641Z] {"timestamp":1777881801076,"level":"DEBUG","args":["[vite] connected."],"stack":null}
+[2026-05-04T08:03:33.645Z] {"timestamp":1777881810560,"level":"DEBUG","args":["[Manus] Debug collector initialized (no rrweb, UI events only)"],"stack":null}
+[2026-05-04T08:03:33.645Z] {"timestamp":1777881810902,"level":"DEBUG","args":["[vite] connected."],"stack":null}
