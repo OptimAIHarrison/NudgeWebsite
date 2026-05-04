@@ -110,18 +110,19 @@ export default function Pricing() {
       {/* Pricing Tiers */}
       <section className="py-20 md:py-32">
         <div className="container">
-          <div className="flex flex-wrap gap-6 max-w-7xl mx-auto mb-12 justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-12">
             {pricingTiers.map((tier, idx) => (
               <div 
                 key={tier.id}
                 onClick={() => setExpandedTier(expandedTier === idx ? -1 : idx)}
-                className={`glass-card p-6 cursor-pointer transition-all duration-300 hover:shadow-lg border border-border group ${
-                  expandedTier === idx ? 'w-full ring-2 ring-accent/50' : 'w-full md:w-1/2 lg:w-1/4'
+                className={`glass-card cursor-pointer transition-all duration-300 hover:shadow-lg border border-border group overflow-hidden ${
+                  expandedTier === idx ? 'ring-2 ring-accent/50' : ''
                 }`}
                 style={{
                   animation: `slideIn 0.5s ease-out ${idx * 0.1}s both`,
                 }}
               >
+                <div className="p-6">
                 <div className="flex items-start gap-3 mb-4">
                   <div className="p-3 rounded-lg bg-accent/10 text-accent group-hover:scale-110 transition-transform flex-shrink-0">
                     {tier.icon}
@@ -137,10 +138,11 @@ export default function Pricing() {
                   <p className="text-2xl font-bold text-accent">{tier.rate}</p>
                 </div>
 
-                <p className="text-sm text-foreground/70 mb-4 line-clamp-2">{tier.description}</p>
+                <p className="text-sm text-foreground/70 mb-4">{tier.description}</p>
+                </div>
 
                 {expandedTier === idx && (
-                  <div className="mt-6 pt-6 border-t border-border space-y-3 animate-fade-in">
+                  <div className="px-6 pb-6 border-t border-border space-y-3 animate-fade-in max-h-96 overflow-y-auto">
                     <div>
                       <p className="text-xs font-semibold text-foreground/60 mb-2 uppercase">What's Included</p>
                       <ul className="space-y-2">
