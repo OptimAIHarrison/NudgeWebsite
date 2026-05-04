@@ -110,20 +110,20 @@ export default function Pricing() {
       {/* Pricing Tiers */}
       <section className="py-20 md:py-32">
         <div className="container">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-12">
+          <div className="flex flex-wrap gap-6 max-w-7xl mx-auto mb-12 justify-center">
             {pricingTiers.map((tier, idx) => (
               <div 
                 key={tier.id}
                 onClick={() => setExpandedTier(expandedTier === idx ? -1 : idx)}
-                className={`glass-card p-6 cursor-pointer transition-all duration-300 hover:shadow-lg border-l-4 border-accent group ${
-                  expandedTier === idx ? 'md:col-span-2 lg:col-span-4 ring-2 ring-accent/50' : ''
+                className={`glass-card p-6 cursor-pointer transition-all duration-300 hover:shadow-lg border border-border group ${
+                  expandedTier === idx ? 'w-full ring-2 ring-accent/50' : 'w-full md:w-1/2 lg:w-1/4'
                 }`}
                 style={{
                   animation: `slideIn 0.5s ease-out ${idx * 0.1}s both`,
                 }}
               >
                 <div className="flex items-start gap-3 mb-4">
-                  <div className="p-3 rounded-lg bg-accent/10 text-accent group-hover:scale-110 transition-transform">
+                  <div className="p-3 rounded-lg bg-accent/10 text-accent group-hover:scale-110 transition-transform flex-shrink-0">
                     {tier.icon}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -132,7 +132,7 @@ export default function Pricing() {
                   </div>
                 </div>
 
-                <div className="mb-4 p-3 bg-accent/5 rounded-lg border border-accent/10">
+                <div className="mb-4 p-3 bg-accent/5 rounded-lg border border-border">
                   <p className="text-xs text-foreground/60 mb-1">Rate</p>
                   <p className="text-2xl font-bold text-accent">{tier.rate}</p>
                 </div>
@@ -163,16 +163,16 @@ export default function Pricing() {
 
           {/* Custom Quote Section */}
           <div className="max-w-2xl mx-auto">
-            <div className="glass-card p-8 text-center border-2 border-accent/30 hover:border-accent/60 transition-colors" style={{ animation: 'slideIn 0.5s ease-out 0.4s both' }}>
+            <div className="glass-card p-8 text-center border border-border hover:border-accent/60 transition-colors" style={{ animation: 'slideIn 0.5s ease-out 0.4s both' }}>
               <div className="flex justify-center mb-4">
                 <div className="p-4 rounded-lg bg-accent/10 text-accent">
                   <Sparkles className="w-8 h-8" />
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-foreground mb-2">Something Off the Charts?</h3>
-              <p className="text-foreground/70 mb-6">
-                Have a unique project or need something completely custom? Let's talk about what you need.
-              </p>
+            <h3 className="text-2xl font-bold text-foreground mb-2">Need Something Tailored?</h3>
+            <p className="text-foreground/70 mb-6">
+              Every business is unique. If none of the above fit perfectly, let's create a custom solution that works for you.
+            </p>
               <Link href="/contact">
                 <Button className="btn-nudge-primary text-lg px-8 py-4">
                   Get a Custom Quote
@@ -205,6 +205,10 @@ export default function Pricing() {
           <div className="max-w-3xl mx-auto space-y-4">
             {[
               {
+                q: 'What if I need something completely different?',
+                a: 'That\'s fine. I work with all kinds of projects. If your needs don\'t fit neatly into one of the pricing tiers above, let\'s chat about a custom solution.',
+              },
+              {
                 q: 'Can you work within my budget?',
                 a: 'Absolutely. I work with clients to find the right engagement model. Whether you need hourly support, a project-based engagement, or a retainer, we can make it work.',
               },
@@ -225,7 +229,7 @@ export default function Pricing() {
                 a: 'I consider project complexity, timeline, your business goals, and current workload. We\'ll discuss options and find the best fit.',
               },
             ].map((faq, idx) => (
-              <div key={idx} className="glass-card p-6 hover:shadow-lg transition-all" style={{ animation: `slideIn 0.5s ease-out ${idx * 0.05}s both` }}>
+              <div key={idx} className="glass-card p-6 hover:shadow-lg transition-all border border-border" style={{ animation: `slideIn 0.5s ease-out ${idx * 0.05}s both` }}>
                 <h4 className="font-bold text-foreground mb-2">{faq.q}</h4>
                 <p className="text-foreground/70">{faq.a}</p>
               </div>

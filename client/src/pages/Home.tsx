@@ -21,27 +21,27 @@ function ServiceNotification({
   size?: 'sm' | 'md';
 }) {
   const positionClasses = {
-    'tl': 'top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 hidden lg:block',
-    'tr': 'top-1/3 right-1/3 translate-x-1/2 -translate-y-1/2 hidden lg:block',
-    'bl': 'top-2/3 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden lg:block',
-    'br': 'top-3/4 right-1/4 translate-x-1/2 -translate-y-1/2 hidden lg:block',
-    'cl': 'top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden lg:block',
-    'cr': 'top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 hidden lg:block',
+    'tl': 'top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'tr': 'top-1/3 right-1/4 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'bl': 'top-2/3 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'br': 'top-2/3 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'cl': 'top-1/2 left-1/6 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'cr': 'top-1/2 right-1/6 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
   };
 
   const sizeClasses = {
-    'sm': 'max-w-xs p-3',
-    'md': 'max-w-sm p-4',
+    'sm': 'max-w-md p-4',
+    'md': 'max-w-lg p-5',
   };
 
   const iconSize = {
-    'sm': 'w-8 h-8',
-    'md': 'w-10 h-10',
+    'sm': 'w-10 h-10',
+    'md': 'w-12 h-12',
   };
 
   const textSize = {
-    'sm': 'text-xs',
-    'md': 'text-sm',
+    'sm': 'text-sm',
+    'md': 'text-base',
   };
 
   const services: Record<string, { icon: React.ReactNode; color: string }> = {
@@ -81,8 +81,8 @@ function ServiceNotification({
           </div>
         </div>
         <div className="flex-shrink-0 flex items-center gap-1">
-          <Bell className={`${iconSize[size]} text-accent/60`} style={{ animation: `pulse-notification 2s ease-in-out infinite ${delay * 0.3}s` }} />
-          <div className="rounded-full bg-accent" style={{ width: size === 'sm' ? '4px' : '6px', height: size === 'sm' ? '4px' : '6px', animation: `pulse-notification 2s ease-in-out infinite ${delay * 0.4}s` }}></div>
+          <Bell className={`${iconSize[size]} text-accent/60`} style={{ animation: `pulse-notification 3s ease-in-out infinite ${delay * 0.5}s` }} />
+          <div className="rounded-full bg-accent" style={{ width: size === 'sm' ? '6px' : '8px', height: size === 'sm' ? '6px' : '8px', animation: `pulse-notification 3s ease-in-out infinite ${delay * 0.6}s` }}></div>
         </div>
       </div>
     </div>
@@ -222,7 +222,7 @@ export default function Home() {
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
 
         {/* Service Notification Cards */}
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none z-30">
           {notifications.map((notif) => (
             <ServiceNotification 
               key={notif.id} 
