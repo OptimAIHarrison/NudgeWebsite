@@ -21,17 +21,17 @@ function ServiceNotification({
   size?: 'sm' | 'md';
 }) {
   const positionClasses = {
-    'tl': 'top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'tr': 'top-2/5 right-1/3 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'bl': 'top-2/3 left-1/3 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'br': 'top-3/5 right-1/4 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'cl': 'top-1/2 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'cr': 'top-1/2 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'tl': 'top-1/4 left-2/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'tr': 'top-1/4 right-2/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'bl': 'top-3/4 left-2/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'br': 'top-3/4 right-2/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'cl': 'top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'cr': 'top-1/2 right-1/3 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
   };
 
   const sizeClasses = {
-    'sm': 'max-w-md p-4',
-    'md': 'max-w-lg p-5',
+    'sm': 'max-w-lg p-5',
+    'md': 'max-w-xl p-6',
   };
 
   const iconSize = {
