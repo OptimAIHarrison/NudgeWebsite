@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { ArrowRight, Zap, TrendingUp, Code, BarChart3, CheckCircle, Sparkles, ChevronLeft, ChevronRight, Lightbulb, Rocket, Target, Palette } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowRight, Zap, TrendingUp, Code, BarChart3, CheckCircle, Sparkles, ChevronLeft, ChevronRight, Lightbulb, Rocket, Target, Palette, Bell, Database, LineChart } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SearchModal from '@/components/SearchModal';
@@ -8,9 +8,114 @@ import { Button } from '@/components/ui/button';
 
 const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663532599876/9u4P3ot5rXMeEQxrn76eMy/nudgewebsite_0d4b2e8a.png';
 
+// Service-focused Notification Component with varied sizes
+function ServiceNotification({ 
+  delay, 
+  position, 
+  service,
+  size = 'md'
+}: { 
+  delay: number; 
+  position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center-left' | 'center-right';
+  service: string;
+  size?: 'sm' | 'md' | 'lg';
+}) {
+  const positionClasses = {
+    'top-left': 'top-16 left-8 md:left-16',
+    'top-right': 'top-24 right-8 md:right-16',
+    'bottom-left': 'bottom-32 left-12 md:left-20',
+    'bottom-right': 'bottom-24 right-8 md:right-16',
+    'center-left': 'top-1/2 left-4 md:left-12 -translate-y-1/2',
+    'center-right': 'top-1/2 right-4 md:right-12 -translate-y-1/2',
+  };
+
+  const sizeClasses = {
+    'sm': 'max-w-xs p-3',
+    'md': 'max-w-sm p-4',
+    'lg': 'max-w-md p-5',
+  };
+
+  const iconSize = {
+    'sm': 'w-8 h-8',
+    'md': 'w-10 h-10',
+    'lg': 'w-12 h-12',
+  };
+
+  const textSize = {
+    'sm': 'text-xs',
+    'md': 'text-sm',
+    'lg': 'text-base',
+  };
+
+  const services: Record<string, { icon: React.ReactNode; color: string }> = {
+    'SEO': { icon: <LineChart className={iconSize[size]} />, color: 'from-blue-500/15 to-blue-400/5' },
+    'Email': { icon: <Zap className={iconSize[size]} />, color: 'from-orange-500/15 to-orange-400/5' },
+    'CRM': { icon: <Database className={iconSize[size]} />, color: 'from-green-500/15 to-green-400/5' },
+    'Analytics': { icon: <BarChart3 className={iconSize[size]} />, color: 'from-purple-500/15 to-purple-400/5' },
+    'Strategy': { icon: <Target className={iconSize[size]} />, color: 'from-pink-500/15 to-pink-400/5' },
+    'Automation': { icon: <Rocket className={iconSize[size]} />, color: 'from-cyan-500/15 to-cyan-400/5' },
+  };
+
+  const serviceData = services[service] || services['SEO'];
+
+  return (
+    <div
+      className={`absolute ${positionClasses[position]} animate-nudge-pop z-5`}
+      style={{
+        animationDelay: `${delay}s`,
+        animationDuration: '0.6s',
+      }}
+    >
+      <div className={`${sizeClasses[size]} rounded-xl backdrop-blur-sm bg-gradient-to-br ${serviceData.color} border border-white/5 shadow-sm hover:shadow-md transition-all duration-300 group hover:scale-105`}>
+        <div className="flex items-start gap-2">
+          <div className="flex-shrink-0 mt-0.5 text-accent/50 group-hover:text-accent/70 transition-colors">
+            {serviceData.icon}
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className={`font-semibold text-foreground/80 ${textSize[size]}`}>{service}</p>
+            <p className={`text-foreground/50 ${textSize[size]} leading-tight mt-0.5`}>
+              {service === 'SEO' && 'Technical optimization'}
+              {service === 'Email' && 'Automation & sequences'}
+              {service === 'CRM' && 'System setup & flows'}
+              {service === 'Analytics' && 'Tracking & reporting'}
+              {service === 'Strategy' && 'Planning & roadmap'}
+              {service === 'Automation' && 'Workflow automation'}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
+  const [notifications, setNotifications] = useState<Array<{ 
+    id: number; 
+    delay: number; 
+    position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center-left' | 'center-right';
+    service: string;
+    size: 'sm' | 'md' | 'lg';
+  }>>([]);
+
+  useEffect(() => {
+    // Generate varied service notifications
+    const positions: Array<'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center-left' | 'center-right'> = [
+      'top-left', 'top-right', 'bottom-left', 'bottom-right', 'center-left', 'center-right'
+    ];
+    const services = ['SEO', 'Email', 'CRM', 'Analytics', 'Strategy', 'Automation'];
+    const sizes: Array<'sm' | 'md' | 'lg'> = ['sm', 'md', 'lg'];
+
+    const generatedNotifications = positions.map((position, idx) => ({
+      id: idx,
+      delay: idx * 0.3,
+      position,
+      service: services[idx],
+      size: sizes[idx % 3],
+    }));
+    setNotifications(generatedNotifications);
+  }, []);
 
   const testimonials = [
     {
@@ -109,18 +214,38 @@ export default function Home() {
       <Header onSearchOpen={() => setSearchOpen(true)} />
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
-      {/* Hero Section */}
+      {/* Hero Section with Service Notifications */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 gradient-hero opacity-60"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background"></div>
 
+        {/* Floating background elements */}
         <div className="absolute top-20 right-10 w-72 h-72 bg-accent/20 rounded-full blur-3xl opacity-30 animate-float"></div>
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
 
+        {/* Service Notification Cards - Behind Text */}
+        <div className="absolute inset-0 pointer-events-none">
+          {notifications.map((notif) => (
+            <ServiceNotification 
+              key={notif.id} 
+              delay={notif.delay} 
+              position={notif.position}
+              service={notif.service}
+              size={notif.size}
+            />
+          ))}
+        </div>
+
         <div className="container relative z-10 max-w-5xl mx-auto px-4">
           <div className="text-center space-y-6 animate-fade-in">
-            <div className="flex justify-center mb-4">
-              <img src={LOGO_URL} alt="Nudge Digital" className="h-24 w-auto" />
+            {/* Animated Logo with Notification Badge */}
+            <div className="flex justify-center mb-4 relative">
+              <div className="relative">
+                <img src={LOGO_URL} alt="Nudge Digital" className="h-24 w-auto animate-bounce" style={{ animationDuration: '3s' }} />
+                <div className="absolute -top-2 -right-2 w-6 h-6 bg-accent rounded-full flex items-center justify-center animate-pulse">
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+              </div>
             </div>
 
             <div className="space-y-4">
@@ -131,11 +256,11 @@ export default function Home() {
                 </span>
               </h1>
               <p className="text-xl md:text-2xl text-foreground/70 max-w-2xl mx-auto leading-relaxed">
-                I solve the technical problems that agencies overlook. Fixing, creating, and implementing—all from one person you can trust.
+                I fix the technical problems agencies overlook. From SEO audits to CRM automation, email sequences to analytics—I handle it all. One person. Real results.
               </p>
             </div>
 
-            {/* Liquid Glass Container */}
+            {/* Liquid Glass Container with Enhanced Design */}
             <div className="max-w-3xl mx-auto mt-8 p-8 md:p-10 space-y-6 rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl hover:shadow-accent/20 transition-shadow">
               <button
                 onClick={() => setSearchOpen(true)}
@@ -184,38 +309,6 @@ export default function Home() {
                 <p className="text-foreground/60">{item.description}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Calculator CTA Section */}
-      <section className="py-20 md:py-32 bg-background">
-        <div className="container">
-          <div className="max-w-4xl mx-auto">
-            <div className="glass-card p-12 md:p-16 bg-gradient-to-br from-accent/10 to-accent/5 border-2 border-accent/30">
-              <div className="space-y-8">
-                <div className="space-y-4">
-                  <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-                    You already know I have the expertise.
-                  </h2>
-                  <p className="text-xl text-foreground/70 leading-relaxed">
-                    You've seen how I work. You've reviewed the case studies and testimonials. Now let's talk numbers—see exactly how much you could save by working with me instead of hiring full-time or using an agency.
-                  </p>
-                </div>
-
-                <div className="pt-8 border-t border-accent/20">
-                  <Link href="/calculator" onClick={() => window.scrollTo(0, 0)}>
-                    <Button className="btn-nudge-primary text-lg px-8 py-6 inline-flex items-center gap-2">
-                      See Your Savings
-                      <ArrowRight className="w-5 h-5" />
-                    </Button>
-                  </Link>
-                  <p className="text-sm text-foreground/60 mt-4">
-                    Use our interactive calculator to compare costs and see your potential ROI.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
