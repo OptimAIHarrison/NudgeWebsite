@@ -21,12 +21,12 @@ function ServiceNotification({
   size?: 'sm' | 'md' | 'lg';
 }) {
   const positionClasses = {
-    'top-left': 'top-16 left-8 md:left-16',
-    'top-right': 'top-24 right-8 md:right-16',
-    'bottom-left': 'bottom-32 left-12 md:left-20',
-    'bottom-right': 'bottom-24 right-8 md:right-16',
-    'center-left': 'top-1/2 left-4 md:left-12 -translate-y-1/2',
-    'center-right': 'top-1/2 right-4 md:right-12 -translate-y-1/2',
+    'top-left': 'top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2',
+    'top-right': 'top-2/5 right-1/4 translate-x-1/2 -translate-y-1/2',
+    'bottom-left': 'top-2/3 left-1/3 -translate-x-1/2 -translate-y-1/2',
+    'bottom-right': 'top-3/5 right-1/3 translate-x-1/2 -translate-y-1/2',
+    'center-left': 'top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2',
+    'center-right': 'top-1/2 right-1/3 translate-x-1/2 -translate-y-1/2',
   };
 
   const sizeClasses = {
@@ -66,7 +66,7 @@ function ServiceNotification({
         animationDuration: '0.6s',
       }}
     >
-      <div className={`${sizeClasses[size]} rounded-xl backdrop-blur-sm bg-gradient-to-br ${serviceData.color} border border-white/5 shadow-sm hover:shadow-md transition-all duration-300 group hover:scale-105`}>
+      <div className={`${sizeClasses[size]} rounded-xl backdrop-blur-sm bg-gradient-to-br ${serviceData.color} border border-white/5 shadow-sm hover:shadow-md transition-all duration-300 group hover:scale-105 animate-pulse-notification`}>
         <div className="flex items-start gap-2">
           <div className="flex-shrink-0 mt-0.5 text-accent/50 group-hover:text-accent/70 transition-colors">
             {serviceData.icon}
@@ -238,14 +238,19 @@ export default function Home() {
 
         <div className="container relative z-10 max-w-5xl mx-auto px-4">
           <div className="text-center space-y-6 animate-fade-in">
-            {/* Animated Logo with Notification Badge */}
+            {/* Animated Logo */}
             <div className="flex justify-center mb-4 relative">
               <div className="relative">
                 <img src={LOGO_URL} alt="Nudge Digital" className="h-24 w-auto animate-bounce" style={{ animationDuration: '3s' }} />
-                <div className="absolute -top-2 -right-2 w-6 h-6 bg-accent rounded-full flex items-center justify-center animate-pulse">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                </div>
               </div>
+            </div>
+
+            {/* Notification Bell and Purple Circle in Top Right */}
+            <div className="absolute top-8 right-8 flex items-center gap-3 z-20">
+              <div className="animate-pulse-notification">
+                <Bell className="w-6 h-6 text-accent" />
+              </div>
+              <div className="w-6 h-6 rounded-full bg-accent animate-pulse-notification"></div>
             </div>
 
             <div className="space-y-4">
