@@ -3619,3 +3619,11 @@
 [2026-05-04T07:49:55.882Z] 3:49:55 AM [vite] (client) hmr update /src/index.css
 [2026-05-04T07:54:02.630Z] 3:54:02 AM [vite] (client) hmr update /src/pages/Home.tsx, /src/index.css
 [2026-05-04T07:54:36.303Z] 3:54:36 AM [vite] (client) hmr update /src/pages/Pricing.tsx, /src/index.css
+[2026-05-04T07:56:39.406Z] 3:56:39 AM [vite] (client) hmr update /src/pages/About.tsx, /src/index.css
+[2026-05-04T07:56:39.409Z] 3:56:39 AM [vite] (client) hmr update /src/pages/Services.tsx, /src/index.css
+[2026-05-04T07:56:39.412Z] 3:56:39 AM [vite] (client) hmr update /src/pages/Contact.tsx, /src/index.css
+[2026-05-04T07:56:39.413Z] 3:56:39 AM [vite] (client) hmr update /src/pages/Resources.tsx, /src/index.css
+[2026-05-04T07:56:39.415Z] 3:56:39 AM [vite] (client) hmr update /src/pages/Testimonials.tsx, /src/index.css
+[2026-05-04T07:56:39.418Z] 3:56:39 AM [vite] (client) hmr update /src/pages/Calculator.tsx, /src/index.css
+[2026-05-04T07:56:39.421Z] 3:56:39 AM [vite] (client) hmr update /src/pages/Pricing.tsx, /src/index.css
+[2026-05-04T07:56:39.423Z] 3:56:39 AM [vite] (client) hmr update /src/pages/FAQ.tsx, /src/index.css

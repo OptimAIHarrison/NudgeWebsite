@@ -106,7 +106,7 @@ export default function Pricing() {
       <Header />
 
       {/* Header */}
-      <section className="py-16 md:py-24 bg-secondary/30 border-b border-border">
+      <section className="py-16 md:py-24 bg-gradient-to-b from-accent/10 to-background border-b border-border">
         <div className="container text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Dynamic Pricing
