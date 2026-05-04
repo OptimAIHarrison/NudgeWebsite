@@ -3632,3 +3632,4 @@
 [2026-05-04T08:03:36.359Z] 4:03:36 AM [vite] (client) hmr update /src/index.css
 [2026-05-04T08:08:24.490Z] 4:08:24 AM [vite] (client) hmr update /src/pages/Pricing.tsx, /src/index.css
 [2026-05-04T08:08:38.282Z] 4:08:38 AM [vite] (client) hmr update /src/pages/Home.tsx, /src/index.css
+[2026-05-04T08:12:19.536Z] 4:12:19 AM [vite] (client) hmr update /src/pages/Home.tsx, /src/index.css

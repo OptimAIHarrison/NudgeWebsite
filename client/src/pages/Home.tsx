@@ -21,12 +21,12 @@ function ServiceNotification({
   size?: 'sm' | 'md';
 }) {
   const positionClasses = {
-    'tl': 'top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'tr': 'top-1/3 right-1/4 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'bl': 'top-2/3 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'br': 'top-2/3 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'cl': 'top-1/2 left-1/6 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'cr': 'top-1/2 right-1/6 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'tl': 'top-1/4 left-1/12 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'tr': 'top-1/4 right-1/12 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'bl': 'top-3/4 left-1/12 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'br': 'top-3/4 right-1/12 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'cl': 'top-1/2 left-1/20 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'cr': 'top-1/2 right-1/20 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
   };
 
   const sizeClasses = {
@@ -107,7 +107,7 @@ export default function Home() {
 
     const generatedNotifications = positions.map((position, idx) => ({
       id: idx,
-      delay: idx * 0.2,
+      delay: idx * 0.15,
       position,
       service: services[idx],
       size: sizes[idx],
