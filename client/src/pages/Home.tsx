@@ -21,12 +21,12 @@ function ServiceNotification({
   size?: 'sm' | 'md' | 'lg';
 }) {
   const positionClasses = {
-    'top-left': 'top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2',
-    'top-right': 'top-2/5 right-1/4 translate-x-1/2 -translate-y-1/2',
-    'bottom-left': 'top-2/3 left-1/3 -translate-x-1/2 -translate-y-1/2',
-    'bottom-right': 'top-3/5 right-1/3 translate-x-1/2 -translate-y-1/2',
-    'center-left': 'top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2',
-    'center-right': 'top-1/2 right-1/3 translate-x-1/2 -translate-y-1/2',
+    'top-left': 'top-1/4 left-1/12 -translate-x-1/2 -translate-y-1/2 hidden lg:block',
+    'top-right': 'top-1/3 right-1/12 translate-x-1/2 -translate-y-1/2 hidden lg:block',
+    'bottom-left': 'top-2/3 left-1/12 -translate-x-1/2 -translate-y-1/2 hidden lg:block',
+    'bottom-right': 'top-3/4 right-1/12 translate-x-1/2 -translate-y-1/2 hidden lg:block',
+    'center-left': 'top-1/2 left-1/12 -translate-x-1/2 -translate-y-1/2 hidden lg:block',
+    'center-right': 'top-1/2 right-1/12 translate-x-1/2 -translate-y-1/2 hidden lg:block',
   };
 
   const sizeClasses = {
@@ -66,7 +66,7 @@ function ServiceNotification({
         animationDuration: '0.6s',
       }}
     >
-      <div className={`${sizeClasses[size]} rounded-xl backdrop-blur-sm bg-gradient-to-br ${serviceData.color} border border-white/5 shadow-sm hover:shadow-md transition-all duration-300 group hover:scale-105 animate-pulse-notification`}>
+      <div className={`${sizeClasses[size]} rounded-xl backdrop-blur-sm bg-gradient-to-br ${serviceData.color} border border-white/5 shadow-sm hover:shadow-md transition-all duration-300 group hover:scale-105 animate-pulse-notification relative`}>
         <div className="flex items-start gap-2">
           <div className="flex-shrink-0 mt-0.5 text-accent/50 group-hover:text-accent/70 transition-colors">
             {serviceData.icon}
@@ -81,6 +81,10 @@ function ServiceNotification({
               {service === 'Strategy' && 'Planning & roadmap'}
               {service === 'Automation' && 'Workflow automation'}
             </p>
+          </div>
+          <div className="absolute -top-2 -right-2 flex items-center gap-1">
+            <Bell className={`${iconSize[size]} text-accent/60 animate-pulse-notification`} />
+            <div className="w-2 h-2 rounded-full bg-accent animate-pulse-notification"></div>
           </div>
         </div>
       </div>
@@ -245,13 +249,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Notification Bell and Purple Circle in Top Right */}
-            <div className="absolute top-8 right-8 flex items-center gap-3 z-20">
-              <div className="animate-pulse-notification">
-                <Bell className="w-6 h-6 text-accent" />
-              </div>
-              <div className="w-6 h-6 rounded-full bg-accent animate-pulse-notification"></div>
-            </div>
+
 
             <div className="space-y-4">
               <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight">
