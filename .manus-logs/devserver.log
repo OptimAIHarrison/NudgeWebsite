@@ -3645,3 +3645,4 @@
 [2026-05-05T09:13:16.196Z] Server running on http://localhost:3000/
 [2026-05-05T09:13:31.797Z] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
 [2026-05-05T09:14:13.530Z] 5:14:13 AM [vite] (client) hmr update /src/pages/Home.tsx, /src/index.css
+[2026-05-05T09:17:08.293Z] 5:17:08 AM [vite] (client) hmr update /src/pages/Pricing.tsx, /src/index.css

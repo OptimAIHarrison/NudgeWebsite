@@ -6,7 +6,7 @@ import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 
 export default function Pricing() {
-  const [expandedTier, setExpandedTier] = useState(0);
+  const [expandedTier, setExpandedTier] = useState(-1);
 
   const pricingTiers = [
     {
@@ -127,24 +127,24 @@ export default function Pricing() {
                   <div className="p-3 rounded-lg bg-accent/10 text-accent group-hover:scale-110 transition-transform flex-shrink-0">
                     {tier.icon}
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-bold text-foreground truncate">{tier.title}</h3>
-                    <p className="text-xs text-accent font-semibold">{tier.subtitle}</p>
+                  <div className="text-left flex-1">
+                    <h3 className="font-bold text-foreground text-base leading-snug">{tier.title}</h3>
+                    <p className="text-xs text-foreground/60 mt-1">{tier.subtitle}</p>
                   </div>
                 </div>
 
-                <div className="mb-4 p-3 bg-accent/5 rounded-lg border border-border">
+                <div className="mb-4">
                   <p className="text-xs text-foreground/60 mb-1">Rate</p>
-                  <p className="text-2xl font-bold text-accent">{tier.rate}</p>
+                  <p className="text-xl font-bold text-accent">{tier.rate}</p>
                 </div>
 
-                <p className="text-sm text-foreground/70 mb-4">{tier.description}</p>
+                <p className="text-sm text-foreground/70 mb-4 line-clamp-3">{tier.description}</p>
                 </div>
 
                 {expandedTier === idx && (
-                  <div className="px-6 pb-6 border-t border-border space-y-3 animate-fade-in max-h-96 overflow-y-auto">
-                    <div>
-                      <p className="text-xs font-semibold text-foreground/60 mb-2 uppercase">What's Included</p>
+                  <div className="px-6 pb-6 border-t border-border animate-fade-in max-h-96 overflow-y-auto">
+                    <div className="pt-4">
+                      <p className="text-xs font-semibold text-foreground/60 mb-3 uppercase">What's Included</p>
                       <ul className="space-y-2">
                         {tier.examples.map((example, i) => (
                           <li key={i} className="flex items-start gap-2 text-sm">
