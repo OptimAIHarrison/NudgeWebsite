@@ -127,8 +127,8 @@ export default function Pricing() {
                   <div className="p-3 rounded-lg bg-accent/10 text-accent group-hover:scale-110 transition-transform flex-shrink-0">
                     {tier.icon}
                   </div>
-                  <div className="text-left flex-1">
-                    <h3 className="font-bold text-foreground text-base leading-snug">{tier.title}</h3>
+                  <div className="text-left flex-1 min-w-0">
+                    <h3 className="font-bold text-foreground text-sm leading-snug break-words">{tier.title}</h3>
                     <p className="text-xs text-foreground/60 mt-1">{tier.subtitle}</p>
                   </div>
                 </div>
