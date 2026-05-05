@@ -21,10 +21,10 @@ function ServiceNotification({
   size?: 'sm' | 'md';
 }) {
   const positionClasses = {
-    'tl': 'top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'tr': 'top-1/4 right-1/3 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'bl': 'top-3/4 left-1/3 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'br': 'top-3/4 right-1/3 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'tl': 'top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'tr': 'top-1/3 right-1/3 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'bl': 'top-2/3 left-1/3 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'br': 'top-2/3 right-1/3 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
     'cl': 'top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
     'cr': 'top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
   };
@@ -241,14 +241,14 @@ export default function Home() {
               <img src={LOGO_URL} alt="Nudge Digital" className="h-24 w-auto animate-bounce" style={{ animationDuration: '3s' }} />
             </div>
 
-            <div className="space-y-4">
-              <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight">
+            <div className="space-y-3">
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
                 Your Digital Marketing
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/70">
                   Strategist & Implementer
                 </span>
               </h1>
-              <p className="text-xl md:text-2xl text-foreground/70 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-base md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
                 I fix the technical problems agencies overlook. From SEO audits to CRM automation, email sequences to analytics—I handle it all. One person. Real results.
               </p>
             </div>
