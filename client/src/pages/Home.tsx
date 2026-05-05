@@ -35,8 +35,8 @@ function ServiceNotification({
   };
 
   const iconSize = {
-    'sm': 'w-10 h-10',
-    'md': 'w-12 h-12',
+    'sm': 'w-8 h-8',
+    'md': 'w-10 h-10',
   };
 
   const textSize = {
@@ -63,7 +63,11 @@ function ServiceNotification({
         animationDuration: '0.6s',
       }}
     >
-      <div className={`${sizeClasses[size]} rounded-lg backdrop-blur-sm bg-gradient-to-br ${serviceData.color} border border-white/5 shadow-sm hover:shadow-md transition-all duration-300 group hover:scale-105 flex items-start justify-between gap-2`}>
+      <div className={`${sizeClasses[size]} rounded-lg backdrop-blur-sm bg-gradient-to-br ${serviceData.color} border border-white/5 shadow-sm hover:shadow-md transition-all duration-300 group hover:scale-105 relative`}>
+        <div className="absolute top-2 right-2 flex items-center gap-1">
+          <Bell className="w-3 h-3 text-accent/60" style={{ animation: `pulse-notification 3s ease-in-out infinite ${delay * 0.5}s` }} />
+          <div className="rounded-full bg-accent" style={{ width: '4px', height: '4px', animation: `pulse-notification 3s ease-in-out infinite ${delay * 0.6}s` }}></div>
+        </div>
         <div className="flex items-start gap-2 flex-1 min-w-0">
           <div className="flex-shrink-0 mt-0.5 text-accent/50 group-hover:text-accent/70 transition-colors">
             {serviceData.icon}
@@ -79,10 +83,6 @@ function ServiceNotification({
               {service === 'Automation' && 'Workflow automation'}
             </p>
           </div>
-        </div>
-        <div className="flex-shrink-0 flex items-center gap-1">
-          <Bell className={`${iconSize[size]} text-accent/60`} style={{ animation: `pulse-notification 3s ease-in-out infinite ${delay * 0.5}s` }} />
-          <div className="rounded-full bg-accent" style={{ width: size === 'sm' ? '6px' : '8px', height: size === 'sm' ? '6px' : '8px', animation: `pulse-notification 3s ease-in-out infinite ${delay * 0.6}s` }}></div>
         </div>
       </div>
     </div>
