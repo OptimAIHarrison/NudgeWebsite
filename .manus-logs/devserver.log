@@ -3636,3 +3636,12 @@
 [2026-05-04T08:17:08.055Z] 4:17:08 AM [vite] (client) hmr update /src/pages/Home.tsx, /src/index.css
 [2026-05-04T08:46:08.867Z] 4:46:08 AM [vite] (client) hmr update /src/pages/Home.tsx, /src/index.css
 [2026-05-04T08:47:24.627Z] 4:47:24 AM [vite] (client) hmr update /src/pages/Pricing.tsx, /src/index.css
+[2026-05-05T09:13:12.913Z] Starting dev server with command: pnpm run dev
+[2026-05-05T09:13:13.960Z] 
+[2026-05-05T09:13:13.961Z] > nudge_digital@1.0.0 dev /home/ubuntu/nudge_digital
+[2026-05-05T09:13:13.961Z] > NODE_ENV=development tsx watch server/_core/index.ts
+[2026-05-05T09:13:13.962Z] 
+[2026-05-05T09:13:15.938Z] [OAuth] Initialized with baseURL: https://api.manus.im
+[2026-05-05T09:13:16.196Z] Server running on http://localhost:3000/
+[2026-05-05T09:13:31.797Z] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[2026-05-05T09:14:13.530Z] 5:14:13 AM [vite] (client) hmr update /src/pages/Home.tsx, /src/index.css
