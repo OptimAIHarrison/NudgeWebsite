@@ -23,13 +23,12 @@ function ServiceNotification({
   isMobile?: boolean;
 }) {
   const positionClasses: Record<string, string> = {
-    'tl': 'top-1/4 left-2/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-4',
-    'tr': 'top-1/4 right-2/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-4',
-    'bl': 'top-3/5 left-2/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-2',
-    'br': 'top-3/5 right-2/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-2',
-    'cl': 'top-2/5 left-1/3 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-x-3',
-    'cr': 'top-2/5 right-1/3 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-x-3',
-    'cm': 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'tl': 'top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-4',
+    'tr': 'top-1/4 right-1/3 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-4',
+    'bl': 'top-3/5 left-1/3 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-2',
+    'br': 'top-3/5 right-1/3 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-2',
+    'cl': 'top-2/5 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-x-3',
+    'cr': 'top-2/5 right-1/4 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-x-3',
     'tm': 'top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
     'bm': 'top-2/3 right-1/2 translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
   };
@@ -114,10 +113,10 @@ export default function Home() {
   }>>([]);
 
   useEffect(() => {
-    const desktopPositions = ['tl', 'tr', 'bl', 'br', 'cl', 'cr', 'cm'];
+    const desktopPositions = ['tl', 'tr', 'bl', 'br', 'cl', 'cr'];
     const mobilePositions = ['tm', 'bm'];
     const services = ['SEO', 'Email', 'CRM', 'Analytics', 'Strategy', 'Automation', 'Data', 'Growth'];
-    const sizes: Array<'sm' | 'md'> = ['md', 'md', 'sm', 'sm', 'md', 'sm', 'sm', 'sm'];
+    const sizes: Array<'sm' | 'md'> = ['md', 'md', 'sm', 'sm', 'md', 'sm', 'sm', 'md'];
 
     const desktopNotifications = desktopPositions.map((position, idx) => ({
       id: idx,

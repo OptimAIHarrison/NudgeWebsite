@@ -83,7 +83,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
       <div className="fixed top-20 md:top-24 right-3 md:right-4 z-40">
         <Link href="/services-marketplace">
           <div className="glass-card rounded-b-lg rounded-t-none border border-t-0 border-accent/30 bg-gradient-to-br from-accent/10 to-accent/5 p-3 md:p-4 shadow-lg hover:shadow-xl hover:border-accent/50 transition-all cursor-pointer w-72 md:w-80 relative">
-            <div className="absolute -top-3 right-4 w-2.5 h-2.5 bg-accent rounded-full animate-pulse"></div>
+            <div className="absolute -top-3 right-4 w-2.5 h-2.5 bg-purple-500 rounded-full animate-pulse"></div>
             <div className="flex items-center gap-2">
               <div className="p-1.5 rounded-lg bg-accent/20 flex-shrink-0">
                 <ShoppingCart className="w-4 h-4 md:w-5 md:h-5 text-accent" />
