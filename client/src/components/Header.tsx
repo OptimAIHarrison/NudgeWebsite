@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Menu, X } from 'lucide-react';
+import { Search, Menu, X, ShoppingCart } from 'lucide-react';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 
@@ -79,19 +79,21 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
         </div>
       </div>
 
-      {/* Marketplace Notification Panel */}
-      <div className="absolute right-0 top-full w-72 md:w-80 bg-gradient-to-br from-purple-500/10 to-purple-400/5 border border-purple-500/20 rounded-b-lg shadow-lg p-4 space-y-2">
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <p className="text-xs md:text-sm font-semibold text-foreground">Browse Services Marketplace...</p>
-            <p className="text-xs text-foreground/60 mt-1">35+ pre-priced services</p>
-          </div>
-          <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse flex-shrink-0 ml-2"></div>
-        </div>
+      {/* Marketplace Notification Panel - Right Side */}
+      <div className="fixed top-20 md:top-24 right-3 md:right-4 z-40">
         <Link href="/services-marketplace">
-          <a className="block text-xs text-purple-400 hover:text-purple-300 transition-colors mt-2">
-            Explore marketplace →
-          </a>
+          <div className="glass-card rounded-b-lg rounded-t-none border border-t-0 border-accent/30 bg-gradient-to-br from-accent/10 to-accent/5 p-3 md:p-4 shadow-lg hover:shadow-xl hover:border-accent/50 transition-all cursor-pointer w-72 md:w-80 relative">
+            <div className="absolute -top-3 right-4 w-2.5 h-2.5 bg-accent rounded-full animate-pulse"></div>
+            <div className="flex items-center gap-2">
+              <div className="p-1.5 rounded-lg bg-accent/20 flex-shrink-0">
+                <ShoppingCart className="w-4 h-4 md:w-5 md:h-5 text-accent" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs md:text-sm font-semibold text-foreground truncate">Browse Services Marketplace...</p>
+                <p className="text-xs text-foreground/60 text-opacity-70">35+ services</p>
+              </div>
+            </div>
+          </div>
         </Link>
       </div>
 
