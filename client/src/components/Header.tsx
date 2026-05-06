@@ -79,6 +79,22 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
         </div>
       </div>
 
+      {/* Marketplace Notification Panel */}
+      <div className="absolute right-0 top-full w-72 md:w-80 bg-gradient-to-br from-purple-500/10 to-purple-400/5 border border-purple-500/20 rounded-b-lg shadow-lg p-4 space-y-2">
+        <div className="flex items-start justify-between">
+          <div className="flex-1">
+            <p className="text-xs md:text-sm font-semibold text-foreground">Browse Services Marketplace...</p>
+            <p className="text-xs text-foreground/60 mt-1">35+ pre-priced services</p>
+          </div>
+          <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse flex-shrink-0 ml-2"></div>
+        </div>
+        <Link href="/services-marketplace">
+          <a className="block text-xs text-purple-400 hover:text-purple-300 transition-colors mt-2">
+            Explore marketplace →
+          </a>
+        </Link>
+      </div>
+
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-border bg-card animate-slide-in-down">
