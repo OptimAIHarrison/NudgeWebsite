@@ -13,30 +13,35 @@ function ServiceNotification({
   delay, 
   position, 
   service,
-  size = 'md'
+  size = 'md',
+  isMobile = false
 }: { 
   delay: number; 
-  position: 'tl' | 'tr' | 'bl' | 'br' | 'cl' | 'cr';
+  position: string;
   service: string;
   size?: 'sm' | 'md';
+  isMobile?: boolean;
 }) {
-  const positionClasses = {
-    'tl': 'top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'tr': 'top-1/4 right-1/4 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'bl': 'top-3/5 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'br': 'top-3/5 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'cl': 'top-2/5 left-1/6 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'cr': 'top-2/5 right-1/6 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+  const positionClasses: Record<string, string> = {
+    'tl': 'top-1/4 left-2/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-4',
+    'tr': 'top-1/4 right-2/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-4',
+    'bl': 'top-3/5 left-2/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-2',
+    'br': 'top-3/5 right-2/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-2',
+    'cl': 'top-2/5 left-1/3 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-x-3',
+    'cr': 'top-2/5 right-1/3 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-x-3',
+    'cm': 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'tm': 'top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
+    'bm': 'top-2/3 right-1/2 translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
   };
 
   const sizeClasses = {
-    'sm': 'max-w-lg p-5',
-    'md': 'max-w-xl p-6',
+    'sm': isMobile ? 'max-w-xs p-2' : 'max-w-lg p-5',
+    'md': isMobile ? 'max-w-sm p-3' : 'max-w-xl p-6',
   };
 
   const iconSize = {
-    'sm': 'w-8 h-8',
-    'md': 'w-10 h-10',
+    'sm': isMobile ? 'w-6 h-6' : 'w-8 h-8',
+    'md': isMobile ? 'w-8 h-8' : 'w-10 h-10',
   };
 
   const textSize = {
@@ -51,6 +56,8 @@ function ServiceNotification({
     'Analytics': { icon: <BarChart3 className={iconSize[size]} />, color: 'from-purple-500/15 to-purple-400/5' },
     'Strategy': { icon: <Target className={iconSize[size]} />, color: 'from-pink-500/15 to-pink-400/5' },
     'Automation': { icon: <Rocket className={iconSize[size]} />, color: 'from-cyan-500/15 to-cyan-400/5' },
+    'Data': { icon: <Database className={iconSize[size]} />, color: 'from-indigo-500/15 to-indigo-400/5' },
+    'Growth': { icon: <TrendingUp className={iconSize[size]} />, color: 'from-emerald-500/15 to-emerald-400/5' },
   };
 
   const serviceData = services[service] || services['SEO'];
@@ -63,11 +70,13 @@ function ServiceNotification({
         animationDuration: '0.6s',
       }}
     >
-      <div className={`${sizeClasses[size]} rounded-lg backdrop-blur-sm bg-gradient-to-br ${serviceData.color} border border-white/5 shadow-sm hover:shadow-md transition-all duration-300 group hover:scale-105 relative`}>
-        <div className="absolute top-2 right-2 flex items-center gap-1">
-          <Bell className="w-3 h-3 text-accent/60" style={{ animation: `pulse-notification 3s ease-in-out infinite ${delay * 0.5}s` }} />
-          <div className="rounded-full bg-accent" style={{ width: '4px', height: '4px', animation: `pulse-notification 3s ease-in-out infinite ${delay * 0.6}s` }}></div>
-        </div>
+      <div className={`${sizeClasses[size]} rounded-lg backdrop-blur-sm bg-gradient-to-br ${serviceData.color} border border-white/5 ${isMobile ? 'opacity-40' : 'shadow-sm hover:shadow-md'} transition-all duration-300 group ${!isMobile && 'hover:scale-105'} relative`}>
+        {!isMobile && (
+          <div className="absolute top-2 right-2 flex items-center gap-1">
+            <Bell className="w-3 h-3 text-accent/60" style={{ animation: `pulse-notification 3s ease-in-out infinite ${delay * 0.5}s` }} />
+            <div className="rounded-full bg-accent" style={{ width: '4px', height: '4px', animation: `pulse-notification 3s ease-in-out infinite ${delay * 0.6}s` }}></div>
+          </div>
+        )}
         <div className="flex items-start gap-2 flex-1 min-w-0">
           <div className="flex-shrink-0 mt-0.5 text-accent/50 group-hover:text-accent/70 transition-colors">
             {serviceData.icon}
@@ -75,12 +84,15 @@ function ServiceNotification({
           <div className="flex-1 min-w-0">
             <p className={`font-semibold text-foreground/80 ${textSize[size]} truncate`}>{service}</p>
             <p className={`text-foreground/50 ${textSize[size]} leading-tight mt-0.5 line-clamp-2`}>
-              {service === 'SEO' && 'Technical optimization'}
-              {service === 'Email' && 'Automation & sequences'}
-              {service === 'CRM' && 'System setup & flows'}
-              {service === 'Analytics' && 'Tracking & reporting'}
-              {service === 'Strategy' && 'Planning & roadmap'}
-              {service === 'Automation' && 'Workflow automation'}
+              {service === 'SEO' ? 'Technical optimization' :
+               service === 'Email' ? 'Automation & sequences' :
+               service === 'CRM' ? 'System setup & flows' :
+               service === 'Analytics' ? 'Tracking & reporting' :
+               service === 'Strategy' ? 'Planning & roadmap' :
+               service === 'Automation' ? 'Workflow automation' :
+               service === 'Data' ? 'Data integrity & cleanup' :
+               service === 'Growth' ? 'Growth optimization' :
+               'Service details'}
             </p>
           </div>
         </div>
@@ -95,24 +107,37 @@ export default function Home() {
   const [notifications, setNotifications] = useState<Array<{ 
     id: number; 
     delay: number; 
-    position: 'tl' | 'tr' | 'bl' | 'br' | 'cl' | 'cr';
+    position: string;
     service: string;
     size: 'sm' | 'md';
+    isMobile?: boolean;
   }>>([]);
 
   useEffect(() => {
-    const positions: Array<'tl' | 'tr' | 'bl' | 'br' | 'cl' | 'cr'> = ['tl', 'tr', 'bl', 'br', 'cl', 'cr'];
-    const services = ['SEO', 'Email', 'CRM', 'Analytics', 'Strategy', 'Automation'];
-    const sizes: Array<'sm' | 'md'> = ['md', 'md', 'sm', 'sm', 'md', 'sm'];
+    const desktopPositions = ['tl', 'tr', 'bl', 'br', 'cl', 'cr', 'cm'];
+    const mobilePositions = ['tm', 'bm'];
+    const services = ['SEO', 'Email', 'CRM', 'Analytics', 'Strategy', 'Automation', 'Data', 'Growth'];
+    const sizes: Array<'sm' | 'md'> = ['md', 'md', 'sm', 'sm', 'md', 'sm', 'sm', 'sm'];
 
-    const generatedNotifications = positions.map((position, idx) => ({
+    const desktopNotifications = desktopPositions.map((position, idx) => ({
       id: idx,
       delay: idx * 0.15,
       position,
       service: services[idx],
       size: sizes[idx],
+      isMobile: false,
     }));
-    setNotifications(generatedNotifications);
+
+    const mobileNotifications = mobilePositions.map((position, idx) => ({
+      id: desktopPositions.length + idx,
+      delay: idx * 0.2,
+      position,
+      service: services[idx + 4],
+      size: idx === 0 ? 'sm' : 'md',
+      isMobile: true,
+    }));
+
+    setNotifications([...desktopNotifications, ...mobileNotifications]);
   }, []);
 
   const testimonials = [
@@ -230,6 +255,7 @@ export default function Home() {
               position={notif.position}
               service={notif.service}
               size={notif.size}
+              isMobile={notif.isMobile}
             />
           ))}
         </div>
