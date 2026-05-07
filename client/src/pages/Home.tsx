@@ -25,11 +25,11 @@ function ServiceNotification({
   const positionClasses: Record<string, string> = {
     'tl': 'top-1/5 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-4',
     'tr': 'top-1/5 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-4',
-    'bl': 'top-4/5 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-2',
-    'br': 'top-4/5 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-2',
-    'cl': 'top-1/2 left-1/6 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-x-3',
+    'bl': 'top-3/4 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-2',
+    'br': 'top-3/4 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-2',
+    'cl': 'top-2/5 left-1/6 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-x-3',
     'cr': 'top-1/2 right-1/6 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-x-3',
-    'cm': 'top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'cm': 'top-2/5 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
     'tm': 'top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
     'bm': 'top-2/3 right-1/2 translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
   };
