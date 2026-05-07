@@ -29,7 +29,8 @@ function ServiceNotification({
     'br': 'top-3/4 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-2',
     'cl': 'top-2/5 left-1/6 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-x-3',
     'cr': 'top-1/2 right-1/6 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-x-3',
-    'cm': 'top-2/5 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'cm': 'top-3/5 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'cd': 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
     'tm': 'top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
     'bm': 'top-2/3 right-1/2 translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
   };
@@ -53,6 +54,7 @@ function ServiceNotification({
     'SEO': { icon: <LineChart className={iconSize[size]} />, color: 'from-blue-500/15 to-blue-400/5' },
     'Email': { icon: <Zap className={iconSize[size]} />, color: 'from-orange-500/15 to-orange-400/5' },
     'CRM': { icon: <Database className={iconSize[size]} />, color: 'from-green-500/15 to-green-400/5' },
+    'Ads': { icon: <Zap className={iconSize[size]} />, color: 'from-yellow-500/15 to-yellow-400/5' },
     'Analytics': { icon: <BarChart3 className={iconSize[size]} />, color: 'from-purple-500/15 to-purple-400/5' },
     'Strategy': { icon: <Target className={iconSize[size]} />, color: 'from-pink-500/15 to-pink-400/5' },
     'Automation': { icon: <Rocket className={iconSize[size]} />, color: 'from-cyan-500/15 to-cyan-400/5' },
@@ -88,6 +90,7 @@ function ServiceNotification({
               {service === 'SEO' ? 'Technical optimization' :
                service === 'Email' ? 'Automation & sequences' :
                service === 'CRM' ? 'System setup & flows' :
+               service === 'Ads' ? 'Campaign management' :
                service === 'Analytics' ? 'Tracking & reporting' :
                service === 'Strategy' ? 'Planning & roadmap' :
                service === 'Automation' ? 'Workflow automation' :
@@ -116,10 +119,10 @@ export default function Home() {
   }>>([]);
 
   useEffect(() => {
-    const desktopPositions = ['tl', 'tr', 'bl', 'br', 'cl', 'cr', 'cm'];
+    const desktopPositions = ['tl', 'tr', 'bl', 'cd', 'br', 'cl', 'cm', 'cr'];
     const mobilePositions = ['tm', 'bm'];
-    const services = ['SEO', 'Email', 'CRM', 'Analytics', 'Strategy', 'Automation', 'Data', 'Growth', 'Insights'];
-    const sizes: Array<'sm' | 'md'> = ['md', 'md', 'sm', 'sm', 'md', 'sm', 'sm', 'md', 'sm'];
+    const services = ['SEO', 'Email', 'CRM', 'Ads', 'Analytics', 'Strategy', 'Data', 'Automation', 'Growth', 'Insights'];
+    const sizes: Array<'sm' | 'md'> = ['md', 'md', 'sm', 'sm', 'sm', 'md', 'sm', 'sm', 'md', 'sm'];
 
     const desktopNotifications = desktopPositions.map((position, idx) => ({
       id: idx,
