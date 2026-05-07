@@ -23,12 +23,13 @@ function ServiceNotification({
   isMobile?: boolean;
 }) {
   const positionClasses: Record<string, string> = {
-    'tl': 'top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-4',
-    'tr': 'top-1/4 right-1/3 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-4',
-    'bl': 'top-3/5 left-1/3 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-2',
-    'br': 'top-3/5 right-1/3 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-2',
-    'cl': 'top-2/5 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-x-3',
-    'cr': 'top-2/5 right-1/4 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-x-3',
+    'tl': 'top-1/5 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-4',
+    'tr': 'top-1/5 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-4',
+    'bl': 'top-4/5 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-2',
+    'br': 'top-4/5 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-2',
+    'cl': 'top-1/2 left-1/6 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-x-3',
+    'cr': 'top-1/2 right-1/6 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-x-3',
+    'cm': 'top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
     'tm': 'top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
     'bm': 'top-2/3 right-1/2 translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
   };
@@ -57,6 +58,7 @@ function ServiceNotification({
     'Automation': { icon: <Rocket className={iconSize[size]} />, color: 'from-cyan-500/15 to-cyan-400/5' },
     'Data': { icon: <Database className={iconSize[size]} />, color: 'from-indigo-500/15 to-indigo-400/5' },
     'Growth': { icon: <TrendingUp className={iconSize[size]} />, color: 'from-emerald-500/15 to-emerald-400/5' },
+    'Insights': { icon: <BarChart3 className={iconSize[size]} />, color: 'from-rose-500/15 to-rose-400/5' },
   };
 
   const serviceData = services[service] || services['SEO'];
@@ -91,6 +93,7 @@ function ServiceNotification({
                service === 'Automation' ? 'Workflow automation' :
                service === 'Data' ? 'Data integrity & cleanup' :
                service === 'Growth' ? 'Growth optimization' :
+               service === 'Insights' ? 'Actionable insights' :
                'Service details'}
             </p>
           </div>
@@ -113,10 +116,10 @@ export default function Home() {
   }>>([]);
 
   useEffect(() => {
-    const desktopPositions = ['tl', 'tr', 'bl', 'br', 'cl', 'cr'];
+    const desktopPositions = ['tl', 'tr', 'bl', 'br', 'cl', 'cr', 'cm'];
     const mobilePositions = ['tm', 'bm'];
-    const services = ['SEO', 'Email', 'CRM', 'Analytics', 'Strategy', 'Automation', 'Data', 'Growth'];
-    const sizes: Array<'sm' | 'md'> = ['md', 'md', 'sm', 'sm', 'md', 'sm', 'sm', 'md'];
+    const services = ['SEO', 'Email', 'CRM', 'Analytics', 'Strategy', 'Automation', 'Data', 'Growth', 'Insights'];
+    const sizes: Array<'sm' | 'md'> = ['md', 'md', 'sm', 'sm', 'md', 'sm', 'sm', 'md', 'sm'];
 
     const desktopNotifications = desktopPositions.map((position, idx) => ({
       id: idx,
