@@ -28,8 +28,7 @@ function ServiceNotification({
     'bl': 'top-3/4 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-2',
     'br': 'top-3/4 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-2',
     'cl': 'top-2/5 left-1/6 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-x-3',
-    'cr': 'top-1/2 right-1/6 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-x-3',
-    'cd': 'top-3/5 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'cr': 'top-2/3 right-1/6 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-x-3',
     'tm': 'top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
     'bm': 'top-2/3 right-1/2 translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
   };
@@ -121,10 +120,10 @@ export default function Home() {
   }>>([]);
 
   useEffect(() => {
-    const desktopPositions = ['tl', 'tr', 'bl', 'br', 'cl', 'cr', 'cd'];
+    const desktopPositions = ['tl', 'tr', 'bl', 'br', 'cl', 'cr'];
     const mobilePositions = ['tm', 'bm'];
-    const services = ['SEO', 'CRM', 'Data', 'Growth', 'Strategy', 'Automation', 'Insights', 'Analytics', 'Ads', 'Email'];
-    const sizes: Array<'sm' | 'md' | 'lg'> = ['lg', 'sm', 'sm', 'md', 'md', 'sm', 'md', 'sm', 'sm', 'sm'];
+    const services = ['SEO', 'CRM', 'Data', 'Growth', 'Strategy', 'Automation', 'Analytics', 'Ads', 'Insights', 'Email'];
+    const sizes: Array<'sm' | 'md' | 'lg'> = ['lg', 'md', 'sm', 'md', 'md', 'sm', 'md', 'sm', 'md', 'sm'];
 
     const desktopNotifications = desktopPositions.map((position, idx) => ({
       id: idx,
@@ -139,7 +138,7 @@ export default function Home() {
       id: desktopPositions.length + idx,
       delay: idx * 0.2,
       position,
-      service: services[idx + 4],
+      service: services[idx + 6],
       size: idx === 0 ? 'sm' : 'md',
       isMobile: true,
     }));
