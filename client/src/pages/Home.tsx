@@ -23,12 +23,16 @@ function ServiceNotification({
   isMobile?: boolean;
 }) {
   const positionClasses: Record<string, string> = {
-    'tl': 'top-1/5 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-4',
-    'tr': 'top-1/5 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-4',
-    'bl': 'top-3/4 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-y-2',
-    'br': 'top-3/4 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-y-2',
-    'cl': 'top-2/5 left-1/6 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 -translate-x-3',
-    'cr': 'top-2/3 right-1/6 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20 translate-x-3',
+    'tl': 'top-1/5 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'tr': 'top-1/5 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'cl': 'top-2/5 left-1/6 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'cr': 'top-3/5 right-1/6 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'ml': 'top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'mr': 'top-1/2 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'bl2': 'top-3/4 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'br2': 'top-3/4 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'bl': 'top-5/6 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
+    'br': 'top-5/6 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
     'tm': 'top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
     'bm': 'top-2/3 right-1/2 translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
   };
@@ -120,10 +124,11 @@ export default function Home() {
   }>>([]);
 
   useEffect(() => {
-    const desktopPositions = ['tl', 'tr', 'bl', 'br', 'cl', 'cr'];
+    // Exact layout from image with edits applied
+    const desktopPositions = ['tl', 'tr', 'bl', 'br', 'cl', 'cr', 'ml', 'mr', 'bl2', 'br2'];
     const mobilePositions = ['tm', 'bm'];
-    const services = ['SEO', 'CRM', 'Data', 'Growth', 'Strategy', 'Automation', 'Analytics', 'Ads', 'Insights', 'Email'];
-    const sizes: Array<'sm' | 'md' | 'lg'> = ['lg', 'md', 'sm', 'md', 'md', 'sm', 'md', 'sm', 'md', 'sm'];
+    const services = ['SEO', 'CRM', 'Strategy', 'Analytics', 'Automation', 'Ads', 'Data', 'Growth', 'Insights', 'Email'];
+    const sizes: Array<'sm' | 'md' | 'lg'> = ['lg', 'md', 'md', 'md', 'md', 'sm', 'sm', 'md', 'md', 'sm'];
 
     const desktopNotifications = desktopPositions.map((position, idx) => ({
       id: idx,
