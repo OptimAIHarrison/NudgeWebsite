@@ -327,11 +327,11 @@ export default function Home() {
           <div className="text-center space-y-6 animate-fade-in">
             {/* Logo */}
             <div className="flex justify-center mb-4">
-              <svg width="220" height="56" viewBox="0 0 220 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NUDGE" className="animate-bounce" style={{ animationDuration: '3s' }}>
-                <circle cx="28" cy="28" r="28" fill="#8040B2"/>
+              <svg width="240" height="50" viewBox="0 0 240 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NUDGE" className="animate-bounce" style={{ animationDuration: '3s' }}>
+                <circle cx="25" cy="25" r="14" fill="#8040B2"/>
                 <text
-                  x="66"
-                  y="28"
+                  x="46"
+                  y="25"
                   fill="currentColor"
                   fontFamily="-apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif"
                   fontWeight="800"
