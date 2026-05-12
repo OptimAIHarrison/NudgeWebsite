@@ -22,7 +22,7 @@ const CARD_CONFIGS = [
   { service: 'SEO',               top: '24%', right: '8%',  mTop: '20%',             mRight: '0%', size: 'sm' as const, delay: 0.15 },
   { service: 'Insights',          top: '40%', right: '10%', mTop: '35%',             mRight: '1%', size: 'md' as const, delay: 0.25 },
   { service: 'Ads',               top: '55%', right: '13%', mTop: '50%',             mRight: '0%', size: 'sm' as const, delay: 0.35 },
-  { service: 'Content Marketing', top: '15%', right: '25%', mTop: '64%',             mRight: '1%', size: 'md' as const, delay: 0.45 },
+  { service: 'Content Marketing', top: '19%', right: '25%', mTop: '64%',             mRight: '1%', size: 'md' as const, delay: 0.45 },
 ];
 
 const SERVICE_DATA: Record<string, { icon: string; color: string; accent: string; subtitle: string }> = {
