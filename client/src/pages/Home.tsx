@@ -11,17 +11,17 @@ import { Button } from '@/components/ui/button';
 const CARD_CONFIGS = [
   // LEFT SIDE
   { service: 'Strategy',          top: '9%',  left: '13%',  mTop: '7%',   mLeft: '9%',             size: 'md' as const, delay: 0.0  },
-  { service: 'Automation',        top: '28%', left: '8%',   mTop: '20%',  mLeft: '5%',             size: 'lg' as const, delay: 0.1  },
-  { service: 'Email',             top: '46%', left: '11%',  mTop: '35%',  mLeft: '10%',             size: 'sm' as const, delay: 0.2  },
-  { service: 'Growth',            top: '59%', left: '9%',   mTop: '50%',  mLeft: '4%',             size: 'md' as const, delay: 0.3  },
-  { service: 'Social Media',      top: '18%', left: '26%',  mTop: '64%',  mLeft: '3%',             size: 'sm' as const, delay: 0.4  },
+  { service: 'Automation',        top: '28%', left: '8%',   mTop: '20%',  mLeft: '5%',             size: 'lg' as const, delay: 0.04  },
+  { service: 'Email',             top: '46%', left: '11%',  mTop: '35%',  mLeft: '10%',             size: 'sm' as const, delay: 0.08  },
+  { service: 'Growth',            top: '59%', left: '9%',   mTop: '50%',  mLeft: '4%',             size: 'md' as const, delay: 0.12 },
+  { service: 'Social Media',      top: '18%', left: '26%',  mTop: '64%',  mLeft: '3%',             size: 'sm' as const, delay: 0.16  },
 
   // RIGHT SIDE
-  { service: 'CRM',               top: '11%',  right: '12%', mTop: '7%',              mRight: '10%', size: 'lg' as const, delay: 0.05 },
-  { service: 'SEO',               top: '28%', right: '8%',  mTop: '20%',             mRight: '7%', size: 'sm' as const, delay: 0.15 },
-  { service: 'Insights',          top: '43%', right: '10%', mTop: '35%',             mRight: '4%', size: 'md' as const, delay: 0.25 },
-  { service: 'Ads',               top: '58%', right: '13%', mTop: '50%',             mRight: '12%', size: 'sm' as const, delay: 0.35 },
-  { service: 'Content Marketing', top: '21%', right: '25%', mTop: '64%',             mRight: '5%', size: 'md' as const, delay: 0.45 },
+  { service: 'CRM',               top: '11%',  right: '12%', mTop: '7%',              mRight: '10%', size: 'lg' as const, delay: 0.02 },
+  { service: 'SEO',               top: '28%', right: '8%',  mTop: '20%',             mRight: '7%', size: 'sm' as const, delay: 0.06 },
+  { service: 'Insights',          top: '43%', right: '10%', mTop: '35%',             mRight: '4%', size: 'md' as const, delay: 0.10 },
+  { service: 'Ads',               top: '58%', right: '13%', mTop: '50%',             mRight: '12%', size: 'sm' as const, delay: 0.14 },
+  { service: 'Content Marketing', top: '21%', right: '25%', mTop: '64%',             mRight: '5%', size: 'md' as const, delay: 0.18 },
 ];
 
 const SERVICE_DATA: Record<string, { icon: string; color: string; accent: string; subtitle: string }> = {
