@@ -22,51 +22,53 @@ function ServiceNotification({
   size?: 'sm' | 'md' | 'lg';
   isMobile?: boolean;
 }) {
+  // Positions pulled inward and upward — cards orbit the centre content
   const positionClasses: Record<string, string> = {
-    'tl':  'top-[18%]  left-[14%]  hidden lg:block z-20',
-    'tr':  'top-[18%]  right-[8%]  hidden lg:block z-20',
-    'cl':  'top-[38%]  left-[5%]   hidden lg:block z-20',
-    'cr':  'top-[38%]  right-[5%]  hidden lg:block z-20',
-    'ml':  'top-[57%]  left-[5%]   hidden lg:block z-20',
-    'mr':  'top-[57%]  right-[5%]  hidden lg:block z-20',
-    'bl2': 'top-[73%]  left-[8%]   hidden lg:block z-20',
-    'br2': 'top-[73%]  right-[8%]  hidden lg:block z-20',
-    'bl':  'top-[86%]  left-[14%]  hidden lg:block z-20',
-    'br':  'top-[86%]  right-[8%]  hidden lg:block z-20',
+    'tl':  'top-[12%]  left-[18%]  hidden lg:block z-20',
+    'tr':  'top-[12%]  right-[16%] hidden lg:block z-20',
+    'cl':  'top-[33%]  left-[10%]  hidden lg:block z-20',
+    'cr':  'top-[33%]  right-[9%]  hidden lg:block z-20',
+    'ml':  'top-[52%]  left-[12%]  hidden lg:block z-20',
+    'mr':  'top-[52%]  right-[10%] hidden lg:block z-20',
+    'bl2': 'top-[68%]  left-[18%]  hidden lg:block z-20',
+    'br2': 'top-[68%]  right-[16%] hidden lg:block z-20',
+    'bl':  'top-[80%]  left-[22%]  hidden lg:block z-20',
+    'br':  'top-[80%]  right-[20%] hidden lg:block z-20',
     'tm':  'top-1/3    left-1/2    -translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
     'bm':  'top-2/3    right-1/2   translate-x-1/2  -translate-y-1/2 lg:hidden z-10',
   };
 
+  // Varied sizes — deliberately different to feel organic
   const sizeClasses = {
-    'sm': isMobile ? 'w-36 p-2'  : 'w-44 p-4',
-    'md': isMobile ? 'w-44 p-3'  : 'w-52 p-4',
-    'lg': 'w-60 p-5',
+    'sm': isMobile ? 'w-36 p-2'  : 'w-48 p-4',
+    'md': isMobile ? 'w-44 p-3'  : 'w-56 p-5',
+    'lg': 'w-64 p-5',
   };
 
   const iconSize = {
-    'sm': 'w-6 h-6',
-    'md': 'w-7 h-7',
-    'lg': 'w-8 h-8',
+    'sm': 'w-7 h-7',
+    'md': 'w-8 h-8',
+    'lg': 'w-9 h-9',
   };
 
   const textSize = {
     'sm': 'text-xs',
     'md': 'text-sm',
-    'lg': 'text-sm',
+    'lg': 'text-base',
   };
 
   const services: Record<string, { icon: React.ReactNode; color: string; accent: string }> = {
-    'SEO':            { icon: <LineChart className={iconSize[size]} />,  color: 'bg-blue-100/80',    accent: 'text-blue-500' },
-    'Email':          { icon: <Zap className={iconSize[size]} />,        color: 'bg-orange-100/80',  accent: 'text-orange-500' },
-    'CRM':            { icon: <Database className={iconSize[size]} />,   color: 'bg-green-100/80',   accent: 'text-green-600' },
-    'Ads':            { icon: <Zap className={iconSize[size]} />,        color: 'bg-yellow-100/80',  accent: 'text-yellow-600' },
-    'Analytics':      { icon: <BarChart3 className={iconSize[size]} />,  color: 'bg-purple-100/80',  accent: 'text-purple-500' },
-    'Strategy':       { icon: <Target className={iconSize[size]} />,     color: 'bg-pink-100/80',    accent: 'text-pink-500' },
-    'Automation':     { icon: <Rocket className={iconSize[size]} />,     color: 'bg-cyan-100/80',    accent: 'text-cyan-600' },
-    'Growth':         { icon: <TrendingUp className={iconSize[size]} />, color: 'bg-emerald-100/80', accent: 'text-emerald-600' },
-    'Insights':       { icon: <BarChart3 className={iconSize[size]} />,  color: 'bg-rose-100/80',    accent: 'text-rose-500' },
-    'Social Media':   { icon: <Share2 className={iconSize[size]} />,     color: 'bg-amber-100/80',   accent: 'text-amber-600' },
-    'Content Marketing': { icon: <FileText className={iconSize[size]} />,color: 'bg-lime-100/80',    accent: 'text-lime-700' },
+    'SEO':            { icon: <LineChart className={iconSize[size]} />,  color: 'bg-blue-200/50',    accent: 'text-blue-500' },
+    'Email':          { icon: <Zap className={iconSize[size]} />,        color: 'bg-orange-200/45',  accent: 'text-orange-500' },
+    'CRM':            { icon: <Database className={iconSize[size]} />,   color: 'bg-green-200/45',   accent: 'text-green-600' },
+    'Ads':            { icon: <Zap className={iconSize[size]} />,        color: 'bg-yellow-200/45',  accent: 'text-yellow-600' },
+    'Analytics':      { icon: <BarChart3 className={iconSize[size]} />,  color: 'bg-purple-200/50',  accent: 'text-purple-500' },
+    'Strategy':       { icon: <Target className={iconSize[size]} />,     color: 'bg-pink-200/45',    accent: 'text-pink-500' },
+    'Automation':     { icon: <Rocket className={iconSize[size]} />,     color: 'bg-cyan-200/45',    accent: 'text-cyan-600' },
+    'Growth':         { icon: <TrendingUp className={iconSize[size]} />, color: 'bg-emerald-200/45', accent: 'text-emerald-600' },
+    'Insights':       { icon: <BarChart3 className={iconSize[size]} />,  color: 'bg-rose-200/45',    accent: 'text-rose-500' },
+    'Social Media':   { icon: <Share2 className={iconSize[size]} />,     color: 'bg-amber-200/45',   accent: 'text-amber-600' },
+    'Content Marketing': { icon: <FileText className={iconSize[size]} />,color: 'bg-lime-200/45',    accent: 'text-lime-700' },
   };
 
   const subtitles: Record<string, string> = {
@@ -96,16 +98,16 @@ function ServiceNotification({
         className={`
           ${sizeClasses[size]}
           flex items-start gap-3
-          rounded-xl
+          rounded-2xl
           ${serviceData.color}
-          border border-white/60
-          shadow-md
-          backdrop-blur-sm
+          border border-white/40
+          shadow-lg shadow-black/5
+          backdrop-blur-md
           transition-all duration-200 ease-out
-          hover:scale-110 hover:shadow-xl hover:shadow-black/10 hover:border-white/90
+          hover:scale-110 hover:shadow-2xl hover:shadow-black/15 hover:border-white/70 hover:brightness-105
           cursor-pointer
-          ${isMobile ? 'opacity-50' : ''}
-          block
+          ${isMobile ? 'opacity-40' : 'opacity-90'}
+          block relative
         `}
       >
         {/* Bell + dot — top right */}
