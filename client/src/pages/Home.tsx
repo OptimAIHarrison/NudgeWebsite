@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, Lightbulb, Rocket, Target, Code, TrendingUp, CheckCircle, Bell, Database, LineChart, Zap, BarChart3, Share2, FileText } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -164,6 +164,27 @@ function ServiceNotification({
 export default function Home() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
+  const [activeCard, setActiveCard] = useState(0);
+
+  // Advance one card at a time — 1.2s ping on, then 3s rest before next
+  useEffect(() => {
+    let cardIdx = 0;
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    const next = () => {
+      setActiveCard(cardIdx);
+      cardIdx = (cardIdx + 1) % CARD_CONFIGS.length;
+      // card stays "active" for 1200ms, then 3000ms silence before the next one
+      timeoutId = setTimeout(() => {
+        setActiveCard(-1);
+        timeoutId = setTimeout(next, 3000);
+      }, 1200);
+    };
+
+    // Small initial delay so page loads before anything fires
+    timeoutId = setTimeout(next, 1500);
+    return () => clearTimeout(timeoutId);
+  }, []);
 
 
   const testimonials = [
@@ -265,48 +286,14 @@ export default function Home() {
 
       {/* ── Hero Section ─────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <style>{`
-          /* Dot pulse — very slow breathe */
-          @keyframes nudge-dot-flash {
-            0%, 100% { opacity: 1;    transform: scale(1);   }
-            50%       { opacity: 0.2; transform: scale(0.65); }
-          }
 
-          /* Card notification flash — gentle lift, fires rarely */
-          @keyframes nudge-card-ping {
-            0%   { opacity: 0.92; transform: translateY(0)    scale(1);    box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
-            3%   { opacity: 1;    transform: translateY(-4px) scale(1.04); box-shadow: 0 12px 32px rgba(0,0,0,0.13); }
-            8%   { opacity: 1;    transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
-            14%  { opacity: 0.92; transform: translateY(0)    scale(1);    box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
-            100% { opacity: 0.92; transform: translateY(0)    scale(1);    box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
-          }
-
-          /*
-            40s total cycle. 10 cards. One fires every 4s — strictly sequential.
-            The ping itself only occupies the first ~14% of the cycle (~5.6s),
-            then the card rests silently for the remaining ~34s.
-            All delays are LESS than the 40s duration so the browser never wraps.
-          */
-          .nudge-card-0  { animation: nudge-card-ping 40s ease-in-out infinite 0s;  }
-          .nudge-card-1  { animation: nudge-card-ping 40s ease-in-out infinite 4s;  }
-          .nudge-card-2  { animation: nudge-card-ping 40s ease-in-out infinite 8s;  }
-          .nudge-card-3  { animation: nudge-card-ping 40s ease-in-out infinite 12s; }
-          .nudge-card-4  { animation: nudge-card-ping 40s ease-in-out infinite 16s; }
-          .nudge-card-5  { animation: nudge-card-ping 40s ease-in-out infinite 20s; }
-          .nudge-card-6  { animation: nudge-card-ping 40s ease-in-out infinite 24s; }
-          .nudge-card-7  { animation: nudge-card-ping 40s ease-in-out infinite 28s; }
-          .nudge-card-8  { animation: nudge-card-ping 40s ease-in-out infinite 32s; }
-          .nudge-card-9  { animation: nudge-card-ping 40s ease-in-out infinite 36s; }
-        `}</style>
-
-        {/* Soft lavender background — replacing the old gradient-hero image */}
+        {/* Soft lavender background */}
         <div
           className="absolute inset-0"
           style={{
             background: 'radial-gradient(ellipse 80% 70% at 50% 40%, #e8e0f5 0%, #ddd6f0 35%, #cec6e8 65%, #bfb8dc 100%)',
           }}
         />
-        {/* Subtle bottom fade into page background */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80" />
 
         {/* Service Notification Cards */}
@@ -318,6 +305,7 @@ export default function Home() {
               size={card.size}
               delay={card.delay}
               cardIndex={idx}
+              activeCard={activeCard}
               top={card.top}
               left={'left' in card ? card.left : undefined}
               right={'right' in card ? card.right : undefined}
