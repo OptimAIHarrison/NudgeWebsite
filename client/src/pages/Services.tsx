@@ -31,6 +31,24 @@ const PILLARS = [
         details: 'Stack audit, tool recommendations, integration planning, cost optimization, vendor selection',
         martech: ['Zapier', 'Make', 'Segment'],
       },
+      {
+        title: 'Competitive Intelligence & Market Mapping',
+        bullets: ['Competitor profiling', 'Share of voice analysis', 'Market positioning'],
+        details: 'In-depth competitor teardowns, share of voice tracking, positioning matrix, whitespace identification, monthly intelligence reports',
+        martech: ['Similarweb', 'SEMrush', 'SparkToro'],
+      },
+      {
+        title: 'Go-To-Market Strategy',
+        bullets: ['Launch planning', 'Channel prioritization', 'Audience segmentation'],
+        details: 'ICP definition, channel mix strategy, messaging hierarchy, launch sequencing, success metrics and OKR framework',
+        martech: ['Notion', 'Miro', 'HubSpot'],
+      },
+      {
+        title: 'Quarterly Business Reviews & Advisory',
+        bullets: ['Performance review', 'Strategic recalibration', 'Executive reporting'],
+        details: 'Quarterly deep-dive sessions, performance-against-goals analysis, strategic pivots, board-ready reporting, ongoing advisory retainer',
+        martech: ['Looker Studio', 'Notion', 'Loom'],
+      },
     ],
   },
   {
@@ -56,6 +74,24 @@ const PILLARS = [
         bullets: ['Process automation', 'AI integration', 'Efficiency gains'],
         details: 'Workflow design, tool integration, AI implementation, process optimization, ROI tracking',
         martech: ['Zapier', 'Make', 'n8n'],
+      },
+      {
+        title: 'Lead Scoring & Nurture Architecture',
+        bullets: ['Scoring model design', 'MQL/SQL thresholds', 'Nurture sequences'],
+        details: 'Behavioral and demographic scoring model, MQL/SQL handoff rules, multi-touch nurture flows, sales alert triggers, reporting dashboard',
+        martech: ['HubSpot', 'Marketo', 'Salesforce'],
+      },
+      {
+        title: 'Marketing Data & CDP Setup',
+        bullets: ['Data unification', 'Audience syncing', 'Identity resolution'],
+        details: 'Source connection, identity stitching, audience segment creation, activation to ad platforms, data governance framework',
+        martech: ['Segment', 'Amplitude', 'RudderStack'],
+      },
+      {
+        title: 'Reporting Infrastructure & Dashboards',
+        bullets: ['Unified data pipeline', 'Automated reporting', 'Stakeholder views'],
+        details: 'Data source connections, metric taxonomy, automated weekly and monthly reports, executive and channel-level dashboards, anomaly alerting',
+        martech: ['Looker Studio', 'Supermetrics', 'BigQuery'],
       },
     ],
   },
@@ -95,6 +131,24 @@ const PILLARS = [
         details: 'Custom dashboards, automated reporting, insights & recommendations, data storytelling',
         martech: ['Looker Studio', 'Tableau', 'Data Studio'],
       },
+      {
+        title: 'Retargeting & Audience Strategy',
+        bullets: ['Audience segmentation', 'Retargeting sequences', 'Suppression logic'],
+        details: 'First-party audience build, multi-stage retargeting flows, lookalike seed creation, suppression list management, frequency and fatigue controls',
+        martech: ['Meta Ads', 'Google Ads', 'AdRoll'],
+      },
+      {
+        title: 'Customer Lifetime Value Optimization',
+        bullets: ['LTV modeling', 'Retention campaigns', 'Upsell sequences'],
+        details: 'Cohort LTV analysis, churn prediction signals, win-back campaigns, upsell and cross-sell automation, loyalty programme integration',
+        martech: ['Klaviyo', 'Amplitude', 'Segment'],
+      },
+      {
+        title: 'Budget Allocation & Media Mix Modeling',
+        bullets: ['Spend analysis', 'Channel efficiency scoring', 'Scenario planning'],
+        details: 'Historical spend audit, marginal return curves per channel, recommended allocation, quarterly rebalancing, scenario and sensitivity planning',
+        martech: ['Looker Studio', 'Google Sheets', 'Northbeam'],
+      },
     ],
   },
   {
@@ -121,6 +175,24 @@ const PILLARS = [
         details: 'Logo design, brand guidelines, templates, asset library, creative direction',
         martech: ['Figma', 'Canva', 'Adobe Creative Suite'],
       },
+      {
+        title: 'Content Marketing Strategy',
+        bullets: ['Editorial planning', 'SEO content mapping', 'Distribution strategy'],
+        details: 'Keyword-to-content mapping, editorial calendar, pillar and cluster architecture, distribution playbook, performance tracking framework',
+        martech: ['Ahrefs', 'Notion', 'SEMrush'],
+      },
+      {
+        title: 'Thought Leadership & PR Programme',
+        bullets: ['Executive positioning', 'Media outreach', 'LinkedIn authority'],
+        details: 'Executive voice development, media list curation, pitch creation, LinkedIn content strategy, speaking opportunity pipeline, coverage tracking',
+        martech: ['Muck Rack', 'LinkedIn', 'Notion'],
+      },
+      {
+        title: 'Video & Podcast Content Strategy',
+        bullets: ['Format planning', 'Production briefs', 'Distribution & repurposing'],
+        details: 'Format and cadence strategy, show concept development, recording briefs, repurposing workflow (clips, transcripts, newsletters), platform distribution',
+        martech: ['Descript', 'Riverside', 'Buffer'],
+      },
     ],
   },
   {
@@ -146,6 +218,24 @@ const PILLARS = [
         bullets: ['Funnel analysis', 'Issue identification', 'Optimization'],
         details: 'Funnel analysis, drop-off identification, friction point removal, conversion optimization',
         martech: ['Hotjar', 'FullStory', 'Contentsquare'],
+      },
+      {
+        title: 'Tag Management & GTM Audit',
+        bullets: ['Container audit', 'Tag governance', 'Clean implementation'],
+        details: 'Full GTM container review, redundant and misfiring tag cleanup, trigger logic refactor, naming convention standards, change governance process',
+        martech: ['Google Tag Manager', 'ObservePoint', 'Datadog'],
+      },
+      {
+        title: 'Landing Page & CRO Build',
+        bullets: ['High-converting builds', 'A/B test variants', 'Form & CTA optimization'],
+        details: 'Landing page design and build, above-the-fold hierarchy, form friction reduction, CTA testing, variant creation for A/B experiments, integration with CRM',
+        martech: ['Webflow', 'Unbounce', 'HubSpot'],
+      },
+      {
+        title: 'MarTech Integration & API Connectors',
+        bullets: ['System integration', 'API setup', 'Data sync validation'],
+        details: 'Point-to-point and middleware integration design, API authentication, field mapping, error handling, bi-directional sync testing and monitoring',
+        martech: ['Zapier', 'Make', 'Segment'],
       },
     ],
   },
@@ -189,10 +279,10 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Pillars Tabs */}
-      <section className="py-12 md:py-16 bg-background border-b border-border sticky top-24 z-40">
+      {/* Pillars Tabs — single scrollable row */}
+      <section className="py-6 bg-background border-b border-border sticky top-24 z-40">
         <div className="container">
-              <div className="flex flex-wrap gap-3 justify-center">
+          <div className="flex flex-nowrap gap-2 justify-center overflow-x-auto scrollbar-hide pb-1">
             {PILLARS.map((pillar) => {
               const Icon = pillar.icon;
               return (
@@ -202,15 +292,14 @@ export default function Services() {
                     setActivePillar(pillar.id);
                     setExpandedService(null);
                   }}
-                  className={`flex items-center gap-2 px-8 py-4 rounded-lg font-semibold transition-all text-base md:text-lg ${
+                  className={`flex items-center gap-2 px-4 py-3 rounded-lg font-semibold transition-all whitespace-nowrap flex-shrink-0 text-sm ${
                     activePillar === pillar.id
                       ? 'bg-accent text-white shadow-lg'
                       : 'bg-secondary text-foreground hover:bg-secondary/80'
                   }`}
                 >
-                  <Icon className="w-5 h-5" />
-                  <span className="hidden sm:inline text-sm">{pillar.name}</span>
-                  <span className="sm:hidden text-xs">{pillar.name.split(' ')[0]}</span>
+                  <Icon className="w-4 h-4 flex-shrink-0" />
+                  <span>{pillar.name}</span>
                 </button>
               );
             })}
