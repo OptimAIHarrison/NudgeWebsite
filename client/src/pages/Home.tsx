@@ -38,7 +38,6 @@ const SERVICE_DATA: Record<string, { icon: string; color: string; accent: string
 };
 
 function ServiceNotification({
-function ServiceNotification({
   service,
   size,
   delay,
