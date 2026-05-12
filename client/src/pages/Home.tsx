@@ -19,9 +19,9 @@ const CARD_CONFIGS = [
 
   // RIGHT SIDE
   { service: 'CRM',               top: '11%',  right: '12%', mTop: '7%',              mRight: '10%', size: 'lg' as const, delay: 0.05 },
-  { service: 'SEO',               top: '24%', right: '8%',  mTop: '20%',             mRight: '7%', size: 'sm' as const, delay: 0.15 },
-  { service: 'Insights',          top: '40%', right: '10%', mTop: '35%',             mRight: '4%', size: 'md' as const, delay: 0.25 },
-  { service: 'Ads',               top: '55%', right: '13%', mTop: '50%',             mRight: '12%', size: 'sm' as const, delay: 0.35 },
+  { service: 'SEO',               top: '28%', right: '8%',  mTop: '20%',             mRight: '7%', size: 'sm' as const, delay: 0.15 },
+  { service: 'Insights',          top: '43%', right: '10%', mTop: '35%',             mRight: '4%', size: 'md' as const, delay: 0.25 },
+  { service: 'Ads',               top: '58%', right: '13%', mTop: '50%',             mRight: '12%', size: 'sm' as const, delay: 0.35 },
   { service: 'Content Marketing', top: '21%', right: '25%', mTop: '64%',             mRight: '5%', size: 'md' as const, delay: 0.45 },
 ];
 
