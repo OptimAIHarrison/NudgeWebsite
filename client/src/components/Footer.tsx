@@ -38,11 +38,11 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <div className="mb-4">
-              <svg width="130" height="32" viewBox="0 0 130 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NUDGE">
-                <circle cx="16" cy="16" r="16" fill="#8040B2"/>
+              <svg width="130" height="26" viewBox="0 0 130 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NUDGE">
+                <circle cx="13" cy="13" r="8" fill="#8040B2"/>
                 <text
-                  x="38"
-                  y="16"
+                  x="27"
+                  y="13"
                   fill="currentColor"
                   fontFamily="-apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif"
                   fontWeight="800"
