@@ -18,12 +18,13 @@ const CARD_CONFIGS = [
   { service: 'Social Media',      top: '18%', left: '26%',  mTop: '64%',  mLeft: '3%',             size: 'sm' as const, delay: 0.4  },
 
   // RIGHT SIDE
-  { service: 'CRM',               top: '13%',  right: '12%', mTop: '7%',              mRight: '4%', size: 'lg' as const, delay: 0.05 },
+  { service: 'CRM',               top: '11%',  right: '12%', mTop: '7%',              mRight: '4%', size: 'lg' as const, delay: 0.05 },
   { service: 'SEO',               top: '24%', right: '8%',  mTop: '20%',             mRight: '3%', size: 'sm' as const, delay: 0.15 },
   { service: 'Insights',          top: '40%', right: '10%', mTop: '35%',             mRight: '2%', size: 'md' as const, delay: 0.25 },
   { service: 'Ads',               top: '55%', right: '13%', mTop: '50%',             mRight: '3%', size: 'sm' as const, delay: 0.35 },
   { service: 'Content Marketing', top: '21%', right: '25%', mTop: '64%',             mRight: '5%', size: 'md' as const, delay: 0.45 },
 ];
+
 
 const SERVICE_DATA: Record<string, { icon: string; color: string; accent: string; subtitle: string }> = {
   'SEO':             { icon: 'LineChart', color: 'bg-blue-200/40',    accent: 'text-blue-500',    subtitle: 'Technical optimization' },
@@ -42,6 +43,7 @@ function ServiceNotification({
   service,
   size,
   delay,
+  cardIndex,
   top,
   left,
   right,
@@ -52,6 +54,7 @@ function ServiceNotification({
   service: string;
   size: 'sm' | 'md' | 'lg';
   delay: number;
+  cardIndex: number;
   top: string;
   left?: string;
   right?: string;
@@ -84,7 +87,7 @@ function ServiceNotification({
     <>
       {/* ── Desktop card ── */}
       <div
-        className="absolute hidden lg:block animate-nudge-pop"
+        className={`absolute hidden lg:block animate-nudge-pop nudge-card-${cardIndex}`}
         style={{
           top,
           ...(left  ? { left  } : {}),
@@ -264,10 +267,32 @@ export default function Home() {
       {/* ── Hero Section ─────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <style>{`
+          /* Dot pulse — subtle breathe */
           @keyframes nudge-dot-flash {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50%       { opacity: 0.25; transform: scale(0.7); }
+            0%, 100% { opacity: 1;    transform: scale(1);   }
+            50%       { opacity: 0.2; transform: scale(0.65); }
           }
+
+          /* Card notification flash — quick ping then settle, fires rarely */
+          @keyframes nudge-card-ping {
+            0%                    { opacity: 0.92; transform: translateY(0)     scale(1);    box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+            4%                    { opacity: 1;    transform: translateY(-4px)  scale(1.04); box-shadow: 0 12px 32px rgba(0,0,0,0.14); }
+            10%                   { opacity: 1;    transform: translateY(-2px)  scale(1.02); box-shadow: 0 8px 24px rgba(0,0,0,0.10); }
+            18%                   { opacity: 0.92; transform: translateY(0)     scale(1);    box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+            100%                  { opacity: 0.92; transform: translateY(0)     scale(1);    box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+          }
+
+          /* Each card gets a unique duration so they never sync up */
+          .nudge-card-0  { animation: nudge-card-ping 7s  ease-in-out infinite 0.0s;  }
+          .nudge-card-1  { animation: nudge-card-ping 11s ease-in-out infinite 1.3s;  }
+          .nudge-card-2  { animation: nudge-card-ping 9s  ease-in-out infinite 3.7s;  }
+          .nudge-card-3  { animation: nudge-card-ping 13s ease-in-out infinite 0.8s;  }
+          .nudge-card-4  { animation: nudge-card-ping 8s  ease-in-out infinite 5.1s;  }
+          .nudge-card-5  { animation: nudge-card-ping 12s ease-in-out infinite 2.4s;  }
+          .nudge-card-6  { animation: nudge-card-ping 10s ease-in-out infinite 6.6s;  }
+          .nudge-card-7  { animation: nudge-card-ping 14s ease-in-out infinite 1.9s;  }
+          .nudge-card-8  { animation: nudge-card-ping 9s  ease-in-out infinite 4.3s;  }
+          .nudge-card-9  { animation: nudge-card-ping 11s ease-in-out infinite 7.2s;  }
         `}</style>
 
         {/* Soft lavender background — replacing the old gradient-hero image */}
@@ -282,12 +307,13 @@ export default function Home() {
 
         {/* Service Notification Cards */}
         <div className="absolute inset-0">
-          {CARD_CONFIGS.map((card) => (
+          {CARD_CONFIGS.map((card, idx) => (
             <ServiceNotification
               key={card.service}
               service={card.service}
               size={card.size}
               delay={card.delay}
+              cardIndex={idx}
               top={card.top}
               left={'left' in card ? card.left : undefined}
               right={'right' in card ? card.right : undefined}
