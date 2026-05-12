@@ -8,21 +8,21 @@ import { Button } from '@/components/ui/button';
 
 const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663532599876/9u4P3ot5rXMeEQxrn76eMy/nudgewebsite_0d4b2e8a.png';
 
-// Each card has its own hand-placed position — asymmetric, above the CTA, no mirroring
+// Each card has its own hand-placed position — desktop + mobile variants
 const CARD_CONFIGS = [
-  // LEFT SIDE — pulled well inward from edge, varied vertical rhythm
-  { service: 'Strategy',          top: '9%',  left: '13%',  size: 'md' as const, delay: 0.0  },
-  { service: 'Automation',        top: '28%', left: '8%',   size: 'lg' as const, delay: 0.1  },
-  { service: 'Email',             top: '46%', left: '11%',  size: 'sm' as const, delay: 0.2  },
-  { service: 'Growth',            top: '59%', left: '9%',   size: 'md' as const, delay: 0.3  },
-  { service: 'Social Media',      top: '18%', left: '26%',  size: 'sm' as const, delay: 0.4  },
+  // LEFT SIDE
+  { service: 'Strategy',          top: '9%',  left: '13%',  mTop: '7%',   mLeft: '1%',             size: 'md' as const, delay: 0.0  },
+  { service: 'Automation',        top: '28%', left: '8%',   mTop: '20%',  mLeft: '0%',             size: 'lg' as const, delay: 0.1  },
+  { service: 'Email',             top: '46%', left: '11%',  mTop: '35%',  mLeft: '1%',             size: 'sm' as const, delay: 0.2  },
+  { service: 'Growth',            top: '59%', left: '9%',   mTop: '50%',  mLeft: '0%',             size: 'md' as const, delay: 0.3  },
+  { service: 'Social Media',      top: '18%', left: '26%',  mTop: '64%',  mLeft: '1%',             size: 'sm' as const, delay: 0.4  },
 
-  // RIGHT SIDE — mirrored inward, different heights to avoid symmetry
-  { service: 'CRM',               top: '7%',  right: '12%', size: 'lg' as const, delay: 0.05 },
-  { service: 'SEO',               top: '24%', right: '8%',  size: 'sm' as const, delay: 0.15 },
-  { service: 'Insights',          top: '40%', right: '10%', size: 'md' as const, delay: 0.25 },
-  { service: 'Ads',               top: '55%', right: '13%', size: 'sm' as const, delay: 0.35 },
-  { service: 'Content Marketing', top: '15%', right: '25%', size: 'md' as const, delay: 0.45 },
+  // RIGHT SIDE
+  { service: 'CRM',               top: '7%',  right: '12%', mTop: '7%',              mRight: '1%', size: 'lg' as const, delay: 0.05 },
+  { service: 'SEO',               top: '24%', right: '8%',  mTop: '20%',             mRight: '0%', size: 'sm' as const, delay: 0.15 },
+  { service: 'Insights',          top: '40%', right: '10%', mTop: '35%',             mRight: '1%', size: 'md' as const, delay: 0.25 },
+  { service: 'Ads',               top: '55%', right: '13%', mTop: '50%',             mRight: '0%', size: 'sm' as const, delay: 0.35 },
+  { service: 'Content Marketing', top: '15%', right: '25%', mTop: '64%',             mRight: '1%', size: 'md' as const, delay: 0.45 },
 ];
 
 const SERVICE_DATA: Record<string, { icon: string; color: string; accent: string; subtitle: string }> = {
@@ -45,6 +45,9 @@ function ServiceNotification({
   top,
   left,
   right,
+  mTop,
+  mLeft,
+  mRight,
 }: {
   service: string;
   size: 'sm' | 'md' | 'lg';
@@ -52,78 +55,107 @@ function ServiceNotification({
   top: string;
   left?: string;
   right?: string;
+  mTop?: string;
+  mLeft?: string;
+  mRight?: string;
 }) {
   const data = SERVICE_DATA[service];
 
-  const iconMap: Record<string, React.ReactNode> = {
-    LineChart:  <LineChart  className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
-    Zap:        <Zap        className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
-    Database:   <Database   className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
-    BarChart3:  <BarChart3  className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
-    Target:     <Target     className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
-    Rocket:     <Rocket     className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
-    TrendingUp: <TrendingUp className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
-    Share2:     <Share2     className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
-    FileText:   <FileText   className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
+  // Mobile: all icons tiny
+  const iconMap = (sz: 'sm' | 'md' | 'lg', mobile = false): Record<string, React.ReactNode> => {
+    const cls = mobile ? 'w-4 h-4' : sz === 'lg' ? 'w-8 h-8' : sz === 'md' ? 'w-7 h-7' : 'w-6 h-6';
+    return {
+      LineChart:  <LineChart  className={cls} />,
+      Zap:        <Zap        className={cls} />,
+      Database:   <Database   className={cls} />,
+      BarChart3:  <BarChart3  className={cls} />,
+      Target:     <Target     className={cls} />,
+      Rocket:     <Rocket     className={cls} />,
+      TrendingUp: <TrendingUp className={cls} />,
+      Share2:     <Share2     className={cls} />,
+      FileText:   <FileText   className={cls} />,
+    };
   };
 
-  const widths = { sm: '176px', md: '210px', lg: '240px' };
-  const paddings = { sm: '12px 14px', md: '14px 16px', lg: '16px 18px' };
+  const desktopWidths  = { sm: '176px', md: '210px', lg: '240px' };
+  const desktopPadding = { sm: '12px 14px', md: '14px 16px', lg: '16px 18px' };
 
   return (
-    <div
-      className="absolute hidden lg:block animate-nudge-pop"
-      style={{
-        top,
-        ...(left  ? { left  } : {}),
-        ...(right ? { right } : {}),
-        animationDelay: `${delay}s`,
-        animationDuration: '0.5s',
-        zIndex: 20,
-      }}
-    >
-      <Link
-        href="/services"
-        onClick={() => window.scrollTo(0, 0)}
-        style={{ width: widths[size], padding: paddings[size] }}
-        className={`
-          flex items-start gap-3 relative
-          rounded-2xl
-          ${data.color}
-          border border-white/35
-          shadow-lg shadow-black/8
-          backdrop-blur-md
-          transition-all duration-200 ease-out
-          hover:scale-[1.08] hover:shadow-xl hover:shadow-black/12 hover:border-white/60 hover:-translate-y-0.5
-          cursor-pointer block
-        `}
+    <>
+      {/* ── Desktop card ── */}
+      <div
+        className="absolute hidden lg:block animate-nudge-pop"
+        style={{
+          top,
+          ...(left  ? { left  } : {}),
+          ...(right ? { right } : {}),
+          animationDelay: `${delay}s`,
+          animationDuration: '0.5s',
+          zIndex: 20,
+        }}
       >
-        {/* Bell + flashing dot indicator */}
-        <div className="absolute top-2 right-2.5 flex items-center gap-1.5">
-          <Bell className="w-3 h-3 text-gray-400/70" />
-          <span
-            className="rounded-full bg-accent block"
-            style={{
-              width: '8px',
-              height: '8px',
-              animation: `nudge-dot-flash 2s ease-in-out infinite ${delay * 0.4}s`,
-            }}
-          />
-        </div>
+        <Link
+          href="/services"
+          onClick={() => window.scrollTo(0, 0)}
+          style={{ width: desktopWidths[size], padding: desktopPadding[size] }}
+          className={`
+            flex items-start gap-3 relative
+            rounded-2xl
+            ${data.color}
+            border border-white/35
+            shadow-lg shadow-black/8
+            backdrop-blur-md
+            transition-all duration-200 ease-out
+            hover:scale-[1.08] hover:shadow-xl hover:shadow-black/12 hover:border-white/60 hover:-translate-y-0.5
+            cursor-pointer block
+          `}
+        >
+          <div className="absolute top-2 right-2.5 flex items-center gap-1.5">
+            <Bell className="w-3 h-3 text-gray-400/70" />
+            <span
+              className="rounded-full bg-accent block"
+              style={{ width: '8px', height: '8px', animation: `nudge-dot-flash 2s ease-in-out infinite ${delay * 0.4}s` }}
+            />
+          </div>
+          <div className={`flex-shrink-0 mt-0.5 ${data.accent}`}>{iconMap(size)[data.icon]}</div>
+          <div className="min-w-0 pr-4">
+            <p className={`font-semibold text-gray-800 leading-tight ${size === 'sm' ? 'text-xs' : 'text-sm'}`}>{service}</p>
+            <p className="text-gray-500 leading-tight mt-0.5 text-xs">{data.subtitle}</p>
+          </div>
+        </Link>
+      </div>
 
-        <div className={`flex-shrink-0 mt-0.5 ${data.accent}`}>
-          {iconMap[data.icon]}
+      {/* ── Mobile card — tiny, very transparent, pointer-events-none so they don't block taps ── */}
+      {(mTop !== undefined) && (
+        <div
+          className="absolute block lg:hidden animate-nudge-pop"
+          style={{
+            top: mTop,
+            ...(mLeft  ? { left: mLeft   } : {}),
+            ...(mRight ? { right: mRight } : {}),
+            animationDelay: `${delay}s`,
+            animationDuration: '0.5s',
+            zIndex: 10,
+            opacity: 0.18,
+            pointerEvents: 'none',
+          }}
+        >
+          <div
+            style={{ width: '100px', padding: '8px 10px' }}
+            className={`
+              flex items-center gap-2 relative
+              rounded-xl
+              ${data.color}
+              border border-white/30
+              backdrop-blur-sm
+            `}
+          >
+            <div className={`flex-shrink-0 ${data.accent}`}>{iconMap(size, true)[data.icon]}</div>
+            <p className="font-semibold text-gray-800 leading-tight text-xs truncate">{service}</p>
+          </div>
         </div>
-        <div className="min-w-0 pr-4">
-          <p className={`font-semibold text-gray-800 leading-tight ${size === 'sm' ? 'text-xs' : 'text-sm'}`}>
-            {service}
-          </p>
-          <p className={`text-gray-500 leading-tight mt-0.5 ${size === 'sm' ? 'text-xs' : 'text-xs'}`}>
-            {data.subtitle}
-          </p>
-        </div>
-      </Link>
-    </div>
+      )}
+    </>
   );
 }
 
@@ -259,6 +291,9 @@ export default function Home() {
               top={card.top}
               left={'left' in card ? card.left : undefined}
               right={'right' in card ? card.right : undefined}
+              mTop={'mTop' in card ? card.mTop : undefined}
+              mLeft={'mLeft' in card ? card.mLeft : undefined}
+              mRight={'mRight' in card ? card.mRight : undefined}
             />
           ))}
         </div>
