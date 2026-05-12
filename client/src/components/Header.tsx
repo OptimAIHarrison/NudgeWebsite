@@ -3,7 +3,6 @@ import { Search, Menu, X, ShoppingCart } from 'lucide-react';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 
-const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663532599876/9u4P3ot5rXMeEQxrn76eMy/nudgewebsite_0d4b2e8a.png';
 
 interface HeaderProps {
   onSearchOpen?: () => void;
@@ -28,7 +27,19 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
       <div className="container flex items-center justify-between h-20 md:h-24">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 flex-shrink-0 hover:opacity-80 transition-opacity">
-          <img src={LOGO_URL} alt="Nudge Digital" className="h-14 md:h-16 w-auto" />
+          <svg width="180" height="44" viewBox="0 0 180 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NUDGE">
+            <circle cx="22" cy="22" r="22" fill="#8040B2"/>
+            <text
+              x="52"
+              y="22"
+              fill="currentColor"
+              fontFamily="-apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif"
+              fontWeight="800"
+              fontSize="30"
+              letterSpacing="2"
+              dominantBaseline="central"
+            >NUDGE</text>
+          </svg>
         </Link>
 
         {/* Desktop Navigation */}
