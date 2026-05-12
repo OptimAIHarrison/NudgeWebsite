@@ -281,17 +281,22 @@ export default function Home() {
             100% { opacity: 0.92; transform: translateY(0)    scale(1);    box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
           }
 
-          /* All cards share a ~40s cycle. Each fires 5s apart so only one pings at a time */
-          .nudge-card-0  { animation: nudge-card-ping 40s ease-in-out infinite 0s;   }
-          .nudge-card-1  { animation: nudge-card-ping 40s ease-in-out infinite 20s;   }
-          .nudge-card-2  { animation: nudge-card-ping 40s ease-in-out infinite 10s;   }
-          .nudge-card-3  { animation: nudge-card-ping 40s ease-in-out infinite 25s;   }
-          .nudge-card-4  { animation: nudge-card-ping 40s ease-in-out infinite 40s;   }
-          .nudge-card-5  { animation: nudge-card-ping 40s ease-in-out infinite 5s;  }
-          .nudge-card-6  { animation: nudge-card-ping 40s ease-in-out infinite 35s;  }
-          .nudge-card-7  { animation: nudge-card-ping 40s ease-in-out infinite 15s;  }
-          .nudge-card-8  { animation: nudge-card-ping 40s ease-in-out infinite 45s;  }
-          .nudge-card-9  { animation: nudge-card-ping 40s ease-in-out infinite 30s;  }
+          /*
+            40s total cycle. 10 cards. One fires every 4s — strictly sequential.
+            The ping itself only occupies the first ~14% of the cycle (~5.6s),
+            then the card rests silently for the remaining ~34s.
+            All delays are LESS than the 40s duration so the browser never wraps.
+          */
+          .nudge-card-0  { animation: nudge-card-ping 40s ease-in-out infinite 0s;  }
+          .nudge-card-1  { animation: nudge-card-ping 40s ease-in-out infinite 4s;  }
+          .nudge-card-2  { animation: nudge-card-ping 40s ease-in-out infinite 8s;  }
+          .nudge-card-3  { animation: nudge-card-ping 40s ease-in-out infinite 12s; }
+          .nudge-card-4  { animation: nudge-card-ping 40s ease-in-out infinite 16s; }
+          .nudge-card-5  { animation: nudge-card-ping 40s ease-in-out infinite 20s; }
+          .nudge-card-6  { animation: nudge-card-ping 40s ease-in-out infinite 24s; }
+          .nudge-card-7  { animation: nudge-card-ping 40s ease-in-out infinite 28s; }
+          .nudge-card-8  { animation: nudge-card-ping 40s ease-in-out infinite 32s; }
+          .nudge-card-9  { animation: nudge-card-ping 40s ease-in-out infinite 36s; }
         `}</style>
 
         {/* Soft lavender background — replacing the old gradient-hero image */}
