@@ -10,18 +10,18 @@ import { Button } from '@/components/ui/button';
 // Each card has its own hand-placed position — desktop + mobile variants
 const CARD_CONFIGS = [
   // LEFT SIDE
-  { service: 'Strategy',          top: '9%',  left: '13%',  mTop: '7%',   mLeft: '9%',             size: 'md' as const, delay: 0.0  },
-  { service: 'Automation',        top: '28%', left: '8%',   mTop: '20%',  mLeft: '5%',             size: 'lg' as const, delay: 0.04  },
-  { service: 'Email',             top: '46%', left: '11%',  mTop: '35%',  mLeft: '10%',             size: 'sm' as const, delay: 0.08  },
-  { service: 'Growth',            top: '59%', left: '9%',   mTop: '50%',  mLeft: '4%',             size: 'md' as const, delay: 0.12 },
-  { service: 'Social Media',      top: '18%', left: '26%',  mTop: '64%',  mLeft: '3%',             size: 'sm' as const, delay: 0.16  },
+  { service: 'Strategy',          top: '9%',  left: '13%',  mTop: '5%',   mLeft: '12%',             size: 'md' as const, delay: 0.0  },
+  { service: 'Automation',        top: '28%', left: '8%',   mTop: '12%',  mLeft: '8%',             size: 'lg' as const, delay: 0.04  },
+  { service: 'Email',             top: '46%', left: '11%',  mTop: '25%',  mLeft: '13%',             size: 'sm' as const, delay: 0.08  },
+  { service: 'Growth',            top: '59%', left: '9%',   mTop: '36%',  mLeft: '7%',             size: 'md' as const, delay: 0.12 },
+  { service: 'Social Media',      top: '18%', left: '26%',  mTop: '45%',  mLeft: '6%',             size: 'sm' as const, delay: 0.16  },
 
   // RIGHT SIDE
-  { service: 'CRM',               top: '11%',  right: '12%', mTop: '7%',              mRight: '10%', size: 'lg' as const, delay: 0.02 },
-  { service: 'SEO',               top: '28%', right: '8%',  mTop: '20%',             mRight: '7%', size: 'sm' as const, delay: 0.06 },
-  { service: 'Insights',          top: '43%', right: '10%', mTop: '35%',             mRight: '4%', size: 'md' as const, delay: 0.10 },
-  { service: 'Ads',               top: '58%', right: '13%', mTop: '50%',             mRight: '12%', size: 'sm' as const, delay: 0.14 },
-  { service: 'Content Marketing', top: '21%', right: '25%', mTop: '64%',             mRight: '5%', size: 'md' as const, delay: 0.18 },
+  { service: 'CRM',               top: '11%',  right: '12%', mTop: '7%',              mRight: '13%', size: 'lg' as const, delay: 0.02 },
+  { service: 'SEO',               top: '28%', right: '8%',  mTop: '14%',             mRight: '10%', size: 'sm' as const, delay: 0.06 },
+  { service: 'Insights',          top: '43%', right: '10%', mTop: '23%',             mRight: '7%', size: 'md' as const, delay: 0.10 },
+  { service: 'Ads',               top: '58%', right: '13%', mTop: '35%',             mRight: '15%', size: 'sm' as const, delay: 0.14 },
+  { service: 'Content Marketing', top: '21%', right: '25%', mTop: '42%',             mRight: '8%', size: 'md' as const, delay: 0.18 },
 ];
 
 const SERVICE_DATA: Record<string, { icon: string; color: string; accent: string; subtitle: string }> = {
@@ -66,7 +66,7 @@ function ServiceNotification({
   const isPinging = activeCard === cardIndex;
 
   const iconMap = (sz: 'sm' | 'md' | 'lg', mobile = false): Record<string, React.ReactNode> => {
-    const cls = mobile ? 'w-4 h-4' : sz === 'lg' ? 'w-8 h-8' : sz === 'md' ? 'w-7 h-7' : 'w-6 h-6';
+    const cls = mobile ? 'w-5 h-5' : sz === 'lg' ? 'w-8 h-8' : sz === 'md' ? 'w-7 h-7' : 'w-6 h-6';
     return {
       LineChart:  <LineChart  className={cls} />,
       Zap:        <Zap        className={cls} />,
