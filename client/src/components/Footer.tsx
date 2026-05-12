@@ -1,8 +1,6 @@
 import { Link } from 'wouter';
 import { Linkedin, Twitter, Facebook, Mail, Phone } from 'lucide-react';
 
-const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663532599876/9u4P3ot5rXMeEQxrn76eMy/nudgewebsite_0d4b2e8a.png';
-
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -40,7 +38,19 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <div className="mb-4">
-              <img src={LOGO_URL} alt="Nudge Digital" className="h-8 w-auto" />
+              <svg width="130" height="32" viewBox="0 0 130 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NUDGE">
+                <circle cx="16" cy="16" r="16" fill="#8040B2"/>
+                <text
+                  x="38"
+                  y="16"
+                  fill="currentColor"
+                  fontFamily="-apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif"
+                  fontWeight="800"
+                  fontSize="22"
+                  letterSpacing="1.5"
+                  dominantBaseline="central"
+                >NUDGE</text>
+              </svg>
             </div>
             <p className="text-sm text-foreground/60 mb-4">
               Your Digital Marketing Strategist & Implementer
