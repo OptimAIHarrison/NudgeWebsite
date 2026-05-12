@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'wouter';
-import { Check, Search, X, Mail, Globe, BarChart3, Settings, Code, TrendingUp, Database, Smartphone, Zap, Clock, DollarSign, FileText, Target, Layers, Users, Megaphone, PenTool, Shield, RefreshCw, LineChart } from 'lucide-react';
+import { Check, Search, X, Mail, Globe, BarChart3, Settings, Code, TrendingUp, Database, Smartphone, Zap, Clock, DollarSign, FileText, Target, Layers, Users, Megaphone, Shield, RefreshCw, LineChart } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -504,7 +503,7 @@ export default function ServicesMarketplace() {
       price: 600,
       category: 'Strategy',
       tags: ['GTM', 'Strategy', 'Advisory'],
-      icon: <Rocket className="w-6 h-6" />,
+      icon: <TrendingUp className="w-6 h-6" />,
       deliverables: ['Pre-session briefing', '2hr strategy session', 'Written GTM plan', 'Channel recommendations'],
       turnaround: '5–7 days',
       fullDescription: 'A focused go-to-market engagement — starting with a briefing document, then a 2-hour working session, followed by a written plan covering channels, audiences, and launch sequencing.',
