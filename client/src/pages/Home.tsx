@@ -10,19 +10,19 @@ const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663532599876/9u4P3
 
 // Each card has its own hand-placed position — asymmetric, above the CTA, no mirroring
 const CARD_CONFIGS = [
-  // LEFT SIDE — scattered, not evenly spaced
-  { service: 'Strategy',        top: '8%',  left: '3%',   size: 'md' as const, delay: 0.0 },
-  { service: 'Automation',      top: '26%', left: '1%',   size: 'lg' as const, delay: 0.1 },
-  { service: 'Email',           top: '44%', left: '4%',   size: 'sm' as const, delay: 0.2 },
-  { service: 'Growth',          top: '57%', left: '2%',   size: 'md' as const, delay: 0.3 },
-  { service: 'Social Media',    top: '16%', left: '22%',  size: 'sm' as const, delay: 0.4 },
+  // LEFT SIDE — pulled well inward from edge, varied vertical rhythm
+  { service: 'Strategy',          top: '9%',  left: '13%',  size: 'md' as const, delay: 0.0  },
+  { service: 'Automation',        top: '28%', left: '8%',   size: 'lg' as const, delay: 0.1  },
+  { service: 'Email',             top: '46%', left: '11%',  size: 'sm' as const, delay: 0.2  },
+  { service: 'Growth',            top: '59%', left: '9%',   size: 'md' as const, delay: 0.3  },
+  { service: 'Social Media',      top: '18%', left: '26%',  size: 'sm' as const, delay: 0.4  },
 
-  // RIGHT SIDE — different heights, different insets
-  { service: 'CRM',             top: '6%',  right: '2%',  size: 'lg' as const, delay: 0.05 },
-  { service: 'SEO',             top: '22%', right: '5%',  size: 'sm' as const, delay: 0.15 },
-  { service: 'Insights',        top: '38%', right: '1%',  size: 'md' as const, delay: 0.25 },
-  { service: 'Ads',             top: '53%', right: '4%',  size: 'sm' as const, delay: 0.35 },
-  { service: 'Content Marketing', top: '14%', right: '22%', size: 'md' as const, delay: 0.45 },
+  // RIGHT SIDE — mirrored inward, different heights to avoid symmetry
+  { service: 'CRM',               top: '7%',  right: '12%', size: 'lg' as const, delay: 0.05 },
+  { service: 'SEO',               top: '24%', right: '8%',  size: 'sm' as const, delay: 0.15 },
+  { service: 'Insights',          top: '40%', right: '10%', size: 'md' as const, delay: 0.25 },
+  { service: 'Ads',               top: '55%', right: '13%', size: 'sm' as const, delay: 0.35 },
+  { service: 'Content Marketing', top: '15%', right: '25%', size: 'md' as const, delay: 0.45 },
 ];
 
 const SERVICE_DATA: Record<string, { icon: string; color: string; accent: string; subtitle: string }> = {
@@ -98,10 +98,17 @@ function ServiceNotification({
           cursor-pointer block
         `}
       >
-        {/* Bell indicator */}
-        <div className="absolute top-2 right-2.5 flex items-center gap-1">
+        {/* Bell + flashing dot indicator */}
+        <div className="absolute top-2 right-2.5 flex items-center gap-1.5">
           <Bell className="w-3 h-3 text-gray-400/70" />
-          <div className="rounded-full bg-accent/80" style={{ width: '4px', height: '4px' }} />
+          <span
+            className="rounded-full bg-accent block"
+            style={{
+              width: '8px',
+              height: '8px',
+              animation: `nudge-dot-flash 2s ease-in-out infinite ${delay * 0.4}s`,
+            }}
+          />
         </div>
 
         <div className={`flex-shrink-0 mt-0.5 ${data.accent}`}>
@@ -224,6 +231,12 @@ export default function Home() {
 
       {/* ── Hero Section ─────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <style>{`
+          @keyframes nudge-dot-flash {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.25; transform: scale(0.7); }
+          }
+        `}</style>
 
         {/* Soft lavender background — replacing the old gradient-hero image */}
         <div
