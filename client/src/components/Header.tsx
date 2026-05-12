@@ -27,11 +27,11 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
       <div className="container flex items-center justify-between h-20 md:h-24">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 flex-shrink-0 hover:opacity-80 transition-opacity">
-          <svg width="180" height="44" viewBox="0 0 180 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NUDGE">
-            <circle cx="22" cy="22" r="22" fill="#8040B2"/>
+          <svg width="190" height="36" viewBox="0 0 190 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NUDGE">
+            <circle cx="18" cy="18" r="11" fill="#8040B2"/>
             <text
-              x="52"
-              y="22"
+              x="36"
+              y="18"
               fill="currentColor"
               fontFamily="-apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif"
               fontWeight="800"
