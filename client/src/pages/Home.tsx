@@ -8,122 +8,112 @@ import { Button } from '@/components/ui/button';
 
 const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663532599876/9u4P3ot5rXMeEQxrn76eMy/nudgewebsite_0d4b2e8a.png';
 
-// Service Notification Component
-function ServiceNotification({ 
-  delay, 
-  position, 
+// Each card has its own hand-placed position — asymmetric, above the CTA, no mirroring
+const CARD_CONFIGS = [
+  // LEFT SIDE — scattered, not evenly spaced
+  { service: 'Strategy',        top: '8%',  left: '3%',   size: 'md' as const, delay: 0.0 },
+  { service: 'Automation',      top: '26%', left: '1%',   size: 'lg' as const, delay: 0.1 },
+  { service: 'Email',           top: '44%', left: '4%',   size: 'sm' as const, delay: 0.2 },
+  { service: 'Growth',          top: '57%', left: '2%',   size: 'md' as const, delay: 0.3 },
+  { service: 'Social Media',    top: '16%', left: '22%',  size: 'sm' as const, delay: 0.4 },
+
+  // RIGHT SIDE — different heights, different insets
+  { service: 'CRM',             top: '6%',  right: '2%',  size: 'lg' as const, delay: 0.05 },
+  { service: 'SEO',             top: '22%', right: '5%',  size: 'sm' as const, delay: 0.15 },
+  { service: 'Insights',        top: '38%', right: '1%',  size: 'md' as const, delay: 0.25 },
+  { service: 'Ads',             top: '53%', right: '4%',  size: 'sm' as const, delay: 0.35 },
+  { service: 'Content Marketing', top: '14%', right: '22%', size: 'md' as const, delay: 0.45 },
+];
+
+const SERVICE_DATA: Record<string, { icon: string; color: string; accent: string; subtitle: string }> = {
+  'SEO':             { icon: 'LineChart', color: 'bg-blue-200/40',    accent: 'text-blue-500',    subtitle: 'Technical optimization' },
+  'Email':           { icon: 'Zap',      color: 'bg-orange-200/40',  accent: 'text-orange-500',  subtitle: 'Automation & sequences' },
+  'CRM':             { icon: 'Database', color: 'bg-green-200/40',   accent: 'text-green-600',   subtitle: 'System setup & flows' },
+  'Ads':             { icon: 'Zap',      color: 'bg-yellow-200/40',  accent: 'text-yellow-600',  subtitle: 'Campaign management' },
+  'Insights':        { icon: 'BarChart3',color: 'bg-rose-200/40',    accent: 'text-rose-500',    subtitle: 'Actionable insights' },
+  'Strategy':        { icon: 'Target',   color: 'bg-pink-200/40',    accent: 'text-pink-500',    subtitle: 'Planning & roadmap' },
+  'Automation':      { icon: 'Rocket',   color: 'bg-cyan-200/40',    accent: 'text-cyan-600',    subtitle: 'Workflow automation' },
+  'Growth':          { icon: 'TrendingUp',color:'bg-emerald-200/40', accent: 'text-emerald-600', subtitle: 'Growth optimization' },
+  'Social Media':    { icon: 'Share2',   color: 'bg-amber-200/40',   accent: 'text-amber-600',   subtitle: 'Strategy & scheduling' },
+  'Content Marketing':{ icon:'FileText', color: 'bg-lime-200/40',    accent: 'text-lime-700',    subtitle: 'Copy, blogs & assets' },
+};
+
+function ServiceNotification({
   service,
-  size = 'md',
-  isMobile = false
-}: { 
-  delay: number; 
-  position: string;
+  size,
+  delay,
+  top,
+  left,
+  right,
+}: {
   service: string;
-  size?: 'sm' | 'md' | 'lg';
-  isMobile?: boolean;
+  size: 'sm' | 'md' | 'lg';
+  delay: number;
+  top: string;
+  left?: string;
+  right?: string;
 }) {
-  // Positions pulled inward and upward — cards orbit the centre content
-  const positionClasses: Record<string, string> = {
-    'tl':  'top-[12%]  left-[18%]  hidden lg:block z-20',
-    'tr':  'top-[12%]  right-[16%] hidden lg:block z-20',
-    'cl':  'top-[33%]  left-[10%]  hidden lg:block z-20',
-    'cr':  'top-[33%]  right-[9%]  hidden lg:block z-20',
-    'ml':  'top-[52%]  left-[12%]  hidden lg:block z-20',
-    'mr':  'top-[52%]  right-[10%] hidden lg:block z-20',
-    'bl2': 'top-[68%]  left-[18%]  hidden lg:block z-20',
-    'br2': 'top-[68%]  right-[16%] hidden lg:block z-20',
-    'bl':  'top-[80%]  left-[22%]  hidden lg:block z-20',
-    'br':  'top-[80%]  right-[20%] hidden lg:block z-20',
-    'tm':  'top-1/3    left-1/2    -translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
-    'bm':  'top-2/3    right-1/2   translate-x-1/2  -translate-y-1/2 lg:hidden z-10',
+  const data = SERVICE_DATA[service];
+
+  const iconMap: Record<string, React.ReactNode> = {
+    LineChart:  <LineChart  className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
+    Zap:        <Zap        className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
+    Database:   <Database   className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
+    BarChart3:  <BarChart3  className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
+    Target:     <Target     className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
+    Rocket:     <Rocket     className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
+    TrendingUp: <TrendingUp className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
+    Share2:     <Share2     className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
+    FileText:   <FileText   className={size === 'lg' ? 'w-8 h-8' : size === 'md' ? 'w-7 h-7' : 'w-6 h-6'} />,
   };
 
-  // Varied sizes — deliberately different to feel organic
-  const sizeClasses = {
-    'sm': isMobile ? 'w-36 p-2'  : 'w-48 p-4',
-    'md': isMobile ? 'w-44 p-3'  : 'w-56 p-5',
-    'lg': 'w-64 p-5',
-  };
-
-  const iconSize = {
-    'sm': 'w-7 h-7',
-    'md': 'w-8 h-8',
-    'lg': 'w-9 h-9',
-  };
-
-  const textSize = {
-    'sm': 'text-xs',
-    'md': 'text-sm',
-    'lg': 'text-base',
-  };
-
-  const services: Record<string, { icon: React.ReactNode; color: string; accent: string }> = {
-    'SEO':            { icon: <LineChart className={iconSize[size]} />,  color: 'bg-blue-200/50',    accent: 'text-blue-500' },
-    'Email':          { icon: <Zap className={iconSize[size]} />,        color: 'bg-orange-200/45',  accent: 'text-orange-500' },
-    'CRM':            { icon: <Database className={iconSize[size]} />,   color: 'bg-green-200/45',   accent: 'text-green-600' },
-    'Ads':            { icon: <Zap className={iconSize[size]} />,        color: 'bg-yellow-200/45',  accent: 'text-yellow-600' },
-    'Analytics':      { icon: <BarChart3 className={iconSize[size]} />,  color: 'bg-purple-200/50',  accent: 'text-purple-500' },
-    'Strategy':       { icon: <Target className={iconSize[size]} />,     color: 'bg-pink-200/45',    accent: 'text-pink-500' },
-    'Automation':     { icon: <Rocket className={iconSize[size]} />,     color: 'bg-cyan-200/45',    accent: 'text-cyan-600' },
-    'Growth':         { icon: <TrendingUp className={iconSize[size]} />, color: 'bg-emerald-200/45', accent: 'text-emerald-600' },
-    'Insights':       { icon: <BarChart3 className={iconSize[size]} />,  color: 'bg-rose-200/45',    accent: 'text-rose-500' },
-    'Social Media':   { icon: <Share2 className={iconSize[size]} />,     color: 'bg-amber-200/45',   accent: 'text-amber-600' },
-    'Content Marketing': { icon: <FileText className={iconSize[size]} />,color: 'bg-lime-200/45',    accent: 'text-lime-700' },
-  };
-
-  const subtitles: Record<string, string> = {
-    'SEO':            'Technical optimization',
-    'Email':          'Automation & sequences',
-    'CRM':            'System setup & flows',
-    'Ads':            'Campaign management',
-    'Analytics':      'Tracking & reporting',
-    'Strategy':       'Planning & roadmap',
-    'Automation':     'Workflow automation',
-    'Growth':         'Growth optimization',
-    'Insights':       'Actionable insights',
-    'Social Media':   'Strategy & scheduling',
-    'Content Marketing': 'Copy, blogs & assets',
-  };
-
-  const serviceData = services[service] || services['SEO'];
+  const widths = { sm: '176px', md: '210px', lg: '240px' };
+  const paddings = { sm: '12px 14px', md: '14px 16px', lg: '16px 18px' };
 
   return (
     <div
-      className={`absolute ${positionClasses[position]} animate-nudge-pop`}
-      style={{ animationDelay: `${delay}s`, animationDuration: '0.6s' }}
+      className="absolute hidden lg:block animate-nudge-pop"
+      style={{
+        top,
+        ...(left  ? { left  } : {}),
+        ...(right ? { right } : {}),
+        animationDelay: `${delay}s`,
+        animationDuration: '0.5s',
+        zIndex: 20,
+      }}
     >
       <Link
         href="/services"
         onClick={() => window.scrollTo(0, 0)}
+        style={{ width: widths[size], padding: paddings[size] }}
         className={`
-          ${sizeClasses[size]}
-          flex items-start gap-3
+          flex items-start gap-3 relative
           rounded-2xl
-          ${serviceData.color}
-          border border-white/40
-          shadow-lg shadow-black/5
+          ${data.color}
+          border border-white/35
+          shadow-lg shadow-black/8
           backdrop-blur-md
           transition-all duration-200 ease-out
-          hover:scale-110 hover:shadow-2xl hover:shadow-black/15 hover:border-white/70 hover:brightness-105
-          cursor-pointer
-          ${isMobile ? 'opacity-40' : 'opacity-90'}
-          block relative
+          hover:scale-[1.08] hover:shadow-xl hover:shadow-black/12 hover:border-white/60 hover:-translate-y-0.5
+          cursor-pointer block
         `}
       >
-        {/* Bell + dot — top right */}
-        {!isMobile && (
-          <div className="absolute top-2 right-2 flex items-center gap-1">
-            <Bell className="w-3 h-3 text-gray-400" style={{ animation: `pulse-notification 3s ease-in-out infinite ${delay * 0.5}s` }} />
-            <div className="rounded-full bg-accent" style={{ width: '4px', height: '4px' }}></div>
-          </div>
-        )}
-
-        <div className={`flex-shrink-0 mt-0.5 ${serviceData.accent}`}>
-          {serviceData.icon}
+        {/* Bell indicator */}
+        <div className="absolute top-2 right-2.5 flex items-center gap-1">
+          <Bell className="w-3 h-3 text-gray-400/70" />
+          <div className="rounded-full bg-accent/80" style={{ width: '4px', height: '4px' }} />
         </div>
-        <div className="min-w-0">
-          <p className={`font-semibold text-gray-800 ${textSize[size]} leading-tight`}>{service}</p>
-          <p className={`text-gray-500 ${textSize[size]} leading-tight mt-0.5`}>{subtitles[service]}</p>
+
+        <div className={`flex-shrink-0 mt-0.5 ${data.accent}`}>
+          {iconMap[data.icon]}
+        </div>
+        <div className="min-w-0 pr-4">
+          <p className={`font-semibold text-gray-800 leading-tight ${size === 'sm' ? 'text-xs' : 'text-sm'}`}>
+            {service}
+          </p>
+          <p className={`text-gray-500 leading-tight mt-0.5 ${size === 'sm' ? 'text-xs' : 'text-xs'}`}>
+            {data.subtitle}
+          </p>
         </div>
       </Link>
     </div>
@@ -133,54 +123,7 @@ function ServiceNotification({
 export default function Home() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
-  const [notifications, setNotifications] = useState<Array<{ 
-    id: number; 
-    delay: number; 
-    position: string;
-    service: string;
-    size: 'sm' | 'md' | 'lg';
-    isMobile?: boolean;
-  }>>([]);
 
-  useEffect(() => {
-    const desktopPositions = ['tl', 'tr', 'cl', 'cr', 'ml', 'mr', 'bl2', 'br2', 'bl', 'br'];
-    const mobilePositions  = ['tm', 'bm'];
-
-    // Services mapped to positions — matches image layout
-    const desktopServices = [
-      'Strategy',       // tl
-      'CRM',            // tr
-      'Automation',     // cl
-      'SEO',            // cr
-      'Email',          // ml
-      'Insights',       // mr
-      'Growth',         // bl2
-      'Ads',            // br2
-      'Social Media',   // bl
-      'Content Marketing', // br
-    ];
-    const desktopSizes: Array<'sm' | 'md' | 'lg'> = ['md', 'md', 'md', 'md', 'sm', 'sm', 'md', 'md', 'lg', 'lg'];
-
-    const desktopNotifications = desktopPositions.map((position, idx) => ({
-      id: idx,
-      delay: idx * 0.12,
-      position,
-      service: desktopServices[idx],
-      size: desktopSizes[idx],
-      isMobile: false,
-    }));
-
-    const mobileNotifications = mobilePositions.map((position, idx) => ({
-      id: desktopPositions.length + idx,
-      delay: idx * 0.2,
-      position,
-      service: ['Analytics', 'Growth'][idx],
-      size: 'sm' as const,
-      isMobile: true,
-    }));
-
-    setNotifications([...desktopNotifications, ...mobileNotifications]);
-  }, []);
 
   const testimonials = [
     {
