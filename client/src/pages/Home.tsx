@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, Lightbulb, Rocket, Target, Code, TrendingUp, CheckCircle, Bell, Database, LineChart, Zap, BarChart3, Share2, FileText } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -235,16 +235,17 @@ export default function Home() {
         {/* Subtle bottom fade into page background */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80" />
 
-        {/* Service Notification Cards — pointer-events-auto so hover & click work */}
-        <div className="absolute inset-0 z-30">
-          {notifications.map((notif) => (
+        {/* Service Notification Cards */}
+        <div className="absolute inset-0">
+          {CARD_CONFIGS.map((card) => (
             <ServiceNotification
-              key={notif.id}
-              delay={notif.delay}
-              position={notif.position}
-              service={notif.service}
-              size={notif.size}
-              isMobile={notif.isMobile}
+              key={card.service}
+              service={card.service}
+              size={card.size}
+              delay={card.delay}
+              top={card.top}
+              left={'left' in card ? card.left : undefined}
+              right={'right' in card ? card.right : undefined}
             />
           ))}
         </div>
