@@ -11,20 +11,19 @@ const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663532599876/9u4P3
 // Each card has its own hand-placed position — desktop + mobile variants
 const CARD_CONFIGS = [
   // LEFT SIDE
-  { service: 'Strategy',          top: '9%',  left: '13%',  mTop: '7%',   mLeft: '5%',             size: 'md' as const, delay: 0.0  },
-  { service: 'Automation',        top: '28%', left: '8%',   mTop: '20%',  mLeft: '2%',             size: 'lg' as const, delay: 0.1  },
-  { service: 'Email',             top: '46%', left: '11%',  mTop: '35%',  mLeft: '4%',             size: 'sm' as const, delay: 0.2  },
+  { service: 'Strategy',          top: '9%',  left: '13%',  mTop: '7%',   mLeft: ‘9%’,             size: 'md' as const, delay: 0.0  },
+  { service: 'Automation',        top: '28%', left: '8%',   mTop: '20%',  mLeft: ‘5%’,             size: 'lg' as const, delay: 0.1  },
+  { service: 'Email',             top: '46%', left: '11%',  mTop: '35%',  mLeft: ’10%’,             size: 'sm' as const, delay: 0.2  },
   { service: 'Growth',            top: '59%', left: '9%',   mTop: '50%',  mLeft: '4%',             size: 'md' as const, delay: 0.3  },
-  { service: 'Social Media',      top: '18%', left: '26%',  mTop: '64%',  mLeft: '3%',             size: 'sm' as const, delay: 0.4  },
+  { service: 'Social Media',      top: '18%', left: '26%',  mTop: '64%',  mLeft: ‘3%’,             size: 'sm' as const, delay: 0.4  },
 
   // RIGHT SIDE
-  { service: 'CRM',               top: '11%',  right: '12%', mTop: '7%',              mRight: '4%', size: 'lg' as const, delay: 0.05 },
-  { service: 'SEO',               top: '24%', right: '8%',  mTop: '20%',             mRight: '3%', size: 'sm' as const, delay: 0.15 },
-  { service: 'Insights',          top: '40%', right: '10%', mTop: '35%',             mRight: '2%', size: 'md' as const, delay: 0.25 },
-  { service: 'Ads',               top: '55%', right: '13%', mTop: '50%',             mRight: '3%', size: 'sm' as const, delay: 0.35 },
+  { service: 'CRM',               top: '11%',  right: '12%', mTop: '7%',              mRight: ’10%’, size: 'lg' as const, delay: 0.05 },
+  { service: 'SEO',               top: '24%', right: '8%',  mTop: '20%',             mRight: ‘7%’, size: 'sm' as const, delay: 0.15 },
+  { service: 'Insights',          top: '40%', right: '10%', mTop: '35%',             mRight: ‘4%’, size: 'md' as const, delay: 0.25 },
+  { service: 'Ads',               top: '55%', right: '13%', mTop: '50%',             mRight: ’12%’, size: 'sm' as const, delay: 0.35 },
   { service: 'Content Marketing', top: '21%', right: '25%', mTop: '64%',             mRight: '5%', size: 'md' as const, delay: 0.45 },
 ];
-
 
 const SERVICE_DATA: Record<string, { icon: string; color: string; accent: string; subtitle: string }> = {
   'SEO':             { icon: 'LineChart', color: 'bg-blue-200/40',    accent: 'text-blue-500',    subtitle: 'Technical optimization' },
@@ -267,32 +266,32 @@ export default function Home() {
       {/* ── Hero Section ─────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <style>{`
-          /* Dot pulse — subtle breathe */
+          /* Dot pulse — very slow breathe */
           @keyframes nudge-dot-flash {
             0%, 100% { opacity: 1;    transform: scale(1);   }
             50%       { opacity: 0.2; transform: scale(0.65); }
           }
 
-          /* Card notification flash — quick ping then settle, fires rarely */
+          /* Card notification flash — gentle lift, fires rarely */
           @keyframes nudge-card-ping {
-            0%                    { opacity: 0.92; transform: translateY(0)     scale(1);    box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
-            4%                    { opacity: 1;    transform: translateY(-4px)  scale(1.04); box-shadow: 0 12px 32px rgba(0,0,0,0.14); }
-            10%                   { opacity: 1;    transform: translateY(-2px)  scale(1.02); box-shadow: 0 8px 24px rgba(0,0,0,0.10); }
-            18%                   { opacity: 0.92; transform: translateY(0)     scale(1);    box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
-            100%                  { opacity: 0.92; transform: translateY(0)     scale(1);    box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+            0%   { opacity: 0.92; transform: translateY(0)    scale(1);    box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+            3%   { opacity: 1;    transform: translateY(-4px) scale(1.04); box-shadow: 0 12px 32px rgba(0,0,0,0.13); }
+            8%   { opacity: 1;    transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
+            14%  { opacity: 0.92; transform: translateY(0)    scale(1);    box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+            100% { opacity: 0.92; transform: translateY(0)    scale(1);    box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
           }
 
-          /* Each card gets a unique duration so they never sync up */
-          .nudge-card-0  { animation: nudge-card-ping 7s  ease-in-out infinite 0.0s;  }
-          .nudge-card-1  { animation: nudge-card-ping 11s ease-in-out infinite 1.3s;  }
-          .nudge-card-2  { animation: nudge-card-ping 9s  ease-in-out infinite 3.7s;  }
-          .nudge-card-3  { animation: nudge-card-ping 13s ease-in-out infinite 0.8s;  }
-          .nudge-card-4  { animation: nudge-card-ping 8s  ease-in-out infinite 5.1s;  }
-          .nudge-card-5  { animation: nudge-card-ping 12s ease-in-out infinite 2.4s;  }
-          .nudge-card-6  { animation: nudge-card-ping 10s ease-in-out infinite 6.6s;  }
-          .nudge-card-7  { animation: nudge-card-ping 14s ease-in-out infinite 1.9s;  }
-          .nudge-card-8  { animation: nudge-card-ping 9s  ease-in-out infinite 4.3s;  }
-          .nudge-card-9  { animation: nudge-card-ping 11s ease-in-out infinite 7.2s;  }
+          /* All cards share a ~20s cycle. Each fires 2s apart so only one pings at a time */
+          .nudge-card-0  { animation: nudge-card-ping 20s ease-in-out infinite 0s;   }
+          .nudge-card-1  { animation: nudge-card-ping 20s ease-in-out infinite 2s;   }
+          .nudge-card-2  { animation: nudge-card-ping 20s ease-in-out infinite 4s;   }
+          .nudge-card-3  { animation: nudge-card-ping 20s ease-in-out infinite 6s;   }
+          .nudge-card-4  { animation: nudge-card-ping 20s ease-in-out infinite 8s;   }
+          .nudge-card-5  { animation: nudge-card-ping 20s ease-in-out infinite 10s;  }
+          .nudge-card-6  { animation: nudge-card-ping 20s ease-in-out infinite 12s;  }
+          .nudge-card-7  { animation: nudge-card-ping 20s ease-in-out infinite 14s;  }
+          .nudge-card-8  { animation: nudge-card-ping 20s ease-in-out infinite 16s;  }
+          .nudge-card-9  { animation: nudge-card-ping 20s ease-in-out infinite 18s;  }
         `}</style>
 
         {/* Soft lavender background — replacing the old gradient-hero image */}
