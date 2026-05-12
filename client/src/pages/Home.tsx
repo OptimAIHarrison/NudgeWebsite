@@ -6,7 +6,6 @@ import SearchModal from '@/components/SearchModal';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 
-const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663532599876/9u4P3ot5rXMeEQxrn76eMy/nudgewebsite_0d4b2e8a.png';
 
 // Each card has its own hand-placed position — desktop + mobile variants
 const CARD_CONFIGS = [
@@ -39,10 +38,12 @@ const SERVICE_DATA: Record<string, { icon: string; color: string; accent: string
 };
 
 function ServiceNotification({
+function ServiceNotification({
   service,
   size,
   delay,
   cardIndex,
+  activeCard,
   top,
   left,
   right,
@@ -54,6 +55,7 @@ function ServiceNotification({
   size: 'sm' | 'md' | 'lg';
   delay: number;
   cardIndex: number;
+  activeCard: number;
   top: string;
   left?: string;
   right?: string;
@@ -62,8 +64,8 @@ function ServiceNotification({
   mRight?: string;
 }) {
   const data = SERVICE_DATA[service];
+  const isPinging = activeCard === cardIndex;
 
-  // Mobile: all icons tiny
   const iconMap = (sz: 'sm' | 'md' | 'lg', mobile = false): Record<string, React.ReactNode> => {
     const cls = mobile ? 'w-4 h-4' : sz === 'lg' ? 'w-8 h-8' : sz === 'md' ? 'w-7 h-7' : 'w-6 h-6';
     return {
@@ -86,7 +88,7 @@ function ServiceNotification({
     <>
       {/* ── Desktop card ── */}
       <div
-        className={`absolute hidden lg:block animate-nudge-pop nudge-card-${cardIndex}`}
+        className="absolute hidden lg:block animate-nudge-pop"
         style={{
           top,
           ...(left  ? { left  } : {}),
@@ -94,6 +96,10 @@ function ServiceNotification({
           animationDelay: `${delay}s`,
           animationDuration: '0.5s',
           zIndex: 20,
+          transform: isPinging ? 'translateY(-5px) scale(1.05)' : 'translateY(0) scale(1)',
+          boxShadow: isPinging ? '0 16px 40px rgba(0,0,0,0.15)' : '0 4px 16px rgba(0,0,0,0.06)',
+          opacity: isPinging ? 1 : 0.92,
+          transition: 'transform 0.35s ease, box-shadow 0.35s ease, opacity 0.35s ease',
         }}
       >
         <Link
@@ -105,10 +111,9 @@ function ServiceNotification({
             rounded-2xl
             ${data.color}
             border border-white/35
-            shadow-lg shadow-black/8
             backdrop-blur-md
             transition-all duration-200 ease-out
-            hover:scale-[1.08] hover:shadow-xl hover:shadow-black/12 hover:border-white/60 hover:-translate-y-0.5
+            hover:scale-[1.08] hover:border-white/60 hover:-translate-y-0.5
             cursor-pointer block
           `}
         >
@@ -116,7 +121,13 @@ function ServiceNotification({
             <Bell className="w-3 h-3 text-gray-400/70" />
             <span
               className="rounded-full bg-accent block"
-              style={{ width: '8px', height: '8px', animation: `nudge-dot-flash 2s ease-in-out infinite ${delay * 0.4}s` }}
+              style={{
+                width: '8px',
+                height: '8px',
+                transform: isPinging ? 'scale(1.5)' : 'scale(1)',
+                opacity: isPinging ? 1 : 0.45,
+                transition: 'transform 0.3s ease, opacity 0.3s ease',
+              }}
             />
           </div>
           <div className={`flex-shrink-0 mt-0.5 ${data.accent}`}>{iconMap(size)[data.icon]}</div>
@@ -127,7 +138,7 @@ function ServiceNotification({
         </Link>
       </div>
 
-      {/* ── Mobile card — tiny, very transparent, pointer-events-none so they don't block taps ── */}
+      {/* ── Mobile card ── */}
       {(mTop !== undefined) && (
         <div
           className="absolute block lg:hidden animate-nudge-pop"
@@ -138,19 +149,14 @@ function ServiceNotification({
             animationDelay: `${delay}s`,
             animationDuration: '0.5s',
             zIndex: 10,
-            opacity: 0.18,
+            opacity: isPinging ? 0.35 : 0.18,
+            transition: 'opacity 0.35s ease',
             pointerEvents: 'none',
           }}
         >
           <div
             style={{ width: '100px', padding: '8px 10px' }}
-            className={`
-              flex items-center gap-2 relative
-              rounded-xl
-              ${data.color}
-              border border-white/30
-              backdrop-blur-sm
-            `}
+            className={`flex items-center gap-2 relative rounded-xl ${data.color} border border-white/30 backdrop-blur-sm`}
           >
             <div className={`flex-shrink-0 ${data.accent}`}>{iconMap(size, true)[data.icon]}</div>
             <p className="font-semibold text-gray-800 leading-tight text-xs truncate">{service}</p>
@@ -319,9 +325,21 @@ export default function Home() {
         {/* Centre content */}
         <div className="container relative z-40 max-w-5xl mx-auto px-4">
           <div className="text-center space-y-6 animate-fade-in">
-            {/* Animated Logo */}
+            {/* Logo */}
             <div className="flex justify-center mb-4">
-              <img src={LOGO_URL} alt="Nudge Digital" className="h-24 w-auto animate-bounce" style={{ animationDuration: '3s' }} />
+              <svg width="220" height="56" viewBox="0 0 220 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NUDGE" className="animate-bounce" style={{ animationDuration: '3s' }}>
+                <circle cx="28" cy="28" r="28" fill="#8040B2"/>
+                <text
+                  x="66"
+                  y="28"
+                  fill="currentColor"
+                  fontFamily="-apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif"
+                  fontWeight="800"
+                  fontSize="38"
+                  letterSpacing="2"
+                  dominantBaseline="central"
+                >NUDGE</text>
+              </svg>
             </div>
 
             <div className="space-y-3">
