@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowRight, ChevronLeft, ChevronRight, Lightbulb, Rocket, Target, Code, TrendingUp, CheckCircle, Bell, Database, LineChart, Zap, BarChart3 } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Lightbulb, Rocket, Target, Code, TrendingUp, CheckCircle, Bell, Database, LineChart, Zap, BarChart3, Share2, FileText } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SearchModal from '@/components/SearchModal';
@@ -23,90 +23,107 @@ function ServiceNotification({
   isMobile?: boolean;
 }) {
   const positionClasses: Record<string, string> = {
-    'tl': 'top-1/5 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'tr': 'top-1/5 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'cl': 'top-2/5 left-1/6 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'cr': 'top-3/5 right-1/6 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'ml': 'top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'mr': 'top-1/2 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'bl2': 'top-3/4 left-1/5 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'br2': 'top-3/4 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'bl': 'top-5/6 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'br': 'top-5/6 right-1/5 translate-x-1/2 -translate-y-1/2 hidden lg:block z-20',
-    'tm': 'top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
-    'bm': 'top-2/3 right-1/2 translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
+    'tl':  'top-[18%]  left-[14%]  hidden lg:block z-20',
+    'tr':  'top-[18%]  right-[8%]  hidden lg:block z-20',
+    'cl':  'top-[38%]  left-[5%]   hidden lg:block z-20',
+    'cr':  'top-[38%]  right-[5%]  hidden lg:block z-20',
+    'ml':  'top-[57%]  left-[5%]   hidden lg:block z-20',
+    'mr':  'top-[57%]  right-[5%]  hidden lg:block z-20',
+    'bl2': 'top-[73%]  left-[8%]   hidden lg:block z-20',
+    'br2': 'top-[73%]  right-[8%]  hidden lg:block z-20',
+    'bl':  'top-[86%]  left-[14%]  hidden lg:block z-20',
+    'br':  'top-[86%]  right-[8%]  hidden lg:block z-20',
+    'tm':  'top-1/3    left-1/2    -translate-x-1/2 -translate-y-1/2 lg:hidden z-10',
+    'bm':  'top-2/3    right-1/2   translate-x-1/2  -translate-y-1/2 lg:hidden z-10',
   };
 
   const sizeClasses = {
-    'sm': isMobile ? 'max-w-xs p-2' : 'max-w-lg p-5',
-    'md': isMobile ? 'max-w-sm p-3' : 'max-w-xl p-6',
-    'lg': 'max-w-2xl p-6',
+    'sm': isMobile ? 'w-36 p-2'  : 'w-44 p-4',
+    'md': isMobile ? 'w-44 p-3'  : 'w-52 p-4',
+    'lg': 'w-60 p-5',
   };
 
   const iconSize = {
-    'sm': isMobile ? 'w-6 h-6' : 'w-8 h-8',
-    'md': isMobile ? 'w-8 h-8' : 'w-10 h-10',
-    'lg': 'w-12 h-12',
+    'sm': 'w-6 h-6',
+    'md': 'w-7 h-7',
+    'lg': 'w-8 h-8',
   };
 
   const textSize = {
-    'sm': 'text-sm',
-    'md': 'text-base',
-    'lg': 'text-lg',
+    'sm': 'text-xs',
+    'md': 'text-sm',
+    'lg': 'text-sm',
   };
 
-  const services: Record<string, { icon: React.ReactNode; color: string }> = {
-    'SEO': { icon: <LineChart className={iconSize[size]} />, color: 'from-blue-500/15 to-blue-400/5' },
-    'Email': { icon: <Zap className={iconSize[size]} />, color: 'from-orange-500/15 to-orange-400/5' },
-    'CRM': { icon: <Database className={iconSize[size]} />, color: 'from-green-500/15 to-green-400/5' },
-    'Ads': { icon: <Zap className={iconSize[size]} />, color: 'from-yellow-500/15 to-yellow-400/5' },
-    'Analytics': { icon: <BarChart3 className={iconSize[size]} />, color: 'from-purple-500/15 to-purple-400/5' },
-    'Strategy': { icon: <Target className={iconSize[size]} />, color: 'from-pink-500/15 to-pink-400/5' },
-    'Automation': { icon: <Rocket className={iconSize[size]} />, color: 'from-cyan-500/15 to-cyan-400/5' },
-    'Data': { icon: <Database className={iconSize[size]} />, color: 'from-indigo-500/15 to-indigo-400/5' },
-    'Growth': { icon: <TrendingUp className={iconSize[size]} />, color: 'from-emerald-500/15 to-emerald-400/5' },
-    'Insights': { icon: <BarChart3 className={iconSize[size]} />, color: 'from-rose-500/15 to-rose-400/5' },
+  const services: Record<string, { icon: React.ReactNode; color: string; accent: string }> = {
+    'SEO':            { icon: <LineChart className={iconSize[size]} />,  color: 'bg-blue-100/80',    accent: 'text-blue-500' },
+    'Email':          { icon: <Zap className={iconSize[size]} />,        color: 'bg-orange-100/80',  accent: 'text-orange-500' },
+    'CRM':            { icon: <Database className={iconSize[size]} />,   color: 'bg-green-100/80',   accent: 'text-green-600' },
+    'Ads':            { icon: <Zap className={iconSize[size]} />,        color: 'bg-yellow-100/80',  accent: 'text-yellow-600' },
+    'Analytics':      { icon: <BarChart3 className={iconSize[size]} />,  color: 'bg-purple-100/80',  accent: 'text-purple-500' },
+    'Strategy':       { icon: <Target className={iconSize[size]} />,     color: 'bg-pink-100/80',    accent: 'text-pink-500' },
+    'Automation':     { icon: <Rocket className={iconSize[size]} />,     color: 'bg-cyan-100/80',    accent: 'text-cyan-600' },
+    'Growth':         { icon: <TrendingUp className={iconSize[size]} />, color: 'bg-emerald-100/80', accent: 'text-emerald-600' },
+    'Insights':       { icon: <BarChart3 className={iconSize[size]} />,  color: 'bg-rose-100/80',    accent: 'text-rose-500' },
+    'Social Media':   { icon: <Share2 className={iconSize[size]} />,     color: 'bg-amber-100/80',   accent: 'text-amber-600' },
+    'Content Marketing': { icon: <FileText className={iconSize[size]} />,color: 'bg-lime-100/80',    accent: 'text-lime-700' },
+  };
+
+  const subtitles: Record<string, string> = {
+    'SEO':            'Technical optimization',
+    'Email':          'Automation & sequences',
+    'CRM':            'System setup & flows',
+    'Ads':            'Campaign management',
+    'Analytics':      'Tracking & reporting',
+    'Strategy':       'Planning & roadmap',
+    'Automation':     'Workflow automation',
+    'Growth':         'Growth optimization',
+    'Insights':       'Actionable insights',
+    'Social Media':   'Strategy & scheduling',
+    'Content Marketing': 'Copy, blogs & assets',
   };
 
   const serviceData = services[service] || services['SEO'];
 
   return (
     <div
-      className={`absolute ${positionClasses[position]} animate-nudge-pop z-5`}
-      style={{
-        animationDelay: `${delay}s`,
-        animationDuration: '0.6s',
-      }}
+      className={`absolute ${positionClasses[position]} animate-nudge-pop`}
+      style={{ animationDelay: `${delay}s`, animationDuration: '0.6s' }}
     >
-      <div className={`${sizeClasses[size]} rounded-lg backdrop-blur-sm bg-gradient-to-br ${serviceData.color} border border-white/5 ${isMobile ? 'opacity-40' : 'shadow-sm hover:shadow-md'} transition-all duration-300 group ${!isMobile && 'hover:scale-105'} relative`}>
+      <Link
+        href="/services"
+        onClick={() => window.scrollTo(0, 0)}
+        className={`
+          ${sizeClasses[size]}
+          flex items-start gap-3
+          rounded-xl
+          ${serviceData.color}
+          border border-white/60
+          shadow-md
+          backdrop-blur-sm
+          transition-all duration-200 ease-out
+          hover:scale-110 hover:shadow-xl hover:shadow-black/10 hover:border-white/90
+          cursor-pointer
+          ${isMobile ? 'opacity-50' : ''}
+          block
+        `}
+      >
+        {/* Bell + dot — top right */}
         {!isMobile && (
           <div className="absolute top-2 right-2 flex items-center gap-1">
-            <Bell className="w-3 h-3 text-accent/60" style={{ animation: `pulse-notification 3s ease-in-out infinite ${delay * 0.5}s` }} />
-            <div className="rounded-full bg-accent" style={{ width: '4px', height: '4px', animation: `pulse-notification 3s ease-in-out infinite ${delay * 0.6}s` }}></div>
+            <Bell className="w-3 h-3 text-gray-400" style={{ animation: `pulse-notification 3s ease-in-out infinite ${delay * 0.5}s` }} />
+            <div className="rounded-full bg-accent" style={{ width: '4px', height: '4px' }}></div>
           </div>
         )}
-        <div className="flex items-start gap-2 flex-1 min-w-0">
-          <div className="flex-shrink-0 mt-0.5 text-accent/50 group-hover:text-accent/70 transition-colors">
-            {serviceData.icon}
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className={`font-semibold text-foreground/80 ${textSize[size]} truncate`}>{service}</p>
-            <p className={`text-foreground/50 ${textSize[size]} leading-tight mt-0.5 line-clamp-2`}>
-              {service === 'SEO' ? 'Technical optimization' :
-               service === 'Email' ? 'Automation & sequences' :
-               service === 'CRM' ? 'System setup & flows' :
-               service === 'Ads' ? 'Campaign management' :
-               service === 'Analytics' ? 'Tracking & reporting' :
-               service === 'Strategy' ? 'Planning & roadmap' :
-               service === 'Automation' ? 'Workflow automation' :
-               service === 'Data' ? 'Data integrity & cleanup' :
-               service === 'Growth' ? 'Growth optimization' :
-               service === 'Insights' ? 'Actionable insights' :
-               'Service details'}
-            </p>
-          </div>
+
+        <div className={`flex-shrink-0 mt-0.5 ${serviceData.accent}`}>
+          {serviceData.icon}
         </div>
-      </div>
+        <div className="min-w-0">
+          <p className={`font-semibold text-gray-800 ${textSize[size]} leading-tight`}>{service}</p>
+          <p className={`text-gray-500 ${textSize[size]} leading-tight mt-0.5`}>{subtitles[service]}</p>
+        </div>
+      </Link>
     </div>
   );
 }
@@ -119,23 +136,35 @@ export default function Home() {
     delay: number; 
     position: string;
     service: string;
-    size: 'sm' | 'md';
+    size: 'sm' | 'md' | 'lg';
     isMobile?: boolean;
   }>>([]);
 
   useEffect(() => {
-    // Exact layout from image with edits applied
-    const desktopPositions = ['tl', 'tr', 'bl', 'br', 'cl', 'cr', 'ml', 'mr', 'bl2', 'br2'];
-    const mobilePositions = ['tm', 'bm'];
-    const services = ['SEO', 'CRM', 'Strategy', 'Analytics', 'Automation', 'Ads', 'Data', 'Growth', 'Insights', 'Email'];
-    const sizes: Array<'sm' | 'md' | 'lg'> = ['lg', 'md', 'md', 'md', 'md', 'sm', 'sm', 'md', 'md', 'sm'];
+    const desktopPositions = ['tl', 'tr', 'cl', 'cr', 'ml', 'mr', 'bl2', 'br2', 'bl', 'br'];
+    const mobilePositions  = ['tm', 'bm'];
+
+    // Services mapped to positions — matches image layout
+    const desktopServices = [
+      'Strategy',       // tl
+      'CRM',            // tr
+      'Automation',     // cl
+      'SEO',            // cr
+      'Email',          // ml
+      'Insights',       // mr
+      'Growth',         // bl2
+      'Ads',            // br2
+      'Social Media',   // bl
+      'Content Marketing', // br
+    ];
+    const desktopSizes: Array<'sm' | 'md' | 'lg'> = ['md', 'md', 'md', 'md', 'sm', 'sm', 'md', 'md', 'lg', 'lg'];
 
     const desktopNotifications = desktopPositions.map((position, idx) => ({
       id: idx,
-      delay: idx * 0.15,
+      delay: idx * 0.12,
       position,
-      service: services[idx],
-      size: sizes[idx],
+      service: desktopServices[idx],
+      size: desktopSizes[idx],
       isMobile: false,
     }));
 
@@ -143,8 +172,8 @@ export default function Home() {
       id: desktopPositions.length + idx,
       delay: idx * 0.2,
       position,
-      service: services[idx + 6],
-      size: idx === 0 ? 'sm' : 'md',
+      service: ['Analytics', 'Growth'][idx],
+      size: 'sm' as const,
       isMobile: true,
     }));
 
@@ -248,21 +277,25 @@ export default function Home() {
       <Header onSearchOpen={() => setSearchOpen(true)} />
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
-      {/* Hero Section */}
+      {/* ── Hero Section ─────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 gradient-hero opacity-60"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background"></div>
 
-        {/* Floating background elements */}
-        <div className="absolute top-20 right-10 w-72 h-72 bg-accent/20 rounded-full blur-3xl opacity-30 animate-float"></div>
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
+        {/* Soft lavender background — replacing the old gradient-hero image */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse 80% 70% at 50% 40%, #e8e0f5 0%, #ddd6f0 35%, #cec6e8 65%, #bfb8dc 100%)',
+          }}
+        />
+        {/* Subtle bottom fade into page background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80" />
 
-        {/* Service Notification Cards */}
-        <div className="absolute inset-0 pointer-events-none z-30">
+        {/* Service Notification Cards — pointer-events-auto so hover & click work */}
+        <div className="absolute inset-0 z-30">
           {notifications.map((notif) => (
-            <ServiceNotification 
-              key={notif.id} 
-              delay={notif.delay} 
+            <ServiceNotification
+              key={notif.id}
+              delay={notif.delay}
               position={notif.position}
               service={notif.service}
               size={notif.size}
@@ -271,6 +304,7 @@ export default function Home() {
           ))}
         </div>
 
+        {/* Centre content */}
         <div className="container relative z-40 max-w-5xl mx-auto px-4">
           <div className="text-center space-y-6 animate-fade-in">
             {/* Animated Logo */}
@@ -319,7 +353,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* What I Do Best */}
+      {/* ── What I Do Best ───────────────────────────────────────── */}
       <section className="py-20 md:py-32 bg-secondary/30">
         <div className="container">
           <div className="text-center mb-16">
@@ -343,7 +377,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* ── Testimonials ─────────────────────────────────────────── */}
       <section className="py-20 md:py-32 bg-background">
         <div className="container">
           <div className="text-center mb-16">
@@ -395,7 +429,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Case Studies */}
+      {/* ── Case Studies ─────────────────────────────────────────── */}
       <section className="py-20 md:py-32 bg-secondary/30">
         <div className="container">
           <div className="text-center mb-16">
@@ -411,7 +445,7 @@ export default function Home() {
                 <div className="mb-6">
                   <p className="text-sm text-accent font-semibold mb-2">CASE STUDY</p>
                   <h3 className="text-2xl font-bold text-foreground mb-4">{study.company}</h3>
-                  
+
                   <div className="space-y-4">
                     <div>
                       <p className="text-sm text-foreground/60 mb-1">Challenge</p>
@@ -443,7 +477,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Work With Me */}
+      {/* ── Why Work With Me ─────────────────────────────────────── */}
       <section className="py-20 md:py-32 bg-gradient-to-r from-accent/5 to-accent/10">
         <div className="container">
           <div className="text-center mb-12">
