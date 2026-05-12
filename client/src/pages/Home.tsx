@@ -11,17 +11,17 @@ const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663532599876/9u4P3
 // Each card has its own hand-placed position — desktop + mobile variants
 const CARD_CONFIGS = [
   // LEFT SIDE
-  { service: 'Strategy',          top: '9%',  left: '13%',  mTop: '7%',   mLeft: ‘9%’,             size: 'md' as const, delay: 0.0  },
-  { service: 'Automation',        top: '28%', left: '8%',   mTop: '20%',  mLeft: ‘5%’,             size: 'lg' as const, delay: 0.1  },
-  { service: 'Email',             top: '46%', left: '11%',  mTop: '35%',  mLeft: ’10%’,             size: 'sm' as const, delay: 0.2  },
+  { service: 'Strategy',          top: '9%',  left: '13%',  mTop: '7%',   mLeft: '9%',             size: 'md' as const, delay: 0.0  },
+  { service: 'Automation',        top: '28%', left: '8%',   mTop: '20%',  mLeft: '5%',             size: 'lg' as const, delay: 0.1  },
+  { service: 'Email',             top: '46%', left: '11%',  mTop: '35%',  mLeft: '10%',             size: 'sm' as const, delay: 0.2  },
   { service: 'Growth',            top: '59%', left: '9%',   mTop: '50%',  mLeft: '4%',             size: 'md' as const, delay: 0.3  },
-  { service: 'Social Media',      top: '18%', left: '26%',  mTop: '64%',  mLeft: ‘3%’,             size: 'sm' as const, delay: 0.4  },
+  { service: 'Social Media',      top: '18%', left: '26%',  mTop: '64%',  mLeft: '3%',             size: 'sm' as const, delay: 0.4  },
 
   // RIGHT SIDE
-  { service: 'CRM',               top: '11%',  right: '12%', mTop: '7%',              mRight: ’10%’, size: 'lg' as const, delay: 0.05 },
-  { service: 'SEO',               top: '24%', right: '8%',  mTop: '20%',             mRight: ‘7%’, size: 'sm' as const, delay: 0.15 },
-  { service: 'Insights',          top: '40%', right: '10%', mTop: '35%',             mRight: ‘4%’, size: 'md' as const, delay: 0.25 },
-  { service: 'Ads',               top: '55%', right: '13%', mTop: '50%',             mRight: ’12%’, size: 'sm' as const, delay: 0.35 },
+  { service: 'CRM',               top: '11%',  right: '12%', mTop: '7%',              mRight: '10%', size: 'lg' as const, delay: 0.05 },
+  { service: 'SEO',               top: '24%', right: '8%',  mTop: '20%',             mRight: '7%', size: 'sm' as const, delay: 0.15 },
+  { service: 'Insights',          top: '40%', right: '10%', mTop: '35%',             mRight: '4%', size: 'md' as const, delay: 0.25 },
+  { service: 'Ads',               top: '55%', right: '13%', mTop: '50%',             mRight: '12%', size: 'sm' as const, delay: 0.35 },
   { service: 'Content Marketing', top: '21%', right: '25%', mTop: '64%',             mRight: '5%', size: 'md' as const, delay: 0.45 },
 ];
 
