@@ -87,7 +87,7 @@ function ServiceNotification({
     <>
       {/* ── Desktop card ── */}
       <div
-        className="absolute hidden lg:block animate-nudge-pop"
+        className="absolute hidden lg:block animate-nudge-pop rounded-2xl overflow-hidden"
         style={{
           top,
           ...(left  ? { left  } : {}),
@@ -99,6 +99,7 @@ function ServiceNotification({
           boxShadow: isPinging ? '0 16px 40px rgba(0,0,0,0.15)' : '0 4px 16px rgba(0,0,0,0.06)',
           opacity: isPinging ? 1 : 0.92,
           transition: 'transform 0.35s ease, box-shadow 0.35s ease, opacity 0.35s ease',
+          background: 'transparent',
         }}
       >
         <Link
@@ -171,23 +172,30 @@ export default function Home() {
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [activeCard, setActiveCard] = useState(0);
 
-  // Advance one card at a time — 1.2s ping on, then 3s rest before next
+  // Sporadic pings — random card, 600ms flash, 800–1800ms random gap
   useEffect(() => {
-    let cardIdx = 0;
     let timeoutId: ReturnType<typeof setTimeout>;
+    const total = CARD_CONFIGS.length;
+    let lastIdx = -1;
 
-    const next = () => {
-      setActiveCard(cardIdx);
-      cardIdx = (cardIdx + 1) % CARD_CONFIGS.length;
-      // card stays "active" for 1200ms, then 3000ms silence before the next one
+    const ping = () => {
+      // Pick a random card, never the same one twice in a row
+      let idx: number;
+      do { idx = Math.floor(Math.random() * total); } while (idx === lastIdx);
+      lastIdx = idx;
+
+      setActiveCard(idx);
+
+      // Flash on for 600ms, then off
       timeoutId = setTimeout(() => {
         setActiveCard(-1);
-        timeoutId = setTimeout(next, 3000);
-      }, 1200);
+        // Random gap between 800ms and 1800ms before next ping
+        const gap = 800 + Math.random() * 1000;
+        timeoutId = setTimeout(ping, gap);
+      }, 600);
     };
 
-    // Small initial delay so page loads before anything fires
-    timeoutId = setTimeout(next, 1500);
+    timeoutId = setTimeout(ping, 800);
     return () => clearTimeout(timeoutId);
   }, []);
 
@@ -326,15 +334,32 @@ export default function Home() {
           <div className="text-center space-y-6 animate-fade-in">
             {/* Logo */}
             <div className="flex justify-center mb-4">
-              <svg width="240" height="50" viewBox="0 0 240 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NUDGE" className="animate-bounce" style={{ animationDuration: '3s' }}>
-                <circle cx="25" cy="25" r="14" fill="#8040B2"/>
+              <style>{`
+                @keyframes nudge-bounce {
+                  0%, 100% { transform: translateY(0); animation-timing-function: cubic-bezier(0.8,0,1,1); }
+                  50%       { transform: translateY(-18px); animation-timing-function: cubic-bezier(0,0,0.2,1); }
+                }
+                .nudge-logo-bounce { animation: nudge-bounce 1.4s infinite; }
+              `}</style>
+              <svg
+                width="320" height="64"
+                viewBox="0 0 320 64"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="NUDGE"
+                className="nudge-logo-bounce"
+              >
+                {/* Circle vertically centred to text cap-height.
+                    fontSize=52, cap≈37px, r=18.5 → use r=19.
+                    Text baseline at y=32 (mid). Circle cy=32. */}
+                <circle cx="19" cy="32" r="19" fill="#8040B2"/>
                 <text
-                  x="46"
-                  y="25"
+                  x="48"
+                  y="32"
                   fill="currentColor"
                   fontFamily="-apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif"
                   fontWeight="800"
-                  fontSize="38"
+                  fontSize="52"
                   letterSpacing="2"
                   dominantBaseline="central"
                 >NUDGE</text>
