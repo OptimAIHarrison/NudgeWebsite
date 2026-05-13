@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, Search, X, Mail, Globe, BarChart3, Settings, Code, TrendingUp, Database, Smartphone, Zap, Clock, FileText, Target, Layers, Users, Megaphone, Shield, RefreshCw, LineChart, Star, Package } from 'lucide-react';
+import { Check, Search, X, Mail, Globe, BarChart3, Settings, Code, TrendingUp, Database, Smartphone, Zap, Clock, FileText, Target, Layers, Users, Megaphone, Shield, RefreshCw, LineChart, Star, Package, Send } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -21,6 +21,16 @@ interface Service {
   isPopular?: boolean;
 }
 
+interface EnquiryForm {
+  name: string;
+  email: string;
+  company: string;
+  message: string;
+  submitted: boolean;
+  submitting: boolean;
+  error: string;
+}
+
 const CATEGORY_ICONS: Record<string, React.ReactNode> = {
   'all':             <Package    className="w-4 h-4" />,
   'Email':           <Mail       className="w-4 h-4" />,
@@ -38,6 +48,10 @@ export default function ServicesMarketplace() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [showEnquiry, setShowEnquiry] = useState(false);
+  const [form, setForm] = useState<EnquiryForm>({
+    name: '', email: '', company: '', message: '', submitted: false, submitting: false, error: '',
+  });
 
   const services: Service[] = [
 
@@ -722,13 +736,43 @@ export default function ServicesMarketplace() {
     return 0;
   });
 
-  const handleServiceClick = (service: Service) => {
+  const openModal = (service: Service) => {
     setSelectedService(service);
+    setShowEnquiry(false);
+    setForm({ name: '', email: '', company: '', message: '', submitted: false, submitting: false, error: '' });
     setShowModal(true);
   };
 
-  const handleEnquire = (service: Service) => {
-    window.location.href = `/contact?service=${encodeURIComponent(service.name)}&price=${service.price}`;
+  const closeModal = () => {
+    setShowModal(false);
+    setShowEnquiry(false);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedService) return;
+    setForm(f => ({ ...f, submitting: true, error: '' }));
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          company: form.company,
+          message: form.message,
+          service: selectedService.name,
+          price: `A$${selectedService.price.toLocaleString()}`,
+        }),
+      });
+      if (res.ok) {
+        setForm(f => ({ ...f, submitted: true, submitting: false }));
+      } else {
+        throw new Error('Failed');
+      }
+    } catch {
+      setForm(f => ({ ...f, submitting: false, error: 'Something went wrong. Please try again or email us directly.' }));
+    }
   };
 
   return (
@@ -751,39 +795,35 @@ export default function ServicesMarketplace() {
         </div>
       </section>
 
-      {/* ── Sticky Filter Bar ────────────────────────────────────────── */}
       <div className="sticky top-24 z-30 bg-background/95 backdrop-blur-sm border-b border-border shadow-sm">
-        <div className="container max-w-7xl mx-auto px-4 py-4">
-          <div className="flex flex-col sm:flex-row gap-3 items-center">
-            {/* Search */}
-            <div className="relative flex-shrink-0 w-full sm:w-56">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40" />
-              <input
-                type="text"
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-secondary border-2 border-border text-foreground placeholder-foreground/40 focus:outline-none focus:border-accent text-sm transition-colors"
-              />
-            </div>
-
-            {/* Category Pills */}
-            <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-              {categories.map(cat => (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-150 border-2 ${
-                    selectedCategory === cat
-                      ? 'bg-accent text-white border-accent shadow-md'
-                      : 'bg-background text-foreground/70 border-foreground/20 hover:border-accent hover:text-accent'
-                  }`}
-                >
-                  {CATEGORY_ICONS[cat]}
-                  <span>{cat === 'all' ? 'All' : cat}</span>
-                </button>
-              ))}
-            </div>
+        <div className="container max-w-7xl mx-auto px-4 py-3 space-y-3">
+          {/* Search — above the category pills */}
+          <div className="relative max-w-sm">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40" />
+            <input
+              type="text"
+              placeholder="Search services..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-secondary border-2 border-border text-foreground placeholder-foreground/40 focus:outline-none focus:border-accent text-sm transition-colors"
+            />
+          </div>
+          {/* Category pills — single scrollable row */}
+          <div className="flex flex-nowrap gap-2 overflow-x-auto pb-1 scrollbar-hide">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-150 border-2 whitespace-nowrap flex-shrink-0 ${
+                  selectedCategory === cat
+                    ? 'bg-accent text-white border-accent shadow-md'
+                    : 'bg-background text-foreground/70 border-foreground/20 hover:border-accent hover:text-accent'
+                }`}
+              >
+                {CATEGORY_ICONS[cat]}
+                <span>{cat === 'all' ? 'All' : cat}</span>
+              </button>
+            ))}
           </div>
         </div>
       </div>
@@ -815,27 +855,17 @@ export default function ServicesMarketplace() {
               {sortedServices.map(service => (
                 <div
                   key={service.id}
-                  onClick={() => handleServiceClick(service)}
-                  className={`relative flex flex-col rounded-2xl border-2 bg-background cursor-pointer transition-all duration-200 overflow-hidden
-                    hover:shadow-xl hover:-translate-y-1
-                    ${service.isFeatured
-                      ? 'border-accent shadow-md shadow-accent/15'
-                      : 'border-border hover:border-accent/60'
-                    }`}
+                  onClick={() => openModal(service)}
+                  className="relative flex flex-col rounded-2xl border-2 border-accent/40 bg-background cursor-pointer transition-all duration-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 hover:border-accent"
                 >
-                  {/* Accent top bar for featured */}
+                  {/* Full Suite badge — no top bar */}
                   {service.isFeatured && (
-                    <div className="h-1 bg-gradient-to-r from-accent to-accent/50 w-full" />
-                  )}
-
-                  {/* Badges */}
-                  {service.isFeatured && (
-                    <div className="absolute top-4 right-4 flex items-center gap-1 px-2.5 py-1 bg-accent text-white text-xs font-bold rounded-full shadow">
+                    <div className="absolute top-4 right-4 flex items-center gap-1 px-2.5 py-1 bg-accent text-white text-xs font-bold rounded-full shadow z-10">
                       <Star className="w-3 h-3" /> Full Suite
                     </div>
                   )}
                   {service.isPopular && !service.isFeatured && (
-                    <div className="absolute top-4 right-4 px-2.5 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full border border-accent/25">
+                    <div className="absolute top-4 right-4 px-2.5 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full border border-accent/25 z-10">
                       Popular
                     </div>
                   )}
@@ -843,7 +873,7 @@ export default function ServicesMarketplace() {
                   <div className="p-6 flex flex-col flex-1">
                     {/* Icon + category row */}
                     <div className="flex items-center gap-3 mb-4">
-                      <div className={`p-2.5 rounded-xl ${service.isFeatured ? 'bg-accent/15 text-accent' : 'bg-secondary text-foreground/60'}`}>
+                      <div className="p-2.5 rounded-xl bg-accent/10 text-accent">
                         {service.icon}
                       </div>
                       <span className="text-xs font-semibold text-foreground/40 uppercase tracking-widest">{service.category}</span>
@@ -888,13 +918,9 @@ export default function ServicesMarketplace() {
                       </div>
 
                       <Button
-                        onClick={(e) => { e.stopPropagation(); handleServiceClick(service); }}
+                        onClick={(e) => { e.stopPropagation(); openModal(service); }}
                         size="sm"
-                        className={`w-full font-semibold transition-all ${
-                          service.isFeatured
-                            ? 'bg-accent hover:bg-accent/90 text-white'
-                            : 'bg-secondary text-foreground border-2 border-border hover:border-accent hover:bg-accent hover:text-white'
-                        }`}
+                        className="w-full font-semibold bg-accent/10 text-accent border-2 border-accent/40 hover:bg-accent hover:text-white hover:border-accent transition-all"
                       >
                         View Details & Enquire
                       </Button>
@@ -944,7 +970,7 @@ export default function ServicesMarketplace() {
                   <h2 className="text-xl font-bold text-foreground leading-tight">{selectedService.name}</h2>
                 </div>
               </div>
-              <button onClick={() => setShowModal(false)} className="text-foreground/35 hover:text-foreground transition-colors p-1 flex-shrink-0 ml-2">
+              <button onClick={closeModal} className="text-foreground/35 hover:text-foreground transition-colors p-1 flex-shrink-0 ml-2">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -999,22 +1025,108 @@ export default function ServicesMarketplace() {
                 ))}
               </div>
 
-              {/* Actions */}
-              <div className="flex gap-3 pt-2 border-t border-border">
-                <Button
-                  onClick={() => handleEnquire(selectedService)}
-                  className="flex-1 bg-accent hover:bg-accent/90 text-white font-semibold py-5"
-                >
-                  <Mail className="w-4 h-4 mr-2" />
-                  Enquire About This Service
-                </Button>
-                <button
-                  onClick={() => setShowModal(false)}
-                  className="px-5 py-2 border-2 border-border rounded-xl text-foreground hover:border-accent/50 transition-colors text-sm font-medium"
-                >
-                  Close
-                </button>
-              </div>
+              {/* Enquire CTA or inline form */}
+              {!showEnquiry ? (
+                <div className="flex gap-3 pt-2 border-t border-border">
+                  <Button
+                    onClick={() => setShowEnquiry(true)}
+                    className="flex-1 bg-accent hover:bg-accent/90 text-white font-semibold py-5"
+                  >
+                    <Mail className="w-4 h-4 mr-2" />
+                    Enquire About This Service
+                  </Button>
+                  <button
+                    onClick={closeModal}
+                    className="px-5 py-2 border-2 border-border rounded-xl text-foreground hover:border-accent/50 transition-colors text-sm font-medium"
+                  >
+                    Close
+                  </button>
+                </div>
+              ) : (
+                <div className="pt-2 border-t border-border space-y-4">
+                  <div className="bg-accent/5 border border-accent/20 rounded-xl p-4">
+                    <p className="text-xs font-semibold text-accent uppercase tracking-wide mb-0.5">Enquiring about</p>
+                    <p className="font-bold text-foreground">{selectedService.name}</p>
+                    <p className="text-xs text-foreground/50 mt-0.5">A${selectedService.price.toLocaleString()}{selectedService.priceNote ? ` · ${selectedService.priceNote}` : ''}</p>
+                  </div>
+
+                  {form.submitted ? (
+                    <div className="text-center py-8">
+                      <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                        <Check className="w-7 h-7 text-accent" />
+                      </div>
+                      <h3 className="font-bold text-foreground text-lg mb-2">Enquiry sent!</h3>
+                      <p className="text-foreground/60 text-sm">We'll be in touch within 1 business day.</p>
+                      <button onClick={closeModal} className="mt-5 text-accent underline text-sm">Close</button>
+                    </div>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="space-y-3">
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="text-xs font-semibold text-foreground/50 uppercase tracking-wide block mb-1">Name *</label>
+                          <input
+                            required
+                            type="text"
+                            value={form.name}
+                            onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                            placeholder="Your name"
+                            className="w-full px-3 py-2.5 rounded-lg bg-secondary border-2 border-border text-foreground placeholder-foreground/35 focus:outline-none focus:border-accent text-sm transition-colors"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs font-semibold text-foreground/50 uppercase tracking-wide block mb-1">Email *</label>
+                          <input
+                            required
+                            type="email"
+                            value={form.email}
+                            onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                            placeholder="you@company.com"
+                            className="w-full px-3 py-2.5 rounded-lg bg-secondary border-2 border-border text-foreground placeholder-foreground/35 focus:outline-none focus:border-accent text-sm transition-colors"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-xs font-semibold text-foreground/50 uppercase tracking-wide block mb-1">Company</label>
+                        <input
+                          type="text"
+                          value={form.company}
+                          onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
+                          placeholder="Company name (optional)"
+                          className="w-full px-3 py-2.5 rounded-lg bg-secondary border-2 border-border text-foreground placeholder-foreground/35 focus:outline-none focus:border-accent text-sm transition-colors"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs font-semibold text-foreground/50 uppercase tracking-wide block mb-1">Message</label>
+                        <textarea
+                          rows={3}
+                          value={form.message}
+                          onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+                          placeholder="Anything you'd like us to know before we chat..."
+                          className="w-full px-3 py-2.5 rounded-lg bg-secondary border-2 border-border text-foreground placeholder-foreground/35 focus:outline-none focus:border-accent text-sm transition-colors resize-none"
+                        />
+                      </div>
+                      {form.error && <p className="text-xs text-red-500">{form.error}</p>}
+                      <div className="flex gap-3 pt-1">
+                        <Button
+                          type="submit"
+                          disabled={form.submitting}
+                          className="flex-1 bg-accent hover:bg-accent/90 text-white font-semibold py-5 disabled:opacity-60"
+                        >
+                          <Send className="w-4 h-4 mr-2" />
+                          {form.submitting ? 'Sending...' : 'Send Enquiry'}
+                        </Button>
+                        <button
+                          type="button"
+                          onClick={() => setShowEnquiry(false)}
+                          className="px-4 py-2 border-2 border-border rounded-xl text-foreground hover:border-accent/50 transition-colors text-sm font-medium"
+                        >
+                          Back
+                        </button>
+                      </div>
+                    </form>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
