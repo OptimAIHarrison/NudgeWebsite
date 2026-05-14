@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowRight, Lightbulb, Target, Code, TrendingUp, Bell, Database, LineChart, Zap, BarChart3, Share2, FileText } from 'lucide-react';
+import { ArrowRight, Lightbulb, Target, Rocket, Code, TrendingUp, Bell, Database, LineChart, Zap, BarChart3, Share2, FileText } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SearchModal from '@/components/SearchModal';
