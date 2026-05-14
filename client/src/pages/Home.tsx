@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowRight, ChevronLeft, ChevronRight, Lightbulb, Rocket, Target, Code, TrendingUp, CheckCircle, Bell, Database, LineChart, Zap, BarChart3, Share2, FileText } from 'lucide-react';
+import { ArrowRight, Lightbulb, Target, Code, TrendingUp, Bell, Database, LineChart, Zap, BarChart3, Share2, FileText } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SearchModal from '@/components/SearchModal';
@@ -169,7 +169,6 @@ function ServiceNotification({
 
 export default function Home() {
   const [searchOpen, setSearchOpen] = useState(false);
-  const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [activeCard, setActiveCard] = useState(0);
 
   // Sporadic pings — random card, 600ms flash, 800–1800ms random gap
@@ -179,17 +178,12 @@ export default function Home() {
     let lastIdx = -1;
 
     const ping = () => {
-      // Pick a random card, never the same one twice in a row
       let idx: number;
       do { idx = Math.floor(Math.random() * total); } while (idx === lastIdx);
       lastIdx = idx;
-
       setActiveCard(idx);
-
-      // Flash on for 600ms, then off
       timeoutId = setTimeout(() => {
         setActiveCard(-1);
-        // Random gap between 800ms and 1800ms before next ping
         const gap = 800 + Math.random() * 1000;
         timeoutId = setTimeout(ping, gap);
       }, 600);
@@ -198,99 +192,6 @@ export default function Home() {
     timeoutId = setTimeout(ping, 800);
     return () => clearTimeout(timeoutId);
   }, []);
-
-
-  const testimonials = [
-    {
-      id: 1,
-      company: 'TechStart Co',
-      quote: 'Harrison fixed our tracking issues and we saw a 45% improvement in lead quality within 3 months.',
-      author: 'Sarah Chen',
-      role: 'Marketing Director',
-    },
-    {
-      id: 2,
-      company: 'Growth Ventures',
-      quote: 'His technical expertise solved problems that were costing us thousands monthly.',
-      author: 'Michael Roberts',
-      role: 'CEO',
-    },
-    {
-      id: 3,
-      company: 'Digital Agency Pro',
-      quote: 'As an agency, we rely on Harrison for specialized technical implementation. He delivers every time.',
-      author: 'Emma Wilson',
-      role: 'Agency Director',
-    },
-  ];
-
-  const caseStudies = [
-    {
-      id: 1,
-      company: 'E-commerce Brand',
-      challenge: 'Broken tracking and low conversion rates',
-      solution: 'Implemented GA4, fixed funnel issues, optimized checkout',
-      result: '+67% Conversions',
-      metric: '$500K+ Additional Revenue',
-    },
-    {
-      id: 2,
-      company: 'SaaS Company',
-      challenge: 'Manual workflows wasting 40 hours/week',
-      solution: 'Built CRM automation and email sequences',
-      result: '40 Hours/Week Saved',
-      metric: '$120K Annual Savings',
-    },
-    {
-      id: 3,
-      company: 'Marketing Agency',
-      challenge: 'Clients needed technical SEO expertise',
-      solution: 'Provided fractional technical SEO services',
-      result: '+3 New Revenue Streams',
-      metric: '$50K+ Monthly Revenue',
-    },
-  ];
-
-  const whatIDosBest = [
-    {
-      title: 'Solving Technical Problems',
-      description: 'Fixing tracking, data integrity, and technical SEO issues that agencies overlook.',
-      icon: <Code className="w-8 h-8" />,
-    },
-    {
-      title: 'Creating Systems',
-      description: 'Building automated workflows, CRM systems, and marketing operations that scale.',
-      icon: <Rocket className="w-8 h-8" />,
-    },
-    {
-      title: 'Strategy & Implementation',
-      description: 'Not just planning—actually executing and delivering measurable results.',
-      icon: <Target className="w-8 h-8" />,
-    },
-    {
-      title: 'Ideation & Creation',
-      description: 'Developing new approaches, creative solutions, and innovative implementations.',
-      icon: <Lightbulb className="w-8 h-8" />,
-    },
-    {
-      title: 'Fractional Leadership',
-      description: 'Senior-level expertise without the overhead of a full-time hire or agency costs.',
-      icon: <TrendingUp className="w-8 h-8" />,
-    },
-    {
-      title: 'Trusted Partnership',
-      description: 'One person you can trust. No agency layers, no hidden costs, just results.',
-      icon: <CheckCircle className="w-8 h-8" />,
-    },
-  ];
-
-  const nextTestimonial = () => {
-    setTestimonialIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -407,144 +308,235 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── What I Do Best ───────────────────────────────────────── */}
-      <section className="py-20 md:py-32 bg-secondary/30">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">What I Do Best</h2>
-            <p className="text-xl text-foreground/60 max-w-2xl mx-auto">
-              I handle everything from SEO and email marketing to CRM setup, automation, and complete digital strategy.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {whatIDosBest.map((item, idx) => (
-              <div key={idx} className="glass-card group hover:scale-105 transition-transform p-8">
-                <div className="p-4 rounded-lg bg-accent/10 text-accent group-hover:bg-accent/20 transition-colors w-fit mb-4">
-                  {item.icon}
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">{item.title}</h3>
-                <p className="text-foreground/60">{item.description}</p>
+      {/* ── Credibility bar ──────────────────────────────────────── */}
+      <section className="py-10 border-b border-border bg-background">
+        <div className="container max-w-5xl mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            {[
+              { stat: '10+', label: 'Years in digital marketing' },
+              { stat: '32+', label: 'Services across 5 disciplines' },
+              { stat: '1', label: 'Person. Full accountability.' },
+              { stat: '40+', label: 'MarTech tools in the stack' },
+            ].map((s, i) => (
+              <div key={i}>
+                <p className="text-3xl font-extrabold text-accent leading-none mb-1">{s.stat}</p>
+                <p className="text-xs text-foreground/50 leading-tight">{s.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Testimonials ─────────────────────────────────────────── */}
-      <section className="py-20 md:py-32 bg-background">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">What Clients Say</h2>
-            <p className="text-xl text-foreground/60 max-w-2xl mx-auto">
-              Real feedback from people I've worked with.
-            </p>
-          </div>
-
-          <div className="max-w-3xl mx-auto">
-            <div className="glass-card p-12">
-              <div className="mb-8">
-                <p className="text-2xl text-foreground italic mb-6">"{testimonials[testimonialIndex].quote}"</p>
-                <div>
-                  <p className="font-semibold text-foreground">{testimonials[testimonialIndex].author}</p>
-                  <p className="text-foreground/60">{testimonials[testimonialIndex].role} at {testimonials[testimonialIndex].company}</p>
+      {/* ── The problem I solve ───────────────────────────────────── */}
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container max-w-6xl mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <span className="text-xs font-bold text-accent uppercase tracking-widest mb-4 block">The gap I fill</span>
+              <h2 className="text-4xl md:text-5xl font-extrabold text-foreground leading-tight mb-6">
+                Agencies miss the details.<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/60">I live in them.</span>
+              </h2>
+              <p className="text-foreground/65 leading-relaxed mb-6">
+                Most agencies sell strategy. What actually breaks businesses is the execution — broken tracking, disconnected tools, automations that half-work, data nobody trusts. I fix the things that quietly cost you every day, and build the systems that actually scale.
+              </p>
+              <p className="text-foreground/65 leading-relaxed mb-8">
+                Not a junior getting their reps in. Not a generalist with a nice deck. A senior operator who's run departments, navigated crises, and delivered across every channel — now working directly for you.
+              </p>
+              <Link href="/about" onClick={() => window.scrollTo(0, 0)}>
+                <div className="flex items-center gap-2 text-sm font-bold text-accent hover:gap-3 transition-all cursor-pointer group">
+                  About me <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <button
-                  onClick={prevTestimonial}
-                  className="p-2 hover:bg-accent/10 rounded-lg transition-colors"
-                >
-                  <ChevronLeft className="w-6 h-6 text-accent" />
-                </button>
-
-                <div className="flex gap-2">
-                  {testimonials.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setTestimonialIndex(idx)}
-                      className={`w-2 h-2 rounded-full transition-all ${
-                        idx === testimonialIndex ? 'bg-accent w-8' : 'bg-accent/30'
-                      }`}
-                    />
-                  ))}
+              </Link>
+            </div>
+            <div className="space-y-3">
+              {[
+                { problem: 'Tracking that lies to you', fix: 'GA4, GTM, attribution — rebuilt from scratch and validated' },
+                { problem: 'Manual workflows eating hours', fix: 'CRM automation, email sequences, AI-assisted processes' },
+                { problem: 'Paid media spend with no visibility', fix: 'Proper attribution, ROAS clarity, audience strategy' },
+                { problem: 'SEO done once and forgotten', fix: 'Technical foundation, keyword mapping, content that ranks' },
+                { problem: 'Strategy with no execution', fix: 'I write the plan and deliver it — no hand-offs' },
+              ].map((row, i) => (
+                <div key={i} className="rounded-xl border-2 border-border hover:border-accent/40 bg-background p-4 transition-all group">
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full border-2 border-foreground/20 group-hover:border-accent transition-colors flex items-center justify-center">
+                      <div className="w-2 h-2 rounded-full bg-foreground/20 group-hover:bg-accent transition-colors" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-foreground/35 uppercase tracking-wide line-through decoration-foreground/20 mb-0.5">{row.problem}</p>
+                      <p className="text-sm font-semibold text-foreground">{row.fix}</p>
+                    </div>
+                  </div>
                 </div>
-
-                <button
-                  onClick={nextTestimonial}
-                  className="p-2 hover:bg-accent/10 rounded-lg transition-colors"
-                >
-                  <ChevronRight className="w-6 h-6 text-accent" />
-                </button>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Case Studies ─────────────────────────────────────────── */}
-      <section className="py-20 md:py-32 bg-secondary/30">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Client Success Stories</h2>
-            <p className="text-xl text-foreground/60 max-w-2xl mx-auto">
-              Measurable results from real clients.
-            </p>
+      {/* ── Services overview ─────────────────────────────────────── */}
+      <section className="py-20 bg-secondary/40 border-t border-border">
+        <div className="container max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <span className="text-xs font-bold text-accent uppercase tracking-widest mb-3 block">What I do</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-3">Five disciplines. One operator.</h2>
+            <p className="text-foreground/55 max-w-xl mx-auto">From big-picture strategy to the technical details no one else wants to touch — I cover the full stack.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {caseStudies.map((study) => (
-              <div key={study.id} className="glass-card p-8">
-                <div className="mb-6">
-                  <p className="text-sm text-accent font-semibold mb-2">CASE STUDY</p>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">{study.company}</h3>
-
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-sm text-foreground/60 mb-1">Challenge</p>
-                      <p className="text-foreground font-medium">{study.challenge}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-foreground/60 mb-1">Solution</p>
-                      <p className="text-foreground font-medium">{study.solution}</p>
-                    </div>
+          <div className="grid md:grid-cols-5 gap-3 mb-10">
+            {[
+              { icon: TrendingUp, name: 'Strategy & Audits', desc: 'Roadmaps, audits, GTM planning, competitive intel' },
+              { icon: Zap, name: 'Marketing Ops', desc: 'CRM, automation, lead scoring, data infrastructure' },
+              { icon: BarChart3, name: 'Performance', desc: 'Paid media, SEO, attribution, CRO, analytics' },
+              { icon: Lightbulb, name: 'Brand & Content', desc: 'Positioning, messaging, content strategy, social' },
+              { icon: Code, name: 'Technical Fixes', desc: 'Tracking, GTM, funnel diagnostics, integrations' },
+            ].map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <div key={i} className="rounded-2xl border-2 border-border bg-background p-5 hover:border-accent/50 hover:shadow-md transition-all group text-center">
+                  <div className="p-2.5 rounded-xl bg-accent/10 text-accent w-fit mx-auto mb-3 group-hover:bg-accent/20 transition-colors">
+                    <Icon className="w-5 h-5" />
                   </div>
+                  <p className="font-extrabold text-foreground text-sm mb-1.5">{s.name}</p>
+                  <p className="text-xs text-foreground/50 leading-relaxed">{s.desc}</p>
                 </div>
-
-                <div className="border-t border-border pt-6">
-                  <p className="text-sm text-foreground/60 mb-2">Result</p>
-                  <p className="text-3xl font-bold text-accent mb-2">{study.result}</p>
-                  <p className="text-foreground/70">{study.metric}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
-          <div className="text-center mt-12">
-            <Link href="/testimonials">
-              <Button className="btn-nudge-primary text-lg px-8 py-4">
-                View All Success Stories
-              </Button>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link href="/services" onClick={() => window.scrollTo(0, 0)}>
+              <Button className="btn-nudge-primary px-7 py-4">Explore all services</Button>
+            </Link>
+            <Link href="/services-marketplace" onClick={() => window.scrollTo(0, 0)}>
+              <Button variant="outline" className="px-7 py-4 border-2">Browse fixed-price shop</Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── Why Work With Me ─────────────────────────────────────── */}
-      <section className="py-20 md:py-32 bg-gradient-to-r from-accent/5 to-accent/10">
-        <div className="container">
+      {/* ── How it works ─────────────────────────────────────────── */}
+      <section className="py-20 md:py-24 border-t border-border bg-background">
+        <div className="container max-w-5xl mx-auto px-4">
+          <div className="text-center mb-14">
+            <span className="text-xs font-bold text-accent uppercase tracking-widest mb-3 block">The process</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-3">From Nudge to done.</h2>
+            <p className="text-foreground/55">No lengthy proposals. No kickoff marathons. Just focused execution.</p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-4 relative">
+            {/* Connector line desktop */}
+            <div className="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-accent/30 via-accent to-accent/30" />
+
+            {[
+              { num: '01', title: 'Send a Nudge', body: 'Tell me what\'s broken or what you need. No brief required — plain language is fine.' },
+              { num: '02', title: 'I scope & quote', body: 'I come back with a clear plan, fixed price, and timeline. You know everything before you commit.' },
+              { num: '03', title: 'You approve', body: 'Happy with the plan? Say the word. No contracts, no retainers unless you want one.' },
+              { num: '04', title: 'I deliver', body: 'Fast, focused execution with regular updates. Delivered with documentation and proper handover.' },
+            ].map((step, i) => (
+              <div key={i} className="relative text-center">
+                <div className="w-20 h-20 rounded-2xl bg-accent text-white flex items-center justify-center mx-auto mb-4 relative z-10 shadow-lg shadow-accent/20">
+                  <span className="text-2xl font-extrabold">{step.num}</span>
+                </div>
+                <h3 className="font-extrabold text-foreground mb-2">{step.title}</h3>
+                <p className="text-sm text-foreground/55 leading-relaxed">{step.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link href="/how-we-work" onClick={() => window.scrollTo(0, 0)}>
+              <div className="flex items-center gap-2 text-sm font-bold text-accent hover:gap-3 transition-all cursor-pointer group justify-center">
+                See how it works in detail <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Results / proof ───────────────────────────────────────── */}
+      <section className="py-20 md:py-24 bg-secondary/40 border-t border-border">
+        <div className="container max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Why Work With Me</h2>
-            <p className="text-xl text-foreground/60 max-w-2xl mx-auto">
-              No agency. No overheads. Just expertise and results.
-            </p>
+            <span className="text-xs font-bold text-accent uppercase tracking-widest mb-3 block">Client results</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-3">What actually happened.</h2>
+            <p className="text-foreground/55">Real projects. Real numbers.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5 mb-10">
+            {[
+              {
+                company: 'E-commerce Brand',
+                tag: 'Analytics & CRO',
+                tagColor: 'bg-emerald-100 text-emerald-700 border-emerald-200',
+                quote: 'Harrison fixed our tracking and we saw a 45% improvement in lead quality within 3 months.',
+                author: 'Sarah Chen, Marketing Director',
+                stat: '+67%', statLabel: 'conversion rate',
+                metric: '$500K+ additional revenue',
+              },
+              {
+                company: 'SaaS Company',
+                tag: 'CRM & Automation',
+                tagColor: 'bg-cyan-100 text-cyan-700 border-cyan-200',
+                quote: 'His technical expertise solved problems that were costing us thousands monthly. No fuss, just fixed.',
+                author: 'Michael Roberts, CEO',
+                stat: '40hrs', statLabel: 'saved per week',
+                metric: '$120K annual savings',
+              },
+              {
+                company: 'Marketing Agency',
+                tag: 'Fractional Support',
+                tagColor: 'bg-violet-100 text-violet-700 border-violet-200',
+                quote: 'We rely on Harrison for specialised implementation. Delivers every time, on scope, on time.',
+                author: 'Emma Wilson, Agency Director',
+                stat: '+3', statLabel: 'new revenue streams',
+                metric: '$50K+ monthly client revenue',
+              },
+            ].map((c, i) => (
+              <div key={i} className="rounded-2xl border-2 border-border bg-background p-6 flex flex-col hover:border-accent/40 hover:shadow-md transition-all">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-extrabold text-foreground">{c.company}</h3>
+                  <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${c.tagColor}`}>{c.tag}</span>
+                </div>
+                <p className="text-sm text-foreground/65 italic leading-relaxed mb-5 flex-1">"{c.quote}"</p>
+                <p className="text-xs text-foreground/40 mb-5">— {c.author}</p>
+                <div className="border-t border-border pt-4">
+                  <p className="text-3xl font-extrabold text-accent leading-none mb-0.5">{c.stat}</p>
+                  <p className="text-xs text-foreground/50 mb-1">{c.statLabel}</p>
+                  <p className="text-xs font-semibold text-foreground/65">{c.metric}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
           <div className="text-center">
-            <Link href="/testimonials">
-              <Button className="btn-nudge-primary text-lg px-8 py-4">
-                Explore Client Success
+            <Link href="/testimonials" onClick={() => window.scrollTo(0, 0)}>
+              <div className="flex items-center gap-2 text-sm font-bold text-accent hover:gap-3 transition-all cursor-pointer group justify-center">
+                See all case studies <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Final CTA ─────────────────────────────────────────────── */}
+      <section className="py-20 md:py-28 bg-gradient-to-br from-accent/10 via-background to-accent/5 border-t border-border">
+        <div className="container max-w-3xl mx-auto px-4 text-center">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 leading-tight">
+            Ready to stop guessing<br />and start growing?
+          </h2>
+          <p className="text-lg text-foreground/60 mb-8 max-w-xl mx-auto">
+            Tell me what's not working. I'll tell you what I'd fix first, what it costs, and when it'll be done.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
+              <Button className="btn-nudge-primary text-lg px-8 py-6">
+                Send a Nudge
+              </Button>
+            </Link>
+            <Link href="/pricing" onClick={() => window.scrollTo(0, 0)}>
+              <Button variant="outline" className="text-lg px-8 py-6 border-2">
+                See pricing
               </Button>
             </Link>
           </div>
