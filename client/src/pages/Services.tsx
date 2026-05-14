@@ -171,7 +171,7 @@ export default function Services() {
       {/* ── Pillar Tabs — sticky ────────────────────────────────────── */}
       <div className="sticky top-24 z-40 bg-background/95 backdrop-blur-sm border-b border-border shadow-sm">
         <div className="container py-3">
-          <div className="flex flex-nowrap gap-2 overflow-x-auto scrollbar-hide pb-1">
+          <div className="flex flex-nowrap gap-2 overflow-x-auto scrollbar-hide pb-1 justify-center">
             {PILLARS.map((pillar) => {
               const Icon = pillar.icon;
               const active = activePillar === pillar.id;
