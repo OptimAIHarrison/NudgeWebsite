@@ -45,10 +45,8 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href}>
-              <a className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors">
-                {link.label}
-              </a>
+            <Link key={link.href} href={link.href} className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors">
+              {link.label}
             </Link>
           ))}
         </nav>
@@ -113,13 +111,13 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
         <div className="lg:hidden border-t border-border bg-card animate-slide-in-down">
           <nav className="container py-4 space-y-3">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <a
-                  className="block py-2 text-sm font-medium text-foreground/70 hover:text-accent transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block py-2 text-sm font-medium text-foreground/70 hover:text-accent transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.label}
               </Link>
             ))}
             <Link href="/contact">
