@@ -1,201 +1,200 @@
 import { useState } from 'react';
-import { ChevronLeft, ChevronRight, TrendingUp } from 'lucide-react';
+import { ChevronLeft, ChevronRight, TrendingUp, Zap, Target, BarChart3, Quote, ArrowRight, CheckCircle, Clock } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 
+const TESTIMONIALS = [
+  {
+    id: 1,
+    company: 'TechStart Co',
+    quote: 'Harrison fixed our tracking issues and we saw a 45% improvement in lead quality within 3 months. He found problems we didn\'t even know we had.',
+    author: 'Sarah Chen',
+    role: 'Marketing Director',
+    category: 'Analytics & Tracking',
+  },
+  {
+    id: 2,
+    company: 'Growth Ventures',
+    quote: 'His technical expertise solved problems that were costing us thousands monthly. He came in, diagnosed the issue fast, and fixed it. No fuss.',
+    author: 'Michael Roberts',
+    role: 'CEO',
+    category: 'Technical Fixes',
+  },
+  {
+    id: 3,
+    company: 'Digital Agency Pro',
+    quote: 'As an agency, we rely on Harrison for specialised technical implementation. He delivers every time, on scope, on time — and our clients love the results.',
+    author: 'Emma Wilson',
+    role: 'Agency Director',
+    category: 'Agency Partnership',
+  },
+  {
+    id: 4,
+    company: 'E-commerce Collective',
+    quote: 'The ROI improvement was immediate. Best investment we made in our marketing stack all year. I wish we\'d brought him in sooner.',
+    author: 'James Liu',
+    role: 'Founder',
+    category: 'CRO & Optimisation',
+  },
+];
+
+const CASE_STUDIES = [
+  {
+    id: 1,
+    company: 'E-commerce Brand',
+    industry: 'Retail',
+    icon: TrendingUp,
+    color: 'from-emerald-500/20 to-emerald-400/5',
+    accentColor: 'text-emerald-600',
+    badgeColor: 'bg-emerald-100 text-emerald-700 border-emerald-200',
+    challenge: 'Broken tracking and invisible customer journeys. They were running paid media blind — no idea what was converting or why.',
+    solution: 'GA4 full implementation, GTM overhaul, attribution model, checkout funnel fixes, and a live performance dashboard.',
+    results: [
+      { stat: '+67%', label: 'Conversion rate' },
+      { stat: '$500K+', label: 'Additional revenue' },
+      { stat: '4 months', label: 'Timeline' },
+    ],
+    services: ['GA4 Setup', 'GTM Audit', 'CRO', 'Attribution'],
+  },
+  {
+    id: 2,
+    company: 'SaaS Company',
+    industry: 'Software',
+    icon: Zap,
+    color: 'from-cyan-500/20 to-cyan-400/5',
+    accentColor: 'text-cyan-600',
+    badgeColor: 'bg-cyan-100 text-cyan-700 border-cyan-200',
+    challenge: 'Manual workflows consuming 40 hours a week. No CRM, no automation, sales and marketing running on spreadsheets.',
+    solution: 'HubSpot CRM build, lead scoring model, automated nurture sequences, and full sales pipeline configuration.',
+    results: [
+      { stat: '40hrs', label: 'Saved per week' },
+      { stat: '$120K', label: 'Annual savings' },
+      { stat: '2 months', label: 'Timeline' },
+    ],
+    services: ['CRM Build', 'Lead Scoring', 'Email Automation', 'Workflow'],
+  },
+  {
+    id: 3,
+    company: 'Marketing Agency',
+    industry: 'Agency',
+    icon: Target,
+    color: 'from-violet-500/20 to-violet-400/5',
+    accentColor: 'text-violet-600',
+    badgeColor: 'bg-violet-100 text-violet-700 border-violet-200',
+    challenge: 'Clients demanding technical SEO and implementation that the agency couldn\'t deliver in-house. Risk of losing accounts.',
+    solution: 'Embedded as fractional technical resource — delivering SEO audits, implementations, and reporting directly for their clients.',
+    results: [
+      { stat: '+3', label: 'New revenue streams' },
+      { stat: '$50K+', label: 'Monthly client revenue' },
+      { stat: 'Ongoing', label: 'Engagement' },
+    ],
+    services: ['Technical SEO', 'Fractional Support', 'Client Reporting'],
+  },
+  {
+    id: 4,
+    company: 'B2B SaaS Platform',
+    industry: 'Technology',
+    icon: BarChart3,
+    color: 'from-amber-500/20 to-amber-400/5',
+    accentColor: 'text-amber-600',
+    badgeColor: 'bg-amber-100 text-amber-700 border-amber-200',
+    challenge: 'Multiple data sources, inconsistent reporting, and zero trust in the numbers. Leadership making decisions on bad data.',
+    solution: 'Unified tracking infrastructure, clean GTM setup, cross-platform attribution, and custom dashboards per stakeholder.',
+    results: [
+      { stat: '+34%', label: 'Data accuracy' },
+      { stat: '6 weeks', label: 'Timeline' },
+      { stat: '1 source', label: 'Of truth' },
+    ],
+    services: ['Data Infrastructure', 'GTM Cleanup', 'Custom Dashboards'],
+  },
+];
+
+const IMPACT_STATS = [
+  { stat: '$500K+', label: 'Additional revenue driven for one client' },
+  { stat: '40hrs/wk', label: 'Saved through automation for a SaaS team' },
+  { stat: '+67%', label: 'Conversion rate improvement for e-commerce' },
+  { stat: '4+', label: 'Industries served and growing' },
+];
+
 export default function Testimonials() {
   const [testimonialIndex, setTestimonialIndex] = useState(0);
+  const [activeStudy, setActiveStudy] = useState(0);
 
-  const testimonials = [
-    {
-      id: 1,
-      company: 'TechStart Co',
-      quote: 'Harrison fixed our tracking issues and we saw a 45% improvement in lead quality within 3 months.',
-      author: 'Sarah Chen',
-      role: 'Marketing Director',
-    },
-    {
-      id: 2,
-      company: 'Growth Ventures',
-      quote: 'His technical expertise solved problems that were costing us thousands monthly.',
-      author: 'Michael Roberts',
-      role: 'CEO',
-    },
-    {
-      id: 3,
-      company: 'Digital Agency Pro',
-      quote: 'As an agency, we rely on Harrison for specialized technical implementation. He delivers every time.',
-      author: 'Emma Wilson',
-      role: 'Agency Director',
-    },
-    {
-      id: 4,
-      company: 'E-commerce Collective',
-      quote: 'The ROI improvement was immediate. Best investment we made in our marketing stack.',
-      author: 'James Liu',
-      role: 'Founder',
-    },
-  ];
+  const nextTestimonial = () => setTestimonialIndex((prev) => (prev + 1) % TESTIMONIALS.length);
+  const prevTestimonial = () => setTestimonialIndex((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
 
-  const caseStudies = [
-    {
-      id: 1,
-      company: 'E-commerce Brand',
-      industry: 'Retail',
-      challenge: 'Broken tracking and low conversion rates. They were losing visibility into customer journeys.',
-      solution: 'Implemented GA4, fixed funnel issues, optimized checkout flow, and set up proper attribution.',
-      result: '+67% Conversions',
-      metric: '$500K+ Additional Revenue',
-      timeline: '4 months',
-    },
-    {
-      id: 2,
-      company: 'SaaS Company',
-      industry: 'Software',
-      challenge: 'Manual workflows wasting 40 hours/week. No automation, no CRM integration.',
-      solution: 'Built CRM automation, email sequences, and integrated marketing operations.',
-      result: '40 Hours/Week Saved',
-      metric: '$120K Annual Savings',
-      timeline: '2 months',
-    },
-    {
-      id: 3,
-      company: 'Marketing Agency',
-      industry: 'Agency',
-      challenge: 'Clients needed technical SEO expertise that they couldn\'t deliver in-house.',
-      solution: 'Provided fractional technical SEO services and implementation support.',
-      result: '+3 New Revenue Streams',
-      metric: '$50K+ Monthly Revenue',
-      timeline: 'Ongoing',
-    },
-    {
-      id: 4,
-      company: 'B2B SaaS Platform',
-      industry: 'Technology',
-      challenge: 'Complex tracking setup with multiple data sources causing reporting inconsistencies.',
-      solution: 'Unified data infrastructure, implemented proper tracking, built custom dashboards.',
-      result: '+34% Data Accuracy',
-      metric: 'Better Decision Making',
-      timeline: '6 weeks',
-    },
-  ];
-
-  const nextTestimonial = () => {
-    setTestimonialIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  const study = CASE_STUDIES[activeStudy];
+  const StudyIcon = study.icon;
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Header */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-accent/10 to-background border-b border-border">
-        <div className="container text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Client Success & Testimonials
+      {/* ── Hero ───────────────────────────────────────────────────── */}
+      <section className="py-20 md:py-28 bg-gradient-to-b from-accent/10 to-background border-b border-border">
+        <div className="container max-w-4xl mx-auto px-4 text-center">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-5 border border-accent/20">
+            Real clients · Real results · No fluff
+          </span>
+          <h1 className="text-5xl md:text-6xl font-extrabold text-foreground mb-5 leading-tight tracking-tight">
+            Results that<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/60">speak for themselves.</span>
           </h1>
-          <p className="text-xl text-foreground/60 max-w-3xl mx-auto">
-            Real results from real clients. See how I've helped businesses solve their toughest digital marketing challenges.
+          <p className="text-lg text-foreground/60 max-w-2xl mx-auto mb-10">
+            From fixing broken tracking to building full marketing systems — here's what actually happened when clients brought me in.
           </p>
-        </div>
-      </section>
 
-      {/* Testimonials Carousel */}
-      <section className="py-20 md:py-32 bg-background">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">What Clients Say</h2>
-            <p className="text-xl text-foreground/60 max-w-2xl mx-auto">
-              Direct feedback from people I've worked with.
-            </p>
-          </div>
-
-          <div className="max-w-3xl mx-auto">
-            <div className="glass-card p-12">
-              <div className="mb-8">
-                <p className="text-2xl text-foreground italic mb-6">"{testimonials[testimonialIndex].quote}"</p>
-                <div>
-                  <p className="font-semibold text-foreground text-lg">{testimonials[testimonialIndex].author}</p>
-                  <p className="text-foreground/60">{testimonials[testimonialIndex].role} at {testimonials[testimonialIndex].company}</p>
-                </div>
+          {/* Impact stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+            {IMPACT_STATS.map((s, i) => (
+              <div key={i} className="bg-background/80 backdrop-blur-sm rounded-xl p-4 border border-border">
+                <p className="text-2xl font-extrabold text-accent leading-none mb-1">{s.stat}</p>
+                <p className="text-xs text-foreground/50 leading-tight">{s.label}</p>
               </div>
-
-              <div className="flex items-center justify-between">
-                <button
-                  onClick={prevTestimonial}
-                  className="p-3 hover:bg-accent/10 rounded-lg transition-colors"
-                >
-                  <ChevronLeft className="w-6 h-6 text-accent" />
-                </button>
-
-                <div className="flex gap-2">
-                  {testimonials.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setTestimonialIndex(idx)}
-                      className={`transition-all ${
-                        idx === testimonialIndex ? 'bg-accent w-8 h-2 rounded-full' : 'bg-accent/30 w-2 h-2 rounded-full'
-                      }`}
-                    />
-                  ))}
-                </div>
-
-                <button
-                  onClick={nextTestimonial}
-                  className="p-3 hover:bg-accent/10 rounded-lg transition-colors"
-                >
-                  <ChevronRight className="w-6 h-6 text-accent" />
-                </button>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Case Studies */}
-      <section className="py-20 md:py-32 bg-secondary/30">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Case Studies</h2>
-            <p className="text-xl text-foreground/60 max-w-2xl mx-auto">
-              Detailed breakdowns of projects and the measurable impact.
-            </p>
+      {/* ── Testimonials ────────────────────────────────────────────── */}
+      <section className="py-20 md:py-24">
+        <div className="container max-w-5xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-2">What clients say</h2>
+            <p className="text-foreground/50">Direct quotes from people I've worked with.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {caseStudies.map((study) => (
-              <div key={study.id} className="glass-card p-8 hover:scale-105 transition-transform">
-                <div className="mb-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-2xl font-bold text-foreground">{study.company}</h3>
-                      <p className="text-sm text-accent font-semibold mt-1">{study.industry}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-sm text-foreground/60 font-semibold mb-2">Challenge</p>
-                      <p className="text-foreground/80">{study.challenge}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-foreground/60 font-semibold mb-2">Solution</p>
-                      <p className="text-foreground/80">{study.solution}</p>
-                    </div>
-                  </div>
+          <div className="grid md:grid-cols-2 gap-4 mb-6">
+            {TESTIMONIALS.map((t, idx) => (
+              <div
+                key={t.id}
+                onClick={() => setTestimonialIndex(idx)}
+                className={`rounded-2xl border-2 p-6 cursor-pointer transition-all duration-200 ${
+                  testimonialIndex === idx
+                    ? 'border-accent bg-accent/3 shadow-lg shadow-accent/10'
+                    : 'border-border bg-background hover:border-accent/40 hover:shadow-md'
+                }`}
+              >
+                <div className="flex items-start gap-3 mb-4">
+                  <Quote className={`w-6 h-6 flex-shrink-0 mt-0.5 ${testimonialIndex === idx ? 'text-accent' : 'text-foreground/20'}`} />
+                  <p className={`text-sm leading-relaxed italic ${testimonialIndex === idx ? 'text-foreground' : 'text-foreground/65'}`}>
+                    "{t.quote}"
+                  </p>
                 </div>
-
-                <div className="border-t border-border pt-6">
-                  <p className="text-sm text-foreground/60 font-semibold mb-2">Result</p>
-                  <p className="text-3xl font-bold text-accent mb-2">{study.result}</p>
-                  <p className="text-foreground/70 mb-4">{study.metric}</p>
-                  <p className="text-sm text-foreground/60">Timeline: {study.timeline}</p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-bold text-foreground text-sm">{t.author}</p>
+                    <p className="text-xs text-foreground/50">{t.role} · {t.company}</p>
+                  </div>
+                  <span className={`text-xs px-2.5 py-1 rounded-full font-semibold border ${
+                    testimonialIndex === idx
+                      ? 'bg-accent/10 text-accent border-accent/25'
+                      : 'bg-secondary text-foreground/40 border-border'
+                  }`}>
+                    {t.category}
+                  </span>
                 </div>
               </div>
             ))}
@@ -203,20 +202,151 @@ export default function Testimonials() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-r from-accent/10 to-accent/5">
-        <div className="container text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Ready to Achieve Similar Results?
+      {/* ── Case Studies — interactive ───────────────────────────────── */}
+      <section className="py-20 bg-secondary/40 border-t border-border">
+        <div className="container max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-2">Case studies</h2>
+            <p className="text-foreground/50">Select a project to see what happened.</p>
+          </div>
+
+          {/* Case study selector */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+            {CASE_STUDIES.map((s, idx) => {
+              const Icon = s.icon;
+              const active = activeStudy === idx;
+              return (
+                <button
+                  key={s.id}
+                  onClick={() => setActiveStudy(idx)}
+                  className={`p-4 rounded-2xl border-2 text-left transition-all hover:-translate-y-0.5 hover:shadow-md ${
+                    active ? 'border-accent bg-accent/5 shadow-md shadow-accent/10' : 'border-border bg-background'
+                  }`}
+                >
+                  <div className={`p-2 rounded-lg w-fit mb-2 ${active ? 'bg-accent/15' : 'bg-secondary'}`}>
+                    <Icon className={`w-4 h-4 ${active ? 'text-accent' : 'text-foreground/50'}`} />
+                  </div>
+                  <p className={`text-sm font-bold leading-tight ${active ? 'text-accent' : 'text-foreground'}`}>{s.company}</p>
+                  <p className="text-xs text-foreground/40 mt-0.5">{s.industry}</p>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Active case study detail */}
+          <div className={`rounded-3xl border-2 border-accent/30 bg-gradient-to-br ${study.color} overflow-hidden`}>
+            <div className="grid md:grid-cols-2">
+
+              {/* Left — challenge + solution */}
+              <div className="p-8 md:p-10 border-b md:border-b-0 md:border-r border-border/40">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-3 rounded-xl bg-background/70 border border-border">
+                    <StudyIcon className={`w-6 h-6 ${study.accentColor}`} />
+                  </div>
+                  <div>
+                    <h3 className="font-extrabold text-foreground text-xl">{study.company}</h3>
+                    <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${study.badgeColor}`}>{study.industry}</span>
+                  </div>
+                </div>
+
+                <div className="space-y-5">
+                  <div>
+                    <p className="text-xs font-bold text-foreground/40 uppercase tracking-widest mb-2">The Challenge</p>
+                    <p className="text-sm text-foreground/70 leading-relaxed">{study.challenge}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-foreground/40 uppercase tracking-widest mb-2">What I Did</p>
+                    <p className="text-sm text-foreground/70 leading-relaxed">{study.solution}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-foreground/40 uppercase tracking-widest mb-2.5">Services Used</p>
+                    <div className="flex flex-wrap gap-2">
+                      {study.services.map((s, i) => (
+                        <span key={i} className="text-xs px-2.5 py-1 bg-background/60 border border-border rounded-full text-foreground/60">
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right — results */}
+              <div className="p-8 md:p-10 flex flex-col justify-between">
+                <div>
+                  <p className="text-xs font-bold text-foreground/40 uppercase tracking-widest mb-6">The Results</p>
+                  <div className="space-y-4">
+                    {study.results.map((r, i) => (
+                      <div key={i} className="bg-background/60 backdrop-blur-sm rounded-2xl p-5 border border-border/60">
+                        <p className={`text-4xl font-extrabold ${study.accentColor} leading-none mb-1`}>{r.stat}</p>
+                        <p className="text-sm text-foreground/55">{r.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-8">
+                  <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
+                    <Button className="btn-nudge-primary w-full py-5">
+                      Get similar results <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Value proposition strip ─────────────────────────────────── */}
+      <section className="py-16 border-t border-border">
+        <div className="container max-w-5xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-foreground mb-2">Why clients keep coming back</h2>
+            <p className="text-foreground/50">Not what I say — what the pattern of results shows.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {[
+              { icon: CheckCircle, title: 'Problems diagnosed fast', body: 'I don\'t spend weeks in discovery. I come in, assess the situation, and tell you what\'s actually wrong — usually within days.' },
+              { icon: Zap, title: 'Execution, not just advice', body: 'I don\'t write recommendations and hand them to someone else. I do the work — implementation, testing, optimisation.' },
+              { icon: Clock, title: 'Results you can measure', body: 'Every engagement starts with clear success metrics. You always know if it worked, by how much, and why.' },
+            ].map((p, i) => {
+              const Icon = p.icon;
+              return (
+                <div key={i} className="rounded-2xl border-2 border-border bg-background p-6 hover:border-accent/40 transition-all">
+                  <div className="p-2.5 rounded-xl bg-accent/10 text-accent w-fit mb-4">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-extrabold text-foreground mb-2">{p.title}</h3>
+                  <p className="text-sm text-foreground/60 leading-relaxed">{p.body}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ─────────────────────────────────────────────────────── */}
+      <section className="py-20 md:py-28 bg-gradient-to-br from-accent/10 via-background to-accent/5 border-t border-border">
+        <div className="container max-w-3xl mx-auto px-4 text-center">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 leading-tight">
+            Want results like these?
           </h2>
-          <p className="text-xl text-foreground/60 mb-8 max-w-2xl mx-auto">
-            Let's discuss your challenges and create a custom solution.
+          <p className="text-lg text-foreground/60 mb-8 max-w-xl mx-auto">
+            Tell me what's not working. I'll tell you exactly what I'd do about it.
           </p>
-          <Link href="/contact">
-            <Button className="btn-nudge-primary text-lg px-8 py-4">
-              Send a Nudge
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
+              <Button className="btn-nudge-primary text-lg px-8 py-6">
+                Send a Nudge
+              </Button>
+            </Link>
+            <Link href="/services" onClick={() => window.scrollTo(0, 0)}>
+              <Button variant="outline" className="text-lg px-8 py-6 border-2">
+                Explore services
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
