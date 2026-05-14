@@ -1,218 +1,219 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { useState } from 'react';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Zap, Target, Lightbulb, Code, Rocket, TrendingUp } from 'lucide-react';
+import { CheckCircle, Zap, Target, Lightbulb, Code, TrendingUp, ArrowRight, Globe, Briefcase, Heart } from 'lucide-react';
+
+const SKILLS = [
+  { icon: Code, title: 'Technical Implementation', body: 'Tracking, data infrastructure, GTM, analytics, pixels — I fix the things that break silently and cost you every day.' },
+  { icon: Zap, title: 'Marketing Automation', body: 'CRM builds, email sequences, lead scoring, workflow design — systems that run without constant babysitting.' },
+  { icon: Target, title: 'Performance Marketing', body: 'Paid media, SEO, attribution, CRO — channels managed with data, not guesswork.' },
+  { icon: TrendingUp, title: 'Strategy & Roadmapping', body: 'Audits, GTM planning, competitive intelligence — clarity before you spend a dollar.' },
+  { icon: Lightbulb, title: 'Brand & Content', body: 'Positioning, messaging, content strategy — helping you tell the right story to the right people.' },
+  { icon: Briefcase, title: 'Fractional Leadership', body: 'Senior-level marketing direction without the full-time overhead. I embed in your team and own the outcomes.' },
+];
+
+const VALUES = [
+  { title: 'Honest over comfortable', body: 'I\'d rather tell you what\'s not working than nod along. You\'re paying for perspective, not reassurance.' },
+  { title: 'Execution, not just advice', body: 'I don\'t write recommendations and hand them off. I do the work — implementation, iteration, delivery.' },
+  { title: 'Outcomes over activity', body: 'Hours worked and tasks completed don\'t matter. What moved? What grew? What got fixed? That\'s what counts.' },
+  { title: 'Your business, treated like mine', body: 'I work with a small number of clients so I can care about each one properly. Not a number in a portfolio.' },
+];
+
+const STATS = [
+  { stat: '10+', label: 'Years in digital marketing' },
+  { stat: '3', label: 'Continents worked across' },
+  { stat: '1', label: 'Person you\'re actually dealing with' },
+  { stat: '40+', label: 'Tools across the MarTech stack' },
+];
 
 export default function About() {
-  const whatIDosBest = [
-    {
-      title: 'Solving Technical Problems',
-      description: 'Fixing tracking, data integrity, and technical SEO issues that agencies overlook.',
-      icon: <Code className="w-8 h-8" />,
-    },
-    {
-      title: 'Creating Systems',
-      description: 'Building automated workflows, CRM systems, and marketing operations that scale.',
-      icon: <Rocket className="w-8 h-8" />,
-    },
-    {
-      title: 'Strategy & Implementation',
-      description: 'Not just planning—actually executing and delivering measurable results.',
-      icon: <Target className="w-8 h-8" />,
-    },
-    {
-      title: 'Ideation & Creation',
-      description: 'Developing new approaches, creative solutions, and innovative implementations.',
-      icon: <Lightbulb className="w-8 h-8" />,
-    },
-    {
-      title: 'Fractional Leadership',
-      description: 'Senior-level expertise without the overhead of a full-time hire or agency costs.',
-      icon: <TrendingUp className="w-8 h-8" />,
-    },
-    {
-      title: 'Trusted Partnership',
-      description: 'One person you can trust. No agency layers, no hidden costs, just results.',
-      icon: <CheckCircle className="w-8 h-8" />,
-    },
-  ];
-
-  const values = [
-    {
-      title: 'Transparency',
-      description: 'I\'ll tell you what\'s working and what isn\'t. No fluff, no BS.',
-    },
-    {
-      title: 'Results-Focused',
-      description: 'Everything I do is tied to measurable outcomes. If it doesn\'t move the needle, I don\'t do it.',
-    },
-    {
-      title: 'Technical Excellence',
-      description: 'I stay on top of the latest tools, platforms, and best practices in digital marketing.',
-    },
-    {
-      title: 'Partnership Mindset',
-      description: 'I treat your business like it\'s my own. Your success is my success.',
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Hero */}
-      <section className="py-16 md:py-24 bg-gradient-mesh relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
-        </div>
-        <div className="container relative z-10 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">About Me</h1>
-          <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
-            I'm Harrison, a fractional Digital Marketing Strategist & Implementer. I help businesses solve their toughest digital marketing challenges.
+      {/* ── Hero ───────────────────────────────────────────────────── */}
+      <section className="py-20 md:py-28 bg-gradient-to-b from-accent/10 to-background border-b border-border">
+        <div className="container max-w-4xl mx-auto px-4 text-center">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-5 border border-accent/20">
+            Fractional Digital Marketing Strategist & Implementer
+          </span>
+          <h1 className="text-5xl md:text-6xl font-extrabold text-foreground mb-5 leading-tight tracking-tight">
+            Hi, I'm Harrison.<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/60">I do the work.</span>
+          </h1>
+          <p className="text-lg text-foreground/60 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Senior digital marketer. Freelancer. Former department head. I've spent over a decade helping businesses build the systems, strategy, and execution that actually grow revenue — and I've done it across three continents.
           </p>
-        </div>
-      </section>
 
-      {/* What I Do Best */}
-      <section className="py-20 md:py-32 bg-secondary/30">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">What I Do Best</h2>
-            <p className="text-xl text-foreground/60 max-w-2xl mx-auto">
-              I handle everything from SEO and email marketing to CRM setup, automation, and complete digital strategy.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {whatIDosBest.map((item, idx) => (
-              <div key={idx} className="glass-card group hover:scale-105 transition-transform p-8">
-                <div className="p-4 rounded-lg bg-accent/10 text-accent group-hover:bg-accent/20 transition-colors w-fit mb-4">
-                  {item.icon}
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">{item.title}</h3>
-                <p className="text-foreground/60">{item.description}</p>
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+            {STATS.map((s, i) => (
+              <div key={i} className="bg-background/80 backdrop-blur-sm rounded-xl p-4 border border-border">
+                <p className="text-2xl font-extrabold text-accent leading-none mb-1">{s.stat}</p>
+                <p className="text-xs text-foreground/50 leading-tight">{s.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Story */}
-      <section className="py-20 md:py-32">
+      {/* ── Story ───────────────────────────────────────────────────── */}
+      <section className="py-20 md:py-24">
         <div className="container max-w-4xl mx-auto px-4">
-          <div className="space-y-8">
-            {/* Header */}
-            <div className="space-y-4">
-              <p className="text-sm font-semibold text-accent uppercase tracking-wide">About Me</p>
-              <h2 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
-                Marketer. Wanderer. Recovering corporate machine.
+
+          {/* Chapter 1 */}
+          <div className="grid md:grid-cols-5 gap-10 items-start mb-16">
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-2 mb-3">
+                <Briefcase className="w-4 h-4 text-accent" />
+                <span className="text-xs font-bold text-accent uppercase tracking-widest">The beginning</span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-extrabold text-foreground leading-tight">
+                Started in corporate UK. Left on my own terms.
               </h2>
-              <p className="text-lg text-foreground/60 font-medium">
-                Digital Marketing | Growth Strategy | Solo Operator
-              </p>
             </div>
-
-            {/* First paragraph with quote box */}
-            <div className="space-y-6">
-              <div className="pl-6 border-l-4 border-accent/50 py-4">
-                <p className="text-lg text-foreground leading-relaxed">
-                  I started out in corporate UK — Database Executive, sharp suit, sharpening my elbows on the way up. By the time I was running the marketing department, I was way too young, way too caffeinated, and burning out before I even had the vocabulary for it.
+            <div className="md:col-span-3 space-y-4">
+              <div className="pl-5 border-l-2 border-accent/40">
+                <p className="text-foreground/70 leading-relaxed">
+                  I came up through corporate marketing in the UK — database exec, sharp suits, steep learning curve. By the time I was running a department, I was young, driven, and quietly burning out. I didn't have the language for it then, but I knew something had to change.
                 </p>
               </div>
-
-              <p className="text-lg text-foreground leading-relaxed">
-                So I did what any sensible person does. I packed a bag, grew my hair out, got a nose piercing, collected a few tattoos, and went to see the world. I climbed mountains, dove to the depths, ate everything I could get my hands on, and worked my way through more varieties of beer than I'd care to admit. All the while, I kept doing what I love — freelance and contract digital marketing for clients across the globe. I think I still have the anklet somewhere.
+              <p className="text-foreground/70 leading-relaxed">
+                So I did what made sense to me: I left. Packed light, grew my hair, got some tattoos, and spent a few years moving across the world. Mountains, ocean dives, street food, and freelance digital marketing for clients across time zones. I kept doing the craft I loved — just from better locations.
               </p>
             </div>
+          </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 py-8">
-              <div className="bg-secondary/50 rounded-lg p-6 text-center">
-                <p className="text-3xl font-bold text-accent mb-2">10+</p>
-                <p className="text-sm text-foreground/70">years in digital marketing</p>
+          {/* Chapter 2 */}
+          <div className="grid md:grid-cols-5 gap-10 items-start mb-16">
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-2 mb-3">
+                <Globe className="w-4 h-4 text-accent" />
+                <span className="text-xs font-bold text-accent uppercase tracking-widest">Australia</span>
               </div>
-              <div className="bg-secondary/50 rounded-lg p-6 text-center">
-                <p className="text-3xl font-bold text-accent mb-2">3</p>
-                <p className="text-sm text-foreground/70">continents worked across</p>
-              </div>
-              <div className="bg-secondary/50 rounded-lg p-6 text-center">
-                <p className="text-3xl font-bold text-accent mb-2">1</p>
-                <p className="text-sm text-foreground/70">suspiciously surviving anklet</p>
-              </div>
+              <h2 className="text-2xl md:text-3xl font-extrabold text-foreground leading-tight">
+                Ended up here. Stayed for good reason.
+              </h2>
             </div>
-
-            {/* Second section */}
-            <p className="text-lg text-foreground leading-relaxed">
-              Eventually, gravity (and a working visa) pulled me to Australia. I did my fruit picking, spent six months living in the desert — yes, really — and then got back to what I do best. I landed with a team that actually gave a damn about growth; not just the company's, but mine. I ran the marketing department through some of the most chaotic, uncharted years in recent memory — COVID, market upheaval, the whole circus. I didn't just survive it. I built something.
-            </p>
-
-            {/* Highlighted quote */}
-            <div className="bg-secondary/30 border-l-4 border-accent rounded-lg p-8 my-8">
-              <p className="text-lg text-foreground leading-relaxed">
-                Now I've gone solo. No more org chart, no more committees. Just me, my craft, and the clients smart enough to see the value. You're not hiring an agency. You're getting a seasoned, tattooed, well-travelled marketing operator who has run departments, navigated crises, freelanced across time zones, and genuinely loves this stuff.
+            <div className="md:col-span-3 space-y-4">
+              <p className="text-foreground/70 leading-relaxed">
+                Eventually Australia won. I did the obligatory fruit picking, spent six months living in the desert (yes, actually), and landed with a team that cared about doing things properly. I ran marketing through some of the most disruptive years in recent memory — COVID, rapid market shifts, the whole thing. I didn't just keep the lights on. I built systems, grew channels, and learned what it means to be accountable for real outcomes.
               </p>
-            </div>
-
-            {/* Closing */}
-            <div className="space-y-6">
-              <p className="text-lg text-foreground leading-relaxed">
-                I know my stuff. I'm easy to work with. And I'll probably be the most interesting person in your Zoom call. You're welcome.
-              </p>
-
-              <div className="pt-6 border-t border-border/50 space-y-3">
-                <p className="text-sm font-semibold text-foreground/60">— A thought —</p>
-                <p className="text-lg text-foreground leading-relaxed">
-                  Imagine if I posted this on LinkedIn.
+              <div className="bg-accent/5 border border-accent/20 rounded-2xl p-5">
+                <p className="text-foreground/75 leading-relaxed italic">
+                  "Running a department through COVID taught me more about what matters in marketing than any course or conference ever could. When the budget disappears, you find out fast what actually drives growth."
                 </p>
               </div>
+            </div>
+          </div>
+
+          {/* Chapter 3 */}
+          <div className="grid md:grid-cols-5 gap-10 items-start">
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-2 mb-3">
+                <Heart className="w-4 h-4 text-accent" />
+                <span className="text-xs font-bold text-accent uppercase tracking-widest">Now</span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-extrabold text-foreground leading-tight">
+                Solo. By choice. Fully committed.
+              </h2>
+            </div>
+            <div className="md:col-span-3 space-y-4">
+              <p className="text-foreground/70 leading-relaxed">
+                Now I work for myself — and for the clients who want senior expertise without the agency overhead or the full-time commitment. No account managers. No juniors quietly doing the work while someone else takes the credit. Just me, doing what I'm actually good at, for businesses I give a genuine damn about.
+              </p>
+              <p className="text-foreground/70 leading-relaxed">
+                I work with a small number of clients at a time so I can do each engagement properly. If you're looking for volume, I'm probably not your person. If you're looking for someone who'll get properly into your business and tell you the truth — I might be exactly right.
+              </p>
+              <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
+                <div className="flex items-center gap-2 mt-2 text-sm font-bold text-accent hover:gap-3 transition-all cursor-pointer group">
+                  Let's have a conversation <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Values */}
-      <section className="py-20 md:py-32">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-center">My Values</h2>
-            <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
-              These principles guide everything I do.
-            </p>
+      {/* ── What I do best ──────────────────────────────────────────── */}
+      <section className="py-20 bg-secondary/40 border-t border-border">
+        <div className="container max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-3">What I actually do</h2>
+            <p className="text-foreground/55 max-w-xl mx-auto">Across five disciplines — from technical fixes to senior strategy. One person who covers the whole stack.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {values.map((value, idx) => (
-              <div key={idx} className="glass-card p-8">
-                <div className="flex items-start gap-3 mb-3">
-                  <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
-                  <h3 className="text-xl font-semibold text-foreground">{value.title}</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {SKILLS.map((skill, idx) => {
+              const Icon = skill.icon;
+              return (
+                <div key={idx} className="rounded-2xl border-2 border-border bg-background p-6 hover:border-accent/50 hover:shadow-md transition-all group">
+                  <div className="p-2.5 rounded-xl bg-accent/10 text-accent w-fit mb-4 group-hover:bg-accent/20 transition-colors">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-extrabold text-foreground mb-2">{skill.title}</h3>
+                  <p className="text-sm text-foreground/60 leading-relaxed">{skill.body}</p>
                 </div>
-                <p className="text-foreground/70">{value.description}</p>
+              );
+            })}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link href="/services" onClick={() => window.scrollTo(0, 0)}>
+              <button className="text-sm font-bold text-accent hover:opacity-70 transition-opacity">
+                See all 32+ services →
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Values ──────────────────────────────────────────────────── */}
+      <section className="py-20 border-t border-border">
+        <div className="container max-w-5xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-3">How I work</h2>
+            <p className="text-foreground/55">Not a values poster. Just how I actually operate.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            {VALUES.map((v, i) => (
+              <div key={i} className="flex gap-4 p-5 rounded-2xl border-2 border-border bg-background hover:border-accent/40 transition-all">
+                <div className="flex-shrink-0 mt-0.5">
+                  <CheckCircle className="w-5 h-5 text-accent" />
+                </div>
+                <div>
+                  <h3 className="font-extrabold text-foreground mb-1">{v.title}</h3>
+                  <p className="text-sm text-foreground/60 leading-relaxed">{v.body}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 md:py-32 bg-gradient-mesh relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
-        </div>
-        <div className="container relative z-10 text-center max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Ready to Work Together?
+      {/* ── CTA ─────────────────────────────────────────────────────── */}
+      <section className="py-20 md:py-28 bg-gradient-to-br from-accent/10 via-background to-accent/5 border-t border-border">
+        <div className="container max-w-3xl mx-auto px-4 text-center">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 leading-tight">
+            Want to work together?
           </h2>
-          <p className="text-xl text-foreground/70 mb-8">
-            Let's talk about your digital marketing challenges and how I can help.
+          <p className="text-lg text-foreground/60 mb-8 max-w-xl mx-auto">
+            Tell me what you're trying to solve. I'll tell you honestly if I can help, and what that looks like.
           </p>
-          <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
-            <Button className="btn-nudge-primary text-lg px-8 py-6">
-              Send a Nudge
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
+              <Button className="btn-nudge-primary text-lg px-8 py-6">
+                Send a Nudge
+              </Button>
+            </Link>
+            <Link href="/services" onClick={() => window.scrollTo(0, 0)}>
+              <Button variant="outline" className="text-lg px-8 py-6 border-2">
+                Explore services
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
