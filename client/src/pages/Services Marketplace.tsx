@@ -797,8 +797,8 @@ export default function ServicesMarketplace() {
 
       <div className="sticky top-24 z-30 bg-background/95 backdrop-blur-sm border-b border-border shadow-sm">
         <div className="container max-w-7xl mx-auto px-4 py-3 space-y-3">
-          {/* Search — above the category pills */}
-          <div className="relative max-w-sm">
+          {/* Search — centred */}
+          <div className="relative max-w-sm mx-auto">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40" />
             <input
               type="text"
@@ -808,8 +808,8 @@ export default function ServicesMarketplace() {
               className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-secondary border-2 border-border text-foreground placeholder-foreground/40 focus:outline-none focus:border-accent text-sm transition-colors"
             />
           </div>
-          {/* Category pills — single scrollable row */}
-          <div className="flex flex-nowrap gap-2 overflow-x-auto pb-1 scrollbar-hide">
+          {/* Category pills — centred, single scrollable row */}
+          <div className="flex flex-nowrap gap-2 overflow-x-auto pb-1 scrollbar-hide justify-center">
             {categories.map(cat => (
               <button
                 key={cat}
