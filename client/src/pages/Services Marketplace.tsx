@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
+import { trpc } from '@/lib/trpc';
 
 interface Service {
   id: string;
@@ -748,30 +749,24 @@ export default function ServicesMarketplace() {
     setShowEnquiry(false);
   };
 
+  const contactMutation = trpc.contact.useMutation();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedService) return;
     setForm(f => ({ ...f, submitting: true, error: '' }));
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          company: form.company,
-          message: form.message,
-          service: selectedService.name,
-          price: `A$${selectedService.price.toLocaleString()}`,
-        }),
+      await contactMutation.mutateAsync({
+        name: form.name,
+        email: form.email,
+        company: form.company || undefined,
+        message: form.message,
+        service: selectedService.name,
+        price: `A$${selectedService.price.toLocaleString()}`,
       });
-      if (res.ok) {
-        setForm(f => ({ ...f, submitted: true, submitting: false }));
-      } else {
-        throw new Error('Failed');
-      }
+      setForm(f => ({ ...f, submitted: true, submitting: false }));
     } catch {
-      setForm(f => ({ ...f, submitting: false, error: 'Something went wrong. Please try again or email us directly.' }));
+      setForm(f => ({ ...f, submitting: false, error: 'Something went wrong. Please try again or email us directly at hello@nudgedigital.com.au' }));
     }
   };
 
