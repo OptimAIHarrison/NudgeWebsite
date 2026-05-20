@@ -1,114 +1,62 @@
-import { TRPCError } from "@trpc/server";
-import { ENV } from "./env";
+import { Resend } from "resend";
 
-export type NotificationPayload = {
-  title: string;
-  content: string;
-};
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-const TITLE_MAX_LENGTH = 1200;
-const CONTENT_MAX_LENGTH = 20000;
+const FROM_EMAIL = "NUDGE <hello@nudgedigital.com.au>";
+const TO_EMAIL   = "hello@nudgedigital.com.au";
 
-const trimValue = (value: string): string => value.trim();
-const isNonEmptyString = (value: unknown): value is string =>
-  typeof value === "string" && value.trim().length > 0;
-
-const buildEndpointUrl = (baseUrl: string): string => {
-  const normalizedBase = baseUrl.endsWith("/")
-    ? baseUrl
-    : `${baseUrl}/`;
-  return new URL(
-    "webdevtoken.v1.WebDevService/SendNotification",
-    normalizedBase
-  ).toString();
-};
-
-const validatePayload = (input: NotificationPayload): NotificationPayload => {
-  if (!isNonEmptyString(input.title)) {
-    throw new TRPCError({
-      code: "BAD_REQUEST",
-      message: "Notification title is required.",
-    });
-  }
-  if (!isNonEmptyString(input.content)) {
-    throw new TRPCError({
-      code: "BAD_REQUEST",
-      message: "Notification content is required.",
-    });
-  }
-
-  const title = trimValue(input.title);
-  const content = trimValue(input.content);
-
-  if (title.length > TITLE_MAX_LENGTH) {
-    throw new TRPCError({
-      code: "BAD_REQUEST",
-      message: `Notification title must be at most ${TITLE_MAX_LENGTH} characters.`,
-    });
-  }
-
-  if (content.length > CONTENT_MAX_LENGTH) {
-    throw new TRPCError({
-      code: "BAD_REQUEST",
-      message: `Notification content must be at most ${CONTENT_MAX_LENGTH} characters.`,
-    });
-  }
-
-  return { title, content };
-};
+export interface EmailPayload {
+  subject: string;
+  html: string;
+  replyTo?: string;
+}
 
 /**
- * Dispatches a project-owner notification through the Manus Notification Service.
- * Returns `true` if the request was accepted, `false` when the upstream service
- * cannot be reached (callers can fall back to email/slack). Validation errors
- * bubble up as TRPC errors so callers can fix the payload.
+ * Send a transactional email via Resend.
+ * Returns true on success, false on failure (never throws — callers log and move on).
  */
-export async function notifyOwner(
-  payload: NotificationPayload
-): Promise<boolean> {
-  const { title, content } = validatePayload(payload);
-
-  if (!ENV.forgeApiUrl) {
-    throw new TRPCError({
-      code: "INTERNAL_SERVER_ERROR",
-      message: "Notification service URL is not configured.",
-    });
-  }
-
-  if (!ENV.forgeApiKey) {
-    throw new TRPCError({
-      code: "INTERNAL_SERVER_ERROR",
-      message: "Notification service API key is not configured.",
-    });
-  }
-
-  const endpoint = buildEndpointUrl(ENV.forgeApiUrl);
-
+export async function sendEmail(payload: EmailPayload): Promise<boolean> {
   try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        authorization: `Bearer ${ENV.forgeApiKey}`,
-        "content-type": "application/json",
-        "connect-protocol-version": "1",
-      },
-      body: JSON.stringify({ title, content }),
+    const { error } = await resend.emails.send({
+      from: FROM_EMAIL,
+      to:   TO_EMAIL,
+      replyTo: payload.replyTo,
+      subject: payload.subject,
+      html:    payload.html,
     });
 
-    if (!response.ok) {
-      const detail = await response.text().catch(() => "");
-      console.warn(
-        `[Notification] Failed to notify owner (${response.status} ${response.statusText})${
-          detail ? `: ${detail}` : ""
-        }`
-      );
+    if (error) {
+      console.error("[Resend] Failed to send email:", error);
       return false;
     }
 
     return true;
-  } catch (error) {
-    console.warn("[Notification] Error calling notification service:", error);
+  } catch (err) {
+    console.error("[Resend] Unexpected error:", err);
     return false;
   }
+}
+
+/** Convenience: build a clean HTML table from a key/value record */
+export function buildEmailHtml(rows: Record<string, string>): string {
+  const tableRows = Object.entries(rows)
+    .map(([k, v]) => `
+      <tr>
+        <td style="padding:8px 12px;font-weight:600;color:#555;width:160px;vertical-align:top;border-bottom:1px solid #eee">${k}</td>
+        <td style="padding:8px 12px;color:#222;vertical-align:top;border-bottom:1px solid #eee">${v.replace(/\n/g, "<br>")}</td>
+      </tr>`)
+    .join("");
+
+  return `
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:600px;margin:0 auto;padding:32px 24px">
+      <div style="background:#8040B2;border-radius:10px 10px 0 0;padding:20px 24px">
+        <p style="color:#fff;font-size:20px;font-weight:800;margin:0;letter-spacing:1px">NUDGE</p>
+      </div>
+      <table style="width:100%;border-collapse:collapse;background:#fff;border:1px solid #eee;border-top:none;border-radius:0 0 10px 10px">
+        ${tableRows}
+      </table>
+      <p style="font-size:12px;color:#999;text-align:center;margin-top:24px">
+        nudgedigital.com.au
+      </p>
+    </div>`;
 }
