@@ -15,7 +15,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
   const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'Services', href: '/services' },
-    { label: 'How We Work', href: '/how-we-work' },
+    { label: 'How I Work', href: '/how-we-work' },
     { label: 'Pricing', href: '/pricing' },
     { label: 'Resources', href: '/resources' },
     { label: 'Customer Success', href: '/testimonials' },
