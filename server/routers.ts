@@ -3,7 +3,10 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { sendEmail, buildEmailHtml } from "./_core/notification";
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+
+const ADMIN_TOKEN = "nudge_admin_authenticated";
 
 export const appRouter = router({
   system: systemRouter,
@@ -13,8 +16,41 @@ export const appRouter = router({
     logout: publicProcedure.mutation(({ ctx }) => {
       const cookieOptions = getSessionCookieOptions(ctx.req);
       ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
+      ctx.res.clearCookie("admin_auth", { path: "/" });
       return { success: true } as const;
     }),
+  }),
+
+  // Admin login — checks password against ADMIN_PASSWORD env var
+  adminLogin: publicProcedure
+    .input(z.object({
+      email:    z.string().email(),
+      password: z.string().min(1),
+    }))
+    .mutation(({ input, ctx }) => {
+      const validEmail    = process.env.ADMIN_EMAIL    || "harrison@nudgedigital.com.au";
+      const validPassword = process.env.ADMIN_PASSWORD || "nudge";
+
+      if (input.email !== validEmail || input.password !== validPassword) {
+        throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid credentials" });
+      }
+
+      // Set a simple httpOnly cookie so the server can recognise admin sessions
+      ctx.res.cookie("admin_auth", ADMIN_TOKEN, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
+        maxAge: 60 * 60 * 24 * 7 * 1000, // 7 days
+        path: "/",
+      });
+
+      return { success: true };
+    }),
+
+  // Check if current request is authenticated as admin
+  adminMe: publicProcedure.query(({ ctx }) => {
+    const token = ctx.req.cookies?.admin_auth;
+    return { isAdmin: token === ADMIN_TOKEN };
   }),
 
   contact: publicProcedure
