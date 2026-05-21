@@ -184,9 +184,9 @@ export default function Home() {
       setActiveCard(idx);
       timeoutId = setTimeout(() => {
         setActiveCard(-1);
-        const gap = 800 + Math.random() * 1000;
+        const gap = 600 + Math.random() * 800;
         timeoutId = setTimeout(ping, gap);
-      }, 600);
+      }, 500);
     };
 
     timeoutId = setTimeout(ping, 800);
