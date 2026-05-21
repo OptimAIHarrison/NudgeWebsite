@@ -1,72 +1,51 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
-import { Plus, LogOut, Edit2, Trash2, Eye } from 'lucide-react';
-
-interface Article {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  status: 'draft' | 'published' | 'scheduled';
-  createdAt: string;
-  publishedAt?: string;
-}
+import { Plus, LogOut, Edit2, Trash2 } from 'lucide-react';
+import { trpc } from '@/lib/trpc';
 
 export default function Admin() {
   const [, setLocation] = useLocation();
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const { data: adminData, isLoading } = trpc.adminMe.useQuery();
+  const logoutMutation = trpc.auth.logout.useMutation({
+    onSuccess: () => setLocation('/admin/login'),
+  });
 
   useEffect(() => {
-    // Check if user is authenticated
-    const token = localStorage.getItem('adminToken');
-    if (!token) {
-      setLocation('/login');
-    } else {
-      setIsAuthenticated(true);
-      // Load articles from localStorage
-      const saved = localStorage.getItem('articles');
-      if (saved) {
-        setArticles(JSON.parse(saved));
-      }
+    if (!isLoading && !adminData?.isAdmin) {
+      setLocation('/admin/login');
     }
-  }, [setLocation]);
+  }, [isLoading, adminData, setLocation]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('adminToken');
-    localStorage.removeItem('adminEmail');
-    setLocation('/login');
-  };
-
-  const handleNewArticle = () => {
-    setLocation('/admin/editor');
-  };
-
-  const handleEditArticle = (id: string) => {
-    setLocation(`/admin/editor?id=${id}`);
-  };
+  // Articles stored in localStorage (client-only CMS for now)
+  const articles = JSON.parse(localStorage.getItem('articles') || '[]');
 
   const handleDeleteArticle = (id: string) => {
     if (confirm('Are you sure you want to delete this article?')) {
-      const updated = articles.filter(a => a.id !== id);
-      setArticles(updated);
+      const updated = articles.filter((a: { id: string }) => a.id !== id);
       localStorage.setItem('articles', JSON.stringify(updated));
+      window.location.reload();
     }
   };
 
-  if (!isAuthenticated) {
-    return null;
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
   }
+
+  if (!adminData?.isAdmin) return null;
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
         <div className="container flex items-center justify-between h-20">
           <h1 className="text-2xl font-bold text-foreground">Admin Dashboard</h1>
           <button
-            onClick={handleLogout}
+            onClick={() => logoutMutation.mutate()}
             className="flex items-center gap-2 px-4 py-2 text-foreground/60 hover:text-foreground transition-colors"
           >
             <LogOut className="w-5 h-5" />
@@ -75,9 +54,7 @@ export default function Admin() {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="container py-12">
-        {/* Articles Section */}
         <div>
           <div className="flex items-center justify-between mb-8">
             <div>
@@ -85,7 +62,7 @@ export default function Admin() {
               <p className="text-foreground/60">Manage your resource articles and guides</p>
             </div>
             <Button
-              onClick={handleNewArticle}
+              onClick={() => setLocation('/admin/editor')}
               className="flex items-center gap-2 bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-lg font-semibold"
             >
               <Plus className="w-5 h-5" />
@@ -93,12 +70,11 @@ export default function Admin() {
             </Button>
           </div>
 
-          {/* Articles Table */}
           {articles.length === 0 ? (
             <div className="glass-card p-12 text-center">
               <p className="text-foreground/60 mb-4">No articles yet. Create your first one!</p>
               <Button
-                onClick={handleNewArticle}
+                onClick={() => setLocation('/admin/editor')}
                 className="bg-accent hover:bg-accent/90 text-white px-6 py-2 rounded-lg font-semibold"
               >
                 Create Article
@@ -116,13 +92,11 @@ export default function Admin() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
-                  {articles.map((article) => (
+                  {articles.map((article: { id: string; title: string; excerpt: string; status: string; createdAt: string }) => (
                     <tr key={article.id} className="hover:bg-secondary/30 transition-colors">
                       <td className="px-6 py-4">
-                        <div>
-                          <p className="font-semibold text-foreground">{article.title}</p>
-                          <p className="text-sm text-foreground/60">{article.excerpt}</p>
-                        </div>
+                        <p className="font-semibold text-foreground">{article.title}</p>
+                        <p className="text-sm text-foreground/60">{article.excerpt}</p>
                       </td>
                       <td className="px-6 py-4">
                         <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
@@ -139,7 +113,7 @@ export default function Admin() {
                       <td className="px-6 py-4">
                         <div className="flex items-center justify-end gap-2">
                           <button
-                            onClick={() => handleEditArticle(article.id)}
+                            onClick={() => setLocation(`/admin/editor?id=${article.id}`)}
                             className="p-2 hover:bg-secondary rounded-lg transition-colors text-foreground/60 hover:text-foreground"
                           >
                             <Edit2 className="w-4 h-4" />
