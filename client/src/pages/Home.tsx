@@ -25,16 +25,16 @@ const CARD_CONFIGS = [
 ];
 
 const SERVICE_DATA: Record<string, { icon: string; color: string; accent: string; subtitle: string }> = {
-  'SEO':             { icon: 'LineChart', color: 'bg-blue-200/40',    accent: 'text-blue-500',    subtitle: 'Technical optimization' },
-  'Email':           { icon: 'Zap',      color: 'bg-orange-200/40',  accent: 'text-orange-500',  subtitle: 'Automation & sequences' },
-  'CRM':             { icon: 'Database', color: 'bg-green-200/40',   accent: 'text-green-600',   subtitle: 'System setup & flows' },
-  'Ads':             { icon: 'Zap',      color: 'bg-yellow-200/40',  accent: 'text-yellow-600',  subtitle: 'Campaign management' },
-  'Insights':        { icon: 'BarChart3',color: 'bg-rose-200/40',    accent: 'text-rose-500',    subtitle: 'Actionable insights' },
-  'Strategy':        { icon: 'Target',   color: 'bg-pink-200/40',    accent: 'text-pink-500',    subtitle: 'Planning & roadmap' },
-  'Automation':      { icon: 'Rocket',   color: 'bg-cyan-200/40',    accent: 'text-cyan-600',    subtitle: 'Workflow automation' },
-  'Growth':          { icon: 'TrendingUp',color:'bg-emerald-200/40', accent: 'text-emerald-600', subtitle: 'Growth optimization' },
-  'Social Media':    { icon: 'Share2',   color: 'bg-amber-200/40',   accent: 'text-amber-600',   subtitle: 'Strategy & scheduling' },
-  'Content Marketing':{ icon:'FileText', color: 'bg-lime-200/40',    accent: 'text-lime-700',    subtitle: 'Copy, blogs & assets' },
+  'SEO':             { icon: 'LineChart', color: 'bg-blue-200/20',    accent: 'text-blue-500',    subtitle: 'Technical optimization' },
+  'Email':           { icon: 'Zap',      color: 'bg-orange-200/20',  accent: 'text-orange-500',  subtitle: 'Automation & sequences' },
+  'CRM':             { icon: 'Database', color: 'bg-green-200/20',   accent: 'text-green-600',   subtitle: 'System setup & flows' },
+  'Ads':             { icon: 'Zap',      color: 'bg-yellow-200/20',  accent: 'text-yellow-600',  subtitle: 'Campaign management' },
+  'Insights':        { icon: 'BarChart3',color: 'bg-rose-200/20',    accent: 'text-rose-500',    subtitle: 'Actionable insights' },
+  'Strategy':        { icon: 'Target',   color: 'bg-pink-200/20',    accent: 'text-pink-500',    subtitle: 'Planning & roadmap' },
+  'Automation':      { icon: 'Rocket',   color: 'bg-cyan-200/20',    accent: 'text-cyan-600',    subtitle: 'Workflow automation' },
+  'Growth':          { icon: 'TrendingUp',color:'bg-emerald-200/20', accent: 'text-emerald-600', subtitle: 'Growth optimization' },
+  'Social Media':    { icon: 'Share2',   color: 'bg-amber-200/20',   accent: 'text-amber-600',   subtitle: 'Strategy & scheduling' },
+  'Content Marketing':{ icon:'FileText', color: 'bg-lime-200/20',    accent: 'text-lime-700',    subtitle: 'Copy, blogs & assets' },
 };
 
 function ServiceNotification({
@@ -97,7 +97,7 @@ function ServiceNotification({
           zIndex: 20,
           transform: isPinging ? 'translateY(-5px) scale(1.05)' : 'translateY(0) scale(1)',
           boxShadow: isPinging ? '0 16px 40px rgba(0,0,0,0.15)' : '0 4px 16px rgba(0,0,0,0.06)',
-          opacity: isPinging ? 1 : 0.92,
+          opacity: isPinging ? 0.82 : 0.45,
           transition: 'transform 0.35s ease, box-shadow 0.35s ease, opacity 0.35s ease',
           background: 'transparent',
         }}
@@ -110,7 +110,7 @@ function ServiceNotification({
             flex items-start gap-3 relative
             rounded-2xl
             ${data.color}
-            border border-white/35
+            border border-white/20
             backdrop-blur-md
             transition-all duration-200 ease-out
             hover:scale-[1.08] hover:border-white/60 hover:-translate-y-0.5
