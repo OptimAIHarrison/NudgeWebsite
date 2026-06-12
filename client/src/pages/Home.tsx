@@ -242,7 +242,7 @@ export default function Home() {
                 ViewBox = 300 wide. Group starts at x=13 so it's centred: (300-274)/2=13.
               */}
               <svg
-                width="300" height="64"
+                viewBox="0 0 300 64" className="w-full max-w-xs"
                 viewBox="0 0 300 64"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
