@@ -236,13 +236,7 @@ export default function Home() {
           <div className="text-center space-y-6 animate-fade-in">
             {/* Logo */}
             <div className="flex justify-center mb-4">
-              <style>{`
-                @keyframes nudge-bounce {
-                  0%, 100% { transform: translateY(0); animation-timing-function: cubic-bezier(0.8,0,1,1); }
-                  50%       { transform: translateY(-18px); animation-timing-function: cubic-bezier(0,0,0.2,1); }
-                }
-                .nudge-logo-bounce { animation: nudge-bounce 0.7s infinite; }
-              `}</style>
+          
               {/*
                 Group width estimate: circle(38) + gap(8) + "NUDGE" text ≈ 228px = 274px total.
                 ViewBox = 300 wide. Group starts at x=13 so it's centred: (300-274)/2=13.
@@ -253,7 +247,7 @@ export default function Home() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 aria-label="NUDGE"
-                className="nudge-logo-bounce"
+              
               >
                 <circle cx="32" cy="32" r="19" fill="#8040B2"/>
                 <text
