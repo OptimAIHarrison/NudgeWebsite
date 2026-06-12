@@ -22,9 +22,9 @@ const VALUES = [
 
 const STATS = [
   { stat: '10+', label: 'Years in digital marketing' },
-  { stat: '3', label: 'Continents worked across' },
+  { stat: '5', label: 'Continents worked across' },
   { stat: '1', label: 'Person you\'re actually dealing with' },
-  { stat: '40+', label: 'Tools across the MarTech stack' },
+  { stat: '30+', label: 'Tools across the MarTech stack' },
 ];
 
 export default function About() {
