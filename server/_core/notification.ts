@@ -5,8 +5,6 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const FROM_EMAIL = "NUDGE <hello@nudgedigital.com.au>";
 const TO_EMAIL   = "hello@nudgedigital.com.au";
 
-const LOGO_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663450259077/HbZCzrQQJzoEYBqv.png";
-
 export interface EmailPayload {
   subject: string;
   html: string;
@@ -39,61 +37,26 @@ export async function sendEmail(payload: EmailPayload): Promise<boolean> {
   }
 }
 
-/** Convenience: build a styled HTML email from a title and key/value record */
-export function buildEmailHtml(title: string, rows: Record<string, string>): string {
+/** Convenience: build a clean HTML table from a key/value record */
+export function buildEmailHtml(rows: Record<string, string>): string {
   const tableRows = Object.entries(rows)
     .map(([k, v]) => `
-        <tr>
-          <td style="padding:10px 16px;background:#f9f7ff;font-weight:600;color:#8040B2;font-size:13px;width:25%;border-bottom:1px solid #ede9fe;white-space:nowrap;vertical-align:top;">${k}</td>
-          <td style="padding:10px 16px;background:#ffffff;color:#1f1f2e;font-size:13px;border-bottom:1px solid #ede9fe;vertical-align:top;line-height:1.6;">${v.replace(/\n/g, "<br/>")}</td>
-        </tr>`)
+      <tr>
+        <td style="padding:8px 12px;font-weight:600;color:#555;width:160px;vertical-align:top;border-bottom:1px solid #eee">${k}</td>
+        <td style="padding:8px 12px;color:#222;vertical-align:top;border-bottom:1px solid #eee">${v.replace(/\n/g, "<br>")}</td>
+      </tr>`)
     .join("");
 
-  return `<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
-<body style="margin:0;padding:0;background:#f3f0ff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f3f0ff;padding:40px 20px;">
-    <tr><td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(128,64,178,0.10);">
-
-        <!-- Header -->
-        <tr>
-          <td style="background:linear-gradient(135deg,#8040B2 0%,#b366e0 100%);padding:24px 28px;">
-            <table width="100%" cellpadding="0" cellspacing="0">
-              <tr>
-                <td style="vertical-align:middle;">
-                  <img src="${LOGO_URL}" alt="Nudge Digital" height="36" style="display:block;height:36px;width:auto;" />
-                </td>
-                <td align="right" style="vertical-align:middle;">
-                  <span style="color:rgba(255,255,255,0.85);font-size:12px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;">${title}</span>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-
-        <!-- Table -->
-        <tr>
-          <td style="padding:0;">
-            <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
-              ${tableRows}
-            </table>
-          </td>
-        </tr>
-
-        <!-- Footer -->
-        <tr>
-          <td style="background:#f9f7ff;padding:16px 24px;border-top:1px solid #ede9fe;">
-            <p style="margin:0;font-size:11px;color:#9ca3af;text-align:center;">
-              This email was sent automatically by Nudge Digital &mdash; <a href="https://nudgedigital.com.au" style="color:#8040B2;text-decoration:none;">nudgedigital.com.au</a>
-            </p>
-          </td>
-        </tr>
-
+  return `
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:600px;margin:0 auto;padding:32px 24px">
+      <div style="background:#8040B2;border-radius:10px 10px 0 0;padding:20px 24px">
+        <p style="color:#fff;font-size:20px;font-weight:800;margin:0;letter-spacing:1px">NUDGE</p>
+      </div>
+      <table style="width:100%;border-collapse:collapse;background:#fff;border:1px solid #eee;border-top:none;border-radius:0 0 10px 10px">
+        ${tableRows}
       </table>
-    </td></tr>
-  </table>
-</body>
-</html>`;
+      <p style="font-size:12px;color:#999;text-align:center;margin-top:24px">
+        nudgedigital.com.au
+      </p>
+    </div>`;
 }
