@@ -182,14 +182,15 @@ export default function Home() {
       do { idx = Math.floor(Math.random() * total); } while (idx === lastIdx);
       lastIdx = idx;
       setActiveCard(idx);
+      // Flash on for ~350ms (half bounce cycle), off gap ~350ms — matches 0.7s bounce
       timeoutId = setTimeout(() => {
         setActiveCard(-1);
-        const gap = 500 + Math.random() * 700;
+        const gap = 300 + Math.random() * 150;
         timeoutId = setTimeout(ping, gap);
-      }, 400);
+      }, 350);
     };
 
-    timeoutId = setTimeout(ping, 700);
+    timeoutId = setTimeout(ping, 350);
     return () => clearTimeout(timeoutId);
   }, []);
 
@@ -240,22 +241,23 @@ export default function Home() {
                   0%, 100% { transform: translateY(0); animation-timing-function: cubic-bezier(0.8,0,1,1); }
                   50%       { transform: translateY(-18px); animation-timing-function: cubic-bezier(0,0,0.2,1); }
                 }
-                .nudge-logo-bounce { animation: nudge-bounce 1.4s infinite; }
+                .nudge-logo-bounce { animation: nudge-bounce 0.7s infinite; }
               `}</style>
+              {/*
+                Group width estimate: circle(38) + gap(8) + "NUDGE" text ≈ 228px = 274px total.
+                ViewBox = 300 wide. Group starts at x=13 so it's centred: (300-274)/2=13.
+              */}
               <svg
-                width="320" height="64"
-                viewBox="0 0 320 64"
+                width="300" height="64"
+                viewBox="0 0 300 64"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 aria-label="NUDGE"
                 className="nudge-logo-bounce"
               >
-                {/* Circle vertically centred to text cap-height.
-                    fontSize=52, cap≈37px, r=18.5 → use r=19.
-                    Text baseline at y=32 (mid). Circle cy=32. */}
-                <circle cx="19" cy="32" r="19" fill="#8040B2"/>
+                <circle cx="32" cy="32" r="19" fill="#8040B2"/>
                 <text
-                  x="48"
+                  x="61"
                   y="32"
                   fill="currentColor"
                   fontFamily="-apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif"
