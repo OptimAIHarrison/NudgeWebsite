@@ -236,31 +236,13 @@ export default function Home() {
           <div className="text-center space-y-6 animate-fade-in">
             {/* Logo */}
             <div className="flex justify-center mb-4">
-          
-              {/*
-                Group width estimate: circle(38) + gap(8) + "NUDGE" text ≈ 228px = 274px total.
-                ViewBox = 300 wide. Group starts at x=13 so it's centred: (300-274)/2=13.
-              */}
-              <svg
-                viewBox="0 0 300 64" className="w-full max-w-xs"
-                viewBox="0 0 300 64"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-label="NUDGE"
-              
-              >
-                <circle cx="32" cy="32" r="19" fill="#8040B2"/>
-                <text
-                  x="61"
-                  y="32"
-                  fill="currentColor"
-                  fontFamily="-apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif"
-                  fontWeight="800"
-                  fontSize="52"
-                  letterSpacing="2"
-                  dominantBaseline="central"
-                >NUDGE</text>
-              </svg>
+              <div className="flex items-center gap-3">
+                <div className="rounded-full bg-[#8040B2] flex-shrink-0" style={{ width: 38, height: 38 }} />
+                <span
+                  className="font-extrabold text-foreground leading-none"
+                  style={{ fontSize: '3.25rem', letterSpacing: '0.04em' }}
+                >NUDGE</span>
+              </div>
             </div>
 
             <div className="space-y-3">
