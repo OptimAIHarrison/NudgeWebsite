@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronLeft, ChevronRight, TrendingUp, Zap, Target, BarChart3, Quote, ArrowRight, CheckCircle, Clock } from 'lucide-react';
+import { TrendingUp, Zap, Target, BarChart3, ArrowRight, CheckCircle, Clock } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'wouter';
@@ -9,50 +9,68 @@ const TESTIMONIALS = [
   {
     id: 1,
     company: 'PR Agency',
-    quote: 'Harrison completely transformed how our agency operates. He built out our website, CRM and content automation from the ground up — and it all works seamlessly together. We\'re saving hours every week and our clients are getting better results.',
+    quote: 'Honestly didn\'t expect the turnaround to be this fast. Harrison came in, figured out what we actually needed (not just what we asked for), and built it. Website, CRM, automations — all talking to each other. We\'ve clawed back hours every single week.',
     author: 'Kane',
     role: 'Founder',
     category: 'Agency & Automation',
+    initials: 'K',
+    color: 'bg-violet-500',
+    featured: true,
   },
   {
     id: 2,
     company: 'AI SaaS Start-up',
-    quote: 'We\'d been battling tracking issues and couldn\'t get our custom site to talk to our analytics. Harrison solved both in no time. He also set up our content automation and now everything just runs. Genuinely impressive.',
+    quote: 'We\'d thrown money at this problem before and gotten nowhere. Harrison looked at it for about ten minutes and knew exactly what was wrong. Tracking fixed, site integrated, content automated. I genuinely don\'t know how he works this fast.',
     author: 'Scott',
     role: 'Founder',
     category: 'Analytics & Tracking',
+    initials: 'S',
+    color: 'bg-cyan-500',
+    featured: false,
   },
   {
     id: 3,
     company: 'Trade Services',
-    quote: 'Harrison sorted everything — website, socials, content plan and lead gen. As a tradie, I don\'t have time to figure this stuff out. He made it simple, got it done, and now the leads are coming in consistently.',
+    quote: 'Look, I lay pipes for a living. I don\'t do websites or "content strategies." Harrison spoke to me like a normal person, didn\'t overcomplicate it, and just got it done. Phone\'s been ringing ever since. That\'s all I needed.',
     author: 'Justin',
     role: 'Self-Employed Tradie',
     category: 'Lead Generation & Web',
+    initials: 'J',
+    color: 'bg-amber-500',
+    featured: false,
   },
   {
     id: 4,
     company: 'Retail & E-commerce',
-    quote: 'We needed a proper online presence and a system to match. Harrison built our Shopify store, set up our email CRM and created templates we actually use. It\'s made a real difference to how we run the business.',
+    quote: 'We\'d been putting off sorting the online side of things for way too long. Harrison made it painless. The Shopify store looks great, the email flows are running, and for the first time I actually feel like the business has a proper system behind it.',
     author: 'Katie',
     role: 'Owner',
     category: 'E-commerce & CRM',
+    initials: 'K',
+    color: 'bg-rose-500',
+    featured: true,
   },
   {
     id: 5,
     company: 'Home Goods Retailer',
-    quote: 'Harrison fixed our tracking issues and we saw a 45% improvement in lead quality within 3 months. He found problems we didn\'t even know we had.',
+    quote: 'Our data was a mess and we didn\'t even realise how bad it was until Harrison showed us. Within three months of him fixing the tracking, our lead quality was up 45%. It\'s the kind of thing that sounds boring until you see the numbers.',
     author: 'Sarah',
     role: 'Marketing Director',
     category: 'Analytics & Tracking',
+    initials: 'S',
+    color: 'bg-emerald-500',
+    featured: false,
   },
   {
     id: 6,
     company: 'Tech Startup',
-    quote: 'His technical expertise solved problems that were costing us monthly. He came in, diagnosed the issue fast, and fixed it. No fuss.',
+    quote: 'Every dev we\'d spoken to wanted to rebuild everything from scratch. Harrison just fixed it. Identified the issue, explained it clearly, sorted it out. Didn\'t oversell, didn\'t drag it out. Exactly what you want.',
     author: 'Adam',
     role: 'Founder',
     category: 'Technical Fixes',
+    initials: 'A',
+    color: 'bg-blue-500',
+    featured: false,
   },
 ];
 
@@ -135,11 +153,7 @@ const IMPACT_STATS = [
 ];
 
 export default function Testimonials() {
-  const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [activeStudy, setActiveStudy] = useState(0);
-
-  const nextTestimonial = () => setTestimonialIndex((prev) => (prev + 1) % TESTIMONIALS.length);
-  const prevTestimonial = () => setTestimonialIndex((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
 
   const study = CASE_STUDIES[activeStudy];
   const StudyIcon = study.icon;
@@ -176,39 +190,47 @@ export default function Testimonials() {
 
       {/* ── Testimonials ────────────────────────────────────────────── */}
       <section className="py-20 md:py-24">
-        <div className="container max-w-5xl mx-auto px-4">
+        <div className="container max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-2">What clients say</h2>
-            <p className="text-foreground/50">Direct quotes from people I've worked with.</p>
+            <p className="text-foreground/50">In their own words — unedited.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-            {TESTIMONIALS.map((t, idx) => (
+          {/* Masonry-style grid */}
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-5 space-y-5">
+            {TESTIMONIALS.map((t) => (
               <div
                 key={t.id}
-                onClick={() => setTestimonialIndex(idx)}
-                className={`rounded-2xl border-2 p-6 cursor-pointer transition-all duration-200 ${
-                  testimonialIndex === idx
-                    ? 'border-accent bg-accent/3 shadow-lg shadow-accent/10'
-                    : 'border-border bg-background hover:border-accent/40 hover:shadow-md'
+                className={`break-inside-avoid rounded-2xl border-2 p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${
+                  t.featured
+                    ? 'border-accent/40 bg-accent/3 shadow-md shadow-accent/5'
+                    : 'border-border bg-background hover:border-accent/30'
                 }`}
               >
-                <div className="flex items-start gap-3 mb-4">
-                  <Quote className={`w-6 h-6 flex-shrink-0 mt-0.5 ${testimonialIndex === idx ? 'text-accent' : 'text-foreground/20'}`} />
-                  <p className={`text-sm leading-relaxed italic ${testimonialIndex === idx ? 'text-foreground' : 'text-foreground/65'}`}>
-                    "{t.quote}"
-                  </p>
+                {/* Stars */}
+                <div className="flex gap-0.5 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-4 h-4 text-amber-400 fill-amber-400" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
                 </div>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-bold text-foreground text-sm">{t.author}</p>
-                    <p className="text-xs text-foreground/50">{t.role} · {t.company}</p>
+
+                {/* Quote */}
+                <p className="text-sm text-foreground/75 leading-relaxed mb-5 italic">
+                  "{t.quote}"
+                </p>
+
+                {/* Author row */}
+                <div className="flex items-center gap-3 pt-4 border-t border-border/60">
+                  <div className={`w-9 h-9 rounded-full ${t.color} flex items-center justify-center flex-shrink-0`}>
+                    <span className="text-white text-xs font-bold">{t.initials}</span>
                   </div>
-                  <span className={`text-xs px-2.5 py-1 rounded-full font-semibold border ${
-                    testimonialIndex === idx
-                      ? 'bg-accent/10 text-accent border-accent/25'
-                      : 'bg-secondary text-foreground/40 border-border'
-                  }`}>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-bold text-foreground text-sm leading-tight">{t.author}</p>
+                    <p className="text-xs text-foreground/45 leading-tight">{t.role} · {t.company}</p>
+                  </div>
+                  <span className="text-xs px-2.5 py-1 rounded-full font-semibold border bg-secondary text-foreground/50 border-border flex-shrink-0">
                     {t.category}
                   </span>
                 </div>
