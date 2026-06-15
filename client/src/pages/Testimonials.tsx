@@ -8,6 +8,38 @@ import { Button } from '@/components/ui/button';
 const TESTIMONIALS = [
   {
     id: 1,
+    company: 'PR Agency',
+    quote: 'Harrison completely transformed how our agency operates. He built out our website, CRM and content automation from the ground up — and it all works seamlessly together. We\'re saving hours every week and our clients are getting better results.',
+    author: 'Kane',
+    role: 'Founder',
+    category: 'Agency & Automation',
+  },
+  {
+    id: 2,
+    company: 'AI SaaS Start-up',
+    quote: 'We\'d been battling tracking issues and couldn\'t get our custom site to talk to our analytics. Harrison solved both in no time. He also set up our content automation and now everything just runs. Genuinely impressive.',
+    author: 'Scott',
+    role: 'Founder',
+    category: 'Analytics & Tracking',
+  },
+  {
+    id: 3,
+    company: 'Trade Services',
+    quote: 'Harrison sorted everything — website, socials, content plan and lead gen. As a tradie, I don\'t have time to figure this stuff out. He made it simple, got it done, and now the leads are coming in consistently.',
+    author: 'Justin',
+    role: 'Self-Employed Tradie',
+    category: 'Lead Generation & Web',
+  },
+  {
+    id: 4,
+    company: 'Retail & E-commerce',
+    quote: 'We needed a proper online presence and a system to match. Harrison built our Shopify store, set up our email CRM and created templates we actually use. It\'s made a real difference to how we run the business.',
+    author: 'Katie',
+    role: 'Owner',
+    category: 'E-commerce & CRM',
+  },
+  {
+    id: 5,
     company: 'Home Goods Retailer',
     quote: 'Harrison fixed our tracking issues and we saw a 45% improvement in lead quality within 3 months. He found problems we didn\'t even know we had.',
     author: 'Sarah',
@@ -15,7 +47,7 @@ const TESTIMONIALS = [
     category: 'Analytics & Tracking',
   },
   {
-    id: 2,
+    id: 6,
     company: 'Tech Startup',
     quote: 'His technical expertise solved problems that were costing us monthly. He came in, diagnosed the issue fast, and fixed it. No fuss.',
     author: 'Adam',
@@ -23,20 +55,12 @@ const TESTIMONIALS = [
     category: 'Technical Fixes',
   },
   {
-    id: 3,
+    id: 7,
     company: 'Digital Agency',
     quote: 'As an agency, we rely on Harrison for specialised technical implementation. He delivers every time, on scope, on time — and our clients love the results.',
     author: 'Emma',
     role: 'Agency Director',
     category: 'Agency Partnership',
-  },
-  {
-    id: 4,
-    company: 'E-commerce Business',
-    quote: 'The ROI improvement was immediate. Best investment we made in our marketing all year. I wish "nudged" sooner.',
-    author: 'James',
-    role: 'Founder',
-    category: 'CRO & Optimisation',
   },
 ];
 
@@ -166,7 +190,7 @@ export default function Testimonials() {
             <p className="text-foreground/50">Direct quotes from people I've worked with.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4 mb-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             {TESTIMONIALS.map((t, idx) => (
               <div
                 key={t.id}
