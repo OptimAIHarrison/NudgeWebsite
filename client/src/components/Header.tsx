@@ -99,7 +99,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
               </div>
               <div className="min-w-0">
                 <p className="text-xs md:text-sm font-semibold text-foreground truncate">Browse Services Marketplace...</p>
-                <p className="text-xs text-foreground/60 text-opacity-70">35+ services</p>
+                <p className="text-xs text-foreground/60 text-opacity-70">40+ services</p>
               </div>
             </div>
           </div>
