@@ -446,27 +446,33 @@ export default function Home() {
               {
                 company: 'PR Agency',
                 tag: 'Agency & Automation',
-                tagColor: 'bg-emerald-100 text-emerald-700 border-emerald-200',
-                quote: 'Harrison completely transformed how our agency operates. He built out our website, CRM and content automation from the ground up — and it all works seamlessly together.',
-                author: 'Kane, Founder',
-                stat: 'Hours', statLabel: 'saved every week',
+                tagColor: 'bg-violet-100 text-violet-700 border-violet-200',
+                quote: 'Harrison came in, figured out what we actually needed (not just what we asked for), and built it. Website, CRM, automations — all talking to each other.',
+                author: 'Kane · Founder',
+                initials: 'K',
+                avatarColor: 'bg-violet-500',
+                stat: 'Hours', statLabel: 'clawed back every week',
                 metric: 'Full agency stack built from scratch',
               },
               {
                 company: 'AI SaaS Start-up',
                 tag: 'Analytics & Tracking',
                 tagColor: 'bg-cyan-100 text-cyan-700 border-cyan-200',
-                quote: 'We\'d been battling tracking issues and couldn\'t get our custom site to talk to our analytics. Harrison solved both in no time.',
-                author: 'Scott, Founder',
+                quote: 'We\'d thrown money at this problem before and gotten nowhere. Harrison looked at it for ten minutes and knew exactly what was wrong.',
+                author: 'Scott · Founder',
+                initials: 'S',
+                avatarColor: 'bg-cyan-500',
                 stat: '100%', statLabel: 'tracking accuracy',
                 metric: 'Analytics + automation fully connected',
               },
               {
                 company: 'Trade Services',
                 tag: 'Lead Generation & Web',
-                tagColor: 'bg-violet-100 text-violet-700 border-violet-200',
-                quote: 'Harrison sorted everything — website, socials, content plan and lead gen. Now the leads are coming in consistently.',
-                author: 'Justin, Self-Employed Tradie',
+                tagColor: 'bg-amber-100 text-amber-700 border-amber-200',
+                quote: 'Harrison spoke to me like a normal person, didn\'t overcomplicate it, and just got it done. Phone\'s been ringing ever since.',
+                author: 'Justin · Self-Employed Tradie',
+                initials: 'J',
+                avatarColor: 'bg-amber-500',
                 stat: 'Consistent', statLabel: 'inbound leads',
                 metric: 'Website, socials & lead gen live',
               },
@@ -476,8 +482,22 @@ export default function Home() {
                   <h3 className="font-extrabold text-foreground">{c.company}</h3>
                   <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${c.tagColor}`}>{c.tag}</span>
                 </div>
+                {/* Stars */}
+                <div className="flex gap-0.5 mb-3">
+                  {[...Array(5)].map((_, si) => (
+                    <svg key={si} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
                 <p className="text-sm text-foreground/65 italic leading-relaxed mb-5 flex-1">"{c.quote}"</p>
-                <p className="text-xs text-foreground/40 mb-5">— {c.author}</p>
+                {/* Author with avatar */}
+                <div className="flex items-center gap-2.5 mb-5">
+                  <div className={`w-7 h-7 rounded-full ${c.avatarColor} flex items-center justify-center flex-shrink-0`}>
+                    <span className="text-white text-xs font-bold">{c.initials}</span>
+                  </div>
+                  <p className="text-xs text-foreground/50">{c.author}</p>
+                </div>
                 <div className="border-t border-border pt-4">
                   <p className="text-3xl font-extrabold text-accent leading-none mb-0.5">{c.stat}</p>
                   <p className="text-xs text-foreground/50 mb-1">{c.statLabel}</p>
