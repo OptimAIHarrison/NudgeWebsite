@@ -54,14 +54,6 @@ const TESTIMONIALS = [
     role: 'Founder',
     category: 'Technical Fixes',
   },
-  {
-    id: 7,
-    company: 'Digital Agency',
-    quote: 'As an agency, we rely on Harrison for specialised technical implementation. He delivers every time, on scope, on time — and our clients love the results.',
-    author: 'Emma',
-    role: 'Agency Director',
-    category: 'Agency Partnership',
-  },
 ];
 
 const CASE_STUDIES = [
@@ -101,20 +93,20 @@ const CASE_STUDIES = [
   },
   {
     id: 3,
-    company: 'Marketing Agency',
+    company: 'PR Agency',
     industry: 'Agency',
     icon: Target,
     color: 'from-violet-500/20 to-violet-400/5',
     accentColor: 'text-violet-600',
     badgeColor: 'bg-violet-100 text-violet-700 border-violet-200',
-    challenge: 'Clients demanding technical SEO and implementation that the agency couldn\'t deliver in-house. Risk of losing accounts.',
-    solution: 'Embedded as fractional technical resource — delivering SEO audits, implementations, and reporting directly for their clients.',
+    challenge: 'The agency had no cohesive digital infrastructure — website, CRM, and content were all disconnected and running manually. Time was being lost across every part of the business.',
+    solution: 'Built the website, CRM, and content automation from the ground up — fully integrated so every system talks to each other without manual intervention.',
     results: [
-      { stat: '+2', label: 'New revenue streams' },
-      { stat: '$15K+', label: 'Monthly client revenue' },
+      { stat: 'Hours', label: 'Saved every week' },
+      { stat: 'Full stack', label: 'Built from scratch' },
       { stat: 'Ongoing', label: 'Engagement' },
     ],
-    services: ['Technical SEO', 'Fractional Support', 'Client Reporting'],
+    services: ['Website Build', 'CRM Setup', 'Content Automation', 'Systems Integration'],
   },
   {
     id: 4,
