@@ -147,12 +147,53 @@ async function main() {
       : "[prerender] Using Puppeteer's bundled Chromium"
   );
 
+  // Railway's Railpack builder auto-detects Puppeteer and installs the
+  // correct apt packages (libnss3, libglib2.0-0, libgbm1, etc.), but on
+  // some Debian/Ubuntu base images the dynamic linker's default search
+  // path doesn't include where these .so files actually land (commonly
+  // /usr/lib/x86_64-linux-gnu). Without this, Chrome fails to launch
+  // with "error while loading shared libraries: libglib-2.0.so.0:
+  // cannot open shared object file" even though the package IS
+  // installed. Explicitly extending LD_LIBRARY_PATH fixes this without
+  // needing to control the builder's package installation step at all.
+  const extraLibPaths = [
+    "/usr/lib/x86_64-linux-gnu",
+    "/usr/lib/aarch64-linux-gnu",
+    "/usr/lib",
+    "/lib/x86_64-linux-gnu",
+  ];
+  const existingLdPath = process.env.LD_LIBRARY_PATH || "";
+  const mergedLdPath = [existingLdPath, ...extraLibPaths].filter(Boolean).join(":");
+
+  // Diagnostic: actively search common locations for the specific
+  // library Chrome failed to find last time (libglib-2.0.so.0), so if
+  // this still fails, the log tells us exactly where it actually is
+  // (or confirms it's genuinely missing) instead of guessing again.
+  try {
+    const { execSync } = await import("child_process");
+    const found = execSync(
+      "find /usr /lib -name 'libglib-2.0.so*' 2>/dev/null || true",
+      { encoding: "utf-8" }
+    ).trim();
+    console.log(
+      found
+        ? `[prerender] Found libglib-2.0.so at:\n${found}`
+        : "[prerender] WARNING: libglib-2.0.so.0 not found anywhere on filesystem"
+    );
+  } catch {
+    // non-fatal — this is just diagnostic logging
+  }
+
   let browser;
   try {
     browser = await puppeteer.launch({
       headless: true,
       executablePath,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      env: {
+        ...process.env,
+        LD_LIBRARY_PATH: mergedLdPath,
+      },
     });
   } catch (err) {
     console.error(
