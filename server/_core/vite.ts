@@ -114,13 +114,24 @@ function injectSeoTags(html: string, requestPath: string): string {
   // Remove any remaining default/placeholder title + description that
   // weren't wrapped in the marker (e.g. the very first build, before
   // any injection has happened yet).
-  result = result.replace(/<title>.*?<\/title>/i, "");
-  result = result.replace(/<meta\s+name="description"[^>]*>\n?/i, "");
+  result = result.replace(/<title>[\s\S]*?<\/title>/i, "");
+  result = result.replace(/<meta\s+name=["']description["'][^>]*\/?>\n?/i, "");
 
-  result = result.replace(
-    /<head>/i,
-    `<head>\n<!-- seo:start -->\n${tags}\n<!-- seo:end -->`
-  );
+  // Match <head> with or without attributes (e.g. <head lang="en">),
+  // and with any whitespace inside the brackets — a plain /<head>/i
+  // match would silently fail on anything but an exact bare tag.
+  if (/<head[^>]*>/i.test(result)) {
+    result = result.replace(
+      /<head([^>]*)>/i,
+      `<head$1>\n<!-- seo:start -->\n<!-- route:${requestPath} -->\n${tags}\n<!-- seo:end -->`
+    );
+  } else {
+    // No <head> tag found at all — extremely unlikely, but fail loudly
+    // in logs rather than silently shipping un-injected HTML.
+    console.error(
+      `[injectSeoTags] WARNING: no <head> tag found in template for path "${requestPath}" — SEO tags were NOT injected.`
+    );
+  }
 
   return result;
 }
