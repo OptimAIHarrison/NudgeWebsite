@@ -1,22 +1,29 @@
 <!doctype html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Nudge Digital - Digital Marketing Strategist & Implementer</title>
-  </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!--
+      No hardcoded <title>, <meta description>, OG tags, or JSON-LD here.
+      All of that is injected server-side, per route, by injectSeoTags()
+      in server/_core/vite.ts — using server/_core/seo-config.ts as the
+      single source of truth. Hardcoding any of it here would risk
+      stale/conflicting data if this file and seo-config.ts ever drift
+      out of sync (e.g. the Melbourne vs Sydney location update).
+    -->
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#8041b2" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
   </body>
-
 </html>
