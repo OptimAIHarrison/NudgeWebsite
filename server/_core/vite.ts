@@ -40,8 +40,12 @@ export async function setupVite(app: Express, server: Server) {
         `src="/src/main.tsx?v=${nanoid()}"`
       );
 
-      // Inject per-route SEO tags even in dev, so it's testable before deploy
-      template = injectSeoTags(template, req.path);
+      // Inject per-route SEO tags even in dev, so it's testable before deploy.
+      // Use `url` (from req.originalUrl, captured above) — NOT req.path,
+      // which Express reports as "/" for every request inside an
+      // app.use("*", ...) middleware regardless of the actual URL.
+      const pathOnly = url.split("?")[0];
+      template = injectSeoTags(template, pathOnly);
 
       const page = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
@@ -216,8 +220,14 @@ export function serveStatic(app: Express) {
   // <meta> Puppeteer happened to capture at prerender time, so the two
   // systems can never drift out of sync with each other.
   app.use("*", (req, res) => {
-    const template = getTemplateForPath(req.path);
-    const html = injectSeoTags(template, req.path);
+    // IMPORTANT: req.path is unreliable inside app.use("*", ...) — Express
+    // treats the wildcard mount itself as consuming the path, which can
+    // cause req.path to report "/" for every request regardless of the
+    // actual URL requested. req.originalUrl always reflects exactly what
+    // the browser requested, unaffected by middleware mounting.
+    const requestPath = req.originalUrl.split("?")[0]; // strip query string
+    const template = getTemplateForPath(requestPath);
+    const html = injectSeoTags(template, requestPath);
     res.status(200).set({ "Content-Type": "text/html" }).end(html);
   });
 }
