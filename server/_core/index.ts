@@ -7,6 +7,7 @@ import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
+import { registerSeoRoutes } from "./seo-routes";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -43,6 +44,11 @@ async function startServer() {
       createContext,
     })
   );
+
+  // robots.txt + sitemap.xml — must be registered BEFORE serveStatic's
+  // catch-all route, or its SPA fallback will swallow these requests.
+  registerSeoRoutes(app);
+
   // development mode uses Vite, production mode uses static files
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);
