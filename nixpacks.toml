@@ -2,17 +2,23 @@
 #
 # Railway builds this repo using Nixpacks. By default, the build
 # container does NOT include the system libraries Chromium needs to
-# launch (libnss3, libatk, libgbm, fonts, etc.) — Puppeteer's
-# headless browser will fail to start during `npm run build` without
-# these, even though the build works fine in most local dev
-# environments that already have these libs installed.
+# RUN (libnss3, libatk, libgbm, fonts, etc.) even after Puppeteer's
+# own Chromium binary is installed via `npx puppeteer browsers
+# install chrome` (see package.json build script). Without these
+# shared libraries present in the container, Chromium fails to
+# launch with missing .so file errors.
 #
-# This explicitly adds the required packages to the build image.
+# This does NOT try to point Puppeteer at a Nix-provided Chromium
+# binary directly (that approach is fragile — Nix store paths are
+# versioned/hashed and not reliably guessable, and Nixpacks env var
+# propagation into [phases.setup] is not consistently honoured).
+# Instead, Puppeteer installs and uses its OWN bundled Chromium
+# (see package.json "postinstall" script), and this file just makes
+# sure the OS-level shared libraries that binary depends on exist.
 
 [phases.setup]
 nixPkgs = [
   "nodejs_20",
-  "chromium",
   "nss",
   "atk",
   "at-spi2-atk",
@@ -28,12 +34,13 @@ nixPkgs = [
   "pango",
   "cairo",
   "alsa-lib",
+  "glib",
+  "nspr",
+  "xorg.libX11",
+  "xorg.libXcomposite",
+  "xorg.libXdamage",
+  "xorg.libXext",
+  "xorg.libXfixes",
+  "xorg.libXrandr",
+  "xorg.libxcb",
 ]
-
-# Tell Puppeteer to use the Chromium provided by Nix instead of trying
-# to download its own — faster builds, no duplicate binary, and avoids
-# Puppeteer's bundled-Chromium download occasionally failing in CI
-# environments with restricted network egress.
-[phases.setup.env]
-PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
-PUPPETEER_EXECUTABLE_PATH = "/usr/bin/chromium"
