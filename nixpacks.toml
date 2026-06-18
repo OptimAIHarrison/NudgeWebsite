@@ -1,0 +1,39 @@
+# nixpacks.toml
+#
+# Railway builds this repo using Nixpacks. By default, the build
+# container does NOT include the system libraries Chromium needs to
+# launch (libnss3, libatk, libgbm, fonts, etc.) — Puppeteer's
+# headless browser will fail to start during `npm run build` without
+# these, even though the build works fine in most local dev
+# environments that already have these libs installed.
+#
+# This explicitly adds the required packages to the build image.
+
+[phases.setup]
+nixPkgs = [
+  "nodejs_20",
+  "chromium",
+  "nss",
+  "atk",
+  "at-spi2-atk",
+  "cups",
+  "dbus",
+  "expat",
+  "fontconfig",
+  "freetype",
+  "gtk3",
+  "libdrm",
+  "libxkbcommon",
+  "mesa",
+  "pango",
+  "cairo",
+  "alsa-lib",
+]
+
+# Tell Puppeteer to use the Chromium provided by Nix instead of trying
+# to download its own — faster builds, no duplicate binary, and avoids
+# Puppeteer's bundled-Chromium download occasionally failing in CI
+# environments with restricted network egress.
+[phases.setup.env]
+PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
+PUPPETEER_EXECUTABLE_PATH = "/usr/bin/chromium"
