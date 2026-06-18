@@ -135,10 +135,17 @@ async function main() {
   const server = await startStaticServer(port);
 
   console.log("[prerender] Launching headless Chromium...");
+  // Default: use Puppeteer's own Chromium, installed via the
+  // "postinstall" script in package.json (`npx puppeteer browsers
+  // install chrome`). Only override via PUPPETEER_EXECUTABLE_PATH if
+  // you specifically need to point at a different binary — leave
+  // this unset in normal operation.
   const executablePath = process.env.PUPPETEER_EXECUTABLE_PATH || undefined;
-  if (executablePath) {
-    console.log(`[prerender] Using system Chromium at ${executablePath}`);
-  }
+  console.log(
+    executablePath
+      ? `[prerender] Using override Chromium at ${executablePath}`
+      : "[prerender] Using Puppeteer's bundled Chromium"
+  );
 
   let browser;
   try {
