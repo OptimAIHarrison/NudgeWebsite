@@ -102,10 +102,25 @@ function injectSeoTags(html: string, requestPath: string): string {
     ${schemaBlock}
   `;
 
-  // Remove any placeholder/default title+meta from the template, then inject ours right after <head>
-  let result = html.replace(/<title>.*?<\/title>/i, "");
-  result = result.replace(/<meta\s+name="description"[^>]*>/i, "");
-  result = result.replace(/<head>/i, `<head>\n${tags}`);
+  // Strip any previously-injected SEO block (idempotent — important
+  // because prerendered files already went through this function once
+  // when Puppeteer captured them; without this, tags would duplicate
+  // on every subsequent build).
+  let result = html.replace(
+    /<!-- seo:start -->[\s\S]*?<!-- seo:end -->/,
+    ""
+  );
+
+  // Remove any remaining default/placeholder title + description that
+  // weren't wrapped in the marker (e.g. the very first build, before
+  // any injection has happened yet).
+  result = result.replace(/<title>.*?<\/title>/i, "");
+  result = result.replace(/<meta\s+name="description"[^>]*>\n?/i, "");
+
+  result = result.replace(
+    /<head>/i,
+    `<head>\n<!-- seo:start -->\n${tags}\n<!-- seo:end -->`
+  );
 
   return result;
 }
@@ -131,28 +146,66 @@ export function serveStatic(app: Express) {
   }
 
   const indexPath = path.resolve(distPath, "index.html");
-  // Cache the raw template in memory — read once, reused for every request.
-  // This avoids a disk read on every single page load in production.
-  let cachedTemplate: string | null = null;
-  function getTemplate(): string {
-    if (cachedTemplate === null) {
-      cachedTemplate = fs.readFileSync(indexPath, "utf-8");
+  // Cache templates in memory — read once, reused for every request.
+  // Avoids a disk read on every single page load in production.
+  const templateCache = new Map<string, string>();
+
+  function getFallbackTemplate(): string {
+    const cached = templateCache.get("__fallback__");
+    if (cached) return cached;
+    const template = fs.readFileSync(indexPath, "utf-8");
+    templateCache.set("__fallback__", template);
+    return template;
+  }
+
+  /**
+   * Looks for a prerendered HTML file matching the request path
+   * (written by scripts/prerender.mjs at build time, e.g.
+   * dist/public/services/index.html for the /services route).
+   * Falls back to the base index.html (un-prerendered SPA shell)
+   * if no prerendered version exists for that route — the page
+   * still works, it just won't have body content for non-JS crawlers
+   * until the next successful build includes it.
+   */
+  function getTemplateForPath(requestPath: string): string {
+    const cached = templateCache.get(requestPath);
+    if (cached) return cached;
+
+    const normalizedPath = requestPath === "/" ? "" : requestPath.replace(/\/$/, "");
+    const prerenderedFile = path.join(distPath, normalizedPath, "index.html");
+
+    let template: string;
+    if (
+      prerenderedFile !== indexPath &&
+      fs.existsSync(prerenderedFile) &&
+      fs.statSync(prerenderedFile).isFile()
+    ) {
+      template = fs.readFileSync(prerenderedFile, "utf-8");
+    } else {
+      template = getFallbackTemplate();
     }
-    return cachedTemplate;
+
+    templateCache.set(requestPath, template);
+    return template;
   }
 
   // Serve static assets (JS, CSS, images) normally — these aren't HTML
   // so they don't need SEO injection.
+
   app.use(express.static(distPath, { index: false }));
 
   // robots.txt and sitemap.xml are handled by dedicated routes registered
   // separately in index.ts (see registerSeoRoutes), which must be added
   // BEFORE this catch-all.
 
-  // Fall through to index.html for any unmatched route (SPA behaviour),
-  // but inject the correct per-route SEO tags first.
+  // Fall through to the matching prerendered HTML for this route if one
+  // exists (see scripts/prerender.mjs), otherwise the base SPA shell.
+  // Either way, inject the correct per-route SEO tags from seo-config.ts
+  // as the single source of truth — this overwrites whatever <title>/
+  // <meta> Puppeteer happened to capture at prerender time, so the two
+  // systems can never drift out of sync with each other.
   app.use("*", (req, res) => {
-    const template = getTemplate();
+    const template = getTemplateForPath(req.path);
     const html = injectSeoTags(template, req.path);
     res.status(200).set({ "Content-Type": "text/html" }).end(html);
   });
