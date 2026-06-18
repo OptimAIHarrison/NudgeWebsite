@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development tsx watch server/_core/index.ts",
+    "postinstall": "npx puppeteer browsers install chrome",
     "build": "vite build && esbuild server/_core/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist && node scripts/prerender.mjs",
     "start": "NODE_ENV=production node dist/index.js",
     "check": "tsc --noEmit",
@@ -113,5 +114,9 @@
     "overrides": {
       "tailwindcss>nanoid": "3.3.7"
     }
-  }
+  },
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": ""
 }
