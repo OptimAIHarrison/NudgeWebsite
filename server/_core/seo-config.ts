@@ -33,13 +33,13 @@ const personSchema = {
   "@id": `${SITE_URL}/#person`,
   name: "Harrison",
   url: `${SITE_URL}/about`,
-  jobTitle: "Freelance Digital Marketing Consultant",
+  jobTitle: "Digital Marketing Strategist, Implementer & Fixer",
   description:
-    "Senior digital marketing consultant with 10+ years experience across SEO, CRM automation, paid media, analytics and fractional CMO engagements. Based in Sydney, Australia.",
+    "Senior digital marketing strategist, implementer and fixer with 10+ years experience across SEO, CRM automation, paid media, analytics and fractional CMO engagements. Based in Melbourne, Australia.",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Sydney",
-    addressRegion: "NSW",
+    addressLocality: "Melbourne",
+    addressRegion: "VIC",
     addressCountry: "AU",
   },
 };
@@ -52,21 +52,21 @@ const businessSchema = {
   logo: `${SITE_URL}/logo.png`,
   image: DEFAULT_OG_IMAGE,
   description:
-    "Freelance digital marketing consultancy offering SEO, CRM automation, GA4 analytics, paid media management, email marketing, and fractional CMO services to businesses across Australia.",
+    "Freelance digital marketing strategist, implementer and fixer offering SEO, CRM automation, GA4 analytics, paid media management, email marketing, and fractional CMO services to businesses across Australia.",
   telephone: "+61400000000",
   email: "hello@nudgedigital.com.au",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Sydney",
-    addressRegion: "NSW",
-    postalCode: "2000",
+    addressLocality: "Melbourne",
+    addressRegion: "VIC",
+    postalCode: "3000",
     addressCountry: "AU",
   },
-  geo: { "@type": "GeoCoordinates", latitude: -33.8688, longitude: 151.2093 },
+  geo: { "@type": "GeoCoordinates", latitude: -37.8136, longitude: 144.9631 },
   areaServed: [
     { "@type": "Country", name: "Australia" },
-    { "@type": "City", name: "Sydney" },
     { "@type": "City", name: "Melbourne" },
+    { "@type": "City", name: "Sydney" },
     { "@type": "City", name: "Brisbane" },
   ],
   priceRange: "$$",
@@ -98,9 +98,9 @@ function breadcrumb(items: { name: string; path: string }[]) {
 export const SEO_ROUTES: SeoRoute[] = [
   {
     path: "/",
-    title: "Nudge Digital — Freelance Digital Marketing Consultant | Sydney, Australia",
+    title: "Nudge Digital — Digital Marketing Strategist, Implementer & Fixer | Melbourne, Australia",
     description:
-      "Harrison is a senior freelance digital marketing consultant in Sydney. SEO, CRM automation, GA4 analytics, paid media & more. Fixed prices. One person. Real results.",
+      "Harrison is a senior freelance digital marketing strategist, implementer and fixer in Melbourne. SEO, CRM automation, GA4 analytics, paid media & more. Fixed prices. One person. Real results.",
     priority: 1.0,
     changefreq: "weekly",
     schema: [
@@ -115,7 +115,7 @@ export const SEO_ROUTES: SeoRoute[] = [
             name: "What does Nudge Digital do?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Nudge Digital is a freelance digital marketing practice run by Harrison, offering SEO, CRM and marketing automation, paid media management, GA4 analytics, email marketing, and fractional CMO services on a project or retainer basis.",
+              text: "Nudge Digital is a freelance digital marketing practice run by Harrison, a strategist, implementer and fixer offering SEO, CRM and marketing automation, paid media management, GA4 analytics, email marketing, and fractional CMO services on a project or retainer basis.",
             },
           },
           {
@@ -123,7 +123,7 @@ export const SEO_ROUTES: SeoRoute[] = [
             name: "Is Nudge Digital an agency?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "No. Nudge Digital is one senior freelance consultant, Harrison, working directly with clients. There are no account managers or junior staff — every project is delivered personally.",
+              text: "No. Nudge Digital is one senior freelance strategist, implementer and fixer, Harrison, working directly with clients. There are no account managers or junior staff — every project is delivered personally.",
             },
           },
           {
@@ -131,7 +131,7 @@ export const SEO_ROUTES: SeoRoute[] = [
             name: "Where is Nudge Digital based?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Nudge Digital is based in Sydney, Australia, and works with clients across Sydney, Melbourne, Brisbane, and remotely throughout Australia.",
+              text: "Nudge Digital is based in Melbourne, Australia, and works with clients across Melbourne, Sydney, Brisbane, and remotely throughout Australia.",
             },
           },
         ],
@@ -176,7 +176,7 @@ export const SEO_ROUTES: SeoRoute[] = [
     path: "/pricing",
     title: "Pricing — Freelance Digital Marketing Rates | Nudge Digital",
     description:
-      "Transparent, fixed pricing for freelance digital marketing in Sydney. Project-based and retainer options. No agency overhead, no surprise invoices.",
+      "Transparent, fixed pricing for freelance digital marketing in Melbourne. Project-based and retainer options. No agency overhead, no surprise invoices.",
     priority: 0.8,
     changefreq: "monthly",
     schema: breadcrumb([
@@ -186,9 +186,9 @@ export const SEO_ROUTES: SeoRoute[] = [
   },
   {
     path: "/about",
-    title: "About Harrison — Freelance Digital Marketing Strategist | Nudge Digital",
+    title: "About Harrison — Digital Marketing Strategist, Implementer & Fixer | Nudge Digital",
     description:
-      "10+ years in digital marketing across three continents. Meet Harrison, the senior consultant behind Nudge Digital — honest, hands-on, and outcome-focused.",
+      "10+ years in digital marketing across three continents. Meet Harrison, the strategist, implementer and fixer behind Nudge Digital — honest, hands-on, and outcome-focused.",
     priority: 0.7,
     changefreq: "monthly",
     schema: [
@@ -291,9 +291,9 @@ export const SEO_ROUTES: SeoRoute[] = [
 
 export const DEFAULT_SEO: SeoRoute = {
   path: "*",
-  title: "Nudge Digital — Freelance Digital Marketing Consultant | Sydney, Australia",
+  title: "Nudge Digital — Digital Marketing Strategist, Implementer & Fixer | Melbourne, Australia",
   description:
-    "Senior freelance digital marketing consultant in Sydney. SEO, CRM automation, GA4 analytics, paid media & fractional CMO. Fixed prices. No agency overhead.",
+    "Senior freelance digital marketing strategist, implementer and fixer in Melbourne. SEO, CRM automation, GA4 analytics, paid media & fractional CMO. Fixed prices. No agency overhead.",
 };
 
 /** Find SEO config for a request path, with support for dynamic params like /admin/editor/:id */
