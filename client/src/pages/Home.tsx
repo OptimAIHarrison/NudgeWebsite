@@ -249,7 +249,7 @@ export default function Home() {
               <h1 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
                 Your Digital Marketing
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/70">
-                  Strategist & Implementer
+                  Strategist, Implementer & Fixer
                 </span>
               </h1>
               <p className="text-base md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
