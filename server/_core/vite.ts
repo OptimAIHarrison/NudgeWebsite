@@ -7,6 +7,12 @@ import { createServer as createViteServer } from "vite";
 import viteConfig from "../../vite.config";
 import { getSeoForPath, DEFAULT_OG_IMAGE, SITE_URL } from "./seo-config";
 
+// Google Analytics 4 Measurement ID. Loaded on every public-facing page
+// via injectSeoTags() below — single source, no per-page wiring needed.
+// Intentionally NOT loaded on noIndex pages (admin, 404) to keep
+// Analytics data limited to genuine public traffic.
+const GA_MEASUREMENT_ID = "G-74N5HRET9C";
+
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
@@ -82,6 +88,19 @@ function injectSeoTags(html: string, requestPath: string): string {
       )}</script>`
     : "";
 
+  // Skip Analytics on noIndex pages (admin, 404) — keeps tracked data
+  // limited to genuine public traffic rather than internal/admin usage.
+  const analyticsBlock = seo.noIndex
+    ? ""
+    : `
+    <script async src="https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${GA_MEASUREMENT_ID}');
+    </script>`;
+
   const tags = `
     <title>${escapeHtml(seo.title)}</title>
     <meta name="description" content="${escapeHtml(seo.description)}" />
@@ -104,6 +123,7 @@ function injectSeoTags(html: string, requestPath: string): string {
     <meta name="twitter:image" content="${ogImage}" />
 
     ${schemaBlock}
+    ${analyticsBlock}
   `;
 
   // Strip any previously-injected SEO block (idempotent — important
