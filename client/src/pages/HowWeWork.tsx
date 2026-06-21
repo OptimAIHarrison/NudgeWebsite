@@ -20,7 +20,7 @@ const STEPS = [
     description: 'I research your situation, ask the right questions, and send back a clear scope — what I\'ll do, what it costs, and when it\'ll be done.',
     icon: Lightbulb,
     detail: 'No vague proposals. You get a specific plan: deliverables, timeline, and a fixed price. You know exactly what you\'re getting before you commit to anything.',
-    time: 'Within 24 hours',
+    time: 'Within a week',
   },
   {
     number: '03',
