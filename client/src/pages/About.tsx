@@ -43,7 +43,7 @@ export default function About() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/60">I do the work.</span>
           </h1>
           <p className="text-lg text-foreground/60 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Senior digital marketer. Freelancer. Former department head. I've spent over a decade helping businesses build the systems, strategy, and execution that actually grow revenue — and I've done it across three continents.
+            Senior digital marketer. Freelancer. Former department head. I've spent over a decade helping businesses build the systems, strategy, and execution that actually grow revenue — and I've done it across five continents.
           </p>
 
           {/* Stats */}
@@ -98,7 +98,7 @@ export default function About() {
             </div>
             <div className="md:col-span-3 space-y-4">
               <p className="text-foreground/70 leading-relaxed">
-                Eventually Australia won. I did the obligatory fruit picking, spent six months living in the desert (yes, actually), and landed with a team that cared about doing things properly. I ran marketing through some of the most disruptive years in recent memory — COVID, rapid market shifts, the whole thing. I didn't just keep the lights on. I built systems, grew channels, and learned what it means to be accountable for real outcomes.
+                Eventually Australia won. I did the obligatory fruit picking, spent six months living in the desert (yes, actually), and landed with a team that cared about doing things properly. I ran marketing through some of the most disruptive years in recent memory — COVID, rapid market shifts, the whole thing. We didn't just keep the lights on. I built systems, grew channels, and learned what it means to be accountable for real outcomes.
               </p>
               <div className="bg-accent/5 border border-accent/20 rounded-2xl p-5">
                 <p className="text-foreground/75 leading-relaxed italic">
