@@ -146,10 +146,10 @@ const CASE_STUDIES = [
 ];
 
 const IMPACT_STATS = [
-  { stat: '$500K+', label: 'Additional revenue driven for one client' },
+  { stat: 'Weeks', label: 'Saved in trying to diagnose GTM problems' },
   { stat: '40hrs/wk', label: 'Saved through automation for a SaaS team' },
   { stat: '+67%', label: 'Conversion rate improvement for e-commerce' },
-  { stat: '4+', label: 'Industries served and growing' },
+  { stat: '5+', label: 'Industries served and growing' },
 ];
 
 export default function Testimonials() {
