@@ -253,7 +253,7 @@ export default function Home() {
                 </span>
               </h1>
               <p className="text-base md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
-                I fix the technical problems agencies overlook. From SEO audits to CRM automation, email sequences to analytics—I handle it all. One person. Real results.
+                I fix the technical problems agencies overlook. From SEO audits to CRM automation, email sequences to analytics, I handle it all. One person. Real results.
               </p>
             </div>
 
@@ -409,7 +409,7 @@ export default function Home() {
             {[
               { num: '01', title: 'Send a Nudge', body: 'Tell me what\'s broken or what you need. No brief required — plain language is fine.' },
               { num: '02', title: 'I scope & quote', body: 'I come back with a clear plan, fixed price, and timeline. You know everything before you commit.' },
-              { num: '03', title: 'You approve', body: 'Happy with the plan? Say the word. No contracts, no retainers unless you want one.' },
+              { num: '03', title: 'You approve', body: 'Happy with the plan? Say the word. No long term, lock-in contracts, no retainers unless you want one.' },
               { num: '04', title: 'I deliver', body: 'Fast, focused execution with regular updates. Delivered with documentation and proper handover.' },
             ].map((step, i) => (
               <div key={i} className="relative text-center">
