@@ -103,7 +103,7 @@ const ENGAGEMENT_MODELS = [
 ];
 
 const FAQS = [
-  { q: 'How does the quoting process work?', a: 'Send me a Nudge with what you need. I\'ll come back within 24 hours with a clear scope, fixed price, and timeline. No vague estimates — you see the full picture before committing to anything.' },
+  { q: 'How does the quoting process work?', a: 'Send me a Nudge with what you need. I\'ll come back within 24 hours and then within a week with a clear scope, fixed price, and timeline. No vague estimates — you see the full picture before committing to anything.' },
   { q: 'What if my project scope changes?', a: 'Project-based pricing is fixed for the agreed scope. If you want to add or change something significant, we\'ll adjust the quote together before moving forward. No nasty surprises.' },
   { q: 'Do you work within a set budget?', a: 'Yes. If you have a budget in mind, tell me upfront and I\'ll scope the work to fit it — or tell you honestly if it\'s not achievable. I\'d rather have that conversation early.' },
   { q: 'Are these prices negotiable?', a: 'Hourly rates are fixed. Project pricing reflects the actual work involved — but if your project is large or ongoing, there\'s room to find a structure that works for both of us.' },
