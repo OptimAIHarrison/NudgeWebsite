@@ -253,7 +253,7 @@ export default function Home() {
                 </span>
               </h1>
               <p className="text-base md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
-                Most agencies sell you a strategy, then hand the execution to someone else. I do both myself, SEO audits, CRM automation, email sequences, analytics and more, so nothing gets lost between the plan and the delivery. One person. Full accountability. Real results.
+                Most agencies sell you a strategy, then hand over the execution. I do both myself, SEO audits, CRM automation, email sequences, analytics and more. One person. Full accountability. Real results.
               </p>
             </div>
 
