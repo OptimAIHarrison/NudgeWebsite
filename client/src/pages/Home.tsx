@@ -7,7 +7,7 @@ import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 
 
-// Each card has its own hand-placed position — desktop + mobile variants
+// Each card has its own hand-placed position, desktop + mobile variants
 const CARD_CONFIGS = [
   // LEFT SIDE
   { service: 'Strategy',          top: '9%',  left: '18%',  mTop: '5%',   mLeft: '18%',             size: 'md' as const, delay: 0.0  },
@@ -25,14 +25,14 @@ const CARD_CONFIGS = [
 ];
 
 const SERVICE_DATA: Record<string, { icon: string; color: string; accent: string; subtitle: string }> = {
-  'SEO':             { icon: 'LineChart', color: 'bg-blue-200/20',    accent: 'text-blue-500',    subtitle: 'Technical optimization' },
+  'SEO':             { icon: 'LineChart', color: 'bg-blue-200/20',    accent: 'text-blue-500',    subtitle: 'Technical fixes that rank' },
   'Email':           { icon: 'Zap',      color: 'bg-orange-200/20',  accent: 'text-orange-500',  subtitle: 'Automation & sequences' },
   'CRM':             { icon: 'Database', color: 'bg-green-200/20',   accent: 'text-green-600',   subtitle: 'System setup & flows' },
   'Ads':             { icon: 'Zap',      color: 'bg-yellow-200/20',  accent: 'text-yellow-600',  subtitle: 'Campaign management' },
-  'Insights':        { icon: 'BarChart3',color: 'bg-rose-200/20',    accent: 'text-rose-500',    subtitle: 'Actionable insights' },
+  'Insights':        { icon: 'BarChart3',color: 'bg-rose-200/20',    accent: 'text-rose-500',    subtitle: 'Numbers you can trust' },
   'Strategy':        { icon: 'Target',   color: 'bg-pink-200/20',    accent: 'text-pink-500',    subtitle: 'Planning & roadmap' },
-  'Automation':      { icon: 'Rocket',   color: 'bg-cyan-200/20',    accent: 'text-cyan-600',    subtitle: 'Workflow automation' },
-  'Growth':          { icon: 'TrendingUp',color:'bg-emerald-200/20', accent: 'text-emerald-600', subtitle: 'Growth optimization' },
+  'Automation':      { icon: 'Rocket',   color: 'bg-cyan-200/20',    accent: 'text-cyan-600',    subtitle: 'Hours back every week' },
+  'Growth':          { icon: 'TrendingUp',color:'bg-emerald-200/20', accent: 'text-emerald-600', subtitle: 'Built to compound' },
   'Social Media':    { icon: 'Share2',   color: 'bg-amber-200/20',   accent: 'text-amber-600',   subtitle: 'Strategy & scheduling' },
   'Content Marketing':{ icon:'FileText', color: 'bg-lime-200/20',    accent: 'text-lime-700',    subtitle: 'Copy, blogs & assets' },
 };
@@ -171,7 +171,7 @@ export default function Home() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeCard, setActiveCard] = useState(0);
 
-  // Sporadic pings — random card, 600ms flash, 800–1800ms random gap
+  // Sporadic pings, random card, 600ms flash, 800-1800ms random gap
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
     const total = CARD_CONFIGS.length;
@@ -182,7 +182,7 @@ export default function Home() {
       do { idx = Math.floor(Math.random() * total); } while (idx === lastIdx);
       lastIdx = idx;
       setActiveCard(idx);
-      // Flash on for ~350ms (half bounce cycle), off gap ~350ms — matches 0.7s bounce
+      // Flash on for ~350ms (half bounce cycle), off gap ~350ms, matches 0.7s bounce
       timeoutId = setTimeout(() => {
         setActiveCard(-1);
         const gap = 300 + Math.random() * 150;
@@ -253,7 +253,7 @@ export default function Home() {
                 </span>
               </h1>
               <p className="text-base md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
-                I fix the technical problems agencies overlook. From SEO audits to CRM automation, email sequences to analytics, I handle it all. One person. Real results.
+                Most agencies sell you a strategy, then hand the execution to someone else. I do both myself, SEO audits, CRM automation, email sequences, analytics and more, so nothing gets lost between the plan and the delivery. One person. Full accountability. Real results.
               </p>
             </div>
 
@@ -316,10 +316,10 @@ export default function Home() {
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/60">I live in them.</span>
               </h2>
               <p className="text-foreground/65 leading-relaxed mb-6">
-                Most agencies sell strategy. What actually breaks businesses is the execution — broken tracking, disconnected tools, automations that half-work, data nobody trusts. I fix the things that quietly cost you every day, and build the systems that actually scale.
+                Most agencies sell strategy. What actually breaks businesses is the execution: broken tracking, disconnected tools, automations that half work, data nobody trusts. I fix the things quietly costing you money every day, then build the systems that scale with you instead of around you.
               </p>
               <p className="text-foreground/65 leading-relaxed mb-8">
-                Not a junior getting their reps in. Not a generalist with a nice deck. A senior operator who's run departments, navigated crises, and delivered across every channel — now working directly for you.
+                Not a junior getting their reps in. Not a generalist with a nice deck. A senior operator who has run departments, navigated crises, and delivered across every channel, now working directly for you, with nothing lost in handover.
               </p>
               <Link href="/about" onClick={() => window.scrollTo(0, 0)}>
                 <div className="flex items-center gap-2 text-sm font-bold text-accent hover:gap-3 transition-all cursor-pointer group">
@@ -329,11 +329,11 @@ export default function Home() {
             </div>
             <div className="space-y-3">
               {[
-                { problem: 'Tracking that lies to you', fix: 'GA4, GTM, attribution — rebuilt from scratch and validated' },
-                { problem: 'Manual workflows eating hours', fix: 'CRM automation, email sequences, AI-assisted processes' },
-                { problem: 'Paid media spend with no visibility', fix: 'Proper attribution, ROAS clarity, audience strategy' },
-                { problem: 'SEO done once and forgotten', fix: 'Technical foundation, keyword mapping, content that ranks' },
-                { problem: 'Strategy with no execution', fix: 'I write the plan and deliver it — no hand-offs' },
+                { problem: 'Tracking that lies to you', fix: 'GA4, GTM and attribution rebuilt from scratch, then validated against real numbers' },
+                { problem: 'Manual workflows eating hours', fix: 'CRM automation, email sequences and AI-assisted processes that run themselves' },
+                { problem: 'Paid media spend with no visibility', fix: 'Real attribution, true ROAS clarity and audience strategy that holds up' },
+                { problem: 'SEO done once and forgotten', fix: 'A technical foundation, keyword mapping and content built to keep ranking' },
+                { problem: 'Strategy with no execution', fix: 'I write the plan and deliver it myself, with zero hand-offs' },
               ].map((row, i) => (
                 <div key={i} className="rounded-xl border-2 border-border hover:border-accent/40 bg-background p-4 transition-all group">
                   <div className="flex items-start gap-3">
@@ -358,16 +358,16 @@ export default function Home() {
           <div className="text-center mb-12">
             <span className="text-xs font-bold text-accent uppercase tracking-widest mb-3 block">What I do</span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-3">Five disciplines. One operator.</h2>
-            <p className="text-foreground/55 max-w-xl mx-auto">From big-picture strategy to the technical details no one else wants to touch — I cover the full stack.</p>
+            <p className="text-foreground/55 max-w-xl mx-auto">From big-picture strategy to the technical details no one else wants to touch, I cover the full stack so nothing falls through the cracks.</p>
           </div>
 
           <div className="grid md:grid-cols-5 gap-3 mb-10">
             {[
-              { icon: TrendingUp, name: 'Strategy & Audits', desc: 'Roadmaps, audits, GTM planning, competitive intel' },
-              { icon: Zap, name: 'Marketing Ops', desc: 'CRM, automation, lead scoring, data infrastructure' },
-              { icon: BarChart3, name: 'Performance', desc: 'Paid media, SEO, attribution, CRO, analytics' },
-              { icon: Lightbulb, name: 'Brand & Content', desc: 'Positioning, messaging, content strategy, social' },
-              { icon: Code, name: 'Technical Fixes', desc: 'Tracking, GTM, funnel diagnostics, integrations' },
+              { icon: TrendingUp, name: 'Strategy & Audits', desc: 'Roadmaps, audits, GTM planning and competitive intel' },
+              { icon: Zap, name: 'Marketing Ops', desc: 'CRM, automation, lead scoring and data infrastructure' },
+              { icon: BarChart3, name: 'Performance', desc: 'Paid media, SEO, attribution, CRO and analytics' },
+              { icon: Lightbulb, name: 'Brand & Content', desc: 'Positioning, messaging, content strategy and social' },
+              { icon: Code, name: 'Technical Fixes', desc: 'Tracking, GTM, funnel diagnostics and integrations' },
             ].map((s, i) => {
               const Icon = s.icon;
               return (
@@ -407,10 +407,10 @@ export default function Home() {
             <div className="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-accent/30 via-accent to-accent/30" />
 
             {[
-              { num: '01', title: 'Send a Nudge', body: 'Tell me what\'s broken or what you need. No brief required — plain language is fine.' },
-              { num: '02', title: 'I scope & quote', body: 'I come back with a clear plan, fixed price, and timeline. You know everything before you commit.' },
-              { num: '03', title: 'You approve', body: 'Happy with the plan? Say the word. No long term, lock-in contracts, no retainers unless you want one.' },
-              { num: '04', title: 'I deliver', body: 'Fast, focused execution with regular updates. Delivered with documentation and proper handover.' },
+              { num: '01', title: 'Send a Nudge', body: 'Tell me what\'s broken or what you need, in plain language. No brief or jargon required.' },
+              { num: '02', title: 'I scope & quote', body: 'I come back with a clear plan, a fixed price, and a timeline. You know exactly what you\'re getting before you commit.' },
+              { num: '03', title: 'You approve', body: 'Happy with the plan? Say the word. No long-term lock-in, no contracts, no retainers unless you actually want one.' },
+              { num: '04', title: 'I deliver', body: 'Fast, focused execution with regular updates along the way. Delivered with full documentation and a proper handover.' },
             ].map((step, i) => (
               <div key={i} className="relative text-center">
                 <div className="w-20 h-20 rounded-2xl bg-accent text-white flex items-center justify-center mx-auto mb-4 relative z-10 shadow-lg shadow-accent/20">
@@ -447,7 +447,7 @@ export default function Home() {
                 company: 'PR Agency',
                 tag: 'Agency & Automation',
                 tagColor: 'bg-violet-100 text-violet-700 border-violet-200',
-                quote: 'Harrison came in, figured out what we actually needed (not just what we asked for), and built it. Website, CRM, automations — all talking to each other.',
+                quote: 'Harrison came in, figured out what we actually needed (not just what we asked for), and built it. Website, CRM, automations, all talking to each other.',
                 author: 'Kane · Founder',
                 initials: 'K',
                 avatarColor: 'bg-violet-500',
