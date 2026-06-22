@@ -14,7 +14,7 @@ export default function Footer() {
     ],
     Company: [
       { label: 'About Us', href: '/about' },
-      { label: 'How We Work', href: '/how-we-work' },
+      { label: 'How I Work', href: '/how-we-work' },
       { label: 'Resources', href: '/resources' },
       { label: 'Client Success', href: '/testimonials' },
     ],
@@ -25,9 +25,7 @@ export default function Footer() {
   };
 
   const socialLinks = [
-    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
-    { icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/company/nudgedigital/', label: 'LinkedIn' },
   ];
 
   return (
