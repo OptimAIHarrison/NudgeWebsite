@@ -188,7 +188,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                   ))}
                 </div>
                 <p className="text-xs text-foreground/30 mt-5">
-                  Searches across 32+ services and the marketplace — try plain English like "fix my broken funnel"
+                  Searches across 30 services and the Fixed Price Market Place — try plain English like "fix my broken funnel"
                 </p>
               </div>
             )}
@@ -227,7 +227,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                   <div>
                     <div className="flex items-center gap-2 px-5 py-3 bg-secondary/50">
                       <ShoppingBag className="w-3.5 h-3.5 text-foreground/40" />
-                      <p className="text-xs font-bold text-foreground/40 uppercase tracking-widest">Services Shop — fixed price</p>
+                      <p className="text-xs font-bold text-foreground/40 uppercase tracking-widest">Fixed Price Market Place</p>
                     </div>
                     {marketplaceResults.map(item => (
                       <Link
@@ -285,7 +285,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
           {/* Footer */}
           <div className="border-t border-border px-5 py-3 flex items-center justify-between bg-secondary/30">
-            <p className="text-xs text-foreground/35">Searching services + marketplace</p>
+            <p className="text-xs text-foreground/35">Searching services + Fixed Price Market Place</p>
             <button
               onClick={() => { window.location.href = '/services-marketplace'; onClose(); }}
               className="text-xs font-semibold text-accent hover:opacity-70 transition-opacity"

@@ -28,9 +28,17 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const onEsc = (e: KeyboardEvent) => e.key === 'Escape' && setMobileMenuOpen(false);
+    window.addEventListener('keydown', onEsc);
+    return () => window.removeEventListener('keydown', onEsc);
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'Services', href: '/services' },
+    { label: 'Fixed Price Market Place', href: '/services-marketplace' },
     { label: 'How I Work', href: '/how-we-work' },
     { label: 'Pricing', href: '/pricing' },
     { label: 'Resources', href: '/resources' },
@@ -60,7 +68,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav className="hidden xl:flex items-center gap-6">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href} className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors">
               {link.label}
@@ -78,7 +86,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
             <Search className="w-5 h-5 text-foreground/70" />
           </button>
 
-          <Link href="/calculator" className="hidden sm:inline-flex">
+          <Link href="/calculator" className="hidden 2xl:inline-flex">
             <Button variant="outline" className="text-sm">
               Time-Saved Calculator
             </Button>
@@ -93,8 +101,10 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 hover:bg-accent/10 rounded-lg transition-colors"
-            aria-label="Toggle menu"
+            className="xl:hidden p-2 hover:bg-accent/10 rounded-lg transition-colors"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {mobileMenuOpen ? (
               <X className="w-5 h-5" />
@@ -105,24 +115,29 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile / tablet navigation (hamburger) */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-border bg-card animate-slide-in-down">
-          <nav className="container py-4 space-y-3">
+        <div id="mobile-menu" className="xl:hidden border-t border-border bg-background shadow-lg animate-slide-in-down max-h-[calc(100vh-5rem)] overflow-y-auto">
+          <nav className="container py-2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block py-2 text-sm font-medium text-foreground/70 hover:text-accent transition-colors"
+                className="block border-b border-border py-3.5 text-base font-medium text-foreground/80 hover:text-accent transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
-            <Link href="/contact">
-              <Button className="btn-nudge-primary w-full mt-4">
-                Send a Nudge
-              </Button>
+            <Link
+              href="/calculator"
+              className="block border-b border-border py-3.5 text-base font-medium text-foreground/80 hover:text-accent transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Time-Saved Calculator
+            </Link>
+            <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+              <Button className="btn-nudge-primary w-full my-4">Send a Nudge</Button>
             </Link>
           </nav>
         </div>
