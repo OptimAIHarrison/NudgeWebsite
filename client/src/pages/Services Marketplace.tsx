@@ -797,7 +797,7 @@ export default function ServicesMarketplace() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40" />
             <input
               type="text"
-              placeholder="Search services..."
+              placeholder="Search packages, e.g. CRM, SEO, email..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-secondary border-2 border-border text-foreground placeholder-foreground/40 focus:outline-none focus:border-accent text-sm transition-colors"

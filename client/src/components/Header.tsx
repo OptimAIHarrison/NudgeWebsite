@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, Menu, X } from 'lucide-react';
+import SearchModal from '@/components/SearchModal';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 
@@ -10,6 +11,21 @@ interface HeaderProps {
 }
 
 export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
+  // Pages can pass their own handler; otherwise the header opens its own panel so search works everywhere.
+  const [ownSearchOpen, setOwnSearchOpen] = useState(false);
+  const openSearch = () => (onSearchOpen ? onSearchOpen() : setOwnSearchOpen(true));
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        openSearch();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  });
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -23,6 +39,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
   ];
 
   return (
+    <>
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
       <div className="container flex items-center justify-between h-20 md:h-24">
         {/* Logo */}
@@ -54,7 +71,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
         {/* Search and CTA */}
         <div className="flex items-center gap-2 md:gap-4">
           <button
-            onClick={() => onSearchOpen?.()}
+            onClick={openSearch}
             className="p-2 hover:bg-accent/10 rounded-lg transition-colors"
             aria-label="Search"
           >
@@ -111,5 +128,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
         </div>
       )}
     </header>
+      <SearchModal isOpen={ownSearchOpen} onClose={() => setOwnSearchOpen(false)} />
+    </>
   );
 }

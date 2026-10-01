@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowRight, Check, Target, Zap, BarChart3, Lightbulb, Code } from 'lucide-react';
+import { ArrowRight, Check, Search, Target, Zap, BarChart3, Lightbulb, Code } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SearchModal from '@/components/SearchModal';
@@ -143,7 +143,11 @@ export default function Home() {
                   See what I run
                 </Button>
               </Link>
-              <button onClick={() => setSearchOpen(true)} className="mono px-2 text-sm text-white/50 hover:text-white">
+              <button
+                onClick={() => setSearchOpen(true)}
+                className="mono inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                <Search className="h-4 w-4" aria-hidden />
                 or search the site
               </button>
             </div>
