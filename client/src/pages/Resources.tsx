@@ -39,48 +39,48 @@ interface Resource {
 const defaultResources: Resource[] = [
   {
     id: '1',
-    title: 'The Complete GA4 Setup Guide',
-    description: 'Step-by-step guide to setting up Google Analytics 4 with proper event tracking.',
+    title: 'GA4 and Product Analytics Setup for SaaS',
+    description: 'Setting up GA4, GTM and Segment so signups, activation and revenue are tracked properly.',
     category: 'guide',
     icon: <BookOpen className="w-5 h-5" />,
     url: '#',
   },
   {
     id: '2',
-    title: 'CRM Implementation Checklist',
-    description: 'Everything you need to successfully implement and configure a CRM system.',
+    title: 'CRM Set-Up Checklist for Tech Startups',
+    description: 'What to configure in HubSpot or Salesforce before your first sales hire.',
     category: 'guide',
     icon: <BookOpen className="w-5 h-5" />,
     url: '#',
   },
   {
     id: '3',
-    title: 'How We Increased Conversions by 45%',
-    description: 'Real case study showing our approach to conversion rate optimization.',
+    title: 'Case Study: Rebuilding Tracking for an AI SaaS Start-up',
+    description: 'How broken analytics was found and fixed, and what it unlocked.',
     category: 'case-study',
     icon: <TrendingUp className="w-5 h-5" />,
     url: '#',
   },
   {
     id: '4',
-    title: 'GTM Server-Side Tracking Setup',
-    description: 'Technical guide to implementing Google Tag Manager Server-Side Tagging.',
+    title: 'Server-Side Tracking for Product-Led Funnels',
+    description: 'When server-side tagging is worth it, and how to set it up.',
     category: 'technical',
     icon: <Code className="w-5 h-5" />,
     url: '#',
   },
   {
     id: '5',
-    title: 'Email Marketing Best Practices',
-    description: 'Proven strategies for building engaged email lists and improving open rates.',
+    title: 'Lifecycle Email for Trials and Onboarding',
+    description: 'Sequences that move trial users to activated, paying customers.',
     category: 'guide',
     icon: <BookOpen className="w-5 h-5" />,
     url: '#',
   },
   {
     id: '6',
-    title: 'SEO Audit Framework',
-    description: 'Our proprietary framework for conducting comprehensive technical SEO audits.',
+    title: 'SEO and AI Search Audit Framework',
+    description: 'A framework for auditing technical SEO and visibility in AI answers.',
     category: 'technical',
     icon: <Code className="w-5 h-5" />,
     url: '#',
@@ -144,7 +144,7 @@ export default function Resources() {
             Resources & Insights
           </h1>
           <p className="text-xl text-foreground/60 max-w-3xl mx-auto">
-            Guides, case studies, and technical resources to help you master digital marketing.
+            Guides, case studies and technical resources on marketing for tech companies and AI startups.
           </p>
         </div>
       </section>

@@ -97,6 +97,20 @@ function breadcrumb(items: { name: string; path: string }[]) {
 
 export const SEO_ROUTES: SeoRoute[] = [
   {
+    path: "/privacy",
+    title: "Privacy Policy | Nudge Digital",
+    description: "How Nudge Digital collects, uses and protects personal information.",
+    priority: 0.3,
+    changefreq: "yearly",
+  },
+  {
+    path: "/terms",
+    title: "Terms of Service | Nudge Digital",
+    description: "The terms that apply to Nudge Digital services and this website.",
+    priority: 0.3,
+    changefreq: "yearly",
+  },
+  {
     path: "/",
     title: "Nudge Digital — Marketing & Automation for Tech Companies and AI Startups",
     description:

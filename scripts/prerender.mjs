@@ -46,6 +46,8 @@ const ROUTES_TO_PRERENDER = [
   "/testimonials",
   "/resources",
   "/faq",
+  "/privacy",
+  "/terms",
   "/calculator",
 ];
 

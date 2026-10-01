@@ -18,6 +18,8 @@ import Calculator from "./pages/Calculator";
 import FAQ from "./pages/FAQ";
 import ServicesMarketplace from "./pages/Services Marketplace";
 import Login from "./pages/Login";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import Admin from "./pages/Admin";
 import ArticleEditor from "./pages/ArticleEditor";
 
@@ -41,6 +43,8 @@ function Router() {
       <Route path={"/calculator"} component={Calculator} />
       <Route path="/faq" component={FAQ} />
       <Route path="/services-marketplace" component={ServicesMarketplace} />
+      <Route path="/privacy" component={Privacy} />
+      <Route path="/terms" component={Terms} />
       <Route path="/admin/login" component={Login} />
       <Route path="/admin" component={Admin} />
       <Route path="/admin/editor/:id" component={ArticleEditor} />

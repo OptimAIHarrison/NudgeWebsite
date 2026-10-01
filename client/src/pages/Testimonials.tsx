@@ -7,17 +7,6 @@ import { Button } from '@/components/ui/button';
 
 const TESTIMONIALS = [
   {
-    id: 1,
-    company: 'PR Agency',
-    quote: 'Honestly didn\'t expect the turnaround to be this fast. Harrison came in, figured out what we actually needed (not just what we asked for), and built it. Website, CRM, automations — all talking to each other. We\'ve clawed back hours every single week.',
-    author: 'Kane',
-    role: 'Founder',
-    category: 'Agency & Automation',
-    initials: 'K',
-    color: 'bg-violet-500',
-    featured: true,
-  },
-  {
     id: 2,
     company: 'AI SaaS Start-up',
     quote: 'We\'d thrown money at this problem before and gotten nowhere. Harrison looked at it for about ten minutes and knew exactly what was wrong. Tracking fixed, site integrated, content automated. I genuinely don\'t know how he works this fast.',
@@ -27,6 +16,28 @@ const TESTIMONIALS = [
     initials: 'S',
     color: 'bg-cyan-500',
     featured: false,
+  },
+  {
+    id: 6,
+    company: 'Tech Startup',
+    quote: 'Every dev we\'d spoken to wanted to rebuild everything from scratch. Harrison just fixed it. Identified the issue, explained it clearly, sorted it out. Didn\'t oversell, didn\'t drag it out. Exactly what you want.',
+    author: 'Adam',
+    role: 'Founder',
+    category: 'Technical Fixes',
+    initials: 'A',
+    color: 'bg-blue-500',
+    featured: false,
+  },
+  {
+    id: 1,
+    company: 'PR Agency',
+    quote: 'Honestly didn\'t expect the turnaround to be this fast. Harrison came in, figured out what we actually needed (not just what we asked for), and built it. Website, CRM, automations — all talking to each other. We\'ve clawed back hours every single week.',
+    author: 'Kane',
+    role: 'Founder',
+    category: 'Agency & Automation',
+    initials: 'K',
+    color: 'bg-violet-500',
+    featured: true,
   },
   {
     id: 3,
@@ -61,37 +72,9 @@ const TESTIMONIALS = [
     color: 'bg-emerald-500',
     featured: false,
   },
-  {
-    id: 6,
-    company: 'Tech Startup',
-    quote: 'Every dev we\'d spoken to wanted to rebuild everything from scratch. Harrison just fixed it. Identified the issue, explained it clearly, sorted it out. Didn\'t oversell, didn\'t drag it out. Exactly what you want.',
-    author: 'Adam',
-    role: 'Founder',
-    category: 'Technical Fixes',
-    initials: 'A',
-    color: 'bg-blue-500',
-    featured: false,
-  },
 ];
 
 const CASE_STUDIES = [
-  {
-    id: 1,
-    company: 'E-commerce Brand',
-    industry: 'Retail',
-    icon: TrendingUp,
-    color: 'from-emerald-500/20 to-emerald-400/5',
-    accentColor: 'text-emerald-600',
-    badgeColor: 'bg-emerald-100 text-emerald-700 border-emerald-200',
-    challenge: 'Broken tracking and invisible customer journeys. They were running paid media blind — no idea what was converting or why.',
-    solution: 'GA4 full implementation, GTM overhaul, attribution model, checkout funnel fixes, and a live performance dashboard.',
-    results: [
-      { stat: '+27%', label: 'Conversion rate' },
-      { stat: '$50K+', label: 'Additional revenue' },
-      { stat: '4 months', label: 'Timeline' },
-    ],
-    services: ['GA4 Setup', 'GTM Audit', 'CRO', 'Attribution'],
-  },
   {
     id: 2,
     company: 'SaaS Company',
@@ -110,23 +93,6 @@ const CASE_STUDIES = [
     services: ['CRM Build', 'Lead Scoring', 'Email Automation', 'Workflow'],
   },
   {
-    id: 3,
-    company: 'PR Agency',
-    industry: 'Agency',
-    icon: Target,
-    color: 'from-violet-500/20 to-violet-400/5',
-    accentColor: 'text-violet-600',
-    badgeColor: 'bg-violet-100 text-violet-700 border-violet-200',
-    challenge: 'The agency had no cohesive digital infrastructure — website, CRM, and content were all disconnected and running manually. Time was being lost across every part of the business.',
-    solution: 'Built the website, CRM, and content automation from the ground up — fully integrated so every system talks to each other without manual intervention.',
-    results: [
-      { stat: 'Hours', label: 'Saved every week' },
-      { stat: 'Full stack', label: 'Built from scratch' },
-      { stat: 'Ongoing', label: 'Engagement' },
-    ],
-    services: ['Website Build', 'CRM Setup', 'Content Automation', 'Systems Integration'],
-  },
-  {
     id: 4,
     company: 'B2B SaaS Platform',
     industry: 'Technology',
@@ -142,6 +108,40 @@ const CASE_STUDIES = [
       { stat: '1 source', label: 'Of truth' },
     ],
     services: ['Data Infrastructure', 'GTM Cleanup', 'Custom Dashboards'],
+  },
+  {
+    id: 1,
+    company: 'E-commerce Brand',
+    industry: 'Retail',
+    icon: TrendingUp,
+    color: 'from-emerald-500/20 to-emerald-400/5',
+    accentColor: 'text-emerald-600',
+    badgeColor: 'bg-emerald-100 text-emerald-700 border-emerald-200',
+    challenge: 'Broken tracking and invisible customer journeys. They were running paid media blind — no idea what was converting or why.',
+    solution: 'GA4 full implementation, GTM overhaul, attribution model, checkout funnel fixes, and a live performance dashboard.',
+    results: [
+      { stat: '+27%', label: 'Conversion rate' },
+      { stat: '$50K+', label: 'Additional revenue' },
+      { stat: '4 months', label: 'Timeline' },
+    ],
+    services: ['GA4 Setup', 'GTM Audit', 'CRO', 'Attribution'],
+  },
+  {
+    id: 3,
+    company: 'PR Agency',
+    industry: 'Agency',
+    icon: Target,
+    color: 'from-violet-500/20 to-violet-400/5',
+    accentColor: 'text-violet-600',
+    badgeColor: 'bg-violet-100 text-violet-700 border-violet-200',
+    challenge: 'The agency had no cohesive digital infrastructure — website, CRM, and content were all disconnected and running manually. Time was being lost across every part of the business.',
+    solution: 'Built the website, CRM, and content automation from the ground up — fully integrated so every system talks to each other without manual intervention.',
+    results: [
+      { stat: 'Hours', label: 'Saved every week' },
+      { stat: 'Full stack', label: 'Built from scratch' },
+      { stat: 'Ongoing', label: 'Engagement' },
+    ],
+    services: ['Website Build', 'CRM Setup', 'Content Automation', 'Systems Integration'],
   },
 ];
 
@@ -173,7 +173,7 @@ export default function Testimonials() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/60">speak for themselves.</span>
           </h1>
           <p className="text-lg text-foreground/60 max-w-2xl mx-auto mb-10">
-            From fixing broken tracking to building full marketing systems — here's what actually happened when clients brought me in.
+            From AI and SaaS teams to growing businesses: fixing broken tracking, building full marketing systems and getting automation running. Here is what actually happened when clients brought me in.
           </p>
 
           {/* Impact stats */}

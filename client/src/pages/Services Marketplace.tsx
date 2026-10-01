@@ -59,19 +59,19 @@ export default function ServicesMarketplace() {
     // ── FULL SUITES ────────────────────────────────────────────────────────
     {
       id: 'full-email-suite',
-      name: 'Full Email Marketing Suite',
-      description: 'Everything you need to run a world-class email programme — built, automated, and ready to scale.',
+      name: 'Full Email & Lifecycle Suite',
+      description: 'Everything you need to run a lifecycle email programme for a software or tech product: onboarding, activation, expansion and win-back, built, automated and ready to scale.',
       price: 3800,
       priceNote: 'one-off setup',
       category: 'Email',
       tags: ['Email', 'Full Suite', 'Automation', 'Strategy'],
       icon: <Mail className="w-6 h-6" />,
       deliverables: [
-        'ESP setup & configuration (Klaviyo, ActiveCampaign, or similar)',
+        'ESP setup & configuration (Customer.io, HubSpot, Klaviyo or similar)',
         'List import, hygiene & segmentation',
         'Welcome & onboarding series (3–5 emails)',
         'Win-back & re-engagement campaign',
-        'Abandoned cart / browse abandonment sequence',
+        'Trial-expiry & activation nudge sequence',
         '3 branded HTML templates (mobile responsive)',
         'Deliverability audit & domain warm-up plan',
         'Performance dashboard setup',
@@ -98,7 +98,7 @@ export default function ServicesMarketplace() {
         'Google Search Console & GA4 setup',
         'XML sitemap & robots.txt optimisation',
         'Core Web Vitals improvements',
-        'Local SEO / Google Business Profile setup',
+        'AI search visibility & schema foundation',
         'Monthly ranking tracker setup',
         'SEO reporting dashboard',
       ],
@@ -208,7 +208,7 @@ export default function ServicesMarketplace() {
     },
     {
       id: 'welcome-series',
-      name: 'Welcome Series Setup',
+      name: 'Onboarding & Welcome Series',
       description: '3-email onboarding sequence for new subscribers, configured and live.',
       price: 750,
       category: 'Email',
@@ -220,7 +220,7 @@ export default function ServicesMarketplace() {
     },
     {
       id: 'winback-campaign',
-      name: 'Win-Back Campaign',
+      name: 'Churn & Win-Back Campaign',
       description: 'Re-engage lapsed subscribers or customers with a targeted sequence.',
       price: 800,
       category: 'Email',
@@ -409,16 +409,16 @@ export default function ServicesMarketplace() {
       fullDescription: 'Hands-on technical SEO fix implementation — based on your audit or ours. All changes documented with a before/after comparison.',
     },
     {
-      id: 'local-seo',
-      name: 'Google Business Profile Setup',
-      description: 'Complete GBP setup, optimisation, and local SEO foundation.',
+      id: 'ai-search-audit',
+      name: 'AI Search Visibility Audit',
+      description: 'How ChatGPT, Perplexity, Gemini and Google AI Overviews currently find and describe you, and what to fix.',
       price: 550,
       category: 'SEO',
-      tags: ['Local SEO', 'Google Business', 'Optimisation'],
+      tags: ['AI Search', 'GEO', 'Schema'],
       icon: <Globe className="w-6 h-6" />,
-      deliverables: ['Profile optimisation', 'Category & attribute setup', 'Photo upload', 'Q&A seeding', 'Post template setup'],
+      deliverables: ['AI answer visibility check across major assistants', 'Entity and brand-consistency review', 'Structured data and crawlability check', 'Citation and content gap list', 'Prioritised fix list'],
       turnaround: '2 days',
-      fullDescription: 'Full Google Business Profile setup and optimisation for local search visibility — categories, attributes, photos, and a content foundation.',
+      fullDescription: 'A focused audit of how AI assistants and AI search find, understand and cite your company, with a prioritised list of fixes. Visibility in AI answers cannot be guaranteed, but the factors that influence it can be improved.',
     },
     {
       id: 'keyword-research',
@@ -534,7 +534,7 @@ export default function ServicesMarketplace() {
     // ── WEB & TECHNICAL ───────────────────────────────────────────────────
     {
       id: '4-page-website',
-      name: '4-Page Website Build',
+      name: 'Product Website Build (4 pages)',
       description: 'Custom 4-page website — designed, developed, SEO-ready, and live.',
       price: 2800,
       category: 'Web & Technical',
@@ -546,7 +546,7 @@ export default function ServicesMarketplace() {
     },
     {
       id: 'landing-page',
-      name: 'High-Converting Landing Page',
+      name: 'Product Landing Page',
       description: 'Conversion-focused single-page build — CTA-optimised and fully tracked.',
       price: 1400,
       category: 'Web & Technical',
@@ -778,13 +778,13 @@ export default function ServicesMarketplace() {
       <section className="py-20 md:py-28 bg-gradient-to-b from-accent/10 to-background border-b border-border">
         <div className="container max-w-4xl mx-auto px-4 text-center">
           <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-5 border border-accent/20">
-            Fixed-price services — no hidden costs
+            Fixed-price marketing sprints for tech and AI teams
           </span>
           <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-5 leading-tight">
-            Services Shop
+            Marketing, scoped and priced.<br />Ready when you are.
           </h1>
           <p className="text-lg text-foreground/60 max-w-2xl mx-auto mb-3">
-            Browse pre-priced deliverables. See exactly what's included, what it costs, and how long it takes — then enquire in one click.
+            Pick a package, see exactly what is included and what it costs. Built for tech companies, AI startups and the teams around them.
           </p>
           <p className="text-sm text-foreground/40">All prices in AUD · GST not included</p>
         </div>

@@ -13,13 +13,13 @@ interface Service {
 }
 
 const SERVICES: Service[] = [
-  { id: 'seo', name: 'SEO & Technical Optimization', avgHoursPerMonth: 40, nudgeRate: 75 },
+  { id: 'seo', name: 'SEO & AI Search', avgHoursPerMonth: 40, nudgeRate: 75 },
   { id: 'ppc', name: 'Paid Media Management', avgHoursPerMonth: 30, nudgeRate: 75 },
-  { id: 'email', name: 'Email Marketing & Automation', avgHoursPerMonth: 25, nudgeRate: 75 },
-  { id: 'analytics', name: 'Analytics & Reporting', avgHoursPerMonth: 20, nudgeRate: 75 },
-  { id: 'crm', name: 'CRM Setup & Optimization', avgHoursPerMonth: 35, nudgeRate: 75 },
-  { id: 'strategy', name: 'Strategic Planning', avgHoursPerMonth: 15, nudgeRate: 85 },
-  { id: 'content', name: 'Content & Social Strategy', avgHoursPerMonth: 30, nudgeRate: 75 },
+  { id: 'email', name: 'Email & Lifecycle Automation', avgHoursPerMonth: 25, nudgeRate: 75 },
+  { id: 'analytics', name: 'Analytics & Attribution', avgHoursPerMonth: 20, nudgeRate: 75 },
+  { id: 'crm', name: 'CRM & Marketing Automation', avgHoursPerMonth: 35, nudgeRate: 75 },
+  { id: 'strategy', name: 'Strategy & Go-To-Market', avgHoursPerMonth: 15, nudgeRate: 85 },
+  { id: 'content', name: 'Content & Social', avgHoursPerMonth: 30, nudgeRate: 75 },
 ];
 
 export default function Calculator() {
@@ -66,7 +66,7 @@ export default function Calculator() {
             Savings Calculator
           </h1>
           <p className="text-xl text-foreground/60 max-w-3xl mx-auto">
-            See how much you can save by working with Nudge Digital instead of hiring full-time or using an agency
+            See how much a senior marketing partner could save your tech team compared with a full-time hire or an agency
           </p>
         </div>
       </section>
