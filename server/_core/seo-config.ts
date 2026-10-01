@@ -98,9 +98,9 @@ function breadcrumb(items: { name: string; path: string }[]) {
 export const SEO_ROUTES: SeoRoute[] = [
   {
     path: "/",
-    title: "Nudge Digital — Digital Marketing Strategist, Implementer & Fixer | Melbourne, Australia",
+    title: "Nudge Digital — Marketing & Automation for Tech Companies and AI Startups",
     description:
-      "Harrison is a senior freelance digital marketing strategist, implementer and fixer in Melbourne. SEO, CRM automation, GA4 analytics, paid media & more. Fixed prices. One person. Real results.",
+      "Go-to-market, SEO and AI search, paid media, lifecycle email, CRM automation and attribution for tech companies and AI startups. Senior operator, fixed prices, systems set up and running.",
     priority: 1.0,
     changefreq: "weekly",
     schema: [
@@ -291,7 +291,7 @@ export const SEO_ROUTES: SeoRoute[] = [
 
 export const DEFAULT_SEO: SeoRoute = {
   path: "*",
-  title: "Nudge Digital — Digital Marketing Strategist, Implementer & Fixer | Melbourne, Australia",
+  title: "Nudge Digital — Marketing & Automation for Tech Companies and AI Startups",
   description:
     "Senior freelance digital marketing strategist, implementer and fixer in Melbourne. SEO, CRM automation, GA4 analytics, paid media & fractional CMO. Fixed prices. No agency overhead.",
 };

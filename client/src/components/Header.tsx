@@ -18,7 +18,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
     { label: 'How I Work', href: '/how-we-work' },
     { label: 'Pricing', href: '/pricing' },
     { label: 'Resources', href: '/resources' },
-    { label: 'Customer Success', href: '/testimonials' },
+    { label: 'Results', href: '/testimonials' },
     { label: 'About', href: '/about' },
   ];
 
@@ -63,7 +63,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
 
           <Link href="/calculator" className="hidden sm:inline-flex">
             <Button variant="outline" className="text-sm">
-              Savings Calculator
+              Time-Saved Calculator
             </Button>
           </Link>
 
@@ -98,8 +98,8 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
                 <ShoppingCart className="w-4 h-4 md:w-5 md:h-5 text-accent" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs md:text-sm font-semibold text-foreground truncate">Browse Services Marketplace...</p>
-                <p className="text-xs text-foreground/60 text-opacity-70">40+ services</p>
+                <p className="text-xs md:text-sm font-semibold text-foreground truncate">Fixed-price sprints</p>
+                <p className="text-xs text-foreground/60 text-opacity-70">Launch-ready packages</p>
               </div>
             </div>
           </div>
