@@ -2,7 +2,9 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Zap, Target, Lightbulb, Code, TrendingUp, ArrowRight, Globe, Briefcase, Heart } from 'lucide-react';
+import { CheckCircle, Zap, Target, Lightbulb, Code, TrendingUp, Briefcase } from 'lucide-react';
+
+const HUMAN_FACTS = ["Started in UK corporate marketing", "Former department head", "Six months in the desert", "Ocean dives and street food", "Based in Melbourne"];
 
 const SKILLS = [
   { icon: Code, title: 'Technical Implementation', body: 'Tracking, data infrastructure, GTM, analytics, pixels — I fix the things that break silently and cost you every day.' },
@@ -58,85 +60,39 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── Story ───────────────────────────────────────────────────── */}
+            {/* The human side */}
       <section className="py-20 md:py-24">
         <div className="container max-w-4xl mx-auto px-4">
-
-          {/* Chapter 1 */}
-          <div className="grid md:grid-cols-5 gap-10 items-start mb-16">
-            <div className="md:col-span-2">
-              <div className="flex items-center gap-2 mb-3">
-                <Briefcase className="w-4 h-4 text-accent" />
-                <span className="text-xs font-bold text-accent uppercase tracking-widest">The beginning</span>
-              </div>
-              <h2 className="text-2xl md:text-3xl font-extrabold text-foreground leading-tight">
-                Started in corporate UK. Left on my own terms.
-              </h2>
-            </div>
-            <div className="md:col-span-3 space-y-4">
-              <div className="pl-5 border-l-2 border-accent/40">
-                <p className="text-foreground/70 leading-relaxed">
-                  I came up through corporate marketing in the UK — database exec, sharp suits, steep learning curve. By the time I was running a department, I was young, driven, and quietly burning out. I didn't have the language for it then, but I knew something had to change.
-                </p>
-              </div>
-              <p className="text-foreground/70 leading-relaxed">
-                So I did what made sense to me: I left. Packed light, grew my hair, got some tattoos, and spent a few years moving across the world. Mountains, ocean dives, street food, and freelance digital marketing for clients across time zones. I kept doing the craft I loved — just from better locations.
-              </p>
-            </div>
-          </div>
-
-          {/* Chapter 2 */}
-          <div className="grid md:grid-cols-5 gap-10 items-start mb-16">
-            <div className="md:col-span-2">
-              <div className="flex items-center gap-2 mb-3">
-                <Globe className="w-4 h-4 text-accent" />
-                <span className="text-xs font-bold text-accent uppercase tracking-widest">Australia</span>
-              </div>
-              <h2 className="text-2xl md:text-3xl font-extrabold text-foreground leading-tight">
-                Ended up here. Stayed for good reason.
-              </h2>
-            </div>
-            <div className="md:col-span-3 space-y-4">
-              <p className="text-foreground/70 leading-relaxed">
-                Eventually Australia won. I did the obligatory fruit picking, spent six months living in the desert (yes, actually), and landed with a team that cared about doing things properly. I ran marketing through some of the most disruptive years in recent memory — COVID, rapid market shifts, the whole thing. We didn't just keep the lights on. I built systems, grew channels, and learned what it means to be accountable for real outcomes.
-              </p>
-              <div className="bg-accent/5 border border-accent/20 rounded-2xl p-5">
-                <p className="text-foreground/75 leading-relaxed italic">
-                  "Running a department through COVID taught me more about what matters in marketing than any course or conference ever could. When the budget disappears, you find out fast what actually drives growth."
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Chapter 3 */}
           <div className="grid md:grid-cols-5 gap-10 items-start">
             <div className="md:col-span-2">
-              <div className="flex items-center gap-2 mb-3">
-                <Heart className="w-4 h-4 text-accent" />
-                <span className="text-xs font-bold text-accent uppercase tracking-widest">Now</span>
-              </div>
+              <p className="mono text-sm text-accent mb-3">Beyond the marketing</p>
               <h2 className="text-2xl md:text-3xl font-extrabold text-foreground leading-tight">
-                Solo. By choice. Fully committed.
+                The human behind the dashboards.
               </h2>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {HUMAN_FACTS.map((f) => (
+                  <span key={f} className="rounded-md border border-accent/20 bg-accent/5 px-3 py-1.5 text-xs font-medium text-foreground/75 backdrop-blur">
+                    {f}
+                  </span>
+                ))}
+              </div>
             </div>
             <div className="md:col-span-3 space-y-4">
               <p className="text-foreground/70 leading-relaxed">
-                Now I work for myself — and for the clients who want senior expertise without the agency overhead or the full-time commitment. No account managers. No juniors quietly doing the work while someone else takes the credit. Just me, doing what I'm actually good at, for businesses I give a genuine damn about.
+                I started in corporate marketing in the UK: database exec, sharp suits, steep learning curve. By the time I was running a department I was quietly burning out, so I packed light and left. A few years of mountains, ocean dives and street food, with freelance clients across time zones, and then Australia won.
               </p>
               <p className="text-foreground/70 leading-relaxed">
-                I work with a small number of clients at a time so I can do each engagement properly. If you're looking for volume, I'm probably not your person. If you're looking for someone who'll get properly into your business and tell you the truth — I might be exactly right.
+                I've picked fruit, lived in the desert for six months (yes, actually), grown my hair and collected a few tattoos. I ran marketing through COVID, and now I work solo, by choice, with a small number of teams I genuinely give a damn about. These days that means tech companies and AI startups. I'd rather have a straight conversation than send a polished pitch.
               </p>
-              <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
-                <div className="flex items-center gap-2 mt-2 text-sm font-bold text-accent hover:gap-3 transition-all cursor-pointer group">
-                  Let's have a conversation <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
+              <blockquote className="glass rounded-xl p-5 text-sm italic leading-relaxed text-foreground/70">
+                "Running a department through COVID taught me more about what matters in marketing than any course or conference ever could. When the budget disappears, you find out fast what actually drives growth."
+              </blockquote>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── What I do best ──────────────────────────────────────────── */}
+{/* ── What I do best ──────────────────────────────────────────── */}
       <section className="py-20 bg-secondary/40 border-t border-border">
         <div className="container max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
