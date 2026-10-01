@@ -10,6 +10,8 @@
  * Also used to generate sitemap.xml — keeps both in sync automatically.
  */
 
+import { FAQS } from "../../client/src/data/faqs";
+
 const SITE_URL = "https://nudgedigital.com.au";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 
@@ -33,7 +35,8 @@ const personSchema = {
   "@id": `${SITE_URL}/#person`,
   name: "Harrison",
   url: `${SITE_URL}/about`,
-  jobTitle: "Digital Marketing Strategist, Implementer & Fixer",
+  jobTitle: "Marketing Strategist & Implementer for Tech and AI Companies",
+  knowsAbout: ["Go-to-market strategy","SEO","AI search optimisation (GEO/AEO)","Paid media","Email and lifecycle marketing","CRM and marketing automation","Marketing analytics and attribution","Fractional CMO services"],
   description:
     "Senior digital marketer with 10+ years of experience across strategy, SEO, CRM automation, paid media and analytics, focused on tech companies and AI startups. Based in Melbourne, Australia.",
   address: {
@@ -49,11 +52,12 @@ const businessSchema = {
   "@id": `${SITE_URL}/#business`,
   name: "Nudge Digital",
   url: SITE_URL,
+  knowsAbout: ["Go-to-market strategy","SEO","AI search optimisation (GEO/AEO)","Paid media","Email and lifecycle marketing","CRM and marketing automation","Marketing analytics and attribution","Fractional CMO services"],
+  areaServed: ["Australia", "Worldwide"],
   logo: `${SITE_URL}/logo.png`,
   image: DEFAULT_OG_IMAGE,
   description:
     "Marketing partner for tech companies and AI startups, offering go-to-market strategy, SEO and AI search, paid media, lifecycle email, CRM and automation, analytics, and fractional CMO services.",
-  telephone: "+61400000000",
   email: "hello@nudgedigital.com.au",
   address: {
     "@type": "PostalAddress",
@@ -63,14 +67,9 @@ const businessSchema = {
     addressCountry: "AU",
   },
   geo: { "@type": "GeoCoordinates", latitude: -37.8136, longitude: 144.9631 },
-  areaServed: [
-    { "@type": "Country", name: "Australia" },
-    { "@type": "City", name: "Melbourne" },
-    { "@type": "City", name: "Sydney" },
-    { "@type": "City", name: "Brisbane" },
-  ],
   priceRange: "$$",
   currenciesAccepted: "AUD",
+  contactPoint: { "@type": "ContactPoint", contactType: "sales", email: "hello@nudgedigital.com.au", availableLanguage: "English" },
   founder: { "@id": `${SITE_URL}/#person` },
 };
 
@@ -137,7 +136,7 @@ export const SEO_ROUTES: SeoRoute[] = [
             name: "Is Nudge Digital an agency?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "No. Nudge Digital is one senior freelance strategist, implementer and fixer, Harrison, working directly with clients. There are no account managers or junior staff — every project is delivered personally.",
+              text: "No. Nudge Digital is one senior marketing operator, Harrison, working directly with tech companies and AI startups. There are no account managers or junior staff in between: the person you speak to is the person who does the work.",
             },
           },
           {
@@ -145,7 +144,7 @@ export const SEO_ROUTES: SeoRoute[] = [
             name: "Where is Nudge Digital based?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Nudge Digital is based in Melbourne, Australia, and works with clients across Melbourne, Sydney, Brisbane, and remotely throughout Australia.",
+              text: "Nudge Digital is based in Melbourne, Australia, and works remotely with tech and AI teams across Australia and around the world.",
             },
           },
         ],
@@ -162,9 +161,21 @@ export const SEO_ROUTES: SeoRoute[] = [
     schema: [
       {
         "@type": "Service",
-        serviceType: "Digital Marketing Consulting",
+        serviceType: "Marketing strategy and implementation for technology companies",
+        audience: { "@type": "Audience", audienceType: "Technology companies and AI startups" },
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Marketing services for tech and AI companies",
+          itemListElement: [
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Strategy & Go-To-Market", description: "ICP, positioning, launch plans and channel mix for tech products" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Marketing Ops & Automation", description: "CRM, lifecycle email, lead scoring and AI workflow automation" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Performance Marketing & Analytics", description: "Paid media, SEO, AI search visibility, attribution and CRO" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Brand & Content", description: "Messaging, technical content, social and website" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Technical Fixes", description: "Tracking, site speed, funnel diagnostics and integrations" } },
+          ],
+        },
         provider: { "@id": `${SITE_URL}/#person` },
-        areaServed: { "@type": "Country", name: "Australia" },
+        areaServed: ["Australia", "Worldwide"],
         description:
           "Full-stack marketing services for tech and AI companies including SEO, AI search, CRM automation, paid media, analytics, and fractional CMO support.",
       },
@@ -183,7 +194,7 @@ export const SEO_ROUTES: SeoRoute[] = [
     changefreq: "weekly",
     schema: breadcrumb([
       { name: "Home", path: "/" },
-      { name: "Services Marketplace", path: "/services-marketplace" },
+      { name: "Fixed-Price Packages", path: "/services-marketplace" },
     ]),
   },
   {
@@ -233,7 +244,7 @@ export const SEO_ROUTES: SeoRoute[] = [
       },
       breadcrumb([
         { name: "Home", path: "/" },
-        { name: "How We Work", path: "/how-we-work" },
+        { name: "How I Work", path: "/how-we-work" },
       ]),
     ],
   },
@@ -260,16 +271,9 @@ export const SEO_ROUTES: SeoRoute[] = [
     priority: 0.7,
     changefreq: "monthly",
     schema: [
-      {
-        "@type": "AggregateRating",
-        itemReviewed: { "@id": `${SITE_URL}/#business` },
-        ratingValue: "5",
-        bestRating: "5",
-        ratingCount: "6",
-      },
       breadcrumb([
         { name: "Home", path: "/" },
-        { name: "Customer Success", path: "/testimonials" },
+        { name: "Results", path: "/testimonials" },
       ]),
     ],
   },
@@ -288,6 +292,14 @@ export const SEO_ROUTES: SeoRoute[] = [
       "Common questions about working with Nudge Digital: who I work with, pricing, process, tools, automation and AI search.",
     priority: 0.5,
     changefreq: "monthly",
+    schema: {
+      "@type": "FAQPage",
+      mainEntity: FAQS.map((f) => ({
+        "@type": "Question",
+        name: f.question,
+        acceptedAnswer: { "@type": "Answer", text: f.answer },
+      })),
+    },
   },
   {
     path: "/calculator",

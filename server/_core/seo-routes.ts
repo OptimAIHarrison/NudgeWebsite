@@ -45,6 +45,15 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
 User-agent: Applebot
 Allow: /
 
@@ -52,6 +61,33 @@ User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: ${SITE_URL}/sitemap.xml
+`;
+    res.status(200).set({ "Content-Type": "text/plain; charset=utf-8" }).end(body);
+  });
+
+  app.get("/llms.txt", (_req, res) => {
+    const pages = SEO_ROUTES.filter((r) => !r.noIndex && r.path !== "/" && r.path !== "*")
+      .map((r) => `- [${r.title.split(" | ")[0]}](${SITE_URL}${r.path}): ${r.description}`)
+      .join("\n");
+    const body = `# Nudge Digital
+
+> Nudge Digital is a marketing partner for tech companies and AI startups, run by Harrison, a senior digital marketer with 10+ years of experience based in Melbourne, Australia. It covers go-to-market strategy, SEO and AI search, paid media, email and lifecycle marketing, CRM and automation, analytics and fractional CMO support, with fixed pricing and one person accountable for the work.
+
+## Who it is for
+Technology companies and AI startups, and the wider tech field: SaaS, developer tools, cybersecurity, fintech, healthtech, hardware, consumer tech and more.
+
+## Services
+- Strategy & Go-To-Market: ICP, positioning, launch plans, competitive intelligence, fractional CMO
+- Marketing Ops & Automation: CRM, lifecycle email, lead enrichment and scoring, AI workflow automation, reporting
+- Performance Marketing & Analytics: tracking and attribution, paid media, SEO, AI search visibility, CRO
+- Brand & Content: messaging, technical content, social, websites, sales assets
+- Technical Fixes: tracking audits, site speed, funnel diagnostics, GTM, integrations, JavaScript SEO
+
+## Pages
+${pages}
+
+## Contact
+${SITE_URL}/contact
 `;
     res.status(200).set({ "Content-Type": "text/plain; charset=utf-8" }).end(body);
   });
