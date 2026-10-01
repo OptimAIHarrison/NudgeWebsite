@@ -129,10 +129,7 @@ export default function Home() {
         <div className="absolute right-[-3rem] top-1/2 hidden h-[26rem] w-[26rem] -translate-y-1/2 rounded-full border border-white/10 bg-white/[0.03] lg:block" aria-hidden />
         <div className="container relative grid items-center gap-12 py-20 md:py-28 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <p className="mono mb-5 flex items-center gap-2.5 text-sm text-[#b58ce0]">
-              <span className="ndot ndot-light" aria-hidden />
-              A marketing partner for tech and AI startups
-            </p>
+            <p className="mono mb-5 text-sm text-[#b58ce0]">A marketing partner for tech and AI startups</p>
             <h1 className="text-4xl font-bold leading-[1.05] md:text-6xl">
               You build something amazing. I know how to market it.
             </h1>
@@ -185,7 +182,7 @@ export default function Home() {
       <section className="py-20 md:py-28">
         <div className="container grid gap-14 lg:grid-cols-2">
           <div>
-            <h2 className="h-dot text-3xl font-bold leading-tight md:text-5xl">
+            <h2 className="text-3xl font-bold leading-tight md:text-5xl">
               You built something technical. Marketing it is a different system.
             </h2>
             <p className="mt-6 max-w-lg leading-relaxed text-foreground/65">
@@ -231,7 +228,7 @@ export default function Home() {
       {/* Disciplines */}
       <section className="py-20 md:py-24">
         <div className="container">
-          <h2 className="h-dot max-w-2xl text-3xl font-bold md:text-4xl">Five disciplines, one operator.</h2>
+          <h2 className="max-w-2xl text-3xl font-bold md:text-4xl">Five disciplines, one operator.</h2>
           <p className="mt-3 max-w-xl text-foreground/60">From go-to-market strategy to the integration nobody else wants to touch.</p>
           <div className="mt-10 grid gap-4 md:grid-cols-5">
             {PILLARS.map(({ icon: Icon, name, desc, id }) => (
@@ -252,7 +249,7 @@ export default function Home() {
       <section className="circles border-t border-border bg-secondary/40 py-20 md:py-24">
         <div className="container grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
-            <h2 className="h-dot text-3xl font-bold md:text-4xl">Traditional marketing, done the way tech buys.</h2>
+            <h2 className="text-3xl font-bold md:text-4xl">Traditional marketing, done the way tech buys.</h2>
             <p className="mt-4 text-foreground/60">Every proven channel, adapted for technical audiences, long evaluation cycles and product-led funnels.</p>
           </div>
           <dl className="glass divide-y divide-accent/10 rounded-xl">
@@ -269,7 +266,7 @@ export default function Home() {
       {/* Automation + stack */}
       <section className="circles circles-dark bg-ink py-20 text-white md:py-24">
         <div className="container">
-          <h2 className="h-dot h-dot-light max-w-2xl text-3xl font-bold md:text-4xl">Set up. Connected. Running.</h2>
+          <h2 className="max-w-2xl text-3xl font-bold md:text-4xl">Set up. Connected. Running.</h2>
           <p className="mt-4 max-w-2xl text-white/65">
             Lead capture, enrichment, scoring, routing, lifecycle email, reporting and AI-assisted workflows, built into your existing stack and documented so your team owns it. Automation that works on a Tuesday when nobody is watching.
           </p>
@@ -284,7 +281,7 @@ export default function Home() {
       {/* Process */}
       <section className="py-20 md:py-24">
         <div className="container">
-          <h2 className="h-dot text-3xl font-bold md:text-4xl">From Nudge to done.</h2>
+          <h2 className="text-3xl font-bold md:text-4xl">From Nudge to done.</h2>
           <p className="mt-3 text-foreground/60">No lengthy proposals, no kickoff marathons.</p>
           <ol className="mt-10 grid gap-4 md:grid-cols-4">
             {STEPS.map((s) => (
@@ -304,7 +301,7 @@ export default function Home() {
       {/* Proof */}
       <section className="circles border-t border-border bg-secondary/40 py-20 md:py-24">
         <div className="container">
-          <h2 className="h-dot text-3xl font-bold md:text-4xl">What actually happened.</h2>
+          <h2 className="text-3xl font-bold md:text-4xl">What actually happened.</h2>
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {PROOF.map((c, i) => (
               <figure key={c.company} className={`glass relative flex flex-col rounded-xl p-6 ${i === 0 ? '!border-accent/60' : ''}`}>
@@ -332,7 +329,7 @@ export default function Home() {
       {/* CTA */}
       <section className="circles circles-dark bg-ink py-20 text-white md:py-24">
         <div className="container max-w-3xl">
-          <h2 className="h-dot h-dot-light text-3xl font-bold leading-tight md:text-5xl">Tell me what's stuck. I'll tell you what I'd ship first.</h2>
+          <h2 className="text-3xl font-bold leading-tight md:text-5xl">Tell me what's stuck. I'll tell you what I'd ship first.</h2>
           <p className="mt-4 text-lg text-white/65">What I'd fix, what it costs and when it will be live, in plain terms.</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link href="/contact" onClick={go}><Button className="btn-nudge-primary px-8 py-6 text-base">Send a Nudge</Button></Link>

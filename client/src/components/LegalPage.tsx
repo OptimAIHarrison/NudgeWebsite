@@ -8,7 +8,7 @@ export default function LegalPage({ title, updated, intro, sections }: { title: 
     <div className="min-h-screen bg-background">
       <Header />
       <main className="container max-w-3xl py-16 md:py-24">
-        <h1 className="h-dot text-4xl font-bold md:text-5xl">{title}</h1>
+        <h1 className="text-4xl font-bold md:text-5xl">{title}</h1>
         <p className="mono mt-3 text-sm text-foreground/50">Last updated {updated}</p>
         <p className="mt-8 leading-relaxed text-foreground/70">{intro}</p>
         {sections.map((s) => (
