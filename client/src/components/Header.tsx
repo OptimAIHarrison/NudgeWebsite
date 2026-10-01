@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Search, Menu, X } from 'lucide-react';
+import { Search, Menu, X, ShoppingCart } from 'lucide-react';
 import SearchModal from '@/components/SearchModal';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
@@ -38,7 +38,6 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
   const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'Services', href: '/services' },
-    { label: 'Fixed Price Market Place', href: '/services-marketplace', isNew: true },
     { label: 'How I Work', href: '/how-we-work' },
     { label: 'Pricing', href: '/pricing' },
     { label: 'Resources', href: '/resources' },
@@ -68,9 +67,9 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden xl:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className={`text-sm font-medium text-foreground/70 hover:text-accent transition-colors ${'isNew' in link ? 'notif' : ''}`}>
+            <Link key={link.href} href={link.href} className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors">
               {link.label}
             </Link>
           ))}
@@ -86,7 +85,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
             <Search className="w-5 h-5 text-foreground/70" />
           </button>
 
-          <Link href="/calculator" className="hidden 2xl:inline-flex">
+          <Link href="/calculator" className="hidden xl:inline-flex">
             <Button variant="outline" className="text-sm">
               Time-Saved Calculator
             </Button>
@@ -101,7 +100,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="xl:hidden p-2 hover:bg-accent/10 rounded-lg transition-colors"
+            className="lg:hidden p-2 hover:bg-accent/10 rounded-lg transition-colors"
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-menu"
@@ -117,7 +116,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
 
       {/* Mobile / tablet navigation (hamburger) */}
       {mobileMenuOpen && (
-        <div id="mobile-menu" className="xl:hidden border-t border-border bg-background shadow-lg animate-slide-in-down max-h-[calc(100vh-5rem)] overflow-y-auto">
+        <div id="mobile-menu" className="lg:hidden border-t border-border bg-background shadow-lg animate-slide-in-down max-h-[calc(100vh-5rem)] overflow-y-auto">
           <nav className="container py-2">
             {navLinks.map((link) => (
               <Link
@@ -127,9 +126,16 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}
-                {'isNew' in link && <span className="ndot ndot-live ml-2 align-middle" aria-hidden />}
               </Link>
             ))}
+            <Link
+              href="/services-marketplace"
+              className="block border-b border-border py-3.5 text-base font-medium text-foreground/80 hover:text-accent transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Fixed Price Market Place
+              <span className="ndot ndot-live ml-2 align-middle" aria-hidden />
+            </Link>
             <Link
               href="/calculator"
               className="block border-b border-border py-3.5 text-base font-medium text-foreground/80 hover:text-accent transition-colors"
@@ -141,6 +147,26 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
               <Button className="btn-nudge-primary w-full my-4">Send a Nudge</Button>
             </Link>
           </nav>
+        </div>
+      )}
+
+      {/* Fixed Price Market Place: label tag hanging from the header, right side */}
+      {!mobileMenuOpen && (
+        <div className="absolute right-3 top-full z-40 md:right-4">
+          <Link href="/services-marketplace" aria-label="Browse the Fixed Price Market Place: 40+ fixed-price packages">
+            <div className="relative rounded-b-lg rounded-t-none border border-t-0 border-accent/30 bg-gradient-to-br from-accent/15 to-accent/5 p-3 pr-9 shadow-lg backdrop-blur-md transition-all hover:border-accent/60 hover:shadow-xl md:p-4 md:pr-10">
+              <span className="ndot absolute right-3 top-3" aria-hidden />
+              <div className="flex items-center gap-2">
+                <div className="flex-shrink-0 rounded-lg bg-accent/20 p-1.5">
+                  <ShoppingCart className="h-4 w-4 text-accent md:h-5 md:w-5" />
+                </div>
+                <div className="min-w-0">
+                  <p className="truncate text-xs font-semibold text-foreground md:text-sm">Fixed Price Market Place</p>
+                  <p className="text-xs text-foreground/60">40+ fixed-price packages</p>
+                </div>
+              </div>
+            </div>
+          </Link>
         </div>
       )}
     </header>
