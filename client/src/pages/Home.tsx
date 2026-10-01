@@ -122,7 +122,7 @@ export default function Home() {
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-ink text-white">
+      <section className="relative overflow-hidden bg-hero text-white">
         <div className="absolute inset-0 grid-bg" aria-hidden />
         <div className="absolute -top-32 right-0 h-96 w-96 rounded-full bg-[#8041b2]/30 blur-3xl" aria-hidden />
         <div className="absolute right-[-9rem] top-1/2 hidden h-[36rem] w-[36rem] -translate-y-1/2 rounded-full border border-white/10 lg:block" aria-hidden />
