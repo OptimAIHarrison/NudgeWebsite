@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Check, Zap, Briefcase, TrendingUp, Repeat, ChevronDown, ArrowRight, Clock, DollarSign, Shield, Star } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { Check, Zap, Briefcase, TrendingUp, Repeat, ChevronDown, ChevronLeft, ChevronRight, ArrowRight, Clock, DollarSign, Shield, Star } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'wouter';
@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 const ENGAGEMENT_MODELS = [
   {
     id: 'hourly',
+    featured: true,
     icon: Clock,
     label: 'Hourly',
     title: 'Hourly / Ad-hoc',
@@ -15,9 +16,9 @@ const ENGAGEMENT_MODELS = [
     rate: '$85–$115',
     rateUnit: '/ hour',
     rateSub: 'AUD · based on complexity',
-    color: 'from-blue-500/20 to-blue-400/5',
-    accentColor: 'text-blue-600',
-    badgeColor: 'bg-blue-100 text-blue-700 border-blue-200',
+    color: 'from-accent/15 to-accent/[0.04]',
+    accentColor: 'text-accent',
+    badgeColor: 'bg-accent/10 text-accent border-accent/25',
     description: 'Best for small, specific tasks where you know roughly what you need and want to keep things flexible. I log hours, you pay for what\'s used — nothing more.',
     bestFor: ['Quick audits', 'Ad-hoc fixes', 'Sanity checks', 'Advice calls'],
     includes: [
@@ -37,7 +38,7 @@ const ENGAGEMENT_MODELS = [
     rate: '$1,000–$6,000+',
     rateUnit: '',
     rateSub: 'AUD · avg project $2,500',
-    color: 'from-accent/20 to-accent/5',
+    color: 'from-accent/15 to-accent/[0.04]',
     accentColor: 'text-accent',
     badgeColor: 'bg-accent/10 text-accent border-accent/25',
     description: 'The most common way I work. You get a clear deliverable, a fixed price, and a defined timeline. I scope it, you approve it, I build it. Simple.',
@@ -50,7 +51,6 @@ const ENGAGEMENT_MODELS = [
       'Post-delivery support (7 days)',
     ],
     cta: 'Get a Quote',
-    featured: true,
   },
   {
     id: 'retainer',
@@ -61,9 +61,9 @@ const ENGAGEMENT_MODELS = [
     rate: 'From $2,000',
     rateUnit: '/ month',
     rateSub: 'AUD · custom to your needs',
-    color: 'from-emerald-500/20 to-emerald-400/5',
-    accentColor: 'text-emerald-600',
-    badgeColor: 'bg-emerald-100 text-emerald-700 border-emerald-200',
+    color: 'from-accent/15 to-accent/[0.04]',
+    accentColor: 'text-accent',
+    badgeColor: 'bg-accent/10 text-accent border-accent/25',
     description: 'For tech teams that want consistent, senior-level marketing support each month — strategy, execution, and accountability — without the overhead of a full-time hire.',
     bestFor: ['Ongoing paid media', 'Monthly reporting', 'CRO testing', 'Growth strategy'],
     includes: [
@@ -85,9 +85,9 @@ const ENGAGEMENT_MODELS = [
     rate: 'From $4,500',
     rateUnit: '/ month',
     rateSub: 'AUD · scoped to your team',
-    color: 'from-violet-500/20 to-violet-400/5',
-    accentColor: 'text-violet-600',
-    badgeColor: 'bg-violet-100 text-violet-700 border-violet-200',
+    color: 'from-accent/15 to-accent/[0.04]',
+    accentColor: 'text-accent',
+    badgeColor: 'bg-accent/10 text-accent border-accent/25',
     description: 'I embed into your business as your senior marketing lead — setting direction, managing channels, directing any existing team or vendors, and owning the results.',
     bestFor: ['Startups scaling up', 'Teams without a marketing lead', 'Board-level reporting', 'Full marketing ownership'],
     includes: [
@@ -121,10 +121,24 @@ const EXAMPLE_PROJECTS = [
 ];
 
 export default function Pricing() {
-  const [activeModel, setActiveModel] = useState('project');
+  const [activeModel, setActiveModel] = useState('hourly');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const current = ENGAGEMENT_MODELS.find(m => m.id === activeModel)!;
+  const idx = ENGAGEMENT_MODELS.findIndex(m => m.id === activeModel);
+  const [dir, setDir] = useState<'next' | 'prev'>('next');
+  const touchX = useRef<number | null>(null);
+
+  // Carousel: wraps around at both ends
+  const goTo = (i: number) => {
+    const n = (i + ENGAGEMENT_MODELS.length) % ENGAGEMENT_MODELS.length;
+    setDir(i > idx ? 'next' : 'prev');
+    setActiveModel(ENGAGEMENT_MODELS[n].id);
+  };
+  const onKey = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowRight') goTo(idx + 1);
+    if (e.key === 'ArrowLeft') goTo(idx - 1);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -151,18 +165,20 @@ export default function Pricing() {
         <div className="container max-w-6xl mx-auto px-4">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-extrabold text-foreground mb-2">How would you like to work?</h2>
-            <p className="text-foreground/50 text-sm">Select a model to see rates, what's included, and what it's best for.</p>
+            <p className="text-foreground/50 text-sm">Hourly is the quickest way to start. Swipe or use the tabs to see the other ways to work together.</p>
           </div>
 
           {/* Model toggle tabs */}
-          <div className="flex flex-wrap gap-2 justify-center mb-10">
+          <div role="tablist" aria-label="How to work together" onKeyDown={onKey} className="flex flex-wrap gap-2 justify-center mb-10">
             {ENGAGEMENT_MODELS.map(model => {
               const Icon = model.icon;
               const active = activeModel === model.id;
               return (
                 <button
                   key={model.id}
-                  onClick={() => setActiveModel(model.id)}
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => goTo(ENGAGEMENT_MODELS.indexOf(model))}
                   className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm border-2 transition-all ${
                     active
                       ? 'bg-accent text-white border-accent shadow-lg shadow-accent/20'
@@ -171,14 +187,25 @@ export default function Pricing() {
                 >
                   <Icon className="w-4 h-4" />
                   {model.label}
-                  {model.featured && <span className="text-xs bg-white/20 rounded-full px-1.5 py-0.5">Popular</span>}
+                  {model.featured && (
+                    <span className={`text-xs rounded-full px-1.5 py-0.5 ${active ? 'bg-white/20' : 'bg-accent/10 text-accent'}`}>Start here</span>
+                  )}
                 </button>
               );
             })}
           </div>
 
           {/* Active model detail panel */}
-          <div className={`rounded-3xl border-2 border-accent/30 bg-gradient-to-br ${current.color} overflow-hidden`}>
+          <div
+            onTouchStart={e => { touchX.current = e.touches[0].clientX; }}
+            onTouchEnd={e => {
+              if (touchX.current === null) return;
+              const dx = e.changedTouches[0].clientX - touchX.current;
+              touchX.current = null;
+              if (Math.abs(dx) > 50) goTo(idx + (dx < 0 ? 1 : -1));
+            }}
+          >
+          <div key={current.id} className={`pricing-slide-${dir} rounded-3xl border-2 border-accent/30 bg-gradient-to-br ${current.color} overflow-hidden`}>
             <div className="grid md:grid-cols-2 gap-0">
 
               {/* Left — rate + description */}
@@ -249,6 +276,36 @@ export default function Pricing() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Carousel controls */}
+          <div className="mt-6 flex items-center justify-center gap-4">
+            <button
+              onClick={() => goTo(idx - 1)}
+              aria-label="Previous option"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-accent/30 bg-background text-accent transition-colors hover:bg-accent hover:text-white"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <div className="flex items-center gap-2">
+              {ENGAGEMENT_MODELS.map((m, i) => (
+                <button
+                  key={m.id}
+                  onClick={() => goTo(i)}
+                  aria-label={`Show ${m.label}`}
+                  className={`h-2.5 rounded-full transition-all ${i === idx ? 'w-7 bg-accent' : 'w-2.5 bg-accent/25 hover:bg-accent/50'}`}
+                />
+              ))}
+            </div>
+            <button
+              onClick={() => goTo(idx + 1)}
+              aria-label="Next option"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-accent/30 bg-background text-accent transition-colors hover:bg-accent hover:text-white"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+          <p className="mt-3 text-center text-xs text-foreground/45">{idx + 1} of {ENGAGEMENT_MODELS.length}</p>
           </div>
         </div>
       </section>

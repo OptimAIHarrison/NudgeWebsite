@@ -532,3 +532,10 @@
 
 @media (prefers-reduced-motion: reduce) { .ndot::after { animation: none; opacity: 0; } }
 .ndot-sm { width: .375rem; height: .375rem; }
+
+/* Pricing carousel slide-in */
+@keyframes pricing-slide-next { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+@keyframes pricing-slide-prev { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: none; } }
+.pricing-slide-next { animation: pricing-slide-next .35s ease-out; }
+.pricing-slide-prev { animation: pricing-slide-prev .35s ease-out; }
+@media (prefers-reduced-motion: reduce) { .pricing-slide-next, .pricing-slide-prev { animation: none; } }
