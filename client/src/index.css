@@ -530,3 +530,14 @@
 
 @media (prefers-reduced-motion: reduce) { .ndot::after { animation: none; opacity: 0; } }
 .ndot-sm { width: .375rem; height: .375rem; }
+
+/* Optional lighter background (a modest step up, faint lilac tint).
+   Not active by default: enable by adding data-bg="lighter" to the <html> element in client/index.html. */
+html[data-bg="lighter"] {
+  --background: oklch(0.99 0.003 300);
+  --card: oklch(0.975 0.004 300);
+  --secondary: oklch(0.953 0.006 300);
+  --muted: oklch(0.925 0.005 300);
+  --border: oklch(0.93 0.005 300);
+  --input: oklch(0.93 0.005 300);
+}
