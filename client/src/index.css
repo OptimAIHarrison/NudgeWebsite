@@ -480,3 +480,50 @@
 @keyframes live-pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
 .live-dot { animation: live-pulse 1.4s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+
+/* ── Nudge circles, notification dots and glass ─────────────────── */
+/* Heading marker: the logo circle with soft translucent halo rings */
+.h-dot::before {
+  content: ""; display: inline-block; width: .38em; height: .38em; margin-right: .5em;
+  border-radius: 9999px; background: #8041b2; vertical-align: .14em;
+  box-shadow: 0 0 0 .2em rgba(128,65,178,.16), 0 0 0 .46em rgba(128,65,178,.07);
+}
+.h-dot-light::before { background: #b58ce0; box-shadow: 0 0 0 .2em rgba(181,140,224,.24), 0 0 0 .46em rgba(181,140,224,.1); }
+
+/* Notification dot with a slow ping ring */
+.ndot { --dot: #8041b2; position: relative; display: inline-block; flex: none; width: .5rem; height: .5rem; border-radius: 9999px; background: var(--dot); }
+.ndot::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--dot); animation: ndot-ping 2.2s ease-out infinite; }
+.ndot-light { --dot: #b58ce0; }
+.ndot-live { --dot: #5ce1b0; }
+@keyframes ndot-ping { 0% { transform: scale(1); opacity: .55; } 80%, 100% { transform: scale(2.8); opacity: 0; } }
+
+/* Small "new" badge dot on a nav item */
+.notif { position: relative; }
+.notif::after { content: ""; position: absolute; top: -3px; right: -9px; width: 7px; height: 7px; border-radius: 9999px; background: #5ce1b0; box-shadow: 0 0 0 2px rgba(250,250,250,.9); }
+
+/* Translucent glass surfaces */
+.glass { background: rgba(255,255,255,.55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(128,65,178,.16); }
+.glass-dark { background: rgba(255,255,255,.05); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.12); }
+
+/* Large faint translucent circles behind a section */
+.circles, section[class*="from-accent/10"] { position: relative; isolation: isolate; overflow: hidden; }
+.circles::before, .circles::after, section[class*="from-accent/10"]::before, section[class*="from-accent/10"]::after {
+  content: ""; position: absolute; border-radius: 9999px; z-index: -1; pointer-events: none;
+}
+.circles::before, section[class*="from-accent/10"]::before {
+  width: 520px; height: 520px; right: -150px; top: -230px;
+  background: radial-gradient(circle, rgba(128,65,178,.15), transparent 66%); box-shadow: inset 0 0 0 1px rgba(128,65,178,.1);
+}
+.circles::after, section[class*="from-accent/10"]::after {
+  width: 300px; height: 300px; left: -100px; bottom: -150px; background: rgba(181,140,224,.07); border: 1px solid rgba(128,65,178,.13);
+}
+.circles-dark::before { background: radial-gradient(circle, rgba(181,140,224,.2), transparent 66%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.07); }
+.circles-dark::after { background: rgba(255,255,255,.03); border-color: rgba(255,255,255,.09); }
+
+/* Page-hero eyebrow badges get a dot automatically */
+span[class*="bg-accent/10"][class*="rounded-full"]::before {
+  content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 8px; vertical-align: middle;
+  border-radius: 9999px; background: #8041b2; box-shadow: 0 0 0 3px rgba(128,65,178,.18);
+}
+@media (prefers-reduced-motion: reduce) { .ndot::after { animation: none; opacity: 0; } }
+.ndot-sm { width: .375rem; height: .375rem; }

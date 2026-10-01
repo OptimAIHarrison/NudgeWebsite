@@ -38,7 +38,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
   const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'Services', href: '/services' },
-    { label: 'Fixed Price Market Place', href: '/services-marketplace' },
+    { label: 'Fixed Price Market Place', href: '/services-marketplace', isNew: true },
     { label: 'How I Work', href: '/how-we-work' },
     { label: 'Pricing', href: '/pricing' },
     { label: 'Resources', href: '/resources' },
@@ -48,7 +48,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
 
   return (
     <>
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 border-b border-accent/15">
       <div className="container flex items-center justify-between h-20 md:h-24">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 flex-shrink-0 hover:opacity-80 transition-opacity">
@@ -70,7 +70,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
         {/* Desktop Navigation */}
         <nav className="hidden xl:flex items-center gap-6">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors">
+            <Link key={link.href} href={link.href} className={`text-sm font-medium text-foreground/70 hover:text-accent transition-colors ${'isNew' in link ? 'notif' : ''}`}>
               {link.label}
             </Link>
           ))}
@@ -127,6 +127,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}
+                {'isNew' in link && <span className="ndot ndot-live ml-2 align-middle" aria-hidden />}
               </Link>
             ))}
             <Link
