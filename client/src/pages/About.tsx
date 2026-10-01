@@ -6,9 +6,9 @@ import { CheckCircle, Zap, Target, Lightbulb, Code, TrendingUp, ArrowRight, Glob
 
 const SKILLS = [
   { icon: Code, title: 'Technical Implementation', body: 'Tracking, data infrastructure, GTM, analytics, pixels — I fix the things that break silently and cost you every day.' },
-  { icon: Zap, title: 'Marketing Automation', body: 'CRM builds, email sequences, lead scoring, workflow design — systems that run without constant babysitting.' },
-  { icon: Target, title: 'Performance Marketing', body: 'Paid media, SEO, attribution, CRO — channels managed with data, not guesswork.' },
-  { icon: TrendingUp, title: 'Strategy & Roadmapping', body: 'Audits, GTM planning, competitive intelligence — clarity before you spend a dollar.' },
+  { icon: Zap, title: 'Marketing Automation', body: 'CRM builds, lifecycle email, lead scoring and AI workflows, connected to your product data and running without babysitting.' },
+  { icon: Target, title: 'Performance Marketing', body: 'Paid media, SEO, attribution, CRO — channels managed with data, aimed at technical buyers.' },
+  { icon: TrendingUp, title: 'Strategy & Roadmapping', body: 'Audits, go-to-market planning and positioning for crowded tech categories. Clarity before you spend a dollar.' },
   { icon: Lightbulb, title: 'Brand & Content', body: 'Positioning, messaging, content strategy — helping you tell the right story to the right people.' },
   { icon: Briefcase, title: 'Fractional Leadership', body: 'Senior-level marketing direction without the full-time overhead. I embed in your team and own the outcomes.' },
 ];
@@ -36,14 +36,14 @@ export default function About() {
       <section className="py-20 md:py-28 bg-gradient-to-b from-accent/10 to-background border-b border-border">
         <div className="container max-w-4xl mx-auto px-4 text-center">
           <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-5 border border-accent/20">
-            Fractional Digital Marketing Strategist & Implementer
+            Marketing partner for tech companies and AI startups
           </span>
           <h1 className="text-5xl md:text-6xl font-extrabold text-foreground mb-5 leading-tight tracking-tight">
             Hi, I'm Harrison.<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/60">I do the work.</span>
           </h1>
           <p className="text-lg text-foreground/60 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Senior digital marketer. Freelancer. Former department head. I've spent over a decade helping businesses build the systems, strategy, and execution that actually grow revenue — and I've done it across five continents.
+            Senior digital marketer. Freelancer. Former department head. I have spent over a decade building the systems, strategy and execution that grow revenue, and I now focus on tech companies and AI startups: teams building things worth marketing properly. I have done it across five continents.
           </p>
 
           {/* Stats */}

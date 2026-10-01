@@ -6,17 +6,17 @@ export default function Footer() {
 
   const footerLinks = {
     Services: [
-      { label: 'Strategic Advisory', href: '/services#strategic-advisory' },
-      { label: 'Marketing Operations', href: '/services#marketing-operations' },
-      { label: 'Performance Marketing', href: '/services#performance-marketing' },
-      { label: 'Brand & Content', href: '/services#brand-content' },
-      { label: 'Technical Fixes', href: '/services#technical-fixes' },
+      { label: 'Strategy & Go-To-Market', href: '/services?pillar=strategic' },
+      { label: 'Marketing Ops & Automation', href: '/services?pillar=operations' },
+      { label: 'Performance & Analytics', href: '/services?pillar=performance' },
+      { label: 'Brand & Content', href: '/services?pillar=brand' },
+      { label: 'Technical Fixes', href: '/services?pillar=technical' },
     ],
     Company: [
-      { label: 'About Us', href: '/about' },
+      { label: 'About', href: '/about' },
       { label: 'How I Work', href: '/how-we-work' },
       { label: 'Resources', href: '/resources' },
-      { label: 'Client Success', href: '/testimonials' },
+      { label: 'Results', href: '/testimonials' },
     ],
     Legal: [
       { label: 'Privacy Policy', href: '/privacy' },
@@ -51,7 +51,7 @@ export default function Footer() {
               </svg>
             </div>
             <p className="text-sm text-foreground/60 mb-4">
-              Your Digital Marketing Strategist & Implementer
+              Your marketing partner for tech and AI
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social) => {

@@ -17,76 +17,17 @@ export default function FAQ() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const faqs: FAQItem[] = [
-    {
-      id: 'fractional',
-      question: 'What does "fractional" mean?',
-      answer: 'Fractional means I work with you part-time, on a flexible basis. You get senior-level expertise without the overhead of a full-time employee. I typically work 10-30 hours per week depending on your needs and the scope of work.',
-    },
-    {
-      id: 'difference',
-      question: 'How are you different from an agency?',
-      answer: 'I work as a solo practitioner, not a team. This means you get direct access to me—no account managers, no junior staff, no layers of bureaucracy. I focus on technical implementation and strategy, not creative work. I\'m also more flexible and can adapt to your specific needs quickly.',
-    },
-    {
-      id: 'engagement',
-      question: 'What does an engagement with you look like?',
-      answer: 'It starts with a conversation about your challenges and goals. From there, I\'ll recommend a specific service or combination of services. We\'ll agree on scope, timeline, and pricing. Then I get to work. I provide regular updates and we adjust as needed based on results.',
-    },
-    {
-      id: 'pricing',
-      question: 'How much does it cost to work with you?',
-      answer: 'Pricing depends on the scope of work. I offer three main packages: Diagnostic Audit & Growth Blueprint ($3,500–$7,500), Strategic Implementer Retainer ($4,000–$10,000+/month), and Technical Sprint & Project Execution ($5,000–$20,000+). Let\'s chat about your specific needs for a custom quote.',
-    },
-    {
-      id: 'minimum',
-      question: 'Is there a minimum commitment?',
-      answer: 'For project-based work, no. For retainer engagements, I typically ask for a 3-month minimum to ensure we have time to implement and see results. This gives us enough runway to make a real impact.',
-    },
-    {
-      id: 'timeline',
-      question: 'How long does a typical project take?',
-      answer: 'It depends on the scope. A diagnostic audit might take 2-3 weeks. A full CRM implementation could take 2-3 months. A retainer engagement is ongoing. I\'ll give you a clear timeline upfront so you know what to expect.',
-    },
-    {
-      id: 'industries',
-      question: 'What industries do you work with?',
-      answer: 'I work with B2B SaaS, B2C e-commerce, agencies, professional services, and more. My expertise is in digital marketing strategy and implementation, which applies across industries. If you\'re in a specific niche, let\'s talk about whether I\'m the right fit.',
-    },
-    {
-      id: 'tools',
-      question: 'What tools and platforms do you work with?',
-      answer: 'I\'m proficient in Google Analytics 4, Google Tag Manager, HubSpot, Salesforce, Zapier, Make, and most major MarTech platforms. I also have expertise in technical SEO, paid media, and conversion optimization. If there\'s a specific tool you use, I can likely work with it.',
-    },
-    {
-      id: 'results',
-      question: 'Can you guarantee results?',
-      answer: 'I can\'t guarantee specific results, but I can guarantee I\'ll give you my best effort and focus on measurable outcomes. I\'ll set clear KPIs upfront and track progress regularly. If something isn\'t working, we\'ll adjust the strategy.',
-    },
-    {
-      id: 'communication',
-      question: 'How often will we communicate?',
-      answer: 'For retainer engagements, I provide weekly or bi-weekly updates depending on your preference. For project work, we\'ll have a kick-off call, regular check-ins, and a final delivery meeting. You can always reach out if you have questions or need updates.',
-    },
-    {
-      id: 'availability',
-      question: 'How quickly can you start?',
-      answer: 'I typically have availability within 1-2 weeks. If it\'s urgent, I can sometimes start sooner. Let me know your timeline and we\'ll figure it out.',
-    },
-    {
-      id: 'contract',
-      question: 'What\'s the contract like?',
-      answer: 'I keep contracts simple and straightforward. No legal jargon or surprise clauses. We\'ll agree on scope, timeline, deliverables, and pricing. That\'s it. I\'m easy to work with and I want you to feel confident in our partnership.',
-    },
-    {
-      id: 'payment',
-      question: 'What\'s your payment structure?',
-      answer: 'For project work, I typically ask for 50% upfront and 50% upon completion. For retainers, it\'s monthly in advance. I\'m flexible on this—let\'s discuss what works best for you.',
-    },
-    {
-      id: 'next-steps',
-      question: 'What\'s the next step if I want to work with you?',
-      answer: 'Send me a nudge! Tell me about your challenges, goals, and what you\'re looking for. We\'ll have a conversation to see if I\'m the right fit. If we\'re aligned, we\'ll move forward. If not, I\'ll try to point you in the right direction.',
-    },
+    { id: "who", question: "Who do you work with?", answer: "Tech companies and AI startups, and everyone in that field: SaaS, developer tools, cybersecurity, fintech, healthtech, hardware, consumer tech and more. If you build something technical or innovative, that is where I do my best work." },
+    { id: "stage", question: "We are early stage. Is marketing worth it now?", answer: "Usually yes, in the right order. Early on that means clear positioning, a website that explains the product, tracking you can trust and one or two channels done well. I will tell you honestly what to do now and what can wait." },
+    { id: "difference", question: "How are you different from an agency?", answer: "I am one senior operator. You deal with me directly, with no account managers or juniors, and I do the work rather than handing it off. I cover strategy, channels and the technical set-up underneath them." },
+    { id: "technical", question: "Do you understand technical products?", answer: "Yes. I work with technical founders and teams every week, and I am comfortable going deep on APIs, product-led funnels and technical buyers. I will learn your product properly before I write a word about it." },
+    { id: "engagement", question: "What does an engagement look like?", answer: "It starts with a conversation about what is stuck. I come back with a scope, a fixed price and a timeline. Once you approve, I build and ship, then hand over with documentation or stay on to run it." },
+    { id: "pricing", question: "How much does it cost?", answer: "Pricing depends on scope. I work hourly, per project at a fixed price, on a monthly retainer or as a fractional CMO. The pricing page shows rates and example projects, and every project is quoted before you commit." },
+    { id: "tools", question: "What tools do you work with?", answer: "HubSpot, Salesforce, GA4, Google Tag Manager, Segment, PostHog, Mixpanel, Customer.io, Klaviyo, Clay, Apollo, n8n, Make, Zapier and most major MarTech platforms. If you already use something, I will work in it." },
+    { id: "automation", question: "Can you set up automation, and who owns it?", answer: "Yes. I build lead capture, enrichment, scoring, lifecycle email, reporting and AI workflows inside your own accounts, so you own everything. It is documented, and I can maintain it if you want." },
+    { id: "ai-search", question: "Can you get us recommended by ChatGPT or Perplexity?", answer: "Nobody can guarantee that. What I can do is improve how AI systems find, understand and cite you: content, structured data, entity clarity and citations, then measure the results." },
+    { id: "minimum", question: "Is there a minimum commitment?", answer: "Not for project work. Retainers usually have a three-month minimum so there is time to implement and see results. There is no lock-in beyond that." },
+    { id: "where", question: "Where are you based?", answer: "Melbourne, Australia. I work remotely with tech teams across Australia and around the world." },
   ];
 
   return (

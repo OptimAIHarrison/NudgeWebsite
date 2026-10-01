@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Search, X, ArrowRight, ShoppingBag, Layers, Clock, DollarSign } from 'lucide-react';
 import { Link } from 'wouter';
+import { PILLARS } from '@/data/services';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -26,45 +27,22 @@ interface IndexItem {
   url: string;
 }
 
-const SERVICES_INDEX: IndexItem[] = [
-  // ── Strategic Advisory & Audits ──
-  { id: 's-strategic-0', title: 'Comprehensive Digital Marketing Audit', description: 'Full-spectrum analysis, competitive benchmarking, gap identification', source: 'services', pillar: 'strategic', pillarName: 'Strategic Advisory & Audits', keywords: ['audit', 'analysis', 'review', 'assessment', 'digital', 'marketing', 'competitive', 'benchmark', 'gap'], url: '/services?pillar=strategic' },
-  { id: 's-strategic-1', title: 'Growth Strategy & Roadmap', description: 'Strategic planning, opportunity identification, implementation timeline', source: 'services', pillar: 'strategic', pillarName: 'Strategic Advisory & Audits', keywords: ['strategy', 'roadmap', 'planning', 'growth', 'market research', 'opportunity'], url: '/services?pillar=strategic' },
-  { id: 's-strategic-2', title: 'MarTech Stack Consulting', description: 'Tool evaluation, integration planning, cost optimization', source: 'services', pillar: 'strategic', pillarName: 'Strategic Advisory & Audits', keywords: ['martech', 'tools', 'stack', 'technology', 'software', 'integration', 'cost'], url: '/services?pillar=strategic' },
-  { id: 's-strategic-3', title: 'Competitive Intelligence & Market Mapping', description: 'Competitor profiling, share of voice, positioning', source: 'services', pillar: 'strategic', pillarName: 'Strategic Advisory & Audits', keywords: ['competitive', 'intelligence', 'competitor', 'market', 'positioning', 'share of voice'], url: '/services?pillar=strategic' },
-  { id: 's-strategic-4', title: 'Go-To-Market Strategy', description: 'Launch planning, channel prioritization, audience segmentation', source: 'services', pillar: 'strategic', pillarName: 'Strategic Advisory & Audits', keywords: ['go to market', 'gtm', 'launch', 'channel', 'audience', 'segmentation'], url: '/services?pillar=strategic' },
-  { id: 's-strategic-5', title: 'Quarterly Business Reviews & Advisory', description: 'Performance review, strategic recalibration, executive reporting', source: 'services', pillar: 'strategic', pillarName: 'Strategic Advisory & Audits', keywords: ['advisory', 'quarterly', 'review', 'executive', 'reporting', 'retainer'], url: '/services?pillar=strategic' },
-  // ── Marketing Operations & Automation ──
-  { id: 's-operations-0', title: 'CRM Implementation & Optimization', description: 'Setup & configuration, workflow automation, data integration', source: 'services', pillar: 'operations', pillarName: 'Marketing Operations & Automation', keywords: ['crm', 'hubspot', 'salesforce', 'pipedrive', 'implementation', 'workflow', 'automation', 'data'], url: '/services?pillar=operations' },
-  { id: 's-operations-1', title: 'Email Marketing & Lifecycle Automation', description: 'Automation sequences, lifecycle campaigns, segmentation', source: 'services', pillar: 'operations', pillarName: 'Marketing Operations & Automation', keywords: ['email', 'automation', 'edm', 'lifecycle', 'newsletter', 'klaviyo', 'mailchimp', 'campaign', 'sequence', 'drip'], url: '/services?pillar=operations' },
-  { id: 's-operations-2', title: 'AI & Workflow Automation', description: 'Process automation, AI integration, efficiency gains', source: 'services', pillar: 'operations', pillarName: 'Marketing Operations & Automation', keywords: ['automation', 'ai', 'workflow', 'zapier', 'make', 'n8n', 'integration', 'efficiency', 'process'], url: '/services?pillar=operations' },
-  { id: 's-operations-3', title: 'Lead Scoring & Nurture Architecture', description: 'Scoring model, MQL/SQL thresholds, nurture sequences', source: 'services', pillar: 'operations', pillarName: 'Marketing Operations & Automation', keywords: ['lead scoring', 'mql', 'sql', 'nurture', 'pipeline', 'scoring', 'qualification'], url: '/services?pillar=operations' },
-  { id: 's-operations-4', title: 'Marketing Data & CDP Setup', description: 'Data unification, audience syncing, identity resolution', source: 'services', pillar: 'operations', pillarName: 'Marketing Operations & Automation', keywords: ['cdp', 'data', 'segment', 'audience', 'identity', 'unification', 'first party'], url: '/services?pillar=operations' },
-  { id: 's-operations-5', title: 'Reporting Infrastructure & Dashboards', description: 'Unified data pipeline, automated reporting, stakeholder views', source: 'services', pillar: 'operations', pillarName: 'Marketing Operations & Automation', keywords: ['reporting', 'dashboard', 'data pipeline', 'automated', 'looker studio', 'stakeholder', 'metrics'], url: '/services?pillar=operations' },
-  // ── Performance Marketing & Analytics ──
-  { id: 's-performance-0', title: 'Advanced Tracking & Attribution', description: 'GA4, event tracking, attribution modeling', source: 'services', pillar: 'performance', pillarName: 'Performance Marketing & Analytics', keywords: ['tracking', 'attribution', 'ga4', 'google analytics', 'events', 'data', 'analytics', 'pixel'], url: '/services?pillar=performance' },
-  { id: 's-performance-1', title: 'Paid Media Strategy & Management', description: 'Campaign strategy, bid optimization, performance reporting', source: 'services', pillar: 'performance', pillarName: 'Performance Marketing & Analytics', keywords: ['paid', 'ads', 'google ads', 'meta ads', 'facebook', 'ppc', 'advertising', 'linkedin ads', 'campaign', 'bid'], url: '/services?pillar=performance' },
-  { id: 's-performance-2', title: 'Technical SEO & Search Authority', description: 'Site optimization, technical fixes, authority building', source: 'services', pillar: 'performance', pillarName: 'Performance Marketing & Analytics', keywords: ['seo', 'search', 'ranking', 'organic', 'technical seo', 'backlinks', 'schema', 'sitemap', 'crawl'], url: '/services?pillar=performance' },
-  { id: 's-performance-3', title: 'Conversion Rate Optimization', description: 'A/B testing, funnel analysis, UX optimization', source: 'services', pillar: 'performance', pillarName: 'Performance Marketing & Analytics', keywords: ['cro', 'conversion', 'ab test', 'split test', 'funnel', 'optimization', 'ux', 'heatmap', 'hotjar'], url: '/services?pillar=performance' },
-  { id: 's-performance-4', title: 'Analytics & Reporting', description: 'Custom dashboards, automated reporting, data visualization', source: 'services', pillar: 'performance', pillarName: 'Performance Marketing & Analytics', keywords: ['analytics', 'reporting', 'dashboard', 'insights', 'metrics', 'data', 'visualization', 'looker'], url: '/services?pillar=performance' },
-  { id: 's-performance-5', title: 'Retargeting & Audience Strategy', description: 'Audience segmentation, retargeting sequences, suppression', source: 'services', pillar: 'performance', pillarName: 'Performance Marketing & Analytics', keywords: ['retargeting', 'remarketing', 'audience', 'suppression', 'lookalike', 'custom audience'], url: '/services?pillar=performance' },
-  { id: 's-performance-6', title: 'Customer Lifetime Value Optimization', description: 'LTV modeling, retention campaigns, upsell sequences', source: 'services', pillar: 'performance', pillarName: 'Performance Marketing & Analytics', keywords: ['ltv', 'lifetime value', 'retention', 'churn', 'upsell', 'win back', 'loyalty'], url: '/services?pillar=performance' },
-  { id: 's-performance-7', title: 'Budget Allocation & Media Mix Modeling', description: 'Spend analysis, channel efficiency, scenario planning', source: 'services', pillar: 'performance', pillarName: 'Performance Marketing & Analytics', keywords: ['budget', 'media mix', 'allocation', 'spend', 'roas', 'efficiency', 'scenario'], url: '/services?pillar=performance' },
-  // ── Brand & Content ──
-  { id: 's-brand-0', title: 'Messaging & Core Narrative', description: 'Brand positioning, value proposition, messaging framework', source: 'services', pillar: 'brand', pillarName: 'Brand & Content Enablement', keywords: ['messaging', 'brand', 'narrative', 'positioning', 'value proposition', 'tone of voice', 'copy'], url: '/services?pillar=brand' },
-  { id: 's-brand-1', title: 'Social Media Strategy & Direction', description: 'Platform strategy, content calendar, community management', source: 'services', pillar: 'brand', pillarName: 'Brand & Content Enablement', keywords: ['social media', 'instagram', 'linkedin', 'twitter', 'facebook', 'tiktok', 'content calendar', 'community'], url: '/services?pillar=brand' },
-  { id: 's-brand-2', title: 'Brand & Creative Assets', description: 'Asset creation, brand guidelines, creative direction', source: 'services', pillar: 'brand', pillarName: 'Brand & Content Enablement', keywords: ['brand', 'creative', 'design', 'assets', 'logo', 'guidelines', 'figma', 'canva'], url: '/services?pillar=brand' },
-  { id: 's-brand-3', title: 'Content Marketing Strategy', description: 'Editorial planning, SEO content mapping, distribution', source: 'services', pillar: 'brand', pillarName: 'Brand & Content Enablement', keywords: ['content', 'blog', 'editorial', 'seo content', 'content marketing', 'distribution', 'pillar', 'cluster'], url: '/services?pillar=brand' },
-  { id: 's-brand-4', title: 'Thought Leadership & PR', description: 'Executive positioning, media outreach, LinkedIn authority', source: 'services', pillar: 'brand', pillarName: 'Brand & Content Enablement', keywords: ['thought leadership', 'pr', 'media', 'linkedin', 'executive', 'press', 'outreach', 'authority'], url: '/services?pillar=brand' },
-  { id: 's-brand-5', title: 'Video & Podcast Content Strategy', description: 'Format planning, production briefs, distribution', source: 'services', pillar: 'brand', pillarName: 'Brand & Content Enablement', keywords: ['video', 'podcast', 'youtube', 'production', 'content', 'repurposing', 'clips'], url: '/services?pillar=brand' },
-  // ── Technical ──
-  { id: 's-technical-0', title: 'Website Performance & Speed', description: 'Speed optimization, Core Web Vitals, technical fixes', source: 'services', pillar: 'technical', pillarName: 'Technical Fixes & Optimization', keywords: ['performance', 'speed', 'core web vitals', 'website', 'pagespeed', 'loading', 'cache', 'cdn'], url: '/services?pillar=technical' },
-  { id: 's-technical-1', title: 'Tracking & Data Integrity', description: 'Tracking audit, data validation, implementation fixes', source: 'services', pillar: 'technical', pillarName: 'Technical Fixes & Optimization', keywords: ['tracking', 'data', 'cleanup', 'integrity', 'tag manager', 'gtm', 'validation', 'duplicate'], url: '/services?pillar=technical' },
-  { id: 's-technical-2', title: 'Broken Funnel & Conversion Diagnostics', description: 'Funnel analysis, issue identification, optimization', source: 'services', pillar: 'technical', pillarName: 'Technical Fixes & Optimization', keywords: ['funnel', 'conversion', 'diagnostic', 'drop off', 'broken', 'fix', 'issue'], url: '/services?pillar=technical' },
-  { id: 's-technical-3', title: 'Tag Management & GTM Audit', description: 'Container audit, tag governance, clean implementation', source: 'services', pillar: 'technical', pillarName: 'Technical Fixes & Optimization', keywords: ['gtm', 'google tag manager', 'tags', 'audit', 'container', 'governance', 'triggers'], url: '/services?pillar=technical' },
-  { id: 's-technical-4', title: 'Landing Page & CRO Build', description: 'High-converting builds, A/B variants, CTA optimization', source: 'services', pillar: 'technical', pillarName: 'Technical Fixes & Optimization', keywords: ['landing page', 'cro', 'conversion', 'build', 'webflow', 'unbounce', 'cta', 'ab test'], url: '/services?pillar=technical' },
-  { id: 's-technical-5', title: 'MarTech Integration & API Connectors', description: 'System integration, API setup, data sync', source: 'services', pillar: 'technical', pillarName: 'Technical Fixes & Optimization', keywords: ['integration', 'api', 'connector', 'sync', 'middleware', 'zapier', 'make', 'webhook'], url: '/services?pillar=technical' },
-];
+const SERVICES_INDEX: IndexItem[] = PILLARS.flatMap((p) =>
+  p.services.map((s, i) => ({
+    id: `s-${p.id}-${i}`,
+    title: s.title,
+    description: s.bullets.join(', '),
+    source: 'services' as const,
+    pillar: p.id,
+    pillarName: p.name,
+    keywords: [
+      ...s.title.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean),
+      ...s.bullets.map((b) => b.toLowerCase()),
+      ...s.martech.map((m) => m.toLowerCase()),
+    ],
+    url: `/services?pillar=${p.id}&service=${p.id}-${i}`,
+  }))
+);
 
 const MARKETPLACE_INDEX: IndexItem[] = [
   { id: 'm-full-email-suite', title: 'Full Email Marketing Suite', description: 'Complete email programme — ESP setup, automations, templates, dashboard', source: 'marketplace', category: 'Email', price: 3800, turnaround: '2–3 weeks', keywords: ['email', 'esp', 'klaviyo', 'suite', 'full', 'automation', 'template', 'deliverability', 'welcome series', 'lifecycle'], url: '/services-marketplace' },

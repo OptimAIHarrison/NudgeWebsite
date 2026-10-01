@@ -157,7 +157,7 @@ export default function Home() {
         <div className="container grid grid-cols-2 gap-6 py-8 md:grid-cols-4">
           {[
             ['10+ years', 'in digital marketing'],
-            ['32+ services', 'across five disciplines'],
+            ['30 services', 'across five disciplines'],
             ['40+ tools', 'in the MarTech stack'],
             ['1 operator', 'no hand-offs, full accountability'],
           ].map(([a, b]) => (

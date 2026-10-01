@@ -15,7 +15,7 @@ export default function ChatBot() {
     {
       id: '1',
       role: 'assistant',
-      content: 'Hi there! I am Nudge, your digital marketing assistant. How can I help you today? I can answer questions about our services, pricing, or help you find the right solution for your business.',
+      content: 'Hi! I am the Nudge assistant. Ask me about services, pricing or how it works for tech and AI companies, or send Harrison a Nudge directly.',
       timestamp: new Date(),
     },
   ]);
@@ -163,41 +163,28 @@ export default function ChatBot() {
 
 // Mock LLM response function (replace with actual tRPC call)
 async function generateChatResponse(userMessage: string, previousMessages: Message[]): Promise<string> {
-  const lowerMessage = userMessage.toLowerCase();
+  const q = userMessage.toLowerCase();
+  const has = (...w: string[]) => w.some((x) => q.includes(x));
 
-  // Service-related queries
-  if (lowerMessage.includes('service') || lowerMessage.includes('what do you offer')) {
-    return 'We offer five main service pillars: Strategic Advisory & Audits, Marketing Operations & Automation, Performance Marketing & Analytics, Brand & Content Enablement, and Technical Fixes & Optimization. Which area interests you most?';
-  }
-
-  if (lowerMessage.includes('pricing') || lowerMessage.includes('cost') || lowerMessage.includes('price')) {
-    return 'We have three pricing packages: Diagnostic Audit & Growth Blueprint ($3,500–$7,500), Strategic Implementer Retainer ($4,000–$10,000+/month), and Technical Sprint & Project Execution ($5,000–$20,000+). Would you like to learn more about any of these?';
-  }
-
-  if (lowerMessage.includes('tracking') || lowerMessage.includes('analytics') || lowerMessage.includes('ga4')) {
-    return 'Advanced tracking and analytics is one of our specialties. We help fix broken tracking, implement GA4 properly, set up server-side tagging, and ensure accurate attribution. This is crucial for making data-driven decisions.';
-  }
-
-  if (lowerMessage.includes('crm') || lowerMessage.includes('automation')) {
-    return 'We specialize in CRM implementation, optimization, and marketing automation. We can help you set up workflows, integrate your tools, and ensure your data flows correctly across your entire marketing stack.';
-  }
-
-  if (lowerMessage.includes('contact') || lowerMessage.includes('nudge')) {
-    return 'You can send us a nudge by filling out our contact form on the Send a Nudge page. We typically respond within 24 hours to discuss your specific needs and create a custom proposal.';
-  }
-
-  if (lowerMessage.includes('how') || lowerMessage.includes('process') || lowerMessage.includes('work')) {
-    return 'Our process is simple: First, you search for what you need. Second, you send us a brief nudge with details. Third, we research and reverse brief to ensure we understand your goals. Finally, we get to work and deliver results.';
-  }
-
-  if (lowerMessage.includes('seo') || lowerMessage.includes('search')) {
-    return 'Technical SEO is one of our core competencies. We conduct comprehensive audits, fix technical issues, optimize site structure, and implement proper tracking to improve your search visibility and organic traffic.';
-  }
-
-  if (lowerMessage.includes('help') || lowerMessage.includes('question')) {
-    return 'I can help you with information about our services, pricing, process, and how to get started. Feel free to ask me anything about digital marketing, or you can send us a nudge to speak with our team directly.';
-  }
-
-  // Default response
-  return 'That is a great question! For more detailed information or to discuss your specific situation, I recommend sending us a nudge. Our team would love to chat with you about how we can help.';
+  if (has('service', 'offer', 'what do you do'))
+    return 'Harrison is a marketing partner for tech companies and AI startups. The work covers Strategy & Go-To-Market, Marketing Ops & Automation, Performance & Analytics, Brand & Content and Technical Fixes: 30 services in all, from CRM and lifecycle email to SEO, AI search and paid media. See the Services page for the full list.';
+  if (has('pricing', 'cost', 'price', 'how much', 'rate'))
+    return 'Work is priced hourly, as a fixed-price project, as a monthly retainer or as a fractional CMO. Every project is quoted up front, so you know the cost before you commit. The Pricing page has rates and example projects.';
+  if (has('ai search', 'chatgpt', 'perplexity', 'geo'))
+    return 'Harrison helps AI systems find, understand and cite your company through content, structured data and entity clarity. Nobody can guarantee a recommendation, but visibility can be improved and measured.';
+  if (has('tracking', 'analytics', 'ga4', 'attribution'))
+    return 'Tracking and attribution are a core specialty: GA4, GTM, Segment and CRM closed-loop reporting, so you can see which channels create pipeline and revenue.';
+  if (has('crm', 'automation', 'hubspot', 'workflow'))
+    return 'Harrison builds CRM, lead enrichment and scoring, lifecycle email and AI workflows inside your own accounts, documented so your team owns it.';
+  if (has('seo', 'search', 'content'))
+    return 'SEO for tech products covers docs, integration and comparison pages, technical and JavaScript SEO, plus the content that supports them.';
+  if (has('who', 'industry', 'industries', 'saas', 'startup', 'hardware'))
+    return 'Tech companies and AI startups, and everyone in that field: SaaS, developer tools, cybersecurity, fintech, healthtech, hardware, consumer tech and more.';
+  if (has('contact', 'nudge', 'quote', 'start'))
+    return 'The easiest way to start is the Send a Nudge page. Tell Harrison what you are building and what is stuck, and you will get a plan, a fixed price and a timeline within 24 hours.';
+  if (has('how', 'process', 'work'))
+    return 'You send a Nudge, Harrison scopes it and sends a fixed quote, you approve, and he builds it. There is no lock-in. The How I Work page walks through it.';
+  if (has('help', 'question'))
+    return 'I can tell you about services, pricing, the process, or who the work suits. Or send Harrison a Nudge to talk it through directly.';
+  return 'Good question. For the detail on your situation, the best next step is to send Harrison a Nudge. He will reply within 24 hours.';
 }

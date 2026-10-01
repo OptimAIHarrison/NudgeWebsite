@@ -9,7 +9,7 @@ const STEPS = [
   {
     number: '01',
     title: 'Send a Nudge',
-    description: 'Tell me what\'s broken, what you need built, or what you want done. No brief required — just tell me in plain language what\'s going on.',
+    description: 'Tell me what you are building and what is stuck: pipeline, tracking, a launch, positioning. No brief required, plain language is fine.',
     icon: MessageSquare,
     detail: 'I read every message personally. Whether it\'s "fix my tracking" or "I need a full CRM setup", I\'ll understand what you need and come back fast.',
     time: 'You respond in minutes',
@@ -17,7 +17,7 @@ const STEPS = [
   {
     number: '02',
     title: 'I Dig In & Reverse Brief',
-    description: 'I research your situation, ask the right questions, and send back a clear scope — what I\'ll do, what it costs, and when it\'ll be done.',
+    description: 'I look at your product, market and current stack, ask the right questions, and send back a clear scope: what I will do, what it costs and when it will be live.',
     icon: Lightbulb,
     detail: 'No vague proposals. You get a specific plan: deliverables, timeline, and a fixed price. You know exactly what you\'re getting before you commit to anything.',
     time: 'Within a week',
@@ -33,7 +33,7 @@ const STEPS = [
   {
     number: '04',
     title: 'I Get to Work',
-    description: 'Fast, focused execution. I keep you updated without drowning you in updates. Delivered on time, built to last.',
+    description: 'I build it, connect it to your stack and test it with real data. Short updates, no meeting overload, documented so your team owns it.',
     icon: Zap,
     detail: 'You get regular check-ins, not radio silence. And when it\'s done, I hand over properly — documentation, walkthrough, and support to make sure it sticks.',
     time: 'Fast turnaround',
@@ -60,7 +60,7 @@ const ENGAGEMENT_TYPES = [
   {
     icon: Layers,
     title: 'Fractional CMO',
-    description: 'Need senior marketing leadership without a full-time hire? I embed in your team and run the marketing function.',
+    description: 'Need a senior marketing lead without a full-time hire? I embed in your tech team and run the marketing function.',
     examples: ['Team direction', 'Channel ownership', 'Vendor management', 'Board reporting'],
     tag: 'Senior expertise',
     highlight: false,

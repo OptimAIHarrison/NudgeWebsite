@@ -64,7 +64,7 @@ const ENGAGEMENT_MODELS = [
     color: 'from-emerald-500/20 to-emerald-400/5',
     accentColor: 'text-emerald-600',
     badgeColor: 'bg-emerald-100 text-emerald-700 border-emerald-200',
-    description: 'For businesses that want consistent, senior-level marketing support each month — strategy, execution, and accountability — without the overhead of a full-time hire.',
+    description: 'For tech teams that want consistent, senior-level marketing support each month — strategy, execution, and accountability — without the overhead of a full-time hire.',
     bestFor: ['Ongoing paid media', 'Monthly reporting', 'CRO testing', 'Growth strategy'],
     includes: [
       'Defined monthly hours & deliverables',
@@ -81,7 +81,7 @@ const ENGAGEMENT_MODELS = [
     icon: TrendingUp,
     label: 'Fractional CMO',
     title: 'Fractional CMO',
-    tagline: 'Senior marketing leadership without the full-time cost.',
+    tagline: 'Senior marketing leadership for your tech team, without the full-time cost.',
     rate: 'From $4,500',
     rateUnit: '/ month',
     rateSub: 'AUD · scoped to your team',
@@ -112,10 +112,10 @@ const FAQS = [
 ];
 
 const EXAMPLE_PROJECTS = [
-  { name: 'GA4 + GTM Setup', type: 'Project', price: 'A$750', time: '2–3 days' },
-  { name: 'Full Email Suite', type: 'Project', price: 'A$3,800', time: '2–3 weeks' },
+  { name: 'Analytics & Tracking Setup (GA4, GTM, Segment)', type: 'Project', price: 'A$750', time: '2–3 days' },
+  { name: 'Lifecycle Email Suite (onboarding to win-back)', type: 'Project', price: 'A$3,800', time: '2–3 weeks' },
   { name: 'HubSpot CRM Build', type: 'Project', price: 'A$1,800', time: '5–7 days' },
-  { name: 'Landing Page Build', type: 'Project', price: 'A$1,400', time: '5–7 days' },
+  { name: 'Product Landing Page Build', type: 'Project', price: 'A$1,400', time: '5–7 days' },
   { name: 'Monthly Growth Retainer', type: 'Retainer', price: 'From A$2,000/mo', time: 'Ongoing' },
   { name: 'Paid Media Management', type: 'Retainer', price: 'From A$2,500/mo', time: 'Ongoing' },
 ];

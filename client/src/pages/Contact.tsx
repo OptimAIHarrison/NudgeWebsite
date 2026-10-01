@@ -17,12 +17,13 @@ export default function Contact() {
   });
 
   const services = [
-    'Strategic Advisory & Audits',
-    'Marketing Operations & Automation',
-    'Performance Marketing & Analytics',
-    'Brand & Content Enablement',
-    'Technical Fixes & Optimization',
-    'Not sure - let us recommend',
+    "Strategy & Go-To-Market",
+    "Marketing Ops & Automation",
+    "Performance Marketing & Analytics",
+    "Brand & Content",
+    "Technical Fixes",
+    "Fractional CMO",
+    "Not sure yet",
   ];
 
   const contactMutation = trpc.contact.useMutation();
@@ -59,9 +60,7 @@ export default function Contact() {
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Send a Nudge
           </h1>
-          <p className="text-xl text-foreground/60 max-w-3xl mx-auto">
-            Tell us about your digital marketing challenges. We will respond with a clear plan and pricing.
-          </p>
+          <p className="text-xl text-foreground/60 max-w-3xl mx-auto">Tell me what you are building and what is stuck. I will reply within 24 hours with a plan, a fixed price and a timeline.</p>
         </div>
       </section>
 
@@ -187,7 +186,7 @@ export default function Contact() {
                     required
                     rows={6}
                     className="glass-input w-full resize-none"
-                    placeholder="Describe what you need help with..."
+                    placeholder="Tell me about your product, your stage and what you need help with..."
                   />
                 </div>
 

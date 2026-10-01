@@ -1,126 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useSearch } from 'wouter';
-import { ChevronDown, Zap, TrendingUp, Code, BarChart3, Palette, CheckCircle, ArrowRight } from 'lucide-react';
+import { ChevronDown, CheckCircle, ArrowRight } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
-
-const PILLARS = [
-  {
-    id: 'strategic',
-    name: 'Strategic Advisory & Audits',
-    shortName: 'Strategy',
-    icon: TrendingUp,
-    color: 'from-violet-500/15 to-purple-500/5',
-    accentColor: 'text-violet-600',
-    badgeColor: 'bg-violet-100 text-violet-700 border-violet-200',
-    stat: '6 services',
-    tagline: 'Clarity before action.',
-    description: 'I analyse your entire digital ecosystem — channels, tools, data, competition — and turn it into a clear, prioritised roadmap. No fluff, no generic frameworks. A plan built around your actual situation.',
-    outcomes: ['Know exactly where to focus', 'Eliminate wasted spend', 'Roadmap with clear ROI'],
-    services: [
-      { title: 'Comprehensive Digital Marketing Audit', bullets: ['Full-spectrum analysis', 'Competitive benchmarking', 'Gap identification'], details: 'Website audit, competitor analysis, MarTech stack review, performance benchmarking, detailed recommendations', martech: ['Google Analytics', 'SEMrush', 'Hotjar'] },
-      { title: 'Growth Strategy & Roadmap', bullets: ['Strategic planning', 'Opportunity identification', 'Implementation timeline'], details: 'Market research, opportunity identification, prioritization, 12-month implementation roadmap', martech: ['Miro', 'Notion', 'Looker Studio'] },
-      { title: 'MarTech Stack Consulting', bullets: ['Tool evaluation', 'Integration planning', 'Cost optimization'], details: 'Stack audit, tool recommendations, integration planning, cost optimization, vendor selection', martech: ['Zapier', 'Make', 'Segment'] },
-      { title: 'Competitive Intelligence & Market Mapping', bullets: ['Competitor profiling', 'Share of voice analysis', 'Market positioning'], details: 'In-depth competitor teardowns, share of voice tracking, positioning matrix, whitespace identification, monthly intelligence reports', martech: ['Similarweb', 'SEMrush', 'SparkToro'] },
-      { title: 'Go-To-Market Strategy', bullets: ['Launch planning', 'Channel prioritization', 'Audience segmentation'], details: 'ICP definition, channel mix strategy, messaging hierarchy, launch sequencing, success metrics and OKR framework', martech: ['Notion', 'Miro', 'HubSpot'] },
-      { title: 'Quarterly Business Reviews & Advisory', bullets: ['Performance review', 'Strategic recalibration', 'Executive reporting'], details: 'Quarterly deep-dive sessions, performance-against-goals analysis, strategic pivots, board-ready reporting, ongoing advisory retainer', martech: ['Looker Studio', 'Notion', 'Loom'] },
-    ],
-  },
-  {
-    id: 'operations',
-    name: 'Marketing Operations & Automation',
-    shortName: 'Operations',
-    icon: Zap,
-    color: 'from-cyan-500/15 to-blue-500/5',
-    accentColor: 'text-cyan-600',
-    badgeColor: 'bg-cyan-100 text-cyan-700 border-cyan-200',
-    stat: '6 services',
-    tagline: 'Fix the engine. Scale the machine.',
-    description: 'Broken workflows, manual processes, and disconnected tools cost you time and money every day. I build the automated marketing engine underneath your business — CRM, email, data, integrations — so everything runs without constant intervention.',
-    outcomes: ['Hours saved every week', 'Leads never fall through gaps', 'Systems that scale with you'],
-    services: [
-      { title: 'CRM Implementation & Optimization', bullets: ['Setup & configuration', 'Workflow automation', 'Data integration'], details: 'CRM setup, data migration, workflow automation, team training, ongoing optimization', martech: ['HubSpot', 'Salesforce', 'Pipedrive'] },
-      { title: 'Email Marketing & Lifecycle Automation', bullets: ['Automation sequences', 'Lifecycle campaigns', 'Segmentation'], details: 'Segmentation strategy, email sequences, lifecycle campaigns, A/B testing, performance optimization', martech: ['Klaviyo', 'ConvertKit', 'ActiveCampaign'] },
-      { title: 'AI & Workflow Automation', bullets: ['Process automation', 'AI integration', 'Efficiency gains'], details: 'Workflow design, tool integration, AI implementation, process optimization, ROI tracking', martech: ['Zapier', 'Make', 'n8n'] },
-      { title: 'Lead Scoring & Nurture Architecture', bullets: ['Scoring model design', 'MQL/SQL thresholds', 'Nurture sequences'], details: 'Behavioral and demographic scoring model, MQL/SQL handoff rules, multi-touch nurture flows, sales alert triggers, reporting dashboard', martech: ['HubSpot', 'Marketo', 'Salesforce'] },
-      { title: 'Marketing Data & CDP Setup', bullets: ['Data unification', 'Audience syncing', 'Identity resolution'], details: 'Source connection, identity stitching, audience segment creation, activation to ad platforms, data governance framework', martech: ['Segment', 'Amplitude', 'RudderStack'] },
-      { title: 'Reporting Infrastructure & Dashboards', bullets: ['Unified data pipeline', 'Automated reporting', 'Stakeholder views'], details: 'Data source connections, metric taxonomy, automated weekly and monthly reports, executive and channel-level dashboards, anomaly alerting', martech: ['Looker Studio', 'Supermetrics', 'BigQuery'] },
-    ],
-  },
-  {
-    id: 'performance',
-    name: 'Performance Marketing & Analytics',
-    shortName: 'Performance',
-    icon: BarChart3,
-    color: 'from-emerald-500/15 to-green-500/5',
-    accentColor: 'text-emerald-600',
-    badgeColor: 'bg-emerald-100 text-emerald-700 border-emerald-200',
-    stat: '8 services',
-    tagline: 'Track everything. Optimise what matters.',
-    description: 'Paid media, SEO, attribution, CRO — I manage the channels that drive revenue and build the measurement frameworks to prove it. Every decision backed by data. Every dollar accountable.',
-    outcomes: ['Clear attribution across channels', 'Higher ROAS on paid media', 'Conversion lifts from CRO'],
-    services: [
-      { title: 'Advanced Tracking & Attribution', bullets: ['GA4 implementation', 'Event tracking', 'Attribution modeling'], details: 'GA4 setup, event tracking, cross-domain tracking, attribution modeling, data validation', martech: ['Google Analytics 4', 'Mixpanel', 'Amplitude'] },
-      { title: 'Paid Media Strategy & Management', bullets: ['Campaign strategy', 'Bid optimization', 'Performance reporting'], details: 'Campaign strategy, audience targeting, bid optimization, A/B testing, monthly reporting', martech: ['Google Ads', 'Meta Ads', 'LinkedIn Ads'] },
-      { title: 'Technical SEO & Search Authority', bullets: ['Site optimization', 'Technical fixes', 'Authority building'], details: 'Site structure optimization, schema markup, crawlability fixes, Core Web Vitals, link building', martech: ['Screaming Frog', 'Ahrefs', 'Google Search Console'] },
-      { title: 'Conversion Rate Optimization', bullets: ['A/B testing', 'Funnel analysis', 'UX optimization'], details: 'Heatmap analysis, user testing, A/B testing, funnel optimization, friction point removal', martech: ['Hotjar', 'Unbounce', 'Optimizely'] },
-      { title: 'Analytics & Reporting', bullets: ['Custom dashboards', 'Automated reporting', 'Data visualization'], details: 'Custom dashboards, automated reporting, insights & recommendations, data storytelling', martech: ['Looker Studio', 'Tableau', 'Data Studio'] },
-      { title: 'Retargeting & Audience Strategy', bullets: ['Audience segmentation', 'Retargeting sequences', 'Suppression logic'], details: 'First-party audience build, multi-stage retargeting flows, lookalike seed creation, suppression list management, frequency and fatigue controls', martech: ['Meta Ads', 'Google Ads', 'AdRoll'] },
-      { title: 'Customer Lifetime Value Optimization', bullets: ['LTV modeling', 'Retention campaigns', 'Upsell sequences'], details: 'Cohort LTV analysis, churn prediction signals, win-back campaigns, upsell and cross-sell automation, loyalty programme integration', martech: ['Klaviyo', 'Amplitude', 'Segment'] },
-      { title: 'Budget Allocation & Media Mix Modeling', bullets: ['Spend analysis', 'Channel efficiency scoring', 'Scenario planning'], details: 'Historical spend audit, marginal return curves per channel, recommended allocation, quarterly rebalancing, scenario and sensitivity planning', martech: ['Looker Studio', 'Google Sheets', 'Northbeam'] },
-    ],
-  },
-  {
-    id: 'brand',
-    name: 'Brand & Content Enablement',
-    shortName: 'Brand & Content',
-    icon: Palette,
-    color: 'from-pink-500/15 to-rose-500/5',
-    accentColor: 'text-pink-600',
-    badgeColor: 'bg-pink-100 text-pink-700 border-pink-200',
-    stat: '6 services',
-    tagline: 'A story worth telling. Told well.',
-    description: 'Brand positioning, messaging frameworks, content strategy, social direction — I help you define what you stand for and build the content engine to say it consistently. Awareness that actually converts.',
-    outcomes: ['Clear, compelling positioning', 'Content that builds authority', 'Consistent voice across channels'],
-    services: [
-      { title: 'Messaging & Core Narrative', bullets: ['Brand positioning', 'Value proposition', 'Messaging framework'], details: 'Brand positioning, value proposition development, messaging framework, content pillars', martech: ['Notion', 'Figma', 'Brand.ai'] },
-      { title: 'Social Media Strategy & Direction', bullets: ['Platform strategy', 'Content calendar', 'Community management'], details: 'Platform strategy, content calendar, creative guidelines, community management, engagement tracking', martech: ['Buffer', 'Later', 'Sprout Social'] },
-      { title: 'Brand & Creative Assets', bullets: ['Asset creation', 'Brand guidelines', 'Creative direction'], details: 'Logo design, brand guidelines, templates, asset library, creative direction', martech: ['Figma', 'Canva', 'Adobe Creative Suite'] },
-      { title: 'Content Marketing Strategy', bullets: ['Editorial planning', 'SEO content mapping', 'Distribution strategy'], details: 'Keyword-to-content mapping, editorial calendar, pillar and cluster architecture, distribution playbook, performance tracking framework', martech: ['Ahrefs', 'Notion', 'SEMrush'] },
-      { title: 'Thought Leadership & PR Programme', bullets: ['Executive positioning', 'Media outreach', 'LinkedIn authority'], details: 'Executive voice development, media list curation, pitch creation, LinkedIn content strategy, speaking opportunity pipeline, coverage tracking', martech: ['Muck Rack', 'LinkedIn', 'Notion'] },
-      { title: 'Video & Podcast Content Strategy', bullets: ['Format planning', 'Production briefs', 'Distribution & repurposing'], details: 'Format and cadence strategy, show concept development, recording briefs, repurposing workflow (clips, transcripts, newsletters), platform distribution', martech: ['Descript', 'Riverside', 'Buffer'] },
-    ],
-  },
-  {
-    id: 'technical',
-    name: 'Technical Fixes & Optimization',
-    shortName: 'Technical',
-    icon: Code,
-    color: 'from-amber-500/15 to-orange-500/5',
-    accentColor: 'text-amber-600',
-    badgeColor: 'bg-amber-100 text-amber-700 border-amber-200',
-    stat: '6 services',
-    tagline: 'The fixes agencies miss.',
-    description: 'Broken tracking, slow sites, leaky funnels, messy GTM containers — these are the problems that silently cost you conversions every day. I find them, fix them, and make sure they stay fixed.',
-    outcomes: ['Accurate data you can trust', 'Faster site, better rankings', 'Funnels that convert'],
-    services: [
-      { title: 'Website Performance & Speed', bullets: ['Speed optimization', 'Core Web Vitals', 'Technical fixes'], details: 'Core Web Vitals optimization, image optimization, caching, CDN setup, performance monitoring', martech: ['PageSpeed Insights', 'GTmetrix', 'Cloudflare'] },
-      { title: 'Tracking & Data Integrity', bullets: ['Tracking audit', 'Data validation', 'Implementation fixes'], details: 'Tag audit, data validation, duplicate removal, data quality assurance, ongoing monitoring', martech: ['Google Tag Manager', 'Segment', 'Tealium'] },
-      { title: 'Broken Funnel & Conversion Diagnostics', bullets: ['Funnel analysis', 'Issue identification', 'Optimization'], details: 'Funnel analysis, drop-off identification, friction point removal, conversion optimization', martech: ['Hotjar', 'FullStory', 'Contentsquare'] },
-      { title: 'Tag Management & GTM Audit', bullets: ['Container audit', 'Tag governance', 'Clean implementation'], details: 'Full GTM container review, redundant and misfiring tag cleanup, trigger logic refactor, naming convention standards, change governance process', martech: ['Google Tag Manager', 'ObservePoint', 'Datadog'] },
-      { title: 'Landing Page & CRO Build', bullets: ['High-converting builds', 'A/B test variants', 'Form & CTA optimization'], details: 'Landing page design and build, above-the-fold hierarchy, form friction reduction, CTA testing, variant creation for A/B experiments, integration with CRM', martech: ['Webflow', 'Unbounce', 'HubSpot'] },
-      { title: 'MarTech Integration & API Connectors', bullets: ['System integration', 'API setup', 'Data sync validation'], details: 'Point-to-point and middleware integration design, API authentication, field mapping, error handling, bi-directional sync testing and monitoring', martech: ['Zapier', 'Make', 'Segment'] },
-    ],
-  },
-];
+import { PILLARS } from '@/data/services';
 
 const PROOF_POINTS = [
-  { stat: '32+', label: 'Services across 5 disciplines' },
-  { stat: '1', label: 'Person. No agency layers' },
-  { stat: 'Full-stack', label: 'Strategy through to implementation' },
-  { stat: '40+', label: 'MarTech tools across the stack' },
+  { stat: "30", label: "Services across 5 disciplines" },
+  { stat: "1", label: "Operator. No agency layers" },
+  { stat: "Tech-first", label: "Built for tech and AI companies" },
+  { stat: "40+", label: "MarTech tools across the stack" },
 ];
 
 export default function Services() {
@@ -146,14 +37,14 @@ export default function Services() {
       <section className="py-20 md:py-28 bg-gradient-to-b from-accent/10 to-background border-b border-border">
         <div className="container max-w-5xl mx-auto px-4 text-center">
           <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-5 border border-accent/20">
-            Full-stack digital marketing expertise
+            Marketing services for tech and AI companies
           </span>
           <h1 className="text-5xl md:text-7xl font-extrabold text-foreground mb-6 leading-tight tracking-tight">
-            Everything digital.<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/60">One person.</span>
+            Marketing for tech, end to end.<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/60">One operator.</span>
           </h1>
           <p className="text-lg md:text-xl text-foreground/60 max-w-3xl mx-auto mb-10 leading-relaxed">
-            From strategy and audits to CRM setup, paid media, SEO, and technical fixes — I cover the full digital marketing stack. No hand-offs, no agency layers, no gaps.
+            Strategy, the proven channels and the automation underneath, for tech companies, AI startups and everyone building in that field. Set up, connected and running.
           </p>
 
           {/* Proof bar */}
