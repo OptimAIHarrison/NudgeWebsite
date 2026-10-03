@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PageHero from '@/components/PageHero';
 import { TrendingUp, Users, Zap, DollarSign, CheckCircle } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -60,16 +61,11 @@ export default function Calculator() {
       <Header />
 
       {/* Header Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-accent/10 to-background border-b border-border">
-        <div className="container text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Savings Calculator
-          </h1>
-          <p className="text-xl text-foreground/60 max-w-3xl mx-auto">
-            See how much a senior marketing partner could save your tech team compared with a full-time hire or an agency
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={"Time and cost"}
+        title={"Savings Calculator"}
+        sub={"See how much a senior marketing partner could save your tech team compared with a full-time hire or an agency"}
+      />
 
       {/* Main Calculator */}
       <main className="py-16 md:py-24">

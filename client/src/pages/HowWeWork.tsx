@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PageHero from '@/components/PageHero';
 import { MessageSquare, Lightbulb, Zap, CheckCircle, Clock, DollarSign, User, ArrowRight, Repeat, Package, Layers } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -98,25 +99,11 @@ export default function HowWeWork() {
       <Header />
 
       {/* ── Hero ───────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-accent/10 to-background border-b border-border">
-        <div className="container max-w-4xl mx-auto px-4 text-center">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-5 border border-accent/20">
-            Freelancer · Project-based · No agency overhead
-          </span>
-          <h1 className="text-5xl md:text-6xl font-extrabold text-foreground mb-5 leading-tight tracking-tight">
-            Simple process.<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/60">Real results.</span>
-          </h1>
-          <p className="text-lg text-foreground/60 max-w-2xl mx-auto mb-8">
-            You send a Nudge. We chat. I get to work. No lengthy proposals, no retainer lock-ins, no hand-offs to juniors. Just focused execution from one senior digital marketer.
-          </p>
-          <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
-            <Button className="btn-nudge-primary text-lg px-8 py-5">
-              Send a Nudge
-            </Button>
-          </Link>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={"How I work"}
+        title={"From Nudge to done."}
+        sub={"Four steps from \"I need help\" to \"it is done\". No lengthy proposals, no kickoff marathons."}
+      />
 
       {/* ── Process steps ───────────────────────────────────────────── */}
       <section className="py-20 md:py-24">

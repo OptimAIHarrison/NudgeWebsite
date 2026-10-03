@@ -1,8 +1,10 @@
 import Header from '@/components/Header';
+import PageHero from '@/components/PageHero';
+import PageCTA from '@/components/PageCTA';
 import Footer from '@/components/Footer';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Zap, Target, Lightbulb, Code, TrendingUp, Briefcase } from 'lucide-react';
+import { Zap, Target, Lightbulb, Code, TrendingUp, Briefcase } from 'lucide-react';
 
 const HUMAN_FACTS = ["Started in UK corporate marketing", "Former department head", "Six months in the desert", "Ocean dives and street food", "Based in Melbourne"];
 
@@ -29,38 +31,32 @@ const STATS = [
   { stat: '30+', label: 'Tools across the MarTech stack' },
 ];
 
+
 export default function About() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* ── Hero ───────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-accent/10 to-background border-b border-border">
-        <div className="container max-w-4xl mx-auto px-4 text-center">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-5 border border-accent/20">
-            Marketing partner for tech companies and AI startups
-          </span>
-          <h1 className="text-5xl md:text-6xl font-extrabold text-foreground mb-5 leading-tight tracking-tight">
-            Hi, I'm Harrison.<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/60">I do the work.</span>
-          </h1>
-          <p className="text-lg text-foreground/60 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Senior digital marketer. Freelancer. Former department head. I have spent over a decade building the systems, strategy and execution that grow revenue, and I now focus on tech companies and AI startups: teams building things worth marketing properly. I have done it across five continents.
-          </p>
+      <PageHero
+        eyebrow="Marketing partner for tech companies and AI startups"
+        title="Hi, I'm Harrison. I do the work."
+        sub={"Senior digital marketer. Freelancer. Former department head. I have spent over a decade building the systems, strategy and execution that grow revenue, and I now focus on tech companies and AI startups: teams building things worth marketing properly. I have done it across five continents."}
+      />
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+      <section className="py-14 md:py-20">
+        <div className="container">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
             {STATS.map((s, i) => (
-              <div key={i} className="bg-background/80 backdrop-blur-sm rounded-xl p-4 border border-border">
-                <p className="text-2xl font-extrabold text-accent leading-none mb-1">{s.stat}</p>
-                <p className="text-xs text-foreground/50 leading-tight">{s.label}</p>
+              <div key={i}>
+                <p className="mono text-2xl font-semibold text-accent">{s.stat}</p>
+                <p className="text-sm text-foreground/55">{s.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-            {/* The human side */}
+      {/* The human side */}
       <section className="py-20 md:py-24">
         <div className="container max-w-4xl mx-auto px-4">
           <div className="grid md:grid-cols-5 gap-10 items-start">
@@ -92,87 +88,35 @@ export default function About() {
         </div>
       </section>
 
-{/* ── What I do best ──────────────────────────────────────────── */}
-      <section className="py-20 bg-secondary/40 border-t border-border">
-        <div className="container max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-3">What I actually do</h2>
-            <p className="text-foreground/55 max-w-xl mx-auto">Across five disciplines — from technical fixes to senior strategy. One person who covers the whole stack.</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {SKILLS.map((skill, idx) => {
-              const Icon = skill.icon;
-              return (
-                <div key={idx} className="rounded-2xl border-2 border-border bg-background p-6 hover:border-accent/50 hover:shadow-md transition-all group">
-                  <div className="p-2.5 rounded-xl bg-accent/10 text-accent w-fit mb-4 group-hover:bg-accent/20 transition-colors">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <h3 className="font-extrabold text-foreground mb-2">{skill.title}</h3>
-                  <p className="text-sm text-foreground/60 leading-relaxed">{skill.body}</p>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="text-center mt-8">
-            <Link href="/services" onClick={() => window.scrollTo(0, 0)}>
-              <button className="text-sm font-bold text-accent hover:opacity-70 transition-opacity">
-                See all 32+ services →
-              </button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Values ──────────────────────────────────────────────────── */}
-      <section className="py-20 border-t border-border">
-        <div className="container max-w-5xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-3">How I work</h2>
-            <p className="text-foreground/55">Not a values poster. Just how I actually operate.</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            {VALUES.map((v, i) => (
-              <div key={i} className="flex gap-4 p-5 rounded-2xl border-2 border-border bg-background hover:border-accent/40 transition-all">
-                <div className="flex-shrink-0 mt-0.5">
-                  <CheckCircle className="w-5 h-5 text-accent" />
-                </div>
-                <div>
-                  <h3 className="font-extrabold text-foreground mb-1">{v.title}</h3>
-                  <p className="text-sm text-foreground/60 leading-relaxed">{v.body}</p>
-                </div>
+      <section className="border-y border-border bg-secondary/40 py-14 md:py-20">
+        <div className="container">
+          <h2 className="text-2xl font-bold md:text-3xl">What I do</h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {SKILLS.map((s) => (
+              <div key={s.title} className="glass rounded-xl p-5">
+                <p className="font-semibold">{s.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-foreground/60">{s.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA ─────────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-gradient-to-br from-accent/10 via-background to-accent/5 border-t border-border">
-        <div className="container max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 leading-tight">
-            Want to work together?
-          </h2>
-          <p className="text-lg text-foreground/60 mb-8 max-w-xl mx-auto">
-            Tell me what you're trying to solve. I'll tell you honestly if I can help, and what that looks like.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
-              <Button className="btn-nudge-primary text-lg px-8 py-6">
-                Send a Nudge
-              </Button>
-            </Link>
-            <Link href="/services" onClick={() => window.scrollTo(0, 0)}>
-              <Button variant="outline" className="text-lg px-8 py-6 border-2">
-                Explore services
-              </Button>
-            </Link>
+      <section className="py-14 md:py-20">
+        <div className="container">
+          <h2 className="text-2xl font-bold md:text-3xl">How I operate</h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {VALUES.map((v) => (
+              <div key={v.title} className="glass rounded-xl p-5">
+                <p className="font-semibold">{v.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-foreground/60">{v.body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
+      <PageCTA />
       <Footer />
     </div>
   );

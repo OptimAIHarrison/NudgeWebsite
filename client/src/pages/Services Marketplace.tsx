@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PageHero from '@/components/PageHero';
 import { Check, Search, X, Mail, Globe, BarChart3, Settings, Code, TrendingUp, Database, Smartphone, Zap, Clock, FileText, Target, Layers, Users, Megaphone, Shield, RefreshCw, LineChart, Star, Package, Send } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -775,20 +776,11 @@ export default function ServicesMarketplace() {
       <Header />
 
       {/* ── Hero ─────────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-accent/10 to-background border-b border-border">
-        <div className="container max-w-4xl mx-auto px-4 text-center">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-5 border border-accent/20">
-            Fixed-price marketing sprints for tech and AI teams
-          </span>
-          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-5 leading-tight">
-            Marketing, scoped and priced.<br />Ready when you are.
-          </h1>
-          <p className="text-lg text-foreground/60 max-w-2xl mx-auto mb-3">
-            Pick a package, see exactly what is included and what it costs. Built for tech companies, AI startups and the teams around them.
-          </p>
-          <p className="text-sm text-foreground/40">All prices in AUD · GST not included</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={"Fixed-price marketing sprints for tech and AI teams"}
+        title={"Marketing, scoped and priced. Ready when you are."}
+        sub={"Pick a package, see exactly what is included and what it costs. Built for tech companies, AI startups and the teams around them. All prices in AUD, GST not included."}
+      />
 
       <div className="sticky top-24 z-30 bg-background/95 backdrop-blur-sm border-b border-border shadow-sm">
         <div className="container max-w-7xl mx-auto px-4 py-3 space-y-3">

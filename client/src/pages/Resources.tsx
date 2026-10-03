@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PageHero from '@/components/PageHero';
 import { BookOpen, TrendingUp, Code, Download } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -138,16 +139,11 @@ export default function Resources() {
       <Header onSearchOpen={() => setSearchOpen(true)} />
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
-      <section className="py-16 md:py-24 bg-card border-b border-border">
-        <div className="container text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Resources & Insights
-          </h1>
-          <p className="text-xl text-foreground/60 max-w-3xl mx-auto">
-            Guides, case studies and technical resources on marketing for tech companies and AI startups.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Guides and case studies"
+        title="Resources & Insights"
+        sub="Guides, case studies and technical resources on marketing for tech companies and AI startups."
+      />
 
       <section className="py-16 md:py-24">
         <div className="container">

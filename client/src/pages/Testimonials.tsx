@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PageHero from '@/components/PageHero';
 import { TrendingUp, Zap, Target, BarChart3, ArrowRight, CheckCircle, Clock } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -163,30 +164,20 @@ export default function Testimonials() {
       <Header />
 
       {/* ── Hero ───────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-accent/10 to-background border-b border-border">
-        <div className="container max-w-4xl mx-auto px-4 text-center">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-5 border border-accent/20">
-            Real clients · Real results · No fluff
-          </span>
-          <h1 className="text-5xl md:text-6xl font-extrabold text-foreground mb-5 leading-tight tracking-tight">
-            Results that<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/60">speak for themselves.</span>
-          </h1>
-          <p className="text-lg text-foreground/60 max-w-2xl mx-auto mb-10">
-            From AI and SaaS teams to growing businesses: fixing broken tracking, building full marketing systems and getting automation running. Here is what actually happened when clients brought me in.
-          </p>
-
-          {/* Impact stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            {IMPACT_STATS.map((s, i) => (
-              <div key={i} className="bg-background/80 backdrop-blur-sm rounded-xl p-4 border border-border">
-                <p className="text-2xl font-extrabold text-accent leading-none mb-1">{s.stat}</p>
-                <p className="text-xs text-foreground/50 leading-tight">{s.label}</p>
-              </div>
-            ))}
-          </div>
+      <PageHero
+        eyebrow={"Real clients \u00b7 Real results"}
+        title={"Results that speak for themselves."}
+        sub={"From AI and SaaS teams to growing businesses: fixing broken tracking, building full marketing systems and getting automation running."}
+      >
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+          {IMPACT_STATS.map((s, i) => (
+            <div key={i}>
+              <p className="mono text-2xl font-semibold text-accent">{s.stat}</p>
+              <p className="text-sm text-foreground/55">{s.label}</p>
+            </div>
+          ))}
         </div>
-      </section>
+      </PageHero>
 
       {/* ── Testimonials ────────────────────────────────────────────── */}
       <section className="py-20 md:py-24">

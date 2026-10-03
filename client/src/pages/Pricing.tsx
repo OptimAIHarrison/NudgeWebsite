@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
-import { Check, Zap, Briefcase, TrendingUp, Repeat, ChevronDown, ChevronLeft, ChevronRight, ArrowRight, Clock, DollarSign, Shield, Star } from 'lucide-react';
+import PageHero from '@/components/PageHero';
+import { Check, Briefcase, TrendingUp, Repeat, ChevronDown, ChevronLeft, ChevronRight, ArrowRight, Clock, DollarSign, Shield, Star } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'wouter';
@@ -145,20 +146,11 @@ export default function Pricing() {
       <Header />
 
       {/* ── Hero ───────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-accent/10 to-background border-b border-border">
-        <div className="container max-w-4xl mx-auto px-4 text-center">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-5 border border-accent/20">
-            All prices in AUD · GST not included
-          </span>
-          <h1 className="text-5xl md:text-6xl font-extrabold text-foreground mb-5 leading-tight tracking-tight">
-            Transparent pricing.<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/60">No guesswork.</span>
-          </h1>
-          <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
-            Fixed prices on projects. Clear rates on hourly work. Custom scoping for retainers. You always know what you're spending before you commit.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={"Transparent pricing"}
+        title={"Pricing for tech and AI teams"}
+        sub={"Pick the model that suits your situation. Every project is scoped and quoted before you commit. Third-party tool costs and ad spend are separate."}
+      />
 
       {/* ── Engagement model selector ───────────────────────────────── */}
       <section className="py-16 md:py-20">

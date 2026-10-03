@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PageHero from '@/components/PageHero';
 import { ChevronDown } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -24,17 +25,11 @@ export default function FAQ() {
       <Header />
 
       {/* Hero */}
-      <section className="py-16 md:py-24 bg-gradient-mesh relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
-        </div>
-        <div className="container relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Frequently Asked Questions</h1>
-          <p className="text-xl text-foreground/70 max-w-2xl">
-            Have questions about working with me? Here are the answers to the most common ones.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={"FAQ"}
+        title={"Frequently asked questions"}
+        sub={"Have questions about working with me? Here are the answers to the most common ones."}
+      />
 
       {/* FAQs */}
       <section className="py-20 md:py-32">

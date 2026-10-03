@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PageHero from '@/components/PageHero';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -55,14 +56,11 @@ export default function Contact() {
       <Header onSearchOpen={() => setSearchOpen(true)} />
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
-      <section className="py-16 md:py-24 bg-card border-b border-border">
-        <div className="container text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Send a Nudge
-          </h1>
-          <p className="text-xl text-foreground/60 max-w-3xl mx-auto">Tell me what you are building and what is stuck. I will reply within 24 hours with a plan, a fixed price and a timeline.</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={"Get in touch"}
+        title={"Send a Nudge"}
+        sub={"Tell me what you are building and what is stuck. I will reply within 24 hours with a plan, a fixed price and a timeline."}
+      />
 
       <section className="py-16 md:py-24">
         <div className="container max-w-5xl">
