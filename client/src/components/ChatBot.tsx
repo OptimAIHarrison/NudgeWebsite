@@ -63,7 +63,7 @@ export default function ChatBot() {
       const errorMessage: Message = {
         id: (Date.now() + 2).toString(),
         role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again or contact our team directly.',
+        content: 'Sorry, I encountered an error. Please try again or contact Harrison directly.',
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, errorMessage]);

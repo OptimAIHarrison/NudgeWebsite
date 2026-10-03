@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PageCTA from '@/components/PageCTA';
 import PageHero from '@/components/PageHero';
 import { Check, Search, X, Mail, Globe, BarChart3, Settings, Code, TrendingUp, Database, Smartphone, Zap, Clock, FileText, Target, Layers, Users, Megaphone, Shield, RefreshCw, LineChart, Star, Package, Send } from 'lucide-react';
 import Header from '@/components/Header';
@@ -767,7 +768,7 @@ export default function ServicesMarketplace() {
       });
       setForm(f => ({ ...f, submitted: true, submitting: false }));
     } catch {
-      setForm(f => ({ ...f, submitting: false, error: 'Something went wrong. Please try again or email us directly at hello@nudgedigital.com.au' }));
+      setForm(f => ({ ...f, submitting: false, error: 'Something went wrong. Please try again or email me directly at hello@nudgedigital.com.au' }));
     }
   };
 
@@ -785,7 +786,7 @@ export default function ServicesMarketplace() {
       <div className="sticky top-24 z-30 bg-background/95 backdrop-blur-sm border-b border-border shadow-sm">
         <div className="container max-w-7xl mx-auto px-4 py-3 space-y-3">
           {/* Search — centred */}
-          <div className="relative max-w-sm mx-auto">
+          <div className="relative max-w-xl">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40" />
             <input
               type="text"
@@ -796,15 +797,15 @@ export default function ServicesMarketplace() {
             />
           </div>
           {/* Category pills — centred, single scrollable row */}
-          <div className="flex flex-nowrap gap-2 overflow-x-auto pb-1 scrollbar-hide justify-center">
+          <div className="flex flex-nowrap gap-2 overflow-x-auto pb-1 scrollbar-hide justify-start">
             {categories.map(cat => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-150 border-2 whitespace-nowrap flex-shrink-0 ${
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium transition-colors border whitespace-nowrap flex-shrink-0 ${
                   selectedCategory === cat
-                    ? 'bg-accent text-white border-accent shadow-md'
-                    : 'bg-background text-foreground/70 border-foreground/20 hover:border-accent hover:text-accent'
+                    ? 'bg-accent text-white border-accent'
+                    : 'bg-background text-foreground/70 border-border hover:border-accent hover:text-accent'
                 }`}
               >
                 {CATEGORY_ICONS[cat]}
@@ -843,7 +844,7 @@ export default function ServicesMarketplace() {
                 <div
                   key={service.id}
                   onClick={() => openModal(service)}
-                  className="relative flex flex-col rounded-2xl border-2 border-accent/40 bg-background cursor-pointer transition-all duration-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 hover:border-accent"
+                  className="glass relative flex flex-col rounded-xl cursor-pointer transition-all duration-200 overflow-hidden hover:border-accent hover:shadow-xl"
                 >
                   {/* Full Suite badge — no top bar */}
                   {service.isFeatured && (
@@ -863,7 +864,7 @@ export default function ServicesMarketplace() {
                       <div className="p-2.5 rounded-xl bg-accent/10 text-accent">
                         {service.icon}
                       </div>
-                      <span className="text-xs font-semibold text-foreground/40 uppercase tracking-widest">{service.category}</span>
+                      <span className="text-xs font-semibold text-foreground/40 mono">{service.category}</span>
                     </div>
 
                     {/* Name */}
@@ -892,7 +893,7 @@ export default function ServicesMarketplace() {
                           <p className="text-xs text-foreground/35 mb-0.5">From</p>
                           <div className="flex items-baseline gap-0.5">
                             <span className="text-sm text-foreground/50 font-medium">A$</span>
-                            <span className="text-3xl font-extrabold text-foreground tracking-tight">{service.price.toLocaleString()}</span>
+                            <span className="text-3xl font-extrabold text-accent tracking-tight">{service.price.toLocaleString()}</span>
                           </div>
                           {service.priceNote && (
                             <p className="text-xs text-foreground/35 mt-0.5">{service.priceNote}</p>
@@ -920,16 +921,7 @@ export default function ServicesMarketplace() {
         </div>
       </section>
 
-      {/* ── CTA Banner ───────────────────────────────────────────────── */}
-      <section className="py-16 bg-gradient-to-r from-accent/10 to-accent/5 border-t border-border">
-        <div className="container max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-foreground mb-3">Need something custom?</h2>
-          <p className="text-foreground/55 mb-6">Not sure which service fits? Let's scope it together — no commitment required.</p>
-          <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
-            <Button className="btn-nudge-primary text-base px-8 py-5">Send a Nudge</Button>
-          </Link>
-        </div>
-      </section>
+      <PageCTA />
 
       {/* ── Service Detail Modal ──────────────────────────────────────── */}
       {showModal && selectedService && (
@@ -944,7 +936,7 @@ export default function ServicesMarketplace() {
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <span className="text-xs font-semibold text-foreground/40 uppercase tracking-widest">{selectedService.category}</span>
+                    <span className="text-xs font-semibold text-foreground/40 mono">{selectedService.category}</span>
                     {selectedService.isFeatured && (
                       <span className="flex items-center gap-1 px-2 py-0.5 bg-accent text-white text-xs font-bold rounded-full">
                         <Star className="w-3 h-3" /> Full Suite
@@ -1088,7 +1080,7 @@ export default function ServicesMarketplace() {
                           rows={3}
                           value={form.message}
                           onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                          placeholder="Anything you'd like us to know before we chat..."
+                          placeholder="Anything you'd like me to know before we chat..."
                           className="w-full px-3 py-2.5 rounded-lg bg-secondary border-2 border-border text-foreground placeholder-foreground/35 focus:outline-none focus:border-accent text-sm transition-colors resize-none"
                         />
                       </div>

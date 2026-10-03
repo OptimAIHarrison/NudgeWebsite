@@ -40,9 +40,9 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
     { label: 'Services', href: '/services' },
     { label: 'How I Work', href: '/how-we-work' },
     { label: 'Pricing', href: '/pricing' },
-    { label: 'Resources', href: '/resources' },
     { label: 'Results', href: '/testimonials' },
     { label: 'About', href: '/about' },
+    { label: 'FAQ', href: '/faq' },
   ];
 
   return (

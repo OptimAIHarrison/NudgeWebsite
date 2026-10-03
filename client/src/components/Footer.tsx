@@ -15,8 +15,11 @@ export default function Footer() {
     Company: [
       { label: 'About', href: '/about' },
       { label: 'How I Work', href: '/how-we-work' },
-      { label: 'Resources', href: '/resources' },
+      { label: 'Pricing', href: '/pricing' },
+      { label: 'Fixed Price Market Place', href: '/services-marketplace' },
       { label: 'Results', href: '/testimonials' },
+      { label: 'Resources', href: '/resources' },
+      { label: 'FAQ', href: '/faq' },
     ],
     Legal: [
       { label: 'Privacy Policy', href: '/privacy' },

@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import PageCTA from '@/components/PageCTA';
 import PageHero from '@/components/PageHero';
-import { TrendingUp, Zap, Target, BarChart3, ArrowRight, CheckCircle, Clock } from 'lucide-react';
+import { TrendingUp, Zap, Target, BarChart3 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'wouter';
@@ -154,76 +155,75 @@ const IMPACT_STATS = [
 ];
 
 export default function Testimonials() {
-  const [activeStudy, setActiveStudy] = useState(0);
-
-  const study = CASE_STUDIES[activeStudy];
-  const StudyIcon = study.icon;
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* ── Hero ───────────────────────────────────────────────────── */}
       <PageHero
-        eyebrow={"Real clients \u00b7 Real results"}
-        title={"Results that speak for themselves."}
-        sub={"From AI and SaaS teams to growing businesses: fixing broken tracking, building full marketing systems and getting automation running."}
-      >
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-          {IMPACT_STATS.map((s, i) => (
-            <div key={i}>
-              <p className="mono text-2xl font-semibold text-accent">{s.stat}</p>
-              <p className="text-sm text-foreground/55">{s.label}</p>
-            </div>
-          ))}
-        </div>
-      </PageHero>
+        eyebrow="Real clients · Real results"
+        title="Results that speak for themselves."
+        sub="From AI and SaaS teams to growing businesses: fixing broken tracking, building full marketing systems and getting automation running."
+      />
 
-      {/* ── Testimonials ────────────────────────────────────────────── */}
-      <section className="py-20 md:py-24">
-        <div className="container max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-2">What clients say</h2>
-            <p className="text-foreground/50">In their own words — unedited.</p>
+      <section className="py-14 md:py-20">
+        <div className="container">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+            {IMPACT_STATS.map((s, i) => (
+              <div key={i}>
+                <p className="mono text-2xl font-semibold text-accent">{s.stat}</p>
+                <p className="text-sm text-foreground/55">{s.label}</p>
+              </div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          {/* Masonry-style grid */}
-          <div className="columns-1 md:columns-2 lg:columns-3 gap-5 space-y-5">
-            {TESTIMONIALS.map((t) => (
-              <div
-                key={t.id}
-                className={`break-inside-avoid rounded-2xl border-2 p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${
-                  t.featured
-                    ? 'border-accent/40 bg-accent/3 shadow-md shadow-accent/5'
-                    : 'border-border bg-background hover:border-accent/30'
-                }`}
-              >
-                {/* Stars */}
-                <div className="flex gap-0.5 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-4 h-4 text-amber-400 fill-amber-400" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
+      <section className="circles border-y border-border bg-secondary/40 py-14 md:py-20">
+        <div className="container">
+          <div className="grid gap-5 md:grid-cols-3">
+            {TESTIMONIALS.map((t, i) => (
+              <figure key={t.company} className={`glass relative m-0 flex flex-col rounded-xl p-6 ${i < 2 ? '!border-accent/60' : ''}`}>
+                {i === 0 && <span className="ndot absolute right-4 top-4" aria-hidden />}
+                <p className="font-semibold">{t.company}</p>
+                <blockquote className="m-0 mt-3 flex-1 text-sm italic leading-relaxed text-foreground/70">"{t.quote}"</blockquote>
+                <figcaption className="mt-4 text-xs text-foreground/50">
+                  {t.author} · {t.role}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14 md:py-20">
+        <div className="container">
+          <h2 className="text-2xl font-bold md:text-3xl">Case studies</h2>
+          <div className="mt-6 grid gap-5 md:grid-cols-2">
+            {CASE_STUDIES.map((c) => (
+              <div key={c.company} className="glass rounded-xl p-6">
+                <div className="flex items-center justify-between">
+                  <p className="font-semibold">{c.company}</p>
+                  <span className="mono text-xs text-foreground/50">{c.industry}</span>
                 </div>
-
-                {/* Quote */}
-                <p className="text-sm text-foreground/75 leading-relaxed mb-5 italic">
-                  "{t.quote}"
-                </p>
-
-                {/* Author row */}
-                <div className="flex items-center gap-3 pt-4 border-t border-border/60">
-                  <div className={`w-9 h-9 rounded-full ${t.color} flex items-center justify-center flex-shrink-0`}>
-                    <span className="text-white text-xs font-bold">{t.initials}</span>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="font-bold text-foreground text-sm leading-tight">{t.author}</p>
-                    <p className="text-xs text-foreground/45 leading-tight">{t.role} · {t.company}</p>
-                  </div>
-                  <span className="text-xs px-2.5 py-1 rounded-full font-semibold border bg-secondary text-foreground/50 border-border flex-shrink-0">
-                    {t.category}
-                  </span>
+                {c.challenge && (
+                  <p className="mt-4 text-sm leading-relaxed text-foreground/70">
+                    <span className="font-semibold text-foreground">Challenge: </span>
+                    {c.challenge}
+                  </p>
+                )}
+                {c.solution && (
+                  <p className="mt-3 text-sm leading-relaxed text-foreground/70">
+                    <span className="font-semibold text-foreground">Solution: </span>
+                    {c.solution}
+                  </p>
+                )}
+                <div className="mt-4 grid grid-cols-3 gap-3 border-t border-border pt-4">
+                  {(c.results as any[]).map((r, i) => (
+                    <div key={i}>
+                      <p className="mono font-semibold text-accent">{r.stat ?? r}</p>
+                      <p className="text-xs text-foreground/55">{r.label ?? ''}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
@@ -231,154 +231,7 @@ export default function Testimonials() {
         </div>
       </section>
 
-      {/* ── Case Studies — interactive ───────────────────────────────── */}
-      <section className="py-20 bg-secondary/40 border-t border-border">
-        <div className="container max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-2">Case studies</h2>
-            <p className="text-foreground/50">Select a project to see what happened.</p>
-          </div>
-
-          {/* Case study selector */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-            {CASE_STUDIES.map((s, idx) => {
-              const Icon = s.icon;
-              const active = activeStudy === idx;
-              return (
-                <button
-                  key={s.id}
-                  onClick={() => setActiveStudy(idx)}
-                  className={`p-4 rounded-2xl border-2 text-left transition-all hover:-translate-y-0.5 hover:shadow-md ${
-                    active ? 'border-accent bg-accent/5 shadow-md shadow-accent/10' : 'border-border bg-background'
-                  }`}
-                >
-                  <div className={`p-2 rounded-lg w-fit mb-2 ${active ? 'bg-accent/15' : 'bg-secondary'}`}>
-                    <Icon className={`w-4 h-4 ${active ? 'text-accent' : 'text-foreground/50'}`} />
-                  </div>
-                  <p className={`text-sm font-bold leading-tight ${active ? 'text-accent' : 'text-foreground'}`}>{s.company}</p>
-                  <p className="text-xs text-foreground/40 mt-0.5">{s.industry}</p>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Active case study detail */}
-          <div className={`rounded-3xl border-2 border-accent/30 bg-gradient-to-br ${study.color} overflow-hidden`}>
-            <div className="grid md:grid-cols-2">
-
-              {/* Left — challenge + solution */}
-              <div className="p-8 md:p-10 border-b md:border-b-0 md:border-r border-border/40">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 rounded-xl bg-background/70 border border-border">
-                    <StudyIcon className={`w-6 h-6 ${study.accentColor}`} />
-                  </div>
-                  <div>
-                    <h3 className="font-extrabold text-foreground text-xl">{study.company}</h3>
-                    <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${study.badgeColor}`}>{study.industry}</span>
-                  </div>
-                </div>
-
-                <div className="space-y-5">
-                  <div>
-                    <p className="text-xs font-bold text-foreground/40 uppercase tracking-widest mb-2">The Challenge</p>
-                    <p className="text-sm text-foreground/70 leading-relaxed">{study.challenge}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-foreground/40 uppercase tracking-widest mb-2">What I Did</p>
-                    <p className="text-sm text-foreground/70 leading-relaxed">{study.solution}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-foreground/40 uppercase tracking-widest mb-2.5">Services Used</p>
-                    <div className="flex flex-wrap gap-2">
-                      {study.services.map((s, i) => (
-                        <span key={i} className="text-xs px-2.5 py-1 bg-background/60 border border-border rounded-full text-foreground/60">
-                          {s}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right — results */}
-              <div className="p-8 md:p-10 flex flex-col justify-between">
-                <div>
-                  <p className="text-xs font-bold text-foreground/40 uppercase tracking-widest mb-6">The Results</p>
-                  <div className="space-y-4">
-                    {study.results.map((r, i) => (
-                      <div key={i} className="bg-background/60 backdrop-blur-sm rounded-2xl p-5 border border-border/60">
-                        <p className={`text-4xl font-extrabold ${study.accentColor} leading-none mb-1`}>{r.stat}</p>
-                        <p className="text-sm text-foreground/55">{r.label}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-8">
-                  <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
-                    <Button className="btn-nudge-primary w-full py-5">
-                      Get similar results <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Value proposition strip ─────────────────────────────────── */}
-      <section className="py-16 border-t border-border">
-        <div className="container max-w-5xl mx-auto px-4">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-foreground mb-2">Why clients keep coming back</h2>
-            <p className="text-foreground/50">Not what I say — what the pattern of results shows.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-4">
-            {[
-              { icon: CheckCircle, title: 'Problems diagnosed fast', body: 'I don\'t spend weeks in discovery. I come in, assess the situation, and tell you what\'s actually wrong — usually within days.' },
-              { icon: Zap, title: 'Execution, not just advice', body: 'I don\'t write recommendations and hand them to someone else. I do the work — implementation, testing, optimisation.' },
-              { icon: Clock, title: 'Results you can measure', body: 'Every engagement starts with clear success metrics. You always know if it worked, by how much, and why.' },
-            ].map((p, i) => {
-              const Icon = p.icon;
-              return (
-                <div key={i} className="rounded-2xl border-2 border-border bg-background p-6 hover:border-accent/40 transition-all">
-                  <div className="p-2.5 rounded-xl bg-accent/10 text-accent w-fit mb-4">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <h3 className="font-extrabold text-foreground mb-2">{p.title}</h3>
-                  <p className="text-sm text-foreground/60 leading-relaxed">{p.body}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA ─────────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-gradient-to-br from-accent/10 via-background to-accent/5 border-t border-border">
-        <div className="container max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 leading-tight">
-            Want results like these?
-          </h2>
-          <p className="text-lg text-foreground/60 mb-8 max-w-xl mx-auto">
-            Tell me what's not working. I'll tell you exactly what I'd do about it.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" onClick={() => window.scrollTo(0, 0)}>
-              <Button className="btn-nudge-primary text-lg px-8 py-6">
-                Send a Nudge
-              </Button>
-            </Link>
-            <Link href="/services" onClick={() => window.scrollTo(0, 0)}>
-              <Button variant="outline" className="text-lg px-8 py-6 border-2">
-                Explore services
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
+      <PageCTA />
       <Footer />
     </div>
   );

@@ -36,6 +36,7 @@ const personSchema = {
   name: "Harrison",
   url: `${SITE_URL}/about`,
   jobTitle: "Marketing Strategist & Implementer for Tech and AI Companies",
+  sameAs: ["https://www.linkedin.com/company/nudgedigital/"],
   knowsAbout: ["Go-to-market strategy","SEO","AI search optimisation (GEO/AEO)","Paid media","Email and lifecycle marketing","CRM and marketing automation","Marketing analytics and attribution","Fractional CMO services"],
   description:
     "Senior digital marketer with 10+ years of experience across strategy, SEO, CRM automation, paid media and analytics, focused on tech companies and AI startups. Based in Melbourne, Australia.",
@@ -52,6 +53,7 @@ const businessSchema = {
   "@id": `${SITE_URL}/#business`,
   name: "Nudge Digital",
   url: SITE_URL,
+  sameAs: ["https://www.linkedin.com/company/nudgedigital/"],
   knowsAbout: ["Go-to-market strategy","SEO","AI search optimisation (GEO/AEO)","Paid media","Email and lifecycle marketing","CRM and marketing automation","Marketing analytics and attribution","Fractional CMO services"],
   areaServed: ["Australia", "Worldwide"],
   logo: `${SITE_URL}/logo.png`,

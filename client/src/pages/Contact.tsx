@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PageHero from '@/components/PageHero';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, MapPin } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SearchModal from '@/components/SearchModal';
@@ -34,7 +34,7 @@ export default function Contact() {
     contactMutation.mutate(formData, {
       onSuccess: (result) => {
         if (result.success) {
-          alert('Thank you for sending us a nudge! I will get back to you shortly.');
+          alert('Thanks for sending a nudge! I will get back to you shortly.');
           setFormData({ name: '', email: '', company: '', service: '', message: '' });
         } else {
           alert('Failed to send message. Please try again.');
@@ -80,19 +80,10 @@ export default function Contact() {
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <Phone className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
-                    <div>
-                      <p className="font-semibold text-foreground">Phone</p>
-                      <a href="tel:+61400000000" className="text-accent hover:underline">
-                        +61 (0) 400 000 000
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
                     <MapPin className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
                     <div>
                       <p className="font-semibold text-foreground">Location</p>
-                      <p className="text-foreground/60">Sydney, Australia</p>
+                      <p className="text-foreground/60">Melbourne, Australia</p>
                     </div>
                   </div>
                 </div>
@@ -101,7 +92,7 @@ export default function Contact() {
               <div className="glass-panel p-6">
                 <h4 className="font-semibold text-foreground mb-3">Response Time</h4>
                 <p className="text-sm text-foreground/60">
-                  We typically respond to nudges within 24 business hours.
+                  I typically reply to nudges within 24 business hours.
                 </p>
               </div>
             </div>
@@ -175,7 +166,7 @@ export default function Contact() {
 
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
-                    Tell us about your challenge
+                    Tell me about your challenge
                   </label>
                   <textarea
                     name="message"
@@ -212,9 +203,9 @@ export default function Contact() {
                 </div>
               </div>
               <div>
-                <h3 className="font-semibold text-foreground mb-1">We Review Your Nudge</h3>
+                <h3 className="font-semibold text-foreground mb-1">I Review Your Nudge</h3>
                 <p className="text-foreground/60">
-                  We read your message carefully and understand your specific challenge.
+                  I read your message carefully and understand your specific challenge.
                 </p>
               </div>
             </div>
@@ -225,9 +216,9 @@ export default function Contact() {
                 </div>
               </div>
               <div>
-                <h3 className="font-semibold text-foreground mb-1">We Respond with a Plan</h3>
+                <h3 className="font-semibold text-foreground mb-1">I Respond with a Plan</h3>
                 <p className="text-foreground/60">
-                  Within 24 hours, we send back a clear plan, pricing, and next steps.
+                  Within 24 hours, I send back a clear plan, pricing, and next steps.
                 </p>
               </div>
             </div>
@@ -240,7 +231,7 @@ export default function Contact() {
               <div>
                 <h3 className="font-semibold text-foreground mb-1">Let's Get to Work</h3>
                 <p className="text-foreground/60">
-                  Once you sign off, we jump in and deliver results. Fast, focused, and without fluff.
+                  Once you sign off, I jump in and deliver results. Fast, focused, and without fluff.
                 </p>
               </div>
             </div>
