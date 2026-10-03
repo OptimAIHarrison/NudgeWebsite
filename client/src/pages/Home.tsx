@@ -34,7 +34,7 @@ function ServicePanel() {
   }, []);
 
   return (
-    <div className="rounded-xl border border-white/15 bg-white/[0.06] shadow-2xl shadow-black/40 backdrop-blur-md overflow-hidden">
+    <div className="w-full lg:max-w-[26rem] lg:justify-self-end rounded-xl border border-white/15 bg-white/[0.06] shadow-2xl shadow-black/40 backdrop-blur-md overflow-hidden">
       <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
         <span className="mono text-xs text-white/60">nudge / marketing-for-tech</span>
         <span className="mono text-xs text-[#5ce1b0] flex items-center gap-1.5">
@@ -125,9 +125,10 @@ export default function Home() {
       <section className="relative overflow-hidden bg-hero text-white">
         <div className="absolute inset-0 grid-bg" aria-hidden />
         <div className="absolute -top-32 right-0 h-96 w-96 rounded-full bg-[#8041b2]/30 blur-3xl" aria-hidden />
-        <div className="absolute right-[-9rem] top-1/2 hidden h-[36rem] w-[36rem] -translate-y-1/2 rounded-full border border-white/10 lg:block" aria-hidden />
-        <div className="absolute right-[-3rem] top-1/2 hidden h-[26rem] w-[26rem] -translate-y-1/2 rounded-full border border-white/10 bg-white/[0.03] lg:block" aria-hidden />
         <div className="container relative grid items-center gap-12 py-20 md:py-28 lg:grid-cols-[1.1fr_0.9fr]">
+          {/* Decorative rings, centred on the panel */}
+          <div className="absolute right-[-3rem] top-1/2 hidden h-[36rem] w-[36rem] -translate-y-1/2 rounded-full border border-white/10 lg:block" aria-hidden />
+          <div className="absolute right-8 top-1/2 hidden h-[26rem] w-[26rem] -translate-y-1/2 rounded-full border border-white/10 bg-white/[0.03] lg:block" aria-hidden />
           <div>
             <p className="mono mb-5 text-sm text-[#b58ce0]">A marketing partner for tech and AI startups</p>
             <h1 className="text-4xl font-bold leading-[1.05] md:text-6xl">

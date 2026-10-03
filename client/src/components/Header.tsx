@@ -152,7 +152,8 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
 
       {/* Fixed Price Market Place: label tag hanging from the header, right side */}
       {!mobileMenuOpen && (
-        <div className="absolute right-3 top-full z-40 md:right-4">
+        <div className="container pointer-events-none absolute inset-x-0 top-full z-40">
+         <div className="pointer-events-auto flex justify-end">
           <Link href="/services-marketplace" aria-label="Browse the Fixed Price Market Place: 40+ fixed-price packages">
             <div className="relative rounded-b-lg rounded-t-none border border-t-0 border-accent/40 bg-gradient-to-br from-[#f8f1fd]/80 to-[#eadcf7]/75 p-3 pr-9 shadow-xl backdrop-blur-md transition-all hover:border-accent hover:from-[#f8f1fd]/95 hover:to-[#eadcf7]/90 hover:shadow-2xl md:p-4 md:pr-10">
               <span className="ndot absolute right-3 top-3" aria-hidden />
@@ -167,6 +168,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
               </div>
             </div>
           </Link>
+         </div>
         </div>
       )}
     </header>
