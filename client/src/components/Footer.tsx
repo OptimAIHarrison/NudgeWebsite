@@ -33,7 +33,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-card border-t border-border">
-      <div className="container py-12 md:py-16">
+      <div className="page-gutter py-12 md:py-16">
         {/* Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand Section */}

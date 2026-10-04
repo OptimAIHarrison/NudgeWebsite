@@ -69,7 +69,7 @@ export default function Calculator() {
 
       {/* Main Calculator */}
       <main className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-4 md:px-8">
+        <div className="max-w-5xl mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-2 gap-8 mb-12">
             {/* Left: Service Selection & Options */}
             <div className="space-y-6 flex flex-col">
@@ -292,7 +292,7 @@ export default function Calculator() {
 
         {/* Comparison Table */}
         {selectedServices.length > 0 && (
-          <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="max-w-5xl mx-auto px-4 md:px-8">
             <div className="glass-card p-8 overflow-x-auto">
               <h3 className="text-2xl font-bold text-foreground mb-6">Detailed Comparison</h3>
               <table className="w-full text-sm">
@@ -343,7 +343,7 @@ export default function Calculator() {
         )}
 
         {/* How It Works */}
-        <div className="max-w-6xl mx-auto px-4 md:px-8 mt-16 grid md:grid-cols-3 gap-6">
+        <div className="max-w-5xl mx-auto px-4 md:px-8 mt-16 grid md:grid-cols-3 gap-6">
           <div className="glass-card p-6 text-center space-y-3">
             <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto">
               <TrendingUp className="w-6 h-6 text-accent" />

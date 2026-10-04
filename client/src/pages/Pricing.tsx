@@ -155,7 +155,7 @@ export default function Pricing() {
 
       {/* ── Engagement model selector ───────────────────────────────── */}
       <section className="py-16 md:py-20">
-        <div className="container max-w-6xl mx-auto px-4">
+        <div className="container max-w-5xl mx-auto px-4">
           <div className="mb-10">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">How would you like to work?</h2>
             <p className="text-foreground/50 text-sm">Hourly is the quickest way to start. Swipe or use the tabs to see the other ways to work together.</p>

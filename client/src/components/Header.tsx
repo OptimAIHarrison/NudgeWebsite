@@ -48,7 +48,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
   return (
     <>
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 border-b border-accent/15">
-      <div className="container flex items-center justify-between h-20 md:h-24">
+      <div className="page-gutter flex items-center justify-between h-20 md:h-24">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 flex-shrink-0 hover:opacity-80 transition-opacity">
           <svg width="190" height="36" viewBox="0 0 190 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NUDGE">
@@ -117,7 +117,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
       {/* Mobile / tablet navigation (hamburger) */}
       {mobileMenuOpen && (
         <div id="mobile-menu" className="lg:hidden border-t border-border bg-background shadow-lg animate-slide-in-down max-h-[calc(100vh-5rem)] overflow-y-auto">
-          <nav className="container py-2">
+          <nav className="page-gutter py-2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -152,7 +152,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
 
       {/* Fixed Price Market Place: label tag hanging from the header, right side */}
       {!mobileMenuOpen && (
-        <div className="container pointer-events-none absolute inset-x-0 top-full z-40">
+        <div className="page-gutter pointer-events-none absolute inset-x-0 top-full z-40">
          <div className="pointer-events-auto flex justify-end">
           <Link href="/services-marketplace" aria-label="Browse the Fixed Price Market Place: 40+ fixed-price packages">
             <div className="relative rounded-b-lg rounded-t-none border border-t-0 border-accent/40 bg-gradient-to-br from-[#f8f1fd]/80 to-[#eadcf7]/75 p-3 pr-9 shadow-xl backdrop-blur-md transition-all hover:border-accent hover:from-[#f8f1fd]/95 hover:to-[#eadcf7]/90 hover:shadow-2xl md:p-4 md:pr-10">
