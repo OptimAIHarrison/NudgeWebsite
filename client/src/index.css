@@ -550,3 +550,9 @@
   .glass { background: rgba(255,255,255,.55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(128,65,178,.16); }
   .glass-dark { background: rgba(255,255,255,.05); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.12); }
 }
+
+/* Body column width.
+   Tailwind's built-in `container` utility sets max-width 80rem (xl) and 96rem (2xl), which beat any max-width
+   set in the base/components layers, so the narrower column never applied on wide screens.
+   This rule is deliberately unlayered so it wins. It skips elements that set their own max-w-* (e.g. max-w-3xl). */
+.container:not([class*="max-w-"]) { max-width: 1024px; }
