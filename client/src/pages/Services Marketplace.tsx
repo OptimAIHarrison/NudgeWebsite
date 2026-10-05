@@ -784,7 +784,7 @@ export default function ServicesMarketplace() {
       />
 
       <div className="sticky top-24 z-30 bg-background/95 backdrop-blur-sm border-b border-border shadow-sm">
-        <div className="container max-w-5xl mx-auto px-4 py-3 space-y-3">
+        <div className="container py-3 space-y-3">
           {/* Search — centred */}
           <div className="relative max-w-xl">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40" />
@@ -817,7 +817,7 @@ export default function ServicesMarketplace() {
       </div>
 
       {/* ── Results count ────────────────────────────────────────────── */}
-      <div className="container max-w-5xl mx-auto px-4 pt-8 pb-2">
+      <div className="container pt-8 pb-2">
         <p className="text-sm text-foreground/40">
           {sortedServices.length} service{sortedServices.length !== 1 ? 's' : ''}
           {selectedCategory !== 'all' ? ` in ${selectedCategory}` : ''}
@@ -827,7 +827,7 @@ export default function ServicesMarketplace() {
 
       {/* ── Services Grid ─────────────────────────────────────────────── */}
       <section className="pb-24">
-        <div className="container max-w-5xl mx-auto px-4">
+        <div className="container">
           {sortedServices.length === 0 ? (
             <div className="text-center py-20">
               <p className="text-lg text-foreground/50">No services found.</p>

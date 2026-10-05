@@ -58,7 +58,7 @@ export default function About() {
 
       {/* The human side */}
       <section className="py-20 md:py-24">
-        <div className="container max-w-4xl mx-auto px-4">
+        <div className="container">
           <div className="grid md:grid-cols-5 gap-10 items-start">
             <div className="md:col-span-2">
               <p className="mono text-sm text-accent mb-3">Beyond the marketing</p>
