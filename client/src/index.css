@@ -501,10 +501,6 @@
 }
 
 /* Notification dot with a slow ping ring */
-.ndot { --dot: #8041b2; position: relative; display: inline-block; flex: none; width: .5rem; height: .5rem; border-radius: 9999px; background: var(--dot); }
-.ndot::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--dot); animation: ndot-ping 2.2s ease-out infinite; }
-.ndot-light { --dot: #b58ce0; }
-.ndot-live { --dot: #5ce1b0; }
 @keyframes ndot-ping { 0% { transform: scale(1); opacity: .55; } 80%, 100% { transform: scale(2.8); opacity: 0; } }
 
 /* Small "new" badge dot on a nav item */
@@ -512,8 +508,6 @@
 .notif::after { content: ""; position: absolute; top: -3px; right: -9px; width: 7px; height: 7px; border-radius: 9999px; background: #5ce1b0; box-shadow: 0 0 0 2px rgba(250,250,250,.9); }
 
 /* Translucent glass surfaces */
-.glass { background: rgba(255,255,255,.55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(128,65,178,.16); }
-.glass-dark { background: rgba(255,255,255,.05); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.12); }
 
 /* Large faint translucent circles behind a section */
 .circles, section[class*="from-accent/10"] { position: relative; isolation: isolate; overflow: hidden; }
@@ -531,7 +525,6 @@
 .circles-dark::after { background: rgba(255,255,255,.03); border-color: rgba(255,255,255,.09); }
 
 @media (prefers-reduced-motion: reduce) { .ndot::after { animation: none; opacity: 0; } }
-.ndot-sm { width: .375rem; height: .375rem; }
 
 /* Pricing carousel slide-in */
 @keyframes pricing-slide-next { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
@@ -546,3 +539,14 @@
 @media (min-width: 640px) { .page-gutter { padding-inline: 2.5rem; } }
 @media (min-width: 1024px) { .page-gutter { padding-inline: 2rem; } }
 @media (min-width: 1280px) { .page-gutter { padding-inline: 4rem; } }
+
+/* Component-level: kept in the components layer so Tailwind utilities (absolute, hover:border-*) can override them */
+@layer components {
+  .ndot { --dot: #8041b2; position: relative; display: inline-block; flex: none; width: .5rem; height: .5rem; border-radius: 9999px; background: var(--dot); }
+  .ndot::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--dot); animation: ndot-ping 2.2s ease-out infinite; }
+  .ndot-light { --dot: #b58ce0; }
+  .ndot-live { --dot: #5ce1b0; }
+  .ndot-sm { width: .375rem; height: .375rem; }
+  .glass { background: rgba(255,255,255,.55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(128,65,178,.16); }
+  .glass-dark { background: rgba(255,255,255,.05); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.12); }
+}

@@ -155,7 +155,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
         <div className="page-gutter pointer-events-none absolute inset-x-0 top-full z-40">
          <div className="pointer-events-auto flex justify-end">
           <Link href="/services-marketplace" aria-label="Browse the Fixed Price Market Place: 40+ fixed-price packages">
-            <div className="relative rounded-b-lg rounded-t-none border border-t-0 border-accent/40 bg-gradient-to-br from-[#f8f1fd]/80 to-[#eadcf7]/75 p-3 pr-9 shadow-xl backdrop-blur-md transition-all hover:border-accent hover:from-[#f8f1fd]/95 hover:to-[#eadcf7]/90 hover:shadow-2xl md:p-4 md:pr-10">
+            <div className="relative rounded-b-lg rounded-t-none border border-t-0 border-accent/40 bg-gradient-to-br from-[#f8f1fd]/90 to-[#eadcf7]/88 py-3 pl-3 pr-8 shadow-xl backdrop-blur-md transition-all hover:border-accent hover:from-[#f8f1fd]/98 hover:to-[#eadcf7]/96 hover:shadow-2xl md:py-3.5 md:pl-4 md:pr-9">
               <span className="ndot absolute right-3 top-3" aria-hidden />
               <div className="flex items-center gap-2">
                 <div className="flex-shrink-0 rounded-lg bg-accent/20 p-1.5">
