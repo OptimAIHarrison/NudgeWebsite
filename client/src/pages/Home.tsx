@@ -129,7 +129,7 @@ export default function Home() {
           <div>
             <p className="mono mb-5 text-sm text-[#b58ce0]">A marketing partner for tech and AI startups</p>
             <h1 className="text-4xl font-bold leading-[1.05] md:text-6xl">
-              You build something amazing. I know how to market it.
+              You built something amazing. I know how to market it.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
               Nudge is a marketing partner for tech companies and AI startups, and everything in that field: SaaS, dev tools, cybersecurity, fintech, hardware. Strategy, email, CRM, content, SEO and paid, plus the automation underneath, set up and running, with one senior operator accountable for it.
