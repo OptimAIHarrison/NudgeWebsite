@@ -347,3 +347,10 @@ export function getSeoForPath(requestPath: string): SeoRoute {
 }
 
 export { SITE_URL, DEFAULT_OG_IMAGE };
+
+/** True for addresses the site really serves (public pages, plus anything under /admin). Everything else is a 404. */
+export function isKnownRoute(requestPath: string): boolean {
+  if (requestPath.startsWith("/admin")) return true;
+  const p = requestPath.length > 1 && requestPath.endsWith("/") ? requestPath.slice(0, -1) : requestPath;
+  return p !== "/404" && p !== "*" && SEO_ROUTES.some((r) => r.path === p);
+}

@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 import path from "path";
 import { createServer as createViteServer } from "vite";
 import viteConfig from "../../vite.config";
-import { getSeoForPath, DEFAULT_OG_IMAGE, SITE_URL } from "./seo-config";
+import { getSeoForPath, DEFAULT_OG_IMAGE, SITE_URL, isKnownRoute } from "./seo-config";
 
 // Google Analytics 4 Measurement ID. Loaded on every public-facing page
 // via injectSeoTags() below — single source, no per-page wiring needed.
@@ -206,6 +206,18 @@ export function serveStatic(app: Express) {
     const cached = templateCache.get(requestPath);
     if (cached) return cached;
 
+    // Static snapshot rendered at build time by scripts/ssr-snapshots.tsx (lives outside dist/public so it is
+    // never served as its own URL). Gives non-JS crawlers (GPTBot, ClaudeBot, PerplexityBot...) the real page text.
+    const ssrName = requestPath === "/" ? "home" : requestPath.replace(/^\/|\/$/g, "");
+    if (/^[a-z0-9-]+$/.test(ssrName)) {
+      const ssrFile = path.resolve(distPath, "..", "ssr", `${ssrName}.html`);
+      if (fs.existsSync(ssrFile)) {
+        const ssrTemplate = fs.readFileSync(ssrFile, "utf-8");
+        templateCache.set(requestPath, ssrTemplate);
+        return ssrTemplate;
+      }
+    }
+
     const normalizedPath = requestPath === "/" ? "" : requestPath.replace(/\/$/, "");
     const prerenderedFile = path.join(distPath, normalizedPath, "index.html");
 
@@ -246,8 +258,16 @@ export function serveStatic(app: Express) {
     // actual URL requested. req.originalUrl always reflects exactly what
     // the browser requested, unaffected by middleware mounting.
     const requestPath = req.originalUrl.split("?")[0]; // strip query string
-    const template = getTemplateForPath(requestPath);
-    const html = injectSeoTags(template, requestPath);
-    res.status(200).set({ "Content-Type": "text/html" }).end(html);
+    // /services/ and /services are the same page: send one permanent redirect so Google only ever sees one address.
+    if (requestPath.length > 1 && requestPath.endsWith("/")) {
+      const q = req.originalUrl.indexOf("?");
+      return res.redirect(301, requestPath.replace(/\/+$/, "") + (q === -1 ? "" : req.originalUrl.slice(q)));
+    }
+
+    // Unknown addresses must return a real 404 (not "200 OK"), otherwise Google reports soft 404s and may index junk URLs.
+    const known = isKnownRoute(requestPath);
+    const template = getTemplateForPath(known ? requestPath : "/404");
+    const html = injectSeoTags(template, known ? requestPath : "/404");
+    res.status(known ? 200 : 404).set({ "Content-Type": "text/html" }).end(html);
   });
 }
