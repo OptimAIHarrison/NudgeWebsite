@@ -45,6 +45,14 @@ async function startServer() {
     })
   );
 
+  // Private areas: keep out of search with a noindex header (more reliable than a robots.txt Disallow)
+  app.use((req, res, next) => {
+    if (req.path.startsWith("/admin") || req.path.startsWith("/api/")) {
+      res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    }
+    next();
+  });
+
   // robots.txt + sitemap.xml — must be registered BEFORE serveStatic's
   // catch-all route, or its SPA fallback will swallow these requests.
   registerSeoRoutes(app);

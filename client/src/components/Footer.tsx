@@ -6,11 +6,11 @@ export default function Footer() {
 
   const footerLinks = {
     Services: [
-      { label: 'Strategy & Go-To-Market', href: '/services?pillar=strategic' },
-      { label: 'Marketing Ops & Automation', href: '/services?pillar=operations' },
-      { label: 'Performance & Analytics', href: '/services?pillar=performance' },
-      { label: 'Brand & Content', href: '/services?pillar=brand' },
-      { label: 'Technical Fixes', href: '/services?pillar=technical' },
+      { label: 'Strategy & Go-To-Market', href: '/services#strategic' },
+      { label: 'Marketing Ops & Automation', href: '/services#operations' },
+      { label: 'Performance & Analytics', href: '/services#performance' },
+      { label: 'Brand & Content', href: '/services#brand' },
+      { label: 'Technical Fixes', href: '/services#technical' },
     ],
     Company: [
       { label: 'About', href: '/about' },

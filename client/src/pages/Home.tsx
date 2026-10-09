@@ -235,7 +235,7 @@ export default function Home() {
           <p className="mt-3 max-w-xl text-foreground/60">From go-to-market strategy to the integration nobody else wants to touch.</p>
           <div className="mt-10 grid gap-4 md:grid-cols-5">
             {PILLARS.map(({ icon: Icon, name, desc, id }) => (
-              <Link key={id} href={`/services?pillar=${id}`} onClick={go}>
+              <Link key={id} href={`/services#${id}`} onClick={go}>
                 <div className="group relative h-full rounded-xl border border-accent/15 bg-accent/[0.04] p-5 backdrop-blur transition-colors hover:border-accent hover:bg-accent/[0.08]">
                   <span className="ndot absolute right-4 top-4 opacity-50 transition-opacity group-hover:opacity-100" aria-hidden />
                   <Icon className="mb-4 h-5 w-5 text-accent" />

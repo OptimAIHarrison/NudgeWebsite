@@ -1,27 +1,43 @@
-import { useState, useEffect } from 'react';
-import { useSearch } from 'wouter';
+import { useState, useEffect, useRef, useSyncExternalStore } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageHero from '@/components/PageHero';
 import PageCTA from '@/components/PageCTA';
 import { PILLARS } from '@/data/services';
 
+// Deep links use the URL hash (/services#strategic or /services#strategic/strategic-2). Google ignores fragments,
+// so these never create duplicate pages the way ?query links did.
+const subscribeHash = (cb: () => void) => {
+  const events = ['hashchange', 'popstate', 'pushState', 'replaceState'];
+  events.forEach((e) => window.addEventListener(e, cb));
+  return () => events.forEach((e) => window.removeEventListener(e, cb));
+};
+const useHash = () => useSyncExternalStore(subscribeHash, () => window.location.hash, () => '');
+
 export default function Services() {
-  const search = useSearch();
+  const hash = useHash();
+  const fromUser = useRef(false);
   const [activePillar, setActivePillar] = useState(PILLARS[0].id);
   const [openId, setOpenId] = useState<string | null>(null);
 
-  // Deep links from Home, the footer and site search: /services?pillar=…&service=…
+  // Keep the hash in step with what's on screen, so any later link to a different view registers as a change
+  const setView = (pid: string, sid: string | null) => {
+    fromUser.current = true;
+    window.history.replaceState(null, '', sid ? `#${pid}/${sid}` : `#${pid}`);
+    setTimeout(() => (fromUser.current = false), 0);
+  };
+
+  // Hash -> view (links from Home, the footer and site search)
   useEffect(() => {
-    const params = new URLSearchParams(search);
-    const p = params.get('pillar');
-    const s = params.get('service');
+    const [p, s] = hash.replace(/^#/, '').split('/');
     if (p && PILLARS.some((x) => x.id === p)) setActivePillar(p);
     if (s) {
       setOpenId(s);
-      setTimeout(() => document.getElementById(s)?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 150);
+      if (!fromUser.current) setTimeout(() => document.getElementById(s)?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 150);
+    } else if (p) {
+      setOpenId(null);
     }
-  }, [search]);
+  }, [hash]);
 
   const pillar = PILLARS.find((p) => p.id === activePillar) ?? PILLARS[0];
 
@@ -46,6 +62,7 @@ export default function Services() {
                 onClick={() => {
                   setActivePillar(p.id);
                   setOpenId(null);
+                  setView(p.id, null);
                 }}
                 className={`rounded-lg border px-3.5 py-2 text-sm font-medium transition-colors ${
                   p.id === pillar.id ? 'border-accent bg-accent text-white' : 'border-border hover:border-accent'
@@ -79,7 +96,11 @@ export default function Services() {
               return (
                 <div key={id} id={id} className="glass rounded-xl p-5">
                   <button
-                    onClick={() => setOpenId(open ? null : id)}
+                    onClick={() => {
+                      const next = open ? null : id;
+                      setOpenId(next);
+                      setView(pillar.id, next);
+                    }}
                     aria-expanded={open}
                     className="flex w-full items-start justify-between gap-4 text-left"
                   >

@@ -11,13 +11,12 @@ import { SEO_ROUTES, SITE_URL } from "./seo-config";
 export function registerSeoRoutes(app: Express) {
   app.get("/robots.txt", (_req, res) => {
     const body = `# Nudge Digital — robots.txt
-# Explicitly allowing major search and AI crawlers.
+# Everything public is open to search engines and AI crawlers.
+# Private areas (/admin, /api) are kept out of search with a noindex header and meta tag instead of "Disallow":
+# a URL blocked here can still be indexed from links, and a crawler can only obey noindex if it may fetch the page.
 
 User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /admin/
-Disallow: /api/
 
 # Search engines
 User-agent: Googlebot

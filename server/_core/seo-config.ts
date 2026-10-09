@@ -12,7 +12,9 @@
 
 import { FAQS } from "../../client/src/data/faqs";
 
-const SITE_URL = "https://nudgedigital.com.au";
+// Canonical host: the live site is served at www (the bare domain redirects to it), so every canonical URL,
+// og:url, sitemap entry and schema @id must use www. Mixing the two causes "Alternate page with proper canonical tag".
+const SITE_URL = "https://www.nudgedigital.com.au";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 export interface SeoRoute {

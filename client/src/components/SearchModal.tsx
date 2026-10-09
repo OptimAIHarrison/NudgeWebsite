@@ -40,7 +40,7 @@ const SERVICES_INDEX: IndexItem[] = PILLARS.flatMap((p) =>
       ...s.bullets.map((b) => b.toLowerCase()),
       ...s.martech.map((m) => m.toLowerCase()),
     ],
-    url: `/services?pillar=${p.id}&service=${p.id}-${i}`,
+    url: `/services#${p.id}/${p.id}-${i}`,
   }))
 );
 
