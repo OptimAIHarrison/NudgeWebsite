@@ -239,6 +239,15 @@ export function serveStatic(app: Express) {
   // Serve static assets (JS, CSS, images) normally — these aren't HTML
   // so they don't need SEO injection.
 
+  // Raw files must never be reachable as duplicate pages. /index.html and /<page>/index.html are the same page as
+  // / and /<page>, but the static handler would serve them without a canonical tag. Redirect them permanently.
+  app.use((req, res, next) => {
+    const m = req.path.match(/^(.*)\/index\.html$/i);
+    if (!m) return next();
+    const q = req.originalUrl.indexOf("?");
+    return res.redirect(301, (m[1] || "/") + (q === -1 ? "" : req.originalUrl.slice(q)));
+  });
+
   app.use(express.static(distPath, { index: false }));
 
   // robots.txt and sitemap.xml are handled by dedicated routes registered
