@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import { Linkedin, Twitter, Facebook, Mail, Phone } from 'lucide-react';
+import { Linkedin, Twitter, Facebook, Mail } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -105,13 +105,6 @@ export default function Footer() {
               >
                 <Mail className="w-4 h-4" />
                 hello@nudgedigital.com.au
-              </a>
-              <a
-                href="tel:+61400000000"
-                className="flex items-center gap-2 text-sm text-foreground/60 hover:text-accent transition-colors"
-              >
-                <Phone className="w-4 h-4" />
-                +61 (0) 400 000 000
               </a>
             </div>
           </div>
