@@ -87,7 +87,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
 
           <Link href="/calculator" className="hidden xl:inline-flex">
             <Button variant="outline" className="text-sm">
-              Time-Saved Calculator
+              Savings Calculator
             </Button>
           </Link>
 
@@ -141,7 +141,7 @@ export default function Header({ onSearchOpen, logoUrl }: HeaderProps) {
               className="block border-b border-border py-3.5 text-base font-medium text-foreground/80 hover:text-accent transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Time-Saved Calculator
+              Savings Calculator
             </Link>
             <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
               <Button className="btn-nudge-primary w-full my-4">Send a Nudge</Button>
