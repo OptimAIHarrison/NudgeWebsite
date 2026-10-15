@@ -5,36 +5,53 @@ import Footer from '@/components/Footer';
 import SearchModal from '@/components/SearchModal';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
+import { PILLARS as SERVICE_DATA } from '@/data/services';
 
 const go = () => window.scrollTo(0, 0);
 
 /* Hero centrepiece: every service, set up and running */
+// Each hero row opens its matching card on the Services page (/services#<pillar>/<pillar>-<n>).
+// Looked up by exact service title, so it keeps working if the order of services changes.
+const serviceHref = (title: string) => {
+  for (const p of SERVICE_DATA) {
+    const i = p.services.findIndex((s) => s.title === title);
+    if (i !== -1) return `/services#${p.id}/${p.id}-${i}`;
+  }
+  return '/services';
+};
+
 const SERVICES = [
-  ['Marketing Strategy', 'Roadmap, ICP and channel plan'],
-  ['Email Marketing', 'Onboarding and lifecycle flows'],
-  ['CRM', 'Pipeline, scoring and routing'],
-  ['Content Creation', 'Blogs, case studies, docs'],
-  ['SEO & AI Search', 'Ranking, and cited in AI answers'],
-  ['Paid Media', 'Google, LinkedIn and Meta'],
-  ['Social Media', 'LinkedIn, X and community'],
-  ['Analytics & Tracking', 'GA4, attribution, dashboards'],
-  ['Marketing Automation', 'Workflows that run themselves'],
-  ['Brand & Messaging', 'Positioning, site and sales assets'],
+  ['Marketing Strategy', 'Roadmap, ICP and channel plan', 'GTM & Launch Strategy'],
+  ['Email Marketing', 'Onboarding and lifecycle flows', 'Email Marketing & Lifecycle'],
+  ['CRM', 'Pipeline, scoring and routing', 'CRM Implementation & Optimisation'],
+  ['Content Creation', 'Blogs, case studies, docs', 'Technical Content Strategy & Production'],
+  ['SEO & AI Search', 'Ranking, and cited in AI answers', 'SEO for Tech Products'],
+  ['Paid Media', 'Google, LinkedIn and Meta', 'Paid Media: Google, LinkedIn & Meta'],
+  ['Social Media', 'LinkedIn, X and community', 'Social Media & Community'],
+  ['Analytics & Tracking', 'GA4, attribution, dashboards', 'Tracking & Attribution'],
+  ['Marketing Automation', 'Workflows that run themselves', 'AI & Workflow Automation'],
+  ['Brand & Messaging', 'Positioning, site and sales assets', 'Messaging & Core Narrative'],
 ];
 
 function ServicePanel() {
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setActive(-1);
       return;
     }
+    if (paused) return; // hold still while the pointer is on the box, so the row doesn't move under it
     const t = setInterval(() => setActive((a) => (a + 1) % SERVICES.length), 1100);
     return () => clearInterval(t);
-  }, []);
+  }, [paused]);
 
   return (
-    <div className="relative z-10 w-full rounded-xl border border-white/15 bg-white/[0.06] shadow-2xl shadow-black/40 backdrop-blur-md overflow-hidden">
+    <div
+      className="relative z-10 w-full rounded-xl border border-white/15 bg-white/[0.06] shadow-2xl shadow-black/40 backdrop-blur-md overflow-hidden"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
         <span className="mono text-xs text-white/60">nudge / marketing-for-tech</span>
         <span className="mono text-xs text-[#5ce1b0] flex items-center gap-1.5">
@@ -42,19 +59,26 @@ function ServicePanel() {
         </span>
       </div>
       <ul className="p-3">
-        {SERVICES.map(([name, detail], i) => {
+        {SERVICES.map(([name, detail, target], i) => {
           const current = active === i;
           return (
-            <li
-              key={name}
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-colors duration-300 ${current ? 'bg-[#8041b2]/25' : ''}`}
-            >
-              <span className={`h-2 w-2 flex-none rounded-full bg-[#5ce1b0] ${current ? 'live-dot' : ''}`} />
-              <div className="min-w-0 flex-1">
-                <p className="mono text-sm text-white">{name}</p>
-                <p className="truncate text-xs text-white/50">{detail}</p>
-              </div>
-              <span className={`mono text-xs ${current ? 'text-[#b58ce0]' : 'text-white/30'}`}>{current ? 'running' : 'live'}</span>
+            <li key={name}>
+              <Link
+                href={serviceHref(target)}
+                onClick={go}
+                onMouseEnter={() => setActive(i)}
+                onFocus={() => setActive(i)}
+                aria-label={`${name}: ${detail}. View this service`}
+                className={`group flex items-center gap-3 rounded-lg px-3 py-2 transition-colors duration-300 hover:bg-[#8041b2]/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b58ce0] ${current ? 'bg-[#8041b2]/25' : ''}`}
+              >
+                <span className={`h-2 w-2 flex-none rounded-full bg-[#5ce1b0] ${current ? 'live-dot' : ''}`} />
+                <div className="min-w-0 flex-1">
+                  <p className="mono text-sm text-white">{name}</p>
+                  <p className="truncate text-xs text-white/50">{detail}</p>
+                </div>
+                <span className={`mono text-xs group-hover:hidden group-focus-visible:hidden ${current ? 'text-[#b58ce0]' : 'text-white/30'}`}>{current ? 'running' : 'live'}</span>
+                <span className="mono hidden text-xs text-[#b58ce0] group-hover:inline group-focus-visible:inline">view →</span>
+              </Link>
             </li>
           );
         })}
